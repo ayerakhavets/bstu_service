@@ -1,3 +1,23 @@
 {
-    "javascript.validate.enable": false
+    "eslint.autoFixOnSave": true,
+    "files.autoSave": "afterDelay",
+    "window.zoomLevel": 0,
+    "gitlens.advanced.messages": {
+      "suppressCommitHasNoPreviousCommitWarning": false,
+      "suppressCommitNotFoundWarning": false,
+      "suppressFileNotUnderSourceControlWarning": false,
+      "suppressGitVersionWarning": false,
+      "suppressLineUncommittedWarning": false,
+      "suppressNoRepositoryWarning": false,
+      "suppressResultsExplorerNotice": false,
+      "suppressShowKeyBindingsNotice": true,
+      "suppressUpdateNotice": false,
+      "suppressWelcomeNotice": true
+    },
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "workbench.iconTheme": "vscode-icons",
+    "javascript.validate.enable": false,
+    "flow.useNPMPackagedFlow": true,
+    "gitlens.keymap": "alternate"
 }
