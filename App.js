@@ -1,61 +1,26 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { ProductNavigator, productReducer, productSaga } from './src/Product';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu'
-});
+const sagaMiddleware = createSagaMiddleware();
 
-type Props = {};
-export default class App extends Component<Props> {
+const store = createStore(
+  productReducer,
+  applyMiddleware(sagaMiddleware)
+);
+
+sagaMiddleware.run(productSaga);
+
+export default class App extends React.Component {
   mock = () => {}
 
   render() {
     return (
-      <View style={ styles.container }>
-        <Text style={ styles.welcome }>
-          Welcome to React Native!
-        </Text>
-        <Text style={ styles.instructions }>
-          To get started, edit App.js
-        </Text>
-        <Text style={ styles.instructions }>
-          {instructions}
-        </Text>
-      </View>
+      <Provider store={ store }>
+        <ProductNavigator />
+      </Provider>
     );
   }
 }
-const white = '#F5FCFF';
-const gray = '#333333';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: white
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: gray,
-    marginBottom: 5
-  }
-});
