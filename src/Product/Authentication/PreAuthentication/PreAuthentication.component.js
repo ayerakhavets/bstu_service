@@ -2,7 +2,7 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  AsyncStorage,
+  // AsyncStorage,
   StatusBar,
   StyleSheet,
   View

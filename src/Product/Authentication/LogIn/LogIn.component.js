@@ -16,7 +16,9 @@ import { logIn, signUp } from '../Authentication.actions';
 // });
 
 type Props = {
-  navigation: any
+  navigation: any,
+  handleLogIn: ()=> void,
+  handleSignIn: ()=> void
 };
 
 class LogIn extends Component<Props> {
@@ -25,14 +27,19 @@ class LogIn extends Component<Props> {
   }
 
   render() {
-    console.log(' Loog===', this.props);
     return (
       <View style={ styles.container }>
-        <TextInput placeholder="Электронная почта" style={ styles.input } />
-        <TextInput placeholder="Пароль" style={ styles.input } />
+        <TextInput
+          placeholder="Электронная почта"
+          style={ styles.input }
+        />
+        <TextInput
+          placeholder="Пароль"
+          style={ styles.input }
+        />
         <Button
           title="Войти"
-          onPress={ this.props.handlLogIn }
+          onPress={ this.props.handleLogIn }
         />
         <Button
           title="Зарегистрироваться"
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = {
   handleSignIn: signUp,
-  handlLogIn: logIn
+  handleLogIn: logIn
 };
 
 export default connect(null, mapDispatchToProps)(LogIn);
