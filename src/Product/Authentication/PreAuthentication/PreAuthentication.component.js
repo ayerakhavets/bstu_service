@@ -20,13 +20,14 @@ class PreAuthentication extends React.Component<Props> {
 
   // Fetch the token from storage then navigate to our appropriate place
   bootstrapAsync = async () => {
+    // TODO: implement log in with saved credentials.
     // const userToken = await AsyncStorage.getItem('userToken');
     console.log('hello from PREAUTH');
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
     // this.props.navigation.navigate(userToken ? 'Dean' : 'Auth');
-    this.props.navigation.navigate('Auth');
+    this.props.navigation.navigate('Student');
   };
 
   // Render any loading content that you like here
@@ -51,7 +52,4 @@ const styles = StyleSheet.create({
   }
 });
 
-// const mapStateToProps = state => ({
-
-// });
 export default PreAuthentication;

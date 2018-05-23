@@ -14,19 +14,15 @@ import {
 } from './LogIn.actions';
 import styles from './LogIn.styles';
 
-type Props = {
-  navigation: any,
+type LogInProps = {
   onChangeEmail: () => void,
   onChangePassword: () => void,
   onLogIn: () => void,
   onSignIn: () => void
 };
 
-class LogIn extends Component<Props> {
-  mock = () => {
-    this.props.navigation.navigate('Dean');
-  }
-
+// eslint-disable-next-line react/prefer-stateless-function
+class LogIn extends Component<LogInProps> {
   render() {
     const {
       onChangeEmail,
@@ -38,12 +34,14 @@ class LogIn extends Component<Props> {
     return (
       <View style={ styles.container }>
         <TextInput
+          keyboardType="email-address"
           placeholder="Электронная почта"
           style={ styles.input }
           onChangeText={ onChangeEmail }
         />
         <TextInput
           placeholder="Пароль"
+          secureTextEntry
           style={ styles.input }
           onChangeText={ onChangePassword }
         />
