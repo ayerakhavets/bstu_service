@@ -1,12 +1,19 @@
-import authenticationReducer from './Authentication.reducer';
-import authenticationSaga from './Authentication.sagas';
-import LogIn from './LogIn';
+// @flow
+import LogIn, {
+  logInReducer,
+  logInSaga,
+  type LogInState
+} from './LogIn';
 import PreAuthentication from './PreAuthentication';
 
 export {
-  authenticationReducer,
-  authenticationSaga,
   LogIn,
+  logInReducer,
+  logInSaga,
   PreAuthentication
+};
+
+export type {
+  LogInState
 };
 

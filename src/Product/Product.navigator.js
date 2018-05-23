@@ -1,3 +1,4 @@
+// @flow
 import { createSwitchNavigator } from 'react-navigation';
 import { LogIn, PreAuthentication } from './Authentication';
 import DeanStack from './Dean';

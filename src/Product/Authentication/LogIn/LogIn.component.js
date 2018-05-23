@@ -1,24 +1,25 @@
 // @flow
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   TextInput,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from '../../../Components';
-import { logIn, signUp } from '../Authentication.actions';
-// const instructions = Platform.select({
-//   ios: 'Press Cmd+R to reload,\n' +
-//     'Cmd+D or shake for dev menu',
-//   android: 'DOUBLE tap R on your keyboard to reload,\n' +
-//     'Shake or press menu button for dev menu'
-// });
+import {
+  changeEmailValue,
+  changePasswordValue,
+  logIn,
+  signUp
+} from './LogIn.actions';
+import styles from './LogIn.styles';
 
 type Props = {
   navigation: any,
-  handleLogIn: ()=> void,
-  handleSignIn: ()=> void
+  onChangeEmail: () => void,
+  onChangePassword: () => void,
+  onLogIn: () => void,
+  onSignIn: () => void
 };
 
 class LogIn extends Component<Props> {
@@ -27,51 +28,43 @@ class LogIn extends Component<Props> {
   }
 
   render() {
+    const {
+      onChangeEmail,
+      onLogIn,
+      onChangePassword,
+      onSignIn
+    } = this.props;
+
     return (
       <View style={ styles.container }>
         <TextInput
           placeholder="Электронная почта"
           style={ styles.input }
+          onChangeText={ onChangeEmail }
         />
         <TextInput
           placeholder="Пароль"
           style={ styles.input }
+          onChangeText={ onChangePassword }
         />
         <Button
           title="Войти"
-          onPress={ this.props.handleLogIn }
+          onPress={ onLogIn }
         />
         <Button
           title="Зарегистрироваться"
-          onPress={ this.props.handleSignIn }
+          onPress={ onSignIn }
         />
       </View>
     );
   }
 }
 
-const white = '#F5FCFF';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: white,
-    padding: 10
-  },
-  input: {
-    width: '100%'
-  }
-});
-
-// const mapStateToProps = state => ({
-
-// });
-
 const mapDispatchToProps = {
-  handleSignIn: signUp,
-  handleLogIn: logIn
+  onChangeEmail: changeEmailValue,
+  onChangePassword: changePasswordValue,
+  onSignIn: signUp,
+  onLogIn: logIn
 };
 
 export default connect(null, mapDispatchToProps)(LogIn);

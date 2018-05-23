@@ -13,7 +13,7 @@ type Props = {
 };
 
 class PreAuthentication extends React.Component<Props> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.bootstrapAsync();
   }
@@ -21,7 +21,7 @@ class PreAuthentication extends React.Component<Props> {
   // Fetch the token from storage then navigate to our appropriate place
   bootstrapAsync = async () => {
     // const userToken = await AsyncStorage.getItem('userToken');
-    console.log('hello from PRE');
+    console.log('hello from PREAUTH');
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
@@ -51,4 +51,7 @@ const styles = StyleSheet.create({
   }
 });
 
+// const mapStateToProps = state => ({
+
+// });
 export default PreAuthentication;

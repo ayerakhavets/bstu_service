@@ -1,15 +1,10 @@
-import { delay } from 'redux-saga';
+// @flow
+import { type Saga } from 'redux-saga';
 import { all } from 'redux-saga/effects';
-import { authenticationSaga } from './Authentication';
+import { logInSaga } from './Authentication';
 
-export function* helloSaga() {
-  yield delay(1000);
-  console.log('Hello Sagas!');
-}
-
-export default function* rootSaga() {
+export default function* rootSaga(): Saga<void> {
   yield all([
-    helloSaga(),
-    authenticationSaga()
+    logInSaga()
   ]);
 }

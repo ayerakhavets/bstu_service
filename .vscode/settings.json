@@ -19,5 +19,6 @@
     "workbench.iconTheme": "vscode-icons",
     "javascript.validate.enable": false,
     "flow.useNPMPackagedFlow": true,
-    "gitlens.keymap": "alternate"
-}
+    "gitlens.keymap": "alternate",
+    "java.configuration.updateBuildConfiguration": "interactive"
+  }

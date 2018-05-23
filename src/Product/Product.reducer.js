@@ -1,6 +1,11 @@
+// @flow
 import { combineReducers } from 'redux';
-import { authenticationReducer } from './Authentication';
+import { logInReducer, type LogInState } from './Authentication';
+
+export type ApplicationState = {
+  logInReducer: LogInState
+}
 
 export default combineReducers({
-  authenticationReducer
+  logInReducer
 });
