@@ -4,10 +4,12 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import NavigatorService from '../../../Services/navigator';
 import {
   createUserWithEmailAndPassword,
+  getUserInfo,
   signInWithEmailAndPassword
 } from '../Authentication.api';
 import { LOG_IN, SIGN_UP, changeUid } from './LogIn.actions';
 import { selectEmail, selectPassword } from './LogIn.selectors';
+import { changeUserInfo } from '../../Student';
 
 export default function* logInSaga(): Saga<void> {
   yield takeEvery(LOG_IN, handleLogIn);
@@ -24,11 +26,13 @@ export function* handleLogIn(): Saga<void> {
   const requestParams = [email, password];
 
   try {
-    const response = yield call(signInWithEmailAndPassword, ...requestParams);
-    yield put(changeUid(response.user.uid));
-
+    const { user } = yield call(signInWithEmailAndPassword, ...requestParams);
+    yield put(changeUid(user.uid));
+    console.log('=== success', user);
+    const supa = yield call(getUserInfo, user.uid);
+    console.log('=== success2', supa);
+    yield put(changeUserInfo(supa));
     // TODO: handle admin/student roles
-    console.log('=== success', response);
     NavigatorService.navigate('Student');
   } catch (error) {
     // TODO: handle error message.

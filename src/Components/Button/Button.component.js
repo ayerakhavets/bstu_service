@@ -18,7 +18,7 @@ function Button(props: ButtonProps) {
       style={ [styles.button, style] }
       onPress={ onPress }
     >
-      <Text>{ title }</Text>
+      <Text style={ styles.text }>{ title }</Text>
     </TouchableOpacity>
   );
 }

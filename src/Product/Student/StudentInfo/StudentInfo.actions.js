@@ -1,4 +1,6 @@
 // @flow
+import type { UserInfo } from '../../types';
+
 export const CHANGE_COURSE = 'CHANGE_COURSE';
 export const CHANGE_FACULTY = 'CHANGE_FACULTY';
 export const CHANGE_MIDDLE_NAME = 'CHANGE_MIDDLE_NAME';
@@ -6,6 +8,7 @@ export const CHANGE_NAME = 'CHANGE_NAME';
 export const CHANGE_SPECIALTY = 'CHANGE_SPECIALTY';
 export const CHANGE_STUDENT_ID = 'CHANGE_STUDENT_ID';
 export const CHANGE_SURNAME = 'CHANGE_SURNAME';
+export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
 export const SAVE_STUDENT_INFO = 'SAVE_STUDENT_INFO';
 
 type ChangeCourseAction = { type: typeof CHANGE_COURSE, payload: string };
@@ -15,6 +18,7 @@ type ChangeNameAction = { type: typeof CHANGE_NAME, payload: string };
 type СhangeSpecialtyAction = { type: typeof CHANGE_SPECIALTY, payload: string };
 type ChangeStudentIdAction = { type: typeof CHANGE_STUDENT_ID, payload: string };
 type ChangeSurnameAction = { type: typeof CHANGE_SURNAME, payload: string };
+type ChangeUserInfoAction = { type: typeof CHANGE_USER_INFO, payload: UserInfo };
 type SaveStudentInfoAction = { type: typeof SAVE_STUDENT_INFO };
 
 export const changeCourse = (course: string): ChangeCourseAction => ({
@@ -52,6 +56,11 @@ export const changeSurname = (surname: string): ChangeSurnameAction => ({
   payload: surname
 });
 
+export const changeUserInfo = (userInfo: UserInfo): ChangeUserInfoAction => ({
+  type: CHANGE_USER_INFO,
+  payload: userInfo
+});
+
 export const saveStudentInfo = (): SaveStudentInfoAction => ({ type: SAVE_STUDENT_INFO });
 
 export type StudentInfoActions =
@@ -62,4 +71,5 @@ export type StudentInfoActions =
   | СhangeSpecialtyAction
   | ChangeStudentIdAction
   | ChangeSurnameAction
+  | ChangeUserInfoAction
   | SaveStudentInfoAction

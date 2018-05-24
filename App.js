@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { ProductNavigator, productReducer, productSaga } from './src/Product';
 import NavigatorService from './src/Services/navigator';
+import { MyStatusBar } from './src/Components';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -24,9 +25,12 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={ store }>
-        <ProductNavigator
-          ref={ this.configureNavigator }
-        />
+        <Fragment>
+          <MyStatusBar />
+          <ProductNavigator
+            ref={ this.configureNavigator }
+          />
+        </Fragment>
       </Provider>
     );
   }

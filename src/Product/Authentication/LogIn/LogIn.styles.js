@@ -1,15 +1,14 @@
 
 // @flow
 import { StyleSheet } from 'react-native';
-
-const white = '#F5FCFF';
+import { colors } from '../../../Components';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: white,
+    backgroundColor: colors.white,
     padding: 10
   },
   input: {

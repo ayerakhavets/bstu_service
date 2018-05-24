@@ -1,11 +1,13 @@
 // @flow
-import StudentStack from './Student.navigator';
+import StudentTabs from './Student.navigator';
 import studentReducer, { type StudentState } from './Student.reducer';
 import studentSaga from './Student.saga';
+import { changeUserInfo } from './StudentInfo';
 
-export default StudentStack;
+export default StudentTabs;
 
 export {
+  changeUserInfo,
   studentReducer,
   studentSaga
 };

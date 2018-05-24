@@ -7,6 +7,7 @@ import {
   CHANGE_SPECIALTY,
   CHANGE_STUDENT_ID,
   CHANGE_SURNAME,
+  CHANGE_USER_INFO,
   type StudentInfoActions
 } from './StudentInfo.actions';
 
@@ -75,6 +76,11 @@ export default (
     return {
       ...state,
       surname: action.payload
+    };
+  case CHANGE_USER_INFO:
+    return {
+      ...state,
+      ...action.payload
     };
   default:
     return state;

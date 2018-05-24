@@ -1,11 +1,11 @@
 // @flow
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   TextInput,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Button } from '../../../Components';
+import { Button, Header } from '../../../Components';
 import {
   changeEmailValue,
   changePasswordValue,
@@ -32,28 +32,32 @@ class LogIn extends Component<LogInProps> {
     } = this.props;
 
     return (
-      <View style={ styles.container }>
-        <TextInput
-          keyboardType="email-address"
-          placeholder="Электронная почта"
-          style={ styles.input }
-          onChangeText={ onChangeEmail }
-        />
-        <TextInput
-          placeholder="Пароль"
-          secureTextEntry
-          style={ styles.input }
-          onChangeText={ onChangePassword }
-        />
-        <Button
-          title="Войти"
-          onPress={ onLogIn }
-        />
-        <Button
-          title="Зарегистрироваться"
-          onPress={ onSignIn }
-        />
-      </View>
+      <Fragment>
+        <Header title="Вход в приложение" />
+
+        <View style={ styles.container }>
+          <TextInput
+            keyboardType="email-address"
+            placeholder="Электронная почта"
+            style={ styles.input }
+            onChangeText={ onChangeEmail }
+          />
+          <TextInput
+            placeholder="Пароль"
+            secureTextEntry
+            style={ styles.input }
+            onChangeText={ onChangePassword }
+          />
+          <Button
+            title="Войти"
+            onPress={ onLogIn }
+          />
+          <Button
+            title="Зарегистрироваться"
+            onPress={ onSignIn }
+          />
+        </View>
+      </Fragment>
     );
   }
 }
