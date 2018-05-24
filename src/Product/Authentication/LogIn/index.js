@@ -1,8 +1,8 @@
 // @flow
 import LogIn from './LogIn.component';
 import {
-  CHANGE_EMAIL_VALUE,
-  CHANGE_PASSWORD_VALUE,
+  CHANGE_EMAIL,
+  CHANGE_UID,
   LOG_IN,
   SIGN_UP,
   changeEmailValue,
@@ -13,18 +13,21 @@ import {
 } from './LogIn.actions';
 import logInSaga from './LogIn.sagas';
 import logInReducer, { type LogInState } from './LogIn.reducer';
+import { selectEmail, selectUid } from './LogIn.selectors';
 
 
 export default LogIn;
 
 export {
-  CHANGE_EMAIL_VALUE,
-  CHANGE_PASSWORD_VALUE,
+  CHANGE_EMAIL,
+  CHANGE_UID,
   LOG_IN,
   SIGN_UP,
   changeEmailValue,
   changePasswordValue,
   logIn,
+  selectEmail,
+  selectUid,
   signUp,
 
   logInSaga,

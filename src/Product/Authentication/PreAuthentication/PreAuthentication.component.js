@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 type Props = {
-  navigation: any
+  // navigation: any
 };
 
 class PreAuthentication extends React.Component<Props> {
@@ -27,7 +27,6 @@ class PreAuthentication extends React.Component<Props> {
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
     // this.props.navigation.navigate(userToken ? 'Dean' : 'Auth');
-    this.props.navigation.navigate('Student');
   };
 
   // Render any loading content that you like here

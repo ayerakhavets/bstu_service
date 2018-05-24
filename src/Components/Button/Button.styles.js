@@ -1,15 +1,14 @@
 // @flow
 import { StyleSheet } from 'react-native';
-
-const red = 'red';
+import colors from '../colors';
 
 export default StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: red,
+    backgroundColor: colors.darkGreen,
     justifyContent: 'center',
     width: '100%',
     height: 50,
-    marginTop: 10
+    margin: 10
   }
 });

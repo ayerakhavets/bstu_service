@@ -12,6 +12,6 @@ export default createSwitchNavigator(
     Student: StudentStack
   },
   {
-    initialRouteName: 'PreAuth'
+    initialRouteName: 'Auth'
   }
 );

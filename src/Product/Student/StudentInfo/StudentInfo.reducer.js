@@ -28,7 +28,7 @@ const initialState = {
   course: '',
   courses: ['1', '2', '3', '4'],
   faculty: '',
-  faculties: ['ФИТ'],
+  faculties: ['', 'ФИТ'],
   middleName: '',
   name: '',
   specialty: '',

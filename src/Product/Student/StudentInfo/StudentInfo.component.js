@@ -50,69 +50,48 @@ faculty: string,
 // eslint-disable-next-line react/prefer-stateless-function
 class StudentInfo extends Component<StudentInfoProps> {
   render() {
-    const {
-      course,
-      faculty,
-      mappedCourses,
-      mappedFaculties,
-      mappedSpecialties,
-      middleName,
-      name,
-      specialty,
-      studentId,
-      surname,
-      onChangeCourse,
-      onChangeFaculty,
-      onChangeMiddleName,
-      onChangeName,
-      onChangeSpicialty,
-      onChangeStudentId,
-      onChangeSurname,
-      onSave
-    } = this.props;
-
     return (<ScrollView>
       <LabelInput
         label="Имя"
-        value={ name }
-        onChangeText={ onChangeName }
+        value={ this.props.name }
+        onChangeText={ this.props.onChangeName }
       />
       <LabelInput
         label="Фамилия"
-        value={ surname }
-        onChangeText={ onChangeSurname }
+        value={ this.props.surname }
+        onChangeText={ this.props.onChangeSurname }
       />
       <LabelInput
         label="Отчество"
-        value={ middleName }
-        onChangeText={ onChangeMiddleName }
+        value={ this.props.middleName }
+        onChangeText={ this.props.onChangeMiddleName }
       />
       <LabelInput
         label="Номер билета"
-        value={ studentId }
-        onChangeText={ onChangeStudentId }
+        value={ this.props.studentId }
+        onChangeText={ this.props.onChangeStudentId }
       />
       <LabelPicker
         label="Факультет"
-        pickerItems={ mappedFaculties }
-        selectedValue={ faculty }
-        onValueChange={ onChangeFaculty }
+        pickerItems={ this.props.mappedFaculties }
+        selectedValue={ this.props.faculty }
+        onValueChange={ this.props.onChangeFaculty }
       />
       <LabelPicker
         label="Курс"
-        pickerItems={ mappedCourses }
-        selectedValue={ course }
-        onValueChange={ onChangeCourse }
+        pickerItems={ this.props.mappedCourses }
+        selectedValue={ this.props.course }
+        onValueChange={ this.props.onChangeCourse }
       />
       <LabelPicker
         label="Специальность"
-        pickerItems={ mappedSpecialties }
-        selectedValue={ specialty }
-        onValueChange={ onChangeSpicialty }
+        pickerItems={ this.props.mappedSpecialties }
+        selectedValue={ this.props.specialty }
+        onValueChange={ this.props.onChangeSpicialty }
       />
       <Button
         title="Сохранить"
-        onPress={ onSave }
+        onPress={ this.props.onSave }
       />
     </ScrollView>);
   }
