@@ -2,7 +2,7 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  container: {
-    // width: '100%'
+  picker: {
+    height: 40
   }
 });

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Header, LabelInput, LabelPicker, type PickerItem } from '../../../Components';
 import {
@@ -25,6 +25,7 @@ import {
   selectStudentId,
   selectSurname
 } from './StudentInfo.selectors';
+import styles from './StudentInfo.styles';
 
 type StudentInfoProps = {
   course: string,
@@ -54,17 +55,21 @@ class StudentInfo extends Component<StudentInfoProps> {
       <Fragment>
         <Header title="Пользователь" />
 
-        <ScrollView>
-          <LabelInput
-            label="Имя"
-            value={ this.props.name }
-            onChangeText={ this.props.onChangeName }
-          />
-          <LabelInput
-            label="Фамилия"
-            value={ this.props.surname }
-            onChangeText={ this.props.onChangeSurname }
-          />
+        <ScrollView style={ styles.container }>
+          <View style={ styles.firstSecondNameContainer }>
+            <LabelInput
+              label="Имя"
+              value={ this.props.name }
+              style={ styles.firstSecondNameInput }
+              onChangeText={ this.props.onChangeName }
+            />
+            <LabelInput
+              label="Фамилия"
+              value={ this.props.surname }
+              style={ styles.firstSecondNameInput }
+              onChangeText={ this.props.onChangeSurname }
+            />
+          </View>
           <LabelInput
             label="Отчество"
             value={ this.props.middleName }
@@ -95,6 +100,7 @@ class StudentInfo extends Component<StudentInfoProps> {
           />
           <Button
             title="Сохранить"
+            style={ styles.button }
             onPress={ this.props.onSave }
           />
         </ScrollView>

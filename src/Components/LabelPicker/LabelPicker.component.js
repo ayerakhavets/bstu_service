@@ -25,9 +25,10 @@ function LabelPicker(props: LabelPickerProps) {
     <Picker.Item key={ index } label={ picker.label } value={ picker.value } />);
 
   return (
-    <View style={ [styles.container, style] }>
+    <View style={ style }>
       <Text>{ label }</Text>
       <Picker
+        style={ styles.picker }
         selectedValue={ selectedValue }
         onValueChange={ onValueChange }
       >

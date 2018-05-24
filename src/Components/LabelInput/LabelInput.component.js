@@ -15,11 +15,11 @@ function LabelInput(props: LabelInputProps) {
   const { value, label, style, onChangeText } = props;
 
   return (
-    <View
-      style={ [styles.container, style] }
-    >
+    <View style={ style }>
       <Text>{ label }</Text>
       <TextInput
+        lineHei={ 24 }
+        style={ styles.input }
         defaultValue={ value }
         onChangeText={ onChangeText }
       />
