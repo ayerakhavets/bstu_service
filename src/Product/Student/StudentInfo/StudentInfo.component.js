@@ -35,13 +35,13 @@ import styles from './StudentInfo.styles';
 
 type StudentInfoProps = {
   course: string,
+  courses: PickerItem[],
   faculty: string,
-  mappedCourses: PickerItem[],
-  mappedFaculties: PickerItem[],
-  mappedSpecialties: PickerItem[],
+  faculties: PickerItem[],
   middleName: string,
   name: string,
   specialty: string,
+  specialties: PickerItem[],
   studentId: string,
   surname: string,
   onChangeCourse: () => void,
@@ -88,19 +88,19 @@ class StudentInfo extends Component<StudentInfoProps> {
           />
           <LabelPicker
             label="Факультет"
-            pickerItems={ this.props.mappedFaculties }
+            pickerItems={ this.props.faculties }
             selectedValue={ this.props.faculty }
             onValueChange={ this.props.onChangeFaculty }
           />
           <LabelPicker
             label="Курс"
-            pickerItems={ this.props.mappedCourses }
+            pickerItems={ this.props.courses }
             selectedValue={ this.props.course }
             onValueChange={ this.props.onChangeCourse }
           />
           <LabelPicker
             label="Специальность"
-            pickerItems={ this.props.mappedSpecialties }
+            pickerItems={ this.props.specialties }
             selectedValue={ this.props.specialty }
             onValueChange={ this.props.onChangeSpicialty }
           />
@@ -116,13 +116,13 @@ class StudentInfo extends Component<StudentInfoProps> {
 
 const mapStateToProps = state => ({
   course: selectCourse(state),
+  courses: selectMappedCourses(state),
   faculty: selectFaculty(state),
-  mappedCourses: selectMappedCourses(state),
-  mappedFaculties: selectMappedFaculties(state),
-  mappedSpecialties: selectMappedSpecialties(state),
+  faculties: selectMappedFaculties(state),
   middleName: selectMiddleName(state),
   name: selectName(state),
   specialty: selectSpecialty(state),
+  specialties: selectMappedSpecialties(state),
   studentId: selectStudentId(state),
   surname: selectSurname(state)
 });

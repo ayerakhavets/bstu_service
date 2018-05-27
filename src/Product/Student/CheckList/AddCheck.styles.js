@@ -2,6 +2,7 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../Components';
 
+// FIXME: use alphabetic order for style objects.
 export default StyleSheet.create({
   container: {
     backgroundColor: colors.white,

@@ -20,9 +20,9 @@ import {
 
 type AddCheckProps = {
   date: string,
-  mappedPaymentTypes: PickerItem[],
   moneyAmount: string,
   paymentType: string,
+  paymentTypes: PickerItem[],
   addImage: () => void,
   onChangeDate: () => void,
   onChangeMoneyAmount: () => void,
@@ -70,7 +70,7 @@ class AddCheck extends Component<AddCheckProps> {
             label="Тип выплаты"
             selectedValue={ this.props.paymentType }
 
-            pickerItems={ this.props.mappedPaymentTypes }
+            pickerItems={ this.props.paymentTypes }
             onValueChange={ this.props.onChangePaymentType }
           />
 
@@ -87,9 +87,9 @@ class AddCheck extends Component<AddCheckProps> {
 
 const mapStateToProps = state => ({
   date: selectDate(state),
-  mappedPaymentTypes: selectMappedPaymentTypes(state),
   moneyAmount: selectMoneyAmount(state),
-  paymentType: selectPaymentType(state)
+  paymentType: selectPaymentType(state),
+  paymentTypes: selectMappedPaymentTypes(state)
 });
 
 const mapDispatchToProps = {

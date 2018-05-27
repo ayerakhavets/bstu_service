@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 import type { ApplicationState } from '../../Product.reducer';
 import type { PickerItem } from '../../../Components';
 
+// TODO: add actual type instead of `any`.
 export const selectChecks = ({ studentReducer }: ApplicationState): any =>
   studentReducer.checkListReducer.checks;
 

@@ -1,11 +1,10 @@
 // @flow
 import firebase from 'react-native-firebase';
 
-// eslint-disable-next-line import/prefer-default-export
 export const updateStudentInfo = (updates: Object) => firebase.database().ref('').update(updates);
 
 export const addCheck = async (uid: string, paymentInfo: Object) => {
-  //$FlowFixMe incompatable with Promise 
+  // $FlowFixMe incompatable with Promise
   const key = await firebase.database().ref('').child('checks').push().key;
 
   const updates = {};

@@ -9,10 +9,11 @@ export const CHANGE_PAYMENT_TYPE = 'CHANGE_PAYMENT_TYPE';
 export const LOAD_CHECKS = 'LOAD_CHECKS';
 // export const SELECT_CHECK = 'SELECT_CHECK';
 
-type AddCheckAction = { type: typeof ADD_CHECK };
 type ChangeDateAction = { type: typeof CHANGE_DATE, payload: string };
 type ChangeMoneyAmountAction = { type: typeof CHANGE_MONEY_AMOUNT, payload: string };
 type ChangePaymentTypeAction = { type: typeof CHANGE_PAYMENT_TYPE, payload: string };
+
+type AddCheckAction = { type: typeof ADD_CHECK };
 type LoadChecksAction = { type: typeof LOAD_CHECKS };
 
 export const addCheck = (): AddCheckAction => ({ type: ADD_CHECK });

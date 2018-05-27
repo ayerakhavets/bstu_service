@@ -18,17 +18,18 @@ type LogInProps = {
   onChangeEmail: () => void,
   onChangePassword: () => void,
   onLogIn: () => void,
-  onSignIn: () => void
+  onSignUp: () => void
 };
 
+// TODO: add "remember me" checkbox.
 // eslint-disable-next-line react/prefer-stateless-function
 class LogIn extends Component<LogInProps> {
   render() {
     const {
       onChangeEmail,
-      onLogIn,
       onChangePassword,
-      onSignIn
+      onLogIn,
+      onSignUp
     } = this.props;
 
     return (
@@ -54,7 +55,7 @@ class LogIn extends Component<LogInProps> {
           />
           <Button
             title="Зарегистрироваться"
-            onPress={ onSignIn }
+            onPress={ onSignUp }
           />
         </View>
       </Fragment>
@@ -65,8 +66,8 @@ class LogIn extends Component<LogInProps> {
 const mapDispatchToProps = {
   onChangeEmail: changeEmailValue,
   onChangePassword: changePasswordValue,
-  onSignIn: signUp,
-  onLogIn: logIn
+  onLogIn: logIn,
+  onSignUp: signUp
 };
 
 export default connect(null, mapDispatchToProps)(LogIn);
