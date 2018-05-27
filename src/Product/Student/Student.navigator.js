@@ -19,6 +19,7 @@ const StudentTabs = createBottomTabNavigator({
   tabBarOptions: {
     activeTintColor: colors.greenDark
   },
+  // FIXME: use react-native-vector-icons for icons.
   navigationOptions: ({ navigation }) => ({
     // eslint-disable-next-line react/display-name, react/prop-types
     tabBarIcon: ({ focused }) => {

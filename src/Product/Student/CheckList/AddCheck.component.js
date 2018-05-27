@@ -30,6 +30,7 @@ type AddCheckProps = {
   onAddCheck: () => void
 }
 
+// FIXME: use https://github.com/wix/react-native-calendars instead of DatePicker.
 // eslint-disable-next-line react/prefer-stateless-function
 class AddCheck extends Component<AddCheckProps> {
   render() {
