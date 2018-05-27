@@ -8,8 +8,8 @@ export default StyleSheet.create({
     borderBottomColor: colors.greyLight,
     borderBottomWidth: 1,
     justifyContent: 'center',
-    height: 60,
-    paddingLeft: 20,
+    height: 57,
+    paddingLeft: 16,
     width: '100%'
   },
   text: {

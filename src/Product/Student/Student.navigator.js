@@ -2,7 +2,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
-import CheckList from './CheckList';
+import CheckListStack from './CheckList';
 import StudentInfo from './StudentInfo';
 import { colors, styles } from '../../Components';
 
@@ -11,7 +11,7 @@ const checkList = 'Выплаты';
 const studentInfo = 'Пользователь';
 
 const StudentTabs = createBottomTabNavigator({
-  [`${checkList}`]: CheckList,
+  [`${checkList}`]: CheckListStack,
   [`${studentInfo}`]: StudentInfo
 },
 {

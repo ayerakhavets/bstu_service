@@ -33,15 +33,16 @@ export const selectStudentId = ({ studentReducer }: ApplicationState): string =>
 export const selectSurname = ({ studentReducer }: ApplicationState): string =>
   studentReducer.studentInfoReducer.surname;
 
-
 export const selectMappedCourses = createSelector(
   selectCourses,
   courses => courses.map((course): PickerItem => ({ label: course, value: course }))
 );
+
 export const selectMappedFaculties = createSelector(
   selectFaculties,
   faculties => faculties.map((faculty): PickerItem => ({ label: faculty, value: faculty }))
 );
+
 export const selectMappedSpecialties = createSelector(
   selectSpecialties,
   specialties =>

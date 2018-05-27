@@ -1,3 +1,16 @@
-import CheckList from './CheckList.component';
+// @flow
+import CheckListStack from './CheckList.navigator';
+import checkListReducer, { type CheckListState } from './CheckList.reducer';
+import checkListSaga from './CheckList.saga';
 
-export default CheckList;
+export default CheckListStack;
+
+export {
+  checkListReducer,
+  checkListSaga
+};
+
+export type {
+  CheckListState
+};
+

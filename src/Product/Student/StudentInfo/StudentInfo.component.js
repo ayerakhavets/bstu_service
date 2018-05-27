@@ -2,7 +2,13 @@
 import React, { Component, Fragment } from 'react';
 import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Button, Header, LabelInput, LabelPicker, type PickerItem } from '../../../Components';
+import {
+  Button,
+  Header,
+  LabelInput,
+  LabelPicker,
+  type PickerItem
+} from '../../../Components';
 import {
   changeCourse,
   changeFaculty,

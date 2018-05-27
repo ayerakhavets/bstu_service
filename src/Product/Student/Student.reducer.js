@@ -1,11 +1,14 @@
 // @flow
 import { combineReducers } from 'redux';
 import { studentInfoReducer, type StudentInfoState } from './StudentInfo';
+import { checkListReducer, type CheckListState } from './CheckList';
 
 export type StudentState = {
-  studentInfoReducer: StudentInfoState
+  studentInfoReducer: StudentInfoState,
+  checkListReducer: CheckListState
 }
 
 export default combineReducers({
-  studentInfoReducer
+  studentInfoReducer,
+  checkListReducer
 });

@@ -47,9 +47,9 @@ export function* handleSaveStudentInfo(): Saga<void> {
     updates[`/specialties/${specialty}/${uid}`] = studentInfo;
 
     yield call(updateStudentInfo, updates);
-    console.log('=== success2');
+    console.log('=== success updateStudentInfo');
   } catch (error) {
     // TODO: handle error.
-    console.log(error);
+    console.log('=== error handleSaveStudentInfo', error);
   }
 }

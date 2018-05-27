@@ -27,16 +27,16 @@ export function* handleLogIn(): Saga<void> {
 
   try {
     const { user } = yield call(signInWithEmailAndPassword, ...requestParams);
+    console.log('=== success signInWithEmailAndPassword', user);
     yield put(changeUid(user.uid));
-    console.log('=== success', user);
-    const supa = yield call(getUserInfo, user.uid);
-    console.log('=== success2', supa);
-    yield put(changeUserInfo(supa));
+    const userInfo = yield call(getUserInfo, user.uid);
+    console.log('=== success getUserInfo', userInfo);
+    yield put(changeUserInfo(userInfo));
     // TODO: handle admin/student roles
     NavigatorService.navigate('Student');
   } catch (error) {
     // TODO: handle error message.
-    console.log('=== error', error);
+    console.log('=== error handleLogIn', error);
   }
 }
 

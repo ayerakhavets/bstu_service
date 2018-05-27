@@ -20,12 +20,14 @@ type LabelPickerProps = {
 function LabelPicker(props: LabelPickerProps) {
   const { label, pickerItems, selectedValue, style, onValueChange } = props;
 
-  const pickerItemComponents: any = pickerItems.map((picker, index) =>
-    // eslint-disable-next-line react/no-array-index-key
-    <Picker.Item key={ index } label={ picker.label } value={ picker.value } />);
+  const pickerItemComponents: any = pickerItems
+    ? pickerItems.map((picker, index) =>
+      // eslint-disable-next-line react/no-array-index-key
+      <Picker.Item key={ index } label={ picker.label } value={ picker.value } />)
+    : null;
 
   return (
-    <View style={ style }>
+    <View style={ [styles.container, style] }>
       <Text>{ label }</Text>
       <Picker
         style={ styles.picker }
