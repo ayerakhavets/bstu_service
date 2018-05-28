@@ -1,23 +1,16 @@
 // @flow
-import LogIn, {
-  logInReducer,
-  logInSaga,
-  selectEmail,
-  selectUid,
-  type LogInState
-} from './LogIn';
-import PreAuthentication from './PreAuthentication';
+import Authentication from './Authentication.component';
+import authenticationSaga from './Authentication.sagas';
+import authenticationReducer, { type AuthenticationState } from './Authentication.reducer';
+import { selectEmail, selectUid } from './Authentication.selectors';
 
 export {
-  LogIn,
-  logInReducer,
-  logInSaga,
-  PreAuthentication,
+  Authentication,
+  authenticationReducer,
+  authenticationSaga,
   selectEmail,
   selectUid
 };
 
-export type {
-  LogInState
-};
+export type { AuthenticationState };
 

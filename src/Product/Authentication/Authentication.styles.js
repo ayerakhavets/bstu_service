@@ -1,12 +1,13 @@
 
 // @flow
 import { StyleSheet } from 'react-native';
-import { colors } from '../../../Components';
+import { colors } from '../../Components';
+
+export { colors };
 
 export default StyleSheet.create({
   container: {
-    justifyContent: 'center',
-
+    justifyContent: 'center'
   },
   button: {
     marginBottom: 10
@@ -16,7 +17,6 @@ export default StyleSheet.create({
   },
   checkBox: {
     borderWidth: 0,
-    
     backgroundColor: colors.white
   }
 });

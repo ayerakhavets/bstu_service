@@ -2,23 +2,29 @@
 export const CHANGE_EMAIL = 'CHANGE_EMAIL';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 export const CHANGE_UID = 'CHANGE_UID';
+export const LOADING_END = 'LOADING_END';
+export const LOADING_START = 'LOADING_START';
 export const LOG_IN = 'LOG_IN';
+export const PRE_AUTHENTICATION = 'PRE_AUTHENTICATION';
 export const SIGN_UP = 'SIGN_UP';
 export const TOGGLE_IS_REMEMBER = 'TOGGLE_IS_REMEMBER';
 
 type ChangeEmailAction = { type: typeof CHANGE_EMAIL, payload: string };
 type ChangePasswordAction = { type: typeof CHANGE_PASSWORD, payload: string };
 type ChangeUidAction = { type: typeof CHANGE_UID, payload: string };
+type LoadingEndAction = { type: typeof LOADING_END };
+type LoadingStartAction = { type: typeof LOADING_START };
 type LogInAction = { type: typeof LOG_IN };
+type PreAuthenticationAction = { type: typeof PRE_AUTHENTICATION };
 type SignUpAction = { type: typeof SIGN_UP };
 type ToggleIsRememberAction = { type: typeof TOGGLE_IS_REMEMBER };
 
-export const changeEmailValue = (email: string): ChangeEmailAction => ({
+export const changeEmail = (email: string): ChangeEmailAction => ({
   type: CHANGE_EMAIL,
   payload: email
 });
 
-export const changePasswordValue = (password: string): ChangePasswordAction => ({
+export const changePassword = (password: string): ChangePasswordAction => ({
   type: CHANGE_PASSWORD,
   payload: password
 });
@@ -28,16 +34,25 @@ export const changeUid = (uid: string): ChangeUidAction => ({
   payload: uid
 });
 
+export const loadingEnd = (): LoadingEndAction => ({ type: LOADING_END });
+
+export const loadingStart = (): LoadingStartAction => ({ type: LOADING_START });
+
 export const logIn = (): LogInAction => ({ type: LOG_IN });
+
+export const preAuthentication = (): PreAuthenticationAction => ({ type: PRE_AUTHENTICATION });
 
 export const signUp = (): SignUpAction => ({ type: SIGN_UP });
 
-export const toggleIsRemember = (): ToggleIsRememberAction => ({type: TOGGLE_IS_REMEMBER});
+export const toggleIsRemember = (): ToggleIsRememberAction => ({ type: TOGGLE_IS_REMEMBER });
 
 export type LogInActions =
   | ChangeEmailAction
   | ChangePasswordAction
   | ChangeUidAction
+  | LoadingEndAction
+  | LoadingStartAction
   | LogInAction
+  | PreAuthenticationAction
   | SignUpAction
   | ToggleIsRememberAction

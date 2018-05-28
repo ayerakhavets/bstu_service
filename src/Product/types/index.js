@@ -1,7 +1,8 @@
 // @flow
 import type { UserInfo } from './UserInfo';
+import type { ApplicationState } from './ApplicationState';
 
 export type {
-  // eslint-disable-next-line import/prefer-default-export
+  ApplicationState,
   UserInfo
 };

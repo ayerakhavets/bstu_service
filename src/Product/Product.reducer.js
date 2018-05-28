@@ -1,15 +1,9 @@
 // @flow
 import { combineReducers } from 'redux';
-import { logInReducer, type LogInState } from './Authentication';
-import { studentReducer, type StudentState } from './Student';
-
-// FIXME: move to the types folder.
-export type ApplicationState = {
-  logInReducer: LogInState,
-  studentReducer: StudentState
-}
+import { authenticationReducer } from './Authentication';
+import { studentReducer } from './Student';
 
 export default combineReducers({
-  logInReducer,
+  authentication: authenticationReducer,
   studentReducer
 });

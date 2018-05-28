@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
 import { Button } from 'react-native-elements';
 import { LabelPicker, type PickerItem } from '../../../Components';
-import styles, {greenDark} from './AddCheck.styles';
+import styles, { greenDark } from './AddCheck.styles';
 import {
   addCheck,
   changeDate,
@@ -51,21 +51,21 @@ class AddCheck extends Component<AddCheckProps> {
         />
         <View style={ styles.editContainer }>
           <View style={ styles.moneyContainer }>
-          <Fragment>
-            <TextInput
-              style={ styles.input }
-              maxLength={ 7 }
-              value={ this.props.moneyAmount }
-              keyboardType="numeric"
-              onChangeText={ this.props.onChangeMoneyAmount }
-            />
-            <Text>BYN</Text>
+            <Fragment>
+              <TextInput
+                style={ styles.input }
+                maxLength={ 7 }
+                value={ this.props.moneyAmount }
+                keyboardType="numeric"
+                onChangeText={ this.props.onChangeMoneyAmount }
+              />
+              <Text>BYN</Text>
             </Fragment>
             <Button
               title=""
               backgroundColor={ greenDark }
-              containerViewStyle={ styles.button}
-              icon={{name: 'ios-image', type: 'ionicon', size: 18}}
+              containerViewStyle={ styles.button }
+              icon={{ name: 'ios-image', type: 'ionicon', size: 18 }}
               raised
               onPress={ this.props.onOpenImagePicker }
             />

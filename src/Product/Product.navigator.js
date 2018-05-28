@@ -1,14 +1,13 @@
 // @flow
 import { createSwitchNavigator } from 'react-navigation';
-import { LogIn, PreAuthentication } from './Authentication';
+import { Authentication } from './Authentication';
 import DeanStack from './Dean';
 import StudentTabs from './Student';
 
 export default createSwitchNavigator(
   {
-    Auth: LogIn,
+    Auth: Authentication,
     Dean: DeanStack,
-    PreAuth: PreAuthentication,
     Student: StudentTabs
   },
   {
