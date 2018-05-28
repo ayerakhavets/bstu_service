@@ -1,12 +1,13 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { connect } from 'react-redux';
 import {
-  MyButton,
   Header,
   LabelInput,
   LabelPicker,
+  MyButton,
+  Screen,
   type PickerItem
 } from '../../../Components';
 import {
@@ -22,6 +23,7 @@ import {
 import {
   selectCourse,
   selectFaculty,
+  selectIsLoading,
   selectMappedCourses,
   selectMappedFaculties,
   selectMappedSpecialties,
@@ -38,6 +40,7 @@ type StudentInfoProps = {
   courses: PickerItem[],
   faculty: string,
   faculties: PickerItem[],
+  isLoading: boolean,
   middleName: string,
   name: string,
   specialty: string,
@@ -54,6 +57,7 @@ type StudentInfoProps = {
   onSave: () => void
 }
 
+// FIXME: add internationalization.
 // eslint-disable-next-line react/prefer-stateless-function
 class StudentInfo extends Component<StudentInfoProps> {
   render() {
@@ -61,55 +65,65 @@ class StudentInfo extends Component<StudentInfoProps> {
       <Fragment>
         <Header title="Пользователь" />
 
-        <ScrollView style={ styles.container }>
-          <View style={ styles.firstSecondNameContainer }>
-            <LabelInput
-              label="Имя"
-              value={ this.props.name }
-              style={ styles.firstSecondNameInput }
-              onChangeText={ this.props.onChangeName }
-            />
-            <LabelInput
-              label="Фамилия"
-              value={ this.props.surname }
-              style={ styles.firstSecondNameInput }
-              onChangeText={ this.props.onChangeSurname }
-            />
-          </View>
-          <LabelInput
-            label="Отчество"
-            value={ this.props.middleName }
-            onChangeText={ this.props.onChangeMiddleName }
-          />
-          <LabelInput
-            label="Номер билета"
-            value={ this.props.studentId }
-            onChangeText={ this.props.onChangeStudentId }
-          />
-          <LabelPicker
-            label="Факультет"
-            pickerItems={ this.props.faculties }
-            selectedValue={ this.props.faculty }
-            onValueChange={ this.props.onChangeFaculty }
-          />
-          <LabelPicker
-            label="Курс"
-            pickerItems={ this.props.courses }
-            selectedValue={ this.props.course }
-            onValueChange={ this.props.onChangeCourse }
-          />
-          <LabelPicker
-            label="Специальность"
-            pickerItems={ this.props.specialties }
-            selectedValue={ this.props.specialty }
-            onValueChange={ this.props.onChangeSpicialty }
-          />
-          <MyButton
-            title="Сохранить"
-            style={ styles.button }
-            onPress={ this.props.onSave }
-          />
-        </ScrollView>
+        <Screen>
+          {this.props.isLoading
+            ? <ActivityIndicator size="large" />
+            : <Fragment>
+              <View style={ styles.twoItemsContainer }>
+                <LabelInput
+                  label="Имя"
+                  value={ this.props.name }
+                  containerViewStyle={ styles.twoItemsContainerItem }
+                  onChangeText={ this.props.onChangeName }
+                />
+                <LabelInput
+                  label="Фамилия"
+                  value={ this.props.surname }
+                  containerViewStyle={ styles.twoItemsContainerItem }
+                  onChangeText={ this.props.onChangeSurname }
+                />
+              </View>
+              <LabelInput
+                label="Отчество"
+                value={ this.props.middleName }
+                onChangeText={ this.props.onChangeMiddleName }
+              />
+              <LabelInput
+                label="Номер билета"
+                maxLength={ 8 }
+                keyboardType="numeric"
+                value={ this.props.studentId }
+                onChangeText={ this.props.onChangeStudentId }
+              />
+              <View style={ styles.twoItemsContainer }>
+                <LabelPicker
+                  style={ styles.twoItemsContainerItem }
+                  label="Факультет"
+                  pickerItems={ this.props.faculties }
+                  selectedValue={ this.props.faculty }
+                  onValueChange={ this.props.onChangeFaculty }
+                />
+                <LabelPicker
+                  style={ styles.twoItemsContainerItem }
+                  label="Курс"
+                  pickerItems={ this.props.courses }
+                  selectedValue={ this.props.course }
+                  onValueChange={ this.props.onChangeCourse }
+                />
+              </View>
+              <LabelPicker
+                label="Специальность"
+                pickerItems={ this.props.specialties }
+                selectedValue={ this.props.specialty }
+                onValueChange={ this.props.onChangeSpicialty }
+              />
+              <MyButton
+                containerViewStyle={ styles.button }
+                title="Сохранить"
+                onPress={ this.props.onSave }
+              />
+            </Fragment> }
+        </Screen>
       </Fragment>);
   }
 }
@@ -119,6 +133,7 @@ const mapStateToProps = state => ({
   courses: selectMappedCourses(state),
   faculty: selectFaculty(state),
   faculties: selectMappedFaculties(state),
+  isLoading: selectIsLoading(state),
   middleName: selectMiddleName(state),
   name: selectName(state),
   specialty: selectSpecialty(state),

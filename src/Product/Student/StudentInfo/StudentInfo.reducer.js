@@ -8,6 +8,8 @@ import {
   CHANGE_STUDENT_ID,
   CHANGE_SURNAME,
   CHANGE_USER_INFO,
+  LOADING_END,
+  LOADING_START,
   type StudentInfoActions
 } from './StudentInfo.actions';
 
@@ -16,6 +18,7 @@ export type StudentInfoState = {
   courses: string[],
   faculty: string,
   faculties: string[],
+  isLoading: boolean,
   middleName: string,
   name: string,
   specialty: string,
@@ -30,6 +33,7 @@ const initialState = {
   courses: ['1', '2', '3', '4'],
   faculty: '',
   faculties: ['', 'ФИТ'],
+  isLoading: false,
   middleName: '',
   name: '',
   specialty: '',
@@ -81,6 +85,16 @@ export default (
     return {
       ...state,
       ...action.payload
+    };
+  case LOADING_END:
+    return {
+      ...state,
+      isLoading: false
+    };
+  case LOADING_START:
+    return {
+      ...state,
+      isLoading: true
     };
   default:
     return state;

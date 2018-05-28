@@ -14,7 +14,6 @@ export type ScreenProps = {
 function Screen({ children, style }: ScreenProps) {
   return (
     <ScrollView
-      centerContent
       contentContainerStyle={ [styles.container, style] }
       alwaysBounceVertical={ false }
       automaticallyAdjustContentInsets={ false }

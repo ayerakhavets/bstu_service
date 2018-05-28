@@ -42,8 +42,6 @@ class Authentication extends Component<AuthenticationProps> {
   constructor(props: AuthenticationProps) {
     super(props);
     props.onPreAuthentication();
-    // AsyncStorage.setItem('keyComponent', 'testComponent', (error, keys) =>
-    //   console.log('keysComponent: ', keys, 'err: ', error));
   }
 
   render() {
@@ -63,7 +61,7 @@ class Authentication extends Component<AuthenticationProps> {
     return (
       <Fragment>
         <Header title="Вход в приложение" />
-        <Screen style={ styles.container }>
+        <Screen>
           { isLoading
             ? <ActivityIndicator size="large" />
             : <Fragment>

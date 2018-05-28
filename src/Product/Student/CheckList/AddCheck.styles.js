@@ -33,6 +33,6 @@ export default StyleSheet.create({
     justifyContent: 'space-between'
   },
   button: {
-margin: 10
+    margin: 10
   }
 });

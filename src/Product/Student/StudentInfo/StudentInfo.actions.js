@@ -9,6 +9,8 @@ export const CHANGE_SPECIALTY = 'CHANGE_SPECIALTY';
 export const CHANGE_STUDENT_ID = 'CHANGE_STUDENT_ID';
 export const CHANGE_SURNAME = 'CHANGE_SURNAME';
 export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
+export const LOADING_END = 'LOADING_END';
+export const LOADING_START = 'LOADING_START';
 export const SAVE_STUDENT_INFO = 'SAVE_STUDENT_INFO';
 
 type ChangeCourseAction = { type: typeof CHANGE_COURSE, payload: string };
@@ -19,6 +21,8 @@ type СhangeSpecialtyAction = { type: typeof CHANGE_SPECIALTY, payload: string }
 type ChangeStudentIdAction = { type: typeof CHANGE_STUDENT_ID, payload: string };
 type ChangeSurnameAction = { type: typeof CHANGE_SURNAME, payload: string };
 type ChangeUserInfoAction = { type: typeof CHANGE_USER_INFO, payload: UserInfo };
+type LoadingEndAction = { type: typeof LOADING_END };
+type LoadingStartAction = { type: typeof LOADING_START };
 type SaveStudentInfoAction = { type: typeof SAVE_STUDENT_INFO };
 
 export const changeCourse = (course: string): ChangeCourseAction => ({
@@ -61,6 +65,10 @@ export const changeUserInfo = (userInfo: UserInfo): ChangeUserInfoAction => ({
   payload: userInfo
 });
 
+export const loadingEnd = (): LoadingEndAction => ({ type: LOADING_END });
+
+export const loadingStart = (): LoadingStartAction => ({ type: LOADING_START });
+
 export const saveStudentInfo = (): SaveStudentInfoAction => ({ type: SAVE_STUDENT_INFO });
 
 export type StudentInfoActions =
@@ -72,4 +80,6 @@ export type StudentInfoActions =
   | ChangeStudentIdAction
   | ChangeSurnameAction
   | ChangeUserInfoAction
+  | LoadingEndAction
+  | LoadingStartAction
   | SaveStudentInfoAction

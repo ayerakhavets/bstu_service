@@ -6,9 +6,6 @@ import { colors } from '../../Components';
 export { colors };
 
 export default StyleSheet.create({
-  container: {
-    justifyContent: 'center'
-  },
   button: {
     marginBottom: 10
   },

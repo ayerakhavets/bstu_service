@@ -1,7 +1,7 @@
 // @flow
 import { createSelector } from 'reselect';
-import type { ApplicationState } from '../../Product.reducer';
 import type { PickerItem } from '../../../Components';
+import type { ApplicationState } from '../../types';
 
 export const selectCourse = ({ studentReducer }: ApplicationState): string =>
   studentReducer.studentInfoReducer.course;
@@ -14,6 +14,9 @@ export const selectFaculty = ({ studentReducer }: ApplicationState): string =>
 
 export const selectFaculties = ({ studentReducer }: ApplicationState): string[] =>
   studentReducer.studentInfoReducer.faculties;
+
+export const selectIsLoading = ({ studentReducer }: ApplicationState): boolean =>
+  studentReducer.studentInfoReducer.isLoading;
 
 export const selectMiddleName = ({ studentReducer }: ApplicationState): string =>
   studentReducer.studentInfoReducer.middleName;

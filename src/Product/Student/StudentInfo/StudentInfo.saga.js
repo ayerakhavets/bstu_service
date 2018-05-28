@@ -1,8 +1,15 @@
 // @flow
+// eslint-disable-next-line react-native/split-platform-components
+import { ToastAndroid } from 'react-native';
 import { type Saga } from 'redux-saga';
-import { call, select, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { selectEmail, selectUid } from '../../Authentication';
 import { updateStudentInfo } from '../Student.api';
-import { SAVE_STUDENT_INFO } from './StudentInfo.actions';
+import {
+  SAVE_STUDENT_INFO,
+  loadingEnd,
+  loadingStart
+} from './StudentInfo.actions';
 import {
   selectCourse,
   selectFaculty,
@@ -12,13 +19,14 @@ import {
   selectStudentId,
   selectSurname
 } from './StudentInfo.selectors';
-import { selectEmail, selectUid } from '../../Authentication';
 
 export default function* studentInfoSaga(): Saga<void> {
   yield takeEvery(SAVE_STUDENT_INFO, handleSaveStudentInfo);
 }
 
 export function* handleSaveStudentInfo(): Saga<void> {
+  yield put(loadingStart());
+
   const course = yield select(selectCourse);
   const faculty = yield select(selectFaculty);
   const middleName = yield select(selectMiddleName);
@@ -47,9 +55,10 @@ export function* handleSaveStudentInfo(): Saga<void> {
     updates[`/specialties/${specialty}/${uid}`] = studentInfo;
 
     yield call(updateStudentInfo, updates);
-    console.log('=== success updateStudentInfo');
+    yield put(loadingEnd());
   } catch (error) {
-    // TODO: handle error.
-    console.log('=== error handleSaveStudentInfo', error);
+    yield put(loadingEnd());
+    // FIXME: implement showing info for iOS.
+    ToastAndroid.show('Ошибка', ToastAndroid.SHORT);
   }
 }

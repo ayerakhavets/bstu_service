@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { Picker, Text, View } from 'react-native';
+import { Picker, View } from 'react-native';
+import { FormLabel } from 'react-native-elements';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 import styles from './LabelPicker.styles';
 
@@ -28,7 +29,7 @@ function LabelPicker(props: LabelPickerProps) {
 
   return (
     <View style={ [styles.container, style] }>
-      <Text>{ label }</Text>
+      <FormLabel>{ label }</FormLabel>
       <Picker
         style={ styles.picker }
         selectedValue={ selectedValue }
