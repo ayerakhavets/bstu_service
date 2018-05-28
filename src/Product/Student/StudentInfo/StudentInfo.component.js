@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 import {
-  Button,
+  MyButton,
   Header,
   LabelInput,
   LabelPicker,
@@ -104,7 +104,7 @@ class StudentInfo extends Component<StudentInfoProps> {
             selectedValue={ this.props.specialty }
             onValueChange={ this.props.onChangeSpicialty }
           />
-          <Button
+          <MyButton
             title="Сохранить"
             style={ styles.button }
             onPress={ this.props.onSave }

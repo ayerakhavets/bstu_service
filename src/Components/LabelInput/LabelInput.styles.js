@@ -1,8 +1,4 @@
 // @flow
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
-  input: {
-    height: 40
-  }
-});
+export default StyleSheet.create({ });

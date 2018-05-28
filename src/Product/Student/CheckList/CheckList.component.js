@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, FlatList, SectionList, Text } from 'react-native';
-import { Button } from '../../../Components';
+import { View } from 'react-native';
+import { MyButton } from '../../../Components';
 import { loadChecks } from './CheckList.actions';
 import { selectChecks } from './CheckList.selectors';
 import styles from './CheckList.styles';
@@ -32,21 +32,9 @@ class CheckList extends Component<CheckListProps> {
 
     return (
       <View style={ styles.container }>
-        <Button
+        <MyButton
           title="Добавить запись"
           onPress={ this.handleAddRecord }
-        />
-        <SectionList
-          renderItem={ ({ item, index, section }) => <Text key={ index }>{item}</Text> }
-          renderSectionHeader={ ({ section: { title } }) => (
-            <Text style={{ fontWeight: 'bold' }}>{title}</Text>
-          ) }
-          sections={ [
-            { title: 'Title1', data: ['item1', 'item2'] },
-            { title: 'Title2', data: ['item3', 'item4'] },
-            { title: 'Title3', data: ['item5', 'item6'] }
-          ] }
-          keyExtractor={ (item, index) => item + index }
         />
       </View>
     );

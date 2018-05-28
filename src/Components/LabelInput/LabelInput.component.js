@@ -1,28 +1,25 @@
 // @flow
 import React from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { View } from 'react-native';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
-import styles from './LabelInput.styles';
+import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 
 type LabelInputProps = {
-  value?: string,
-  label: string,
-  style?: StyleObj,
-  onChangeText: () => void
+  containerViewStyle?: StyleObj,
+  errorMessage?: string,
+  label?: string
 }
 
 function LabelInput(props: LabelInputProps) {
-  const { value, label, style, onChangeText } = props;
+  const { containerViewStyle, errorMessage, label, ...rest } = props;
 
   return (
-    <View style={ style }>
-      <Text>{ label }</Text>
-      <TextInput
-        lineHei={ 24 }
-        style={ styles.input }
-        defaultValue={ value }
-        onChangeText={ onChangeText }
+    <View style={ containerViewStyle }>
+      { label && <FormLabel>{ label }</FormLabel> }
+      <FormInput
+        { ...rest }
       />
+      { errorMessage ? <FormValidationMessage>{ errorMessage }</FormValidationMessage> : null }
     </View>
   );
 }

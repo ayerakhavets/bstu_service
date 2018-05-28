@@ -5,13 +5,18 @@ import { colors } from '../../../Components';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.white,
-    padding: 10
+
+  },
+  button: {
+    marginBottom: 10
   },
   input: {
-    width: '100%'
+    marginBottom: 10
+  },
+  checkBox: {
+    borderWidth: 0,
+    
+    backgroundColor: colors.white
   }
 });

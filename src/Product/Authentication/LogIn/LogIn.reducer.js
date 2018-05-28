@@ -3,17 +3,20 @@ import {
   CHANGE_EMAIL,
   CHANGE_PASSWORD,
   CHANGE_UID,
+  TOGGLE_IS_REMEMBER,
   type LogInActions
 } from './LogIn.actions';
 
 export type LogInState = {
   email: string,
+  isRemember: boolean,
   password: string,
   uid: string
 }
 
 const initialState = {
   email: '',
+  isRemember: false,
   password: '',
   uid: ''
 };
@@ -26,6 +29,11 @@ export default (
     return {
       ...state,
       email: action.payload
+    };
+  case TOGGLE_IS_REMEMBER:
+    return {
+      ...state,
+      isRemember: !state.isRemember
     };
   case CHANGE_PASSWORD:
     return {

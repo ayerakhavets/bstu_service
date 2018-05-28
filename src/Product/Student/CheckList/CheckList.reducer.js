@@ -1,6 +1,7 @@
 // @flow
 import {
   CHANGE_DATE,
+  CHANGE_IMAGE,
   CHANGE_MONEY_AMOUNT,
   CHANGE_PAYMENT_TYPE,
   type CheckListActions
@@ -8,7 +9,11 @@ import {
 
 export type PaymentInfo = {
   date: string,
-  image: string,
+  image: {
+    localPath: string,
+    name: string,
+    url: string
+  },
   moneyAmount: string,
   paymentType: string
 }
@@ -22,7 +27,11 @@ export type CheckListState = {
 const initialState = {
   check: {
     date: '',
-    image: '',
+    image: {
+      localPath: '',
+      name: '',
+      url: ''
+    },
     moneyAmount: '',
     paymentType: ''
   },
@@ -41,6 +50,19 @@ export default (
       check: {
         ...state.check,
         date: action.payload
+      }
+    };
+  case CHANGE_IMAGE:
+    return {
+      ...state,
+      check: {
+        ...state.check,
+        image: {
+          localPath: action.payload.localPath
+            ? action.payload.localPath : state.check.image.localPath,
+          name: action.payload.name ? action.payload.name : state.check.image.name,
+          url: action.payload.url ? action.payload.url : state.check.image.url
+        }
       }
     };
   case CHANGE_MONEY_AMOUNT:

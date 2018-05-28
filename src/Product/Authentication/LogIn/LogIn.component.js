@@ -1,24 +1,31 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import {
-  TextInput,
-  View
-} from 'react-native';
 import { connect } from 'react-redux';
-import { Button, Header } from '../../../Components';
+import { CheckBox } from 'react-native-elements';
+import { MyButton, Header, LabelInput, Screen } from '../../../Components';
 import {
   changeEmailValue,
   changePasswordValue,
   logIn,
-  signUp
+  signUp,
+  toggleIsRemember
 } from './LogIn.actions';
 import styles from './LogIn.styles';
+import {
+  selectEmail,
+  selectIsRemember,
+  selectPassword
+} from './LogIn.selectors';
 
 type LogInProps = {
+  email: string,
+  isRemember: boolean,
+  password: string,
   onChangeEmail: () => void,
   onChangePassword: () => void,
   onLogIn: () => void,
-  onSignUp: () => void
+  onSignUp: () => void,
+  onPressIsRemember: () => void
 };
 
 // TODO: add "remember me" checkbox.
@@ -26,48 +33,67 @@ type LogInProps = {
 class LogIn extends Component<LogInProps> {
   render() {
     const {
+      email,
+      isRemember,
+      password,
       onChangeEmail,
       onChangePassword,
       onLogIn,
-      onSignUp
+      onSignUp,
+      onPressIsRemember
     } = this.props;
 
     return (
       <Fragment>
         <Header title="Вход в приложение" />
 
-        <View style={ styles.container }>
-          <TextInput
+        <Screen style={ styles.container }>
+          <LabelInput
             keyboardType="email-address"
             placeholder="Электронная почта"
-            style={ styles.input }
             onChangeText={ onChangeEmail }
+            errorMessage={ email ? '' : 'Обязательное поле' }
           />
-          <TextInput
+          <LabelInput
+            containerViewStyle={ styles.input }
             placeholder="Пароль"
             secureTextEntry
-            style={ styles.input }
+            errorMessage={ password ? '' : 'Обязательное поле' }
             onChangeText={ onChangePassword }
           />
-          <Button
+          <MyButton
             title="Войти"
+            containerViewStyle={ styles.button }
             onPress={ onLogIn }
           />
-          <Button
+          <MyButton
             title="Зарегистрироваться"
             onPress={ onSignUp }
           />
-        </View>
+          <CheckBox
+            containerStyle={ styles.checkBox }
+            title="Запомнить меня"
+            checked={ isRemember }
+            onPress={ onPressIsRemember }
+          />
+        </Screen>
       </Fragment>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  email: selectEmail(state),
+  isRemember: selectIsRemember(state),
+  password: selectPassword(state)
+});
+
 const mapDispatchToProps = {
   onChangeEmail: changeEmailValue,
+  onPressIsRemember: toggleIsRemember,
   onChangePassword: changePasswordValue,
   onLogIn: logIn,
   onSignUp: signUp
 };
 
-export default connect(null, mapDispatchToProps)(LogIn);
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

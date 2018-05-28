@@ -1,44 +1,57 @@
 // @flow
-import React, { Component } from 'react';
-import { ScrollView, View, Text, TextInput } from 'react-native';
+import React, { Component, Fragment } from 'react';
+import { Image, ScrollView, Text, TextInput, View } from 'react-native';
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
-import { Button, LabelPicker, type PickerItem } from '../../../Components';
-import styles from './AddCheck.styles';
+import { Button } from 'react-native-elements';
+import { LabelPicker, type PickerItem } from '../../../Components';
+import styles, {greenDark} from './AddCheck.styles';
 import {
   addCheck,
   changeDate,
   changeMoneyAmount,
-  changePaymentType
+  changePaymentType,
+  openImagePicker
 } from './CheckList.actions';
 import {
   selectDate,
-  selectPaymentType,
+  selectImage,
+  selectMappedPaymentTypes,
   selectMoneyAmount,
-  selectMappedPaymentTypes
+  selectPaymentType
 } from './CheckList.selectors';
 
 type AddCheckProps = {
   date: string,
+  // FIXME: type.
+  image: Object,
   moneyAmount: string,
   paymentType: string,
   paymentTypes: PickerItem[],
-  addImage: () => void,
+  onAddCheck: () => void,
   onChangeDate: () => void,
   onChangeMoneyAmount: () => void,
   onChangePaymentType: () => void,
-  onAddCheck: () => void
+  onOpenImagePicker: () => void
 }
 
 // FIXME: use https://github.com/wix/react-native-calendars instead of DatePicker.
 // eslint-disable-next-line react/prefer-stateless-function
 class AddCheck extends Component<AddCheckProps> {
   render() {
+    console.log('ddChecka', this.props);
     // FIXME: move ScrollView with default styles to Components.
+    // source={{uri: iconName}}/>
+
     return (
       <ScrollView style={ styles.container }>
+        <Image
+          style={{ width: '100%', height: 400, resizeMode: Image.resizeMode.contain }}
+          source={{ uri: `file://${this.props.image.localPath}` }}
+        />
         <View style={ styles.editContainer }>
           <View style={ styles.moneyContainer }>
+          <Fragment>
             <TextInput
               style={ styles.input }
               maxLength={ 7 }
@@ -47,10 +60,14 @@ class AddCheck extends Component<AddCheckProps> {
               onChangeText={ this.props.onChangeMoneyAmount }
             />
             <Text>BYN</Text>
+            </Fragment>
             <Button
-              title="ICON"
-              style={ styles.button }
-              onPress={ this.props.addImage }
+              title=""
+              backgroundColor={ greenDark }
+              containerViewStyle={ styles.button}
+              icon={{name: 'ios-image', type: 'ionicon', size: 18}}
+              raised
+              onPress={ this.props.onOpenImagePicker }
             />
           </View>
 
@@ -68,14 +85,15 @@ class AddCheck extends Component<AddCheckProps> {
           />
 
           <LabelPicker
-            label="Тип выплаты"
+            label="Тип услуги"
             selectedValue={ this.props.paymentType }
-
             pickerItems={ this.props.paymentTypes }
             onValueChange={ this.props.onChangePaymentType }
           />
 
           <Button
+            backgroundColor={ greenDark }
+            raised
             title="Добавить"
             style={ styles.button }
             onPress={ this.props.onAddCheck }
@@ -88,6 +106,7 @@ class AddCheck extends Component<AddCheckProps> {
 
 const mapStateToProps = state => ({
   date: selectDate(state),
+  image: selectImage(state),
   moneyAmount: selectMoneyAmount(state),
   paymentType: selectPaymentType(state),
   paymentTypes: selectMappedPaymentTypes(state)
@@ -97,7 +116,8 @@ const mapDispatchToProps = {
   onAddCheck: addCheck,
   onChangeDate: changeDate,
   onChangeMoneyAmount: changeMoneyAmount,
-  onChangePaymentType: changePaymentType
+  onChangePaymentType: changePaymentType,
+  onOpenImagePicker: openImagePicker
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCheck);
