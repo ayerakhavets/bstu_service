@@ -2,37 +2,49 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../Components';
 
-const { greenDark } = colors;
-
-export { greenDark };
-// FIXME: use alphabetic order for style objects.
 export default StyleSheet.create({
+  buttonAdd: {
+    marginTop: 10,
+    width: '100%'
+  },
+  buttonIcon: {
+    alignSelf: 'flex-end',
+    margin: 10,
+    width: 50
+  },
   container: {
-    backgroundColor: colors.white,
-    flex: 1,
-    padding: 10
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: colors.greyLight,
+    padding: 10,
+    marginBottom: 10
   },
   datePicker: {
+    marginLeft: 10,
     width: 200
   },
   datePlaceholderText: {
-    color: 'black'
+    color: colors.black
   },
-  editContainer: {
-    paddingBottom: 10,
-    backgroundColor: colors.greyLight,
-    marginBottom: 20
+  image: {
+    borderWidth: 1,
+    borderColor: colors.grey,
+    width: '100%',
+    height: 400,
+    resizeMode: 'contain',
+    marginBottom: 10
   },
   input: {
     width: 66
   },
-  moneyContainer: {
-    flex: 1,
+  inputContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    alignItems: 'center'
   },
-  button: {
-    margin: 10
+  rowContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%'
   }
 });

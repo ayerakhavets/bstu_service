@@ -1,11 +1,16 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import { Image, ScrollView, Text, TextInput, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  Text,
+  TextInput,
+  View
+} from 'react-native';
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
-import { Button } from 'react-native-elements';
-import { LabelPicker, type PickerItem } from '../../../Components';
-import styles, { greenDark } from './AddCheck.styles';
+import { Screen, LabelPicker, MyButton, type PickerItem } from '../../../Components';
+import styles from './AddCheck.styles';
 import {
   addCheck,
   changeDate,
@@ -16,6 +21,7 @@ import {
 import {
   selectDate,
   selectImage,
+  selectIsLoading,
   selectMappedPaymentTypes,
   selectMoneyAmount,
   selectPaymentType
@@ -25,6 +31,7 @@ type AddCheckProps = {
   date: string,
   // FIXME: type.
   image: Object,
+  isLoading: boolean,
   moneyAmount: string,
   paymentType: string,
   paymentTypes: PickerItem[],
@@ -36,70 +43,64 @@ type AddCheckProps = {
 }
 
 // FIXME: use https://github.com/wix/react-native-calendars instead of DatePicker.
+// FIXME: add prop for not generating data field to ImagePicker.
 // eslint-disable-next-line react/prefer-stateless-function
 class AddCheck extends Component<AddCheckProps> {
   render() {
-    console.log('ddChecka', this.props);
-    // FIXME: move ScrollView with default styles to Components.
-    // source={{uri: iconName}}/>
-
     return (
-      <ScrollView style={ styles.container }>
-        <Image
-          style={{ width: '100%', height: 400, resizeMode: Image.resizeMode.contain }}
-          source={{ uri: `file://${this.props.image.localPath}` }}
-        />
-        <View style={ styles.editContainer }>
-          <View style={ styles.moneyContainer }>
-            <Fragment>
-              <TextInput
-                style={ styles.input }
-                maxLength={ 7 }
-                value={ this.props.moneyAmount }
-                keyboardType="numeric"
-                onChangeText={ this.props.onChangeMoneyAmount }
-              />
-              <Text>BYN</Text>
-            </Fragment>
-            <Button
-              title=""
-              backgroundColor={ greenDark }
-              containerViewStyle={ styles.button }
-              icon={{ name: 'ios-image', type: 'ionicon', size: 18 }}
-              raised
-              onPress={ this.props.onOpenImagePicker }
+      <Screen>
+        { this.props.isLoading
+          ? <ActivityIndicator size="large" />
+          : <Fragment>
+            <Image
+              source={{ uri: `file://${this.props.image.localPath}` }}
+              style={ styles.image }
             />
-          </View>
-
-          <DatePicker
-            style={ styles.datePicker }
-            date={ this.props.date }
-            placeholder="Выберите дату"
-            customStyles={{
-              placeholderText: styles.datePlaceholderText
-            }}
-            format="DD MM YYYY"
-            confirmBtnText="Ок"
-            cancelBtnText="Закрыть"
-            onDateChange={ this.props.onChangeDate }
-          />
-
-          <LabelPicker
-            label="Тип услуги"
-            selectedValue={ this.props.paymentType }
-            pickerItems={ this.props.paymentTypes }
-            onValueChange={ this.props.onChangePaymentType }
-          />
-
-          <Button
-            backgroundColor={ greenDark }
-            raised
-            title="Добавить"
-            style={ styles.button }
-            onPress={ this.props.onAddCheck }
-          />
-        </View>
-      </ScrollView>
+            <View style={ styles.container }>
+              <View style={ styles.rowContainer }>
+                <View style={ styles.inputContainer }>
+                  <TextInput
+                    keyboardType="numeric"
+                    maxLength={ 8 }
+                    style={ styles.input }
+                    value={ this.props.moneyAmount }
+                    onChangeText={ this.props.onChangeMoneyAmount }
+                  />
+                  <Text>BYN</Text>
+                </View>
+                <MyButton
+                  containerViewStyle={ styles.buttonIcon }
+                  icon={{ name: 'ios-image', type: 'ionicon', size: 18 }}
+                  title=""
+                  onPress={ this.props.onOpenImagePicker }
+                />
+              </View>
+              <DatePicker
+                cancelBtnText="Закрыть"
+                confirmBtnText="Ок"
+                customStyles={{
+                  placeholderText: styles.datePlaceholderText
+                }}
+                date={ this.props.date }
+                format="DD MM YYYY"
+                placeholder="Выберите дату"
+                style={ styles.datePicker }
+                onDateChange={ this.props.onChangeDate }
+              />
+              <LabelPicker
+                label="Тип услуги"
+                pickerItems={ this.props.paymentTypes }
+                selectedValue={ this.props.paymentType }
+                onValueChange={ this.props.onChangePaymentType }
+              />
+              <MyButton
+                containerViewStyle={ styles.buttonAdd }
+                title="Добавить"
+                onPress={ this.props.onAddCheck }
+              />
+            </View>
+          </Fragment> }
+      </Screen>
     );
   }
 }
@@ -107,6 +108,7 @@ class AddCheck extends Component<AddCheckProps> {
 const mapStateToProps = state => ({
   date: selectDate(state),
   image: selectImage(state),
+  isLoading: selectIsLoading(state),
   moneyAmount: selectMoneyAmount(state),
   paymentType: selectPaymentType(state),
   paymentTypes: selectMappedPaymentTypes(state)

@@ -14,6 +14,9 @@ export const selectDate = ({ studentReducer }: ApplicationState): string =>
 export const selectImage = ({ studentReducer }: ApplicationState): Object =>
   studentReducer.checkListReducer.check.image;
 
+export const selectIsLoading = ({ studentReducer }: ApplicationState): boolean =>
+  studentReducer.checkListReducer.isLoading;
+
 export const selectMoneyAmount = ({ studentReducer }: ApplicationState): string =>
   studentReducer.checkListReducer.check.moneyAmount;
 

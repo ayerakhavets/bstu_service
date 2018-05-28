@@ -1,4 +1,6 @@
 // @flow
+// eslint-disable-next-line react-native/split-platform-components
+import { ToastAndroid } from 'react-native';
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 // $FlowFixMe no default export.
@@ -7,7 +9,9 @@ import {
   ADD_CHECK,
   LOAD_CHECKS,
   OPEN_IMAGE_PICKER,
-  changeImage
+  changeImage,
+  loadingEnd,
+  loadingStart
 } from './CheckList.actions';
 import { addCheck, getCheckList } from '../Student.api';
 import { selectUid } from '../../Authentication';
@@ -37,15 +41,19 @@ export default function* checkListSaga(): Saga<void> {
 }
 
 export function* handleSetImage(): Saga<void> {
+  yield put(loadingStart());
   const response = yield call(showImagePicker);
   console.log('showImagePicker response: ', response);
   yield put(changeImage({
     name: response.fileName,
     localPath: response.path
   }));
+  yield put(loadingEnd());
 }
 
 export function* handleAddCheck(): Saga<void> {
+  yield put(loadingStart());
+
   const date = yield select(selectDate);
   const paymentType = yield select(selectPaymentType);
   const moneyAmount = yield select(selectMoneyAmount);
@@ -62,10 +70,13 @@ export function* handleAddCheck(): Saga<void> {
 
   try {
     yield call(addCheck, image, paymentInfo, uid);
-    console.log('=== handleAddCheck success');
+    yield put(loadingEnd());
+    // FIXME: implement showing info for iOS.
+    ToastAndroid.show('Чек добавлен', ToastAndroid.SHORT);
   } catch (error) {
-    // TODO: handle error.
-    console.log('error handleAddCheck', error);
+    yield put(loadingEnd());
+    // FIXME: implement showing info for iOS.
+    ToastAndroid.show('Ошибка', ToastAndroid.SHORT);
   }
 }
 
@@ -78,6 +89,8 @@ export function* handleLoadChecks(): Saga<void> {
     // eslint-disable-next-line no-underscore-dangle
     mapCheckListItemsToArray(res._value);
   } catch (error) {
+    // FIXME: implement showing info for iOS.
+    ToastAndroid.show('Ошибка', ToastAndroid.SHORT);
     // TODO: handle error.
     console.log(error);
   }

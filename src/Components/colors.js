@@ -1,6 +1,7 @@
 // @flow
 
 export default {
+  black: '#000000',
   green: '#2C7F6E',
   greenDark: '#20594D',
   greenLight: '#38A690',
