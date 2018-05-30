@@ -1,6 +1,8 @@
 // @flow
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { colors } from '../../../Components';
+
+export { colors };
 
 export default StyleSheet.create({
   buttonAdd: {
@@ -13,14 +15,15 @@ export default StyleSheet.create({
     width: 50
   },
   container: {
-    width: '100%',
     alignItems: 'center',
     backgroundColor: colors.greyLight,
+    borderRadius: 3,
+    marginBottom: 10,
     padding: 10,
-    marginBottom: 10
+    width: '100%'
   },
   datePicker: {
-    marginLeft: 10,
+    alignSelf: 'flex-start',
     width: 200
   },
   datePlaceholderText: {
@@ -29,17 +32,17 @@ export default StyleSheet.create({
   image: {
     borderWidth: 1,
     borderColor: colors.grey,
-    width: '100%',
     height: 400,
-    resizeMode: 'contain',
-    marginBottom: 10
+    marginBottom: 10,
+    resizeMode: Image.resizeMode.contain,
+    width: '100%'
   },
   input: {
     width: 66
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'row'
   },
   rowContainer: {
     alignItems: 'center',

@@ -6,7 +6,7 @@ import {
   LOADING_END,
   LOADING_START,
   TOGGLE_IS_REMEMBER,
-  type LogInActions
+  type AuthenticationActions
 } from './Authentication.actions';
 
 export type AuthenticationState = {
@@ -25,9 +25,8 @@ const initialState = {
   uid: ''
 };
 
-export default (
-  state: AuthenticationState = initialState,
-  action: LogInActions): AuthenticationState => {
+export default (state: AuthenticationState = initialState,
+  action: AuthenticationActions): AuthenticationState => {
   switch (action.type) {
   case CHANGE_EMAIL:
     return {
@@ -50,6 +49,7 @@ export default (
       isLoading: false
     };
   case LOADING_START:
+    console.log('=== LOADING_START authentication');
     return {
       ...state,
       isLoading: true

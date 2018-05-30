@@ -1,9 +1,8 @@
 // @flow
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-// eslint-disable-next-line react-native/split-platform-components
-import { AsyncStorage, ToastAndroid } from 'react-native';
-import NavigatorService from '../../Services/navigator';
+import { AsyncStorage } from 'react-native';
+import { NavigatorActions, Toast } from '../../Services';
 import { changeUserInfo } from '../Student';
 import {
   createUserWithEmailAndPassword,
@@ -44,9 +43,8 @@ export function* handleLogIn(): Saga<void> {
 
   const requestParams = [email, password];
 
-  // FIXME: implement showing info for iOS.
   if (!email || !password) {
-    ToastAndroid.show('Введите данные', ToastAndroid.SHORT);
+    Toast.show('Введите данные');
     return;
   }
 
@@ -62,11 +60,10 @@ export function* handleLogIn(): Saga<void> {
     yield put(loadingEnd());
 
     // TODO: handle admin/student roles.
-    NavigatorService.navigate('Student');
+    NavigatorActions.navigate('Student');
   } catch (error) {
     yield put(loadingEnd());
-    // FIXME: implement showing info for iOS.
-    ToastAndroid.show('Ошибка', ToastAndroid.SHORT);
+    Toast.show('Ошибка');
   }
 }
 
@@ -93,11 +90,10 @@ export function* handlePreAuthentication(): Saga<void> {
     yield put(loadingEnd());
 
     // TODO: handle admin/student roles.
-    NavigatorService.navigate('Student');
+    NavigatorActions.navigate('Student');
   } catch (error) {
     yield put(loadingEnd());
-    // FIXME: implement showing info for iOS.
-    ToastAndroid.show('Что-то пошло не так', ToastAndroid.SHORT);
+    Toast.show('Ошибка');
   }
 }
 
@@ -108,9 +104,8 @@ export function* handleSignUp(): Saga<void> {
 
   const requestParams = [email, password];
 
-  // FIXME: implement showing info for iOS.
   if (!email || !password) {
-    ToastAndroid.show('Введите данные', ToastAndroid.SHORT);
+    Toast.show('Введите данные');
     return;
   }
 
@@ -123,11 +118,10 @@ export function* handleSignUp(): Saga<void> {
     if (isRemember) yield call(saveCredentials);
     yield put(loadingEnd());
 
-    NavigatorService.navigate('Student');
+    NavigatorActions.navigate('Student');
   } catch (error) {
     yield put(loadingEnd());
-    // FIXME: implement showing info for iOS.
-    ToastAndroid.show('Ошибка', ToastAndroid.SHORT);
+    Toast.show('Ошибка');
   }
 }
 

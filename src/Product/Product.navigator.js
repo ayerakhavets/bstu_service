@@ -2,13 +2,16 @@
 import { createSwitchNavigator } from 'react-navigation';
 import { Authentication } from './Authentication';
 import DeanStack from './Dean';
-import StudentTabs from './Student';
+import { Student } from './Student';
+
+// $FlowFixMe property is missing
+console.ignoredYellowBox = ['Warning: isMounted']; // eslint-disable-line no-console
 
 export default createSwitchNavigator(
   {
     Auth: Authentication,
     Dean: DeanStack,
-    Student: StudentTabs
+    Student
   },
   {
     initialRouteName: 'Auth'

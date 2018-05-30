@@ -1,14 +1,13 @@
 // @flow
-// eslint-disable-next-line react-native/split-platform-components
-import { ToastAndroid } from 'react-native';
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { Toast } from '../../../Services';
 import { selectEmail, selectUid } from '../../Authentication';
 import { updateStudentInfo } from '../Student.api';
 import {
-  SAVE_STUDENT_INFO,
-  loadingEnd,
-  loadingStart
+  SAVE_STUDENT_INFO_REQUEST,
+  saveStudentInfoFailure,
+  saveStudentInfoSuccess
 } from './StudentInfo.actions';
 import {
   selectCourse,
@@ -21,44 +20,37 @@ import {
 } from './StudentInfo.selectors';
 
 export default function* studentInfoSaga(): Saga<void> {
-  yield takeEvery(SAVE_STUDENT_INFO, handleSaveStudentInfo);
+  yield takeEvery(SAVE_STUDENT_INFO_REQUEST, saveStudentInfo);
 }
 
-export function* handleSaveStudentInfo(): Saga<void> {
-  yield put(loadingStart());
-
+export function* saveStudentInfo(): Saga<void> {
   const course = yield select(selectCourse);
+  const email = yield select(selectEmail);
   const faculty = yield select(selectFaculty);
   const middleName = yield select(selectMiddleName);
   const name = yield select(selectName);
   const specialty = yield select(selectSpecialty);
   const studentId = yield select(selectStudentId);
   const surname = yield select(selectSurname);
-
-  const email = yield select(selectEmail);
   const uid = yield select(selectUid);
 
   const studentInfo = {
     course,
+    email,
     faculty,
     middleName,
     name,
     specialty,
     studentId,
-    surname,
-    email
+    surname
   };
 
   try {
-    const updates = {};
-    updates[`/students/${uid}`] = studentInfo;
-    updates[`/specialties/${specialty}/${uid}`] = studentInfo;
-
-    yield call(updateStudentInfo, updates);
-    yield put(loadingEnd());
+    yield call(updateStudentInfo, studentInfo, uid);
+    yield put(saveStudentInfoSuccess());
+    Toast.show('Данные добавлены');
   } catch (error) {
-    yield put(loadingEnd());
-    // FIXME: implement showing info for iOS.
-    ToastAndroid.show('Ошибка', ToastAndroid.SHORT);
+    yield put(saveStudentInfoFailure());
+    Toast.show('Ошибка добавления данных');
   }
 }

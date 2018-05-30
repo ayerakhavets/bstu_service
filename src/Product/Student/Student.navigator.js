@@ -1,40 +1,56 @@
 // @flow
 import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
-import CheckListStack from './CheckList';
-import StudentInfo from './StudentInfo';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { Icon } from 'react-native-elements';
+import { PaymentList } from './PaymentList';
+import { StudentInfo } from './StudentInfo';
 import { colors, styles } from '../../Components';
+import { Payment } from './Payment';
 
 // TODO: add internationalization.
-const checkList = 'Выплаты';
-const studentInfo = 'Пользователь';
+export const STUDENT = 'Пользователь';
+export const PAYMENT = 'Чек';
+export const PAYMENT_LIST = 'Платежи';
 
-const StudentTabs = createBottomTabNavigator({
-  [`${checkList}`]: CheckListStack,
-  [`${studentInfo}`]: StudentInfo
+const PaymentStack = createStackNavigator({
+  [PAYMENT_LIST]: PaymentList,
+  [PAYMENT]: Payment
 },
 {
-  initialRouteName: studentInfo,
+  navigationOptions: ({ navigation }) => ({
+    title: navigation.state.routeName,
+    headerTintColor: colors.white,
+    headerStyle: {
+      backgroundColor: colors.greenLight
+    }
+  })
+});
+
+const StudentTabs = createBottomTabNavigator({
+  [PAYMENT_LIST]: PaymentStack,
+  [STUDENT]: StudentInfo
+},
+{
+  initialRouteName: STUDENT,
   tabBarOptions: {
     activeTintColor: colors.greenDark
   },
-  // FIXME: use react-native-vector-icons for icons.
   navigationOptions: ({ navigation }) => ({
     // eslint-disable-next-line react/display-name, react/prop-types
     tabBarIcon: ({ focused }) => {
       let iconName;
       switch (navigation.state.routeName) {
-      case checkList:
+      case PAYMENT_LIST:
         iconName = `ios-list-box${focused ? '' : '-outline'}`; break;
-      case studentInfo:
+      case STUDENT:
         iconName = `ios-contact${focused ? '' : '-outline'}`; break;
       default: break;
       }
       return (<Icon
+        color={ focused ? colors.greenDark : colors.grey }
         name={ iconName }
         size={ styles.tabIconSize }
-        color={ focused ? colors.greenDark : colors.grey }
+        type="ionicon"
       />);
     }
   })

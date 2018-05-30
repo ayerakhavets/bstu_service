@@ -9,15 +9,15 @@ export const PRE_AUTHENTICATION = 'PRE_AUTHENTICATION';
 export const SIGN_UP = 'SIGN_UP';
 export const TOGGLE_IS_REMEMBER = 'TOGGLE_IS_REMEMBER';
 
-type ChangeEmailAction = { type: typeof CHANGE_EMAIL, payload: string };
-type ChangePasswordAction = { type: typeof CHANGE_PASSWORD, payload: string };
-type ChangeUidAction = { type: typeof CHANGE_UID, payload: string };
-type LoadingEndAction = { type: typeof LOADING_END };
-type LoadingStartAction = { type: typeof LOADING_START };
-type LogInAction = { type: typeof LOG_IN };
-type PreAuthenticationAction = { type: typeof PRE_AUTHENTICATION };
-type SignUpAction = { type: typeof SIGN_UP };
-type ToggleIsRememberAction = { type: typeof TOGGLE_IS_REMEMBER };
+export type ChangeEmailAction = { type: typeof CHANGE_EMAIL, payload: string };
+export type ChangePasswordAction = { type: typeof CHANGE_PASSWORD, payload: string };
+export type ChangeUidAction = { type: typeof CHANGE_UID, payload: string };
+export type LoadingEndAction = { type: typeof LOADING_END };
+export type LoadingStartAction = { type: typeof LOADING_START };
+export type LogInAction = { type: typeof LOG_IN };
+export type PreAuthenticationAction = { type: typeof PRE_AUTHENTICATION };
+export type SignUpAction = { type: typeof SIGN_UP };
+export type ToggleIsRememberAction = { type: typeof TOGGLE_IS_REMEMBER };
 
 export const changeEmail = (email: string): ChangeEmailAction => ({
   type: CHANGE_EMAIL,
@@ -46,7 +46,7 @@ export const signUp = (): SignUpAction => ({ type: SIGN_UP });
 
 export const toggleIsRemember = (): ToggleIsRememberAction => ({ type: TOGGLE_IS_REMEMBER });
 
-export type LogInActions =
+export type AuthenticationActions =
   | ChangeEmailAction
   | ChangePasswordAction
   | ChangeUidAction

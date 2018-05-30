@@ -1,5 +1,5 @@
 // @flow
-import type { UserInfo } from '../../types';
+import type { StudentInfo } from '../../types';
 
 export const CHANGE_COURSE = 'CHANGE_COURSE';
 export const CHANGE_FACULTY = 'CHANGE_FACULTY';
@@ -11,7 +11,9 @@ export const CHANGE_SURNAME = 'CHANGE_SURNAME';
 export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
 export const LOADING_END = 'LOADING_END';
 export const LOADING_START = 'LOADING_START';
-export const SAVE_STUDENT_INFO = 'SAVE_STUDENT_INFO';
+export const SAVE_STUDENT_INFO_FAILURE = 'SAVE_STUDENT_INFO_FAILURE';
+export const SAVE_STUDENT_INFO_REQUEST = 'SAVE_STUDENT_INFO_REQUEST';
+export const SAVE_STUDENT_INFO_SUCCESS = 'SAVE_STUDENT_INFO_SUCCESS';
 
 type ChangeCourseAction = { type: typeof CHANGE_COURSE, payload: string };
 type ChangeFacultyAction = { type: typeof CHANGE_FACULTY, payload: string };
@@ -20,10 +22,12 @@ type ChangeNameAction = { type: typeof CHANGE_NAME, payload: string };
 type СhangeSpecialtyAction = { type: typeof CHANGE_SPECIALTY, payload: string };
 type ChangeStudentIdAction = { type: typeof CHANGE_STUDENT_ID, payload: string };
 type ChangeSurnameAction = { type: typeof CHANGE_SURNAME, payload: string };
-type ChangeUserInfoAction = { type: typeof CHANGE_USER_INFO, payload: UserInfo };
+type ChangeUserInfoAction = { type: typeof CHANGE_USER_INFO, payload: StudentInfo };
 type LoadingEndAction = { type: typeof LOADING_END };
 type LoadingStartAction = { type: typeof LOADING_START };
-type SaveStudentInfoAction = { type: typeof SAVE_STUDENT_INFO };
+type SaveStudentInfoFailureAction = { type: typeof SAVE_STUDENT_INFO_FAILURE };
+type SaveStudentInfoRequestAction = { type: typeof SAVE_STUDENT_INFO_REQUEST };
+type SaveStudentInfoSuccessAction = { type: typeof SAVE_STUDENT_INFO_SUCCESS };
 
 export const changeCourse = (course: string): ChangeCourseAction => ({
   type: CHANGE_COURSE,
@@ -60,7 +64,7 @@ export const changeSurname = (surname: string): ChangeSurnameAction => ({
   payload: surname
 });
 
-export const changeUserInfo = (userInfo: UserInfo): ChangeUserInfoAction => ({
+export const changeUserInfo = (userInfo: StudentInfo): ChangeUserInfoAction => ({
   type: CHANGE_USER_INFO,
   payload: userInfo
 });
@@ -69,7 +73,15 @@ export const loadingEnd = (): LoadingEndAction => ({ type: LOADING_END });
 
 export const loadingStart = (): LoadingStartAction => ({ type: LOADING_START });
 
-export const saveStudentInfo = (): SaveStudentInfoAction => ({ type: SAVE_STUDENT_INFO });
+export const saveStudentInfoFailure = (): SaveStudentInfoFailureAction =>
+  ({ type: SAVE_STUDENT_INFO_FAILURE });
+
+export const saveStudentInfoRequest = (): SaveStudentInfoRequestAction =>
+  ({ type: SAVE_STUDENT_INFO_REQUEST });
+
+export const saveStudentInfoSuccess = (): SaveStudentInfoSuccessAction =>
+  ({ type: SAVE_STUDENT_INFO_SUCCESS });
+
 
 export type StudentInfoActions =
   | ChangeCourseAction
@@ -80,6 +92,6 @@ export type StudentInfoActions =
   | ChangeStudentIdAction
   | ChangeSurnameAction
   | ChangeUserInfoAction
-  | LoadingEndAction
-  | LoadingStartAction
-  | SaveStudentInfoAction
+  | SaveStudentInfoFailureAction
+  | SaveStudentInfoRequestAction
+  | SaveStudentInfoSuccessAction

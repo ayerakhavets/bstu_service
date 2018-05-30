@@ -1,7 +1,7 @@
 // @flow
 import Authentication from './Authentication.component';
-import authenticationSaga from './Authentication.sagas';
 import authenticationReducer, { type AuthenticationState } from './Authentication.reducer';
+import authenticationSaga from './Authentication.sagas';
 import { selectEmail, selectUid } from './Authentication.selectors';
 
 export {
@@ -12,5 +12,7 @@ export {
   selectUid
 };
 
-export type { AuthenticationState };
+export type {
+  AuthenticationState
+};
 

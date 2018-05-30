@@ -1,6 +1,5 @@
 // @flow
-
-export type UserInfo = {
+export type StudentInfo = {
   course: string,
   email: string,
   faculty: string,
@@ -8,5 +7,5 @@ export type UserInfo = {
   name: string,
   specialty: string,
   studentId: string,
-  surname: string,
+  surname: string
 }

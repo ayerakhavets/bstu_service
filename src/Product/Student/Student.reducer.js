@@ -1,14 +1,17 @@
 // @flow
 import { combineReducers } from 'redux';
+import { paymentReducer, type PaymentState } from './Payment';
 import { studentInfoReducer, type StudentInfoState } from './StudentInfo';
-import { checkListReducer, type CheckListState } from './CheckList';
+import { paymentListReducer, type PaymentListState } from './PaymentList';
 
 export type StudentState = {
-  studentInfoReducer: StudentInfoState,
-  checkListReducer: CheckListState
+  payment: PaymentState,
+  paymentList: PaymentListState,
+  studentInfo: StudentInfoState,
 }
 
 export default combineReducers({
-  studentInfoReducer,
-  checkListReducer
+  payment: paymentReducer,
+  paymentList: paymentListReducer,
+  studentInfo: studentInfoReducer
 });

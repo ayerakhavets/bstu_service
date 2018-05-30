@@ -17,13 +17,13 @@ import {
   signUp,
   toggleIsRemember
 } from './Authentication.actions';
-import styles, { colors } from './Authentication.styles';
 import {
   selectEmail,
   selectIsLoading,
   selectIsRemember,
   selectPassword
 } from './Authentication.selectors';
+import styles, { colors } from './Authentication.styles';
 
 type AuthenticationProps = {
   email: string,
@@ -57,7 +57,6 @@ class Authentication extends Component<AuthenticationProps> {
       onPressIsRemember
     } = this.props;
 
-    // FIXME: add internationalization.
     return (
       <Fragment>
         <Header title="Вход в приложение" />

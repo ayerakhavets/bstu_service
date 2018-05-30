@@ -5,5 +5,5 @@ import { studentReducer } from './Student';
 
 export default combineReducers({
   authentication: authenticationReducer,
-  studentReducer
+  student: studentReducer
 });

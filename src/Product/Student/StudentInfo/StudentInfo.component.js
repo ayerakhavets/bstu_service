@@ -18,7 +18,7 @@ import {
   changeSpecialty,
   changeStudentId,
   changeSurname,
-  saveStudentInfo
+  saveStudentInfoRequest
 } from './StudentInfo.actions';
 import {
   selectCourse,
@@ -47,17 +47,16 @@ type StudentInfoProps = {
   specialties: PickerItem[],
   studentId: string,
   surname: string,
-  onChangeCourse: () => void,
-  onChangeFaculty: () => void,
-  onChangeMiddleName: () => void,
-  onChangeName: () => void,
-  onChangeSpicialty: () => void,
-  onChangeStudentId: () => void,
-  onChangeSurname: () => void,
-  onSave: () => void
+  changeCourse: () => void,
+  changeFaculty: () => void,
+  changeMiddleName: () => void,
+  changeName: () => void,
+  changeSpecialty: () => void,
+  changeStudentId: () => void,
+  changeSurname: () => void,
+  saveStudentInfoRequest: () => void
 }
 
-// FIXME: add internationalization.
 // eslint-disable-next-line react/prefer-stateless-function
 class StudentInfo extends Component<StudentInfoProps> {
   render() {
@@ -74,26 +73,26 @@ class StudentInfo extends Component<StudentInfoProps> {
                   label="Имя"
                   value={ this.props.name }
                   containerViewStyle={ styles.twoItemsContainerItem }
-                  onChangeText={ this.props.onChangeName }
+                  onChangeText={ this.props.changeName }
                 />
                 <LabelInput
                   label="Фамилия"
                   value={ this.props.surname }
                   containerViewStyle={ styles.twoItemsContainerItem }
-                  onChangeText={ this.props.onChangeSurname }
+                  onChangeText={ this.props.changeSurname }
                 />
               </View>
               <LabelInput
                 label="Отчество"
                 value={ this.props.middleName }
-                onChangeText={ this.props.onChangeMiddleName }
+                onChangeText={ this.props.changeMiddleName }
               />
               <LabelInput
                 label="Номер билета"
                 maxLength={ 8 }
                 keyboardType="numeric"
                 value={ this.props.studentId }
-                onChangeText={ this.props.onChangeStudentId }
+                onChangeText={ this.props.changeStudentId }
               />
               <View style={ styles.twoItemsContainer }>
                 <LabelPicker
@@ -101,26 +100,26 @@ class StudentInfo extends Component<StudentInfoProps> {
                   label="Факультет"
                   pickerItems={ this.props.faculties }
                   selectedValue={ this.props.faculty }
-                  onValueChange={ this.props.onChangeFaculty }
+                  onValueChange={ this.props.changeFaculty }
                 />
                 <LabelPicker
                   style={ styles.twoItemsContainerItem }
                   label="Курс"
                   pickerItems={ this.props.courses }
                   selectedValue={ this.props.course }
-                  onValueChange={ this.props.onChangeCourse }
+                  onValueChange={ this.props.changeCourse }
                 />
               </View>
               <LabelPicker
                 label="Специальность"
                 pickerItems={ this.props.specialties }
                 selectedValue={ this.props.specialty }
-                onValueChange={ this.props.onChangeSpicialty }
+                onValueChange={ this.props.changeSpecialty }
               />
               <MyButton
                 containerViewStyle={ styles.button }
                 title="Сохранить"
-                onPress={ this.props.onSave }
+                onPress={ this.props.saveStudentInfoRequest }
               />
             </Fragment> }
         </Screen>
@@ -143,14 +142,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  onChangeCourse: changeCourse,
-  onChangeFaculty: changeFaculty,
-  onChangeMiddleName: changeMiddleName,
-  onChangeName: changeName,
-  onChangeSpicialty: changeSpecialty,
-  onChangeStudentId: changeStudentId,
-  onChangeSurname: changeSurname,
-  onSave: saveStudentInfo
+  changeCourse,
+  changeFaculty,
+  changeMiddleName,
+  changeName,
+  changeSpecialty,
+  changeStudentId,
+  changeSurname,
+  saveStudentInfoRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentInfo);

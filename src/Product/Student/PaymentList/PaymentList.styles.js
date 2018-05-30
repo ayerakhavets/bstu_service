@@ -4,9 +4,13 @@ import { colors } from '../../../Components';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
+    height: '100%',
     backgroundColor: colors.white,
     padding: 10
+  },
+  flatList: {
+    marginTop: 10,
+    width: '100%'
   }
 });

@@ -8,8 +8,9 @@ import {
   CHANGE_STUDENT_ID,
   CHANGE_SURNAME,
   CHANGE_USER_INFO,
-  LOADING_END,
-  LOADING_START,
+  SAVE_STUDENT_INFO_FAILURE,
+  SAVE_STUDENT_INFO_REQUEST,
+  SAVE_STUDENT_INFO_SUCCESS,
   type StudentInfoActions
 } from './StudentInfo.actions';
 
@@ -30,14 +31,14 @@ export type StudentInfoState = {
 // TODO: use server data instead of the mocked one.
 const initialState = {
   course: '',
-  courses: ['1', '2', '3', '4'],
+  courses: ['', '1', '2', '3', '4'],
   faculty: '',
   faculties: ['', 'ФИТ'],
   isLoading: false,
   middleName: '',
   name: '',
   specialty: '',
-  specialties: ['ДЭиВИ', 'ПОиБМС', 'ПОИТ', 'ИСИТ'],
+  specialties: ['', 'ДЭиВИ', 'ПОиБМС', 'ПОИТ', 'ИСИТ'],
   studentId: '',
   surname: ''
 };
@@ -86,12 +87,13 @@ export default (
       ...state,
       ...action.payload
     };
-  case LOADING_END:
+  case SAVE_STUDENT_INFO_FAILURE:
+  case SAVE_STUDENT_INFO_SUCCESS:
     return {
       ...state,
       isLoading: false
     };
-  case LOADING_START:
+  case SAVE_STUDENT_INFO_REQUEST:
     return {
       ...state,
       isLoading: true

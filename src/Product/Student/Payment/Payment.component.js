@@ -9,15 +9,16 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
+import { Icon } from 'react-native-elements';
 import { Screen, LabelPicker, MyButton, type PickerItem } from '../../../Components';
-import styles from './AddCheck.styles';
 import {
-  addCheck,
+  addPaymentRequest,
   changeDate,
   changeMoneyAmount,
   changePaymentType,
   openImagePicker
-} from './CheckList.actions';
+} from './Payment.actions';
+import type { PaymentImage } from './Payment.reducer';
 import {
   selectDate,
   selectImage,
@@ -25,35 +26,39 @@ import {
   selectMappedPaymentTypes,
   selectMoneyAmount,
   selectPaymentType
-} from './CheckList.selectors';
+} from './Payment.selectors';
+import styles, { colors } from './Payment.styles';
 
-type AddCheckProps = {
+type PaymentProps = {
   date: string,
-  // FIXME: type.
-  image: Object,
+  image: PaymentImage,
   isLoading: boolean,
   moneyAmount: string,
   paymentType: string,
   paymentTypes: PickerItem[],
-  onAddCheck: () => void,
-  onChangeDate: () => void,
+  addPaymentRequest: () => void,
   onChangeMoneyAmount: () => void,
   onChangePaymentType: () => void,
+  onDateChange: () => void,
   onOpenImagePicker: () => void
 }
 
 // FIXME: use https://github.com/wix/react-native-calendars instead of DatePicker.
-// FIXME: add prop for not generating data field to ImagePicker.
 // eslint-disable-next-line react/prefer-stateless-function
-class AddCheck extends Component<AddCheckProps> {
+class Payment extends Component<PaymentProps> {
   render() {
+    const imageSource = this.props.image.url || `file://${this.props.image.path}`;
+    const submitButtonText = this.props.image.url
+      ? 'Сохранить'
+      : 'Добавить';
+
     return (
       <Screen>
         { this.props.isLoading
           ? <ActivityIndicator size="large" />
           : <Fragment>
             <Image
-              source={{ uri: `file://${this.props.image.localPath}` }}
+              source={{ uri: imageSource }}
               style={ styles.image }
             />
             <View style={ styles.container }>
@@ -68,10 +73,13 @@ class AddCheck extends Component<AddCheckProps> {
                   />
                   <Text>BYN</Text>
                 </View>
-                <MyButton
+                <Icon
+                  color={ colors.greenDark }
                   containerViewStyle={ styles.buttonIcon }
-                  icon={{ name: 'ios-image', type: 'ionicon', size: 18 }}
-                  title=""
+                  name="insert-photo"
+                  raised
+                  reverse
+                  size={ 20 }
                   onPress={ this.props.onOpenImagePicker }
                 />
               </View>
@@ -83,9 +91,9 @@ class AddCheck extends Component<AddCheckProps> {
                 }}
                 date={ this.props.date }
                 format="DD MM YYYY"
-                placeholder="Выберите дату"
+                placeholder="Дата платежа"
                 style={ styles.datePicker }
-                onDateChange={ this.props.onChangeDate }
+                onDateChange={ this.props.onDateChange }
               />
               <LabelPicker
                 label="Тип услуги"
@@ -95,8 +103,8 @@ class AddCheck extends Component<AddCheckProps> {
               />
               <MyButton
                 containerViewStyle={ styles.buttonAdd }
-                title="Добавить"
-                onPress={ this.props.onAddCheck }
+                title={ submitButtonText }
+                onPress={ this.props.addPaymentRequest }
               />
             </View>
           </Fragment> }
@@ -115,11 +123,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  onAddCheck: addCheck,
-  onChangeDate: changeDate,
+  addPaymentRequest,
+  onDateChange: changeDate,
   onChangeMoneyAmount: changeMoneyAmount,
   onChangePaymentType: changePaymentType,
   onOpenImagePicker: openImagePicker
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddCheck);
+export default connect(mapStateToProps, mapDispatchToProps)(Payment);

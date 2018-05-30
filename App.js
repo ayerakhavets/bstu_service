@@ -1,11 +1,13 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
+import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { ProductNavigator, productReducer, productSaga } from './src/Product';
 import NavigatorService from './src/Services/navigator';
-import { MyStatusBar } from './src/Components';
+import { colors } from './src/Components';
 
+// FIXME: put inside the component
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
@@ -17,7 +19,7 @@ const store = createStore(
 
 sagaMiddleware.run(productSaga);
 
-export default class App extends React.Component {
+class App extends Component {
   configureNavigator = (navigatorRef) => {
     NavigatorService.setContainer(navigatorRef);
   }
@@ -26,12 +28,12 @@ export default class App extends React.Component {
     return (
       <Provider store={ store }>
         <Fragment>
-          <MyStatusBar />
-          <ProductNavigator
-            ref={ this.configureNavigator }
-          />
+          <StatusBar backgroundColor={ colors.green } />
+          <ProductNavigator ref={ this.configureNavigator } />
         </Fragment>
       </Provider>
     );
   }
 }
+
+export default App;
