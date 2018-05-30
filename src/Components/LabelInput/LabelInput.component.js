@@ -7,12 +7,13 @@ import styles from './LabelInput.styles';
 
 type LabelInputProps = {
   containerViewStyle?: StyleObj,
+  isError?: boolean,
   errorMessage?: string,
   label?: string
 }
 
 function LabelInput(props: LabelInputProps) {
-  const { containerViewStyle, errorMessage, label, ...rest } = props;
+  const { containerViewStyle, isError, errorMessage, label, ...rest } = props;
 
   return (
     <View style={ [styles.container, containerViewStyle] }>
@@ -20,9 +21,10 @@ function LabelInput(props: LabelInputProps) {
       <FormInput
         { ...rest }
       />
-      { errorMessage
-        ? <FormValidationMessage>{ errorMessage }</FormValidationMessage>
-        : null }
+      {errorMessage || isError
+        ? <FormValidationMessage>{errorMessage || '* Обязательное поле'}</FormValidationMessage>
+        : null
+      }
     </View>
   );
 }

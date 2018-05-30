@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Picker, View } from 'react-native';
-import { FormLabel } from 'react-native-elements';
+import { FormLabel, FormValidationMessage } from 'react-native-elements';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 import styles from './LabelPicker.styles';
 
@@ -11,6 +11,8 @@ export type PickerItem = {
 }
 
 type LabelPickerProps = {
+  errorMessage?: string,
+  isError?: boolean,
   pickerItems: PickerItem[],
   label: string,
   selectedValue?: string,
@@ -19,7 +21,15 @@ type LabelPickerProps = {
 }
 
 function LabelPicker(props: LabelPickerProps) {
-  const { label, pickerItems, selectedValue, style, onValueChange } = props;
+  const {
+    errorMessage,
+    isError,
+    label,
+    pickerItems,
+    selectedValue,
+    style,
+    onValueChange
+  } = props;
 
   const pickerItemComponents: any = pickerItems
     ? pickerItems.map((picker, index) =>
@@ -37,6 +47,10 @@ function LabelPicker(props: LabelPickerProps) {
       >
         { pickerItemComponents }
       </Picker>
+      {errorMessage || isError
+        ? <FormValidationMessage>{errorMessage || '* Обязательное поле'}</FormValidationMessage>
+        : null
+      }
     </View>
   );
 }

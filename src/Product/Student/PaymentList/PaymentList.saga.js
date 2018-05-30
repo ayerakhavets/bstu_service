@@ -13,7 +13,8 @@ import {
   loadPaymentListSuccess,
   type OpenShowPaymentScreenAction
 } from './PaymentList.actions';
-import { PAYMENT } from '../Student.navigator';
+
+export const PAYMENT = 'Чек';
 
 export default function* paymentListSaga(): Saga<void> {
   yield takeEvery(LOAD_PAYMENT_LIST_REQUEST, handleLoadPaymentList);

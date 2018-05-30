@@ -49,7 +49,6 @@ export default (state: AuthenticationState = initialState,
       isLoading: false
     };
   case LOADING_START:
-    console.log('=== LOADING_START authentication');
     return {
       ...state,
       isLoading: true

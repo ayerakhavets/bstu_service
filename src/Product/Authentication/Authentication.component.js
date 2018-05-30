@@ -65,7 +65,7 @@ class Authentication extends Component<AuthenticationProps> {
             ? <ActivityIndicator size="large" />
             : <Fragment>
               <LabelInput
-                errorMessage={ email ? '' : '* Обязательное поле' }
+                isError={ !email }
                 keyboardType="email-address"
                 placeholder="Электронная почта"
                 value={ email }
@@ -73,7 +73,7 @@ class Authentication extends Component<AuthenticationProps> {
               />
               <LabelInput
                 containerViewStyle={ styles.input }
-                errorMessage={ password ? '' : '* Обязательное поле' }
+                isError={ !password }
                 placeholder="Пароль"
                 secureTextEntry
                 value={ password }

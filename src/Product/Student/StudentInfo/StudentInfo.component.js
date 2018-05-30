@@ -70,12 +70,14 @@ class StudentInfo extends Component<StudentInfoProps> {
             : <Fragment>
               <View style={ styles.twoItemsContainer }>
                 <LabelInput
+                  isError={ !this.props.name }
                   label="Имя"
                   value={ this.props.name }
                   containerViewStyle={ styles.twoItemsContainerItem }
                   onChangeText={ this.props.changeName }
                 />
                 <LabelInput
+                  isError={ !this.props.surname }
                   label="Фамилия"
                   value={ this.props.surname }
                   containerViewStyle={ styles.twoItemsContainerItem }
@@ -83,11 +85,13 @@ class StudentInfo extends Component<StudentInfoProps> {
                 />
               </View>
               <LabelInput
+                isError={ !this.props.middleName }
                 label="Отчество"
                 value={ this.props.middleName }
                 onChangeText={ this.props.changeMiddleName }
               />
               <LabelInput
+                isError={ !this.props.studentId }
                 label="Номер билета"
                 maxLength={ 8 }
                 keyboardType="numeric"
@@ -96,21 +100,24 @@ class StudentInfo extends Component<StudentInfoProps> {
               />
               <View style={ styles.twoItemsContainer }>
                 <LabelPicker
-                  style={ styles.twoItemsContainerItem }
+                  isError={ !this.props.faculty }
                   label="Факультет"
                   pickerItems={ this.props.faculties }
                   selectedValue={ this.props.faculty }
+                  style={ styles.twoItemsContainerItem }
                   onValueChange={ this.props.changeFaculty }
                 />
                 <LabelPicker
-                  style={ styles.twoItemsContainerItem }
+                  isError={ !this.props.course }
                   label="Курс"
                   pickerItems={ this.props.courses }
                   selectedValue={ this.props.course }
+                  style={ styles.twoItemsContainerItem }
                   onValueChange={ this.props.changeCourse }
                 />
               </View>
               <LabelPicker
+                isError={ !this.props.specialty }
                 label="Специальность"
                 pickerItems={ this.props.specialties }
                 selectedValue={ this.props.specialty }
