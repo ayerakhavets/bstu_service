@@ -3,6 +3,7 @@ import {
   CHANGE_EMAIL,
   CHANGE_PASSWORD,
   CHANGE_UID,
+  CLEAR_USER_DATA,
   LOADING_END,
   LOADING_START,
   TOGGLE_IS_REMEMBER,
@@ -53,6 +54,8 @@ export default (state: AuthenticationState = initialState,
       ...state,
       isLoading: true
     };
+  case CLEAR_USER_DATA:
+    return initialState;
   case TOGGLE_IS_REMEMBER:
     return {
       ...state,

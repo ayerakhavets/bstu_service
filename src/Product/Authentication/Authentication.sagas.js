@@ -3,7 +3,7 @@ import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
 import { NavigatorActions, Toast } from '../../Services';
-import { changeUserInfo } from '../Student';
+import { LOG_OUT, changeUserInfo } from '../Student';
 import {
   createUserWithEmailAndPassword,
   getUserInfo,
@@ -16,6 +16,7 @@ import {
   changeUid,
   changeEmail,
   changePassword,
+  clearUserData,
   loadingEnd,
   loadingStart
 } from './Authentication.actions';
@@ -32,6 +33,7 @@ const UID_KEY = 'UID_KEY';
 
 export default function* authenticationSaga(): Saga<void> {
   yield takeEvery(LOG_IN, handleLogIn);
+  yield takeEvery(LOG_OUT, handleLogOut);
   yield takeEvery(PRE_AUTHENTICATION, handlePreAuthentication);
   yield takeEvery(SIGN_UP, handleSignUp);
 }
@@ -65,6 +67,12 @@ export function* handleLogIn(): Saga<void> {
     yield put(loadingEnd());
     Toast.show('Ошибка');
   }
+}
+
+export function* handleLogOut(): Saga<void> {
+  yield call(clearCredentials);
+  yield put(clearUserData());
+  NavigatorActions.navigate('Auth');
 }
 
 export function* handlePreAuthentication(): Saga<void> {
@@ -134,5 +142,13 @@ export function* saveCredentials(): Saga<void> {
     [EMAIL_KEY, email],
     [PASSWORD_KEY, password],
     [UID_KEY, uid]
+  ]);
+}
+
+export function* clearCredentials(): Saga<void> {
+  yield call(AsyncStorage.multiRemove, [
+    EMAIL_KEY,
+    PASSWORD_KEY,
+    UID_KEY
   ]);
 }

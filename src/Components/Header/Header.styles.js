@@ -7,9 +7,11 @@ export default StyleSheet.create({
     backgroundColor: colors.greenLight,
     borderBottomColor: colors.greyLight,
     borderBottomWidth: 1,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     height: 57,
-    paddingLeft: 16,
+    paddingHorizontal: 16,
     width: '100%'
   },
   text: {

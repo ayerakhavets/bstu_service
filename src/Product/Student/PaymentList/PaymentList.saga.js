@@ -49,7 +49,11 @@ export function* handleLoadPaymentList(): Saga<void> {
 
   try {
     const paymentListReponse = yield call(getPaymentList, uid);
-    yield put(loadPaymentListSuccess(paymentListReponse));
+    if (paymentListReponse) {
+      yield put(loadPaymentListSuccess(Object.values(paymentListReponse)));
+    } else {
+      yield put(loadPaymentListFailure());
+    }
   } catch (error) {
     yield put(loadPaymentListFailure());
     Toast.show('Ошибка загрузки данных');

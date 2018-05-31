@@ -18,6 +18,7 @@ import {
   changeSpecialty,
   changeStudentId,
   changeSurname,
+  logOut,
   saveStudentInfoRequest
 } from './StudentInfo.actions';
 import {
@@ -54,6 +55,7 @@ type StudentInfoProps = {
   changeSpecialty: () => void,
   changeStudentId: () => void,
   changeSurname: () => void,
+  onLogOut: () => void,
   saveStudentInfoRequest: () => void
 }
 
@@ -62,7 +64,13 @@ class StudentInfo extends Component<StudentInfoProps> {
   render() {
     return (
       <Fragment>
-        <Header title="Пользователь" />
+        <Header
+          title="Пользователь"
+          leftIcon={{
+            name: 'log-out',
+            onPress: this.props.onLogOut
+          }}
+        />
 
         <Screen>
           {this.props.isLoading
@@ -156,7 +164,8 @@ const mapDispatchToProps = {
   changeSpecialty,
   changeStudentId,
   changeSurname,
-  saveStudentInfoRequest
+  saveStudentInfoRequest,
+  onLogOut: logOut
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentInfo);

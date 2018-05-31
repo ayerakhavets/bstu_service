@@ -2,6 +2,7 @@
 export const CHANGE_EMAIL = 'CHANGE_EMAIL';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 export const CHANGE_UID = 'CHANGE_UID';
+export const CLEAR_USER_DATA = 'CLEAR_USER_DATA';
 export const LOADING_END = 'LOADING_END';
 export const LOADING_START = 'LOADING_START';
 export const LOG_IN = 'LOG_IN';
@@ -12,6 +13,7 @@ export const TOGGLE_IS_REMEMBER = 'TOGGLE_IS_REMEMBER';
 export type ChangeEmailAction = { type: typeof CHANGE_EMAIL, payload: string };
 export type ChangePasswordAction = { type: typeof CHANGE_PASSWORD, payload: string };
 export type ChangeUidAction = { type: typeof CHANGE_UID, payload: string };
+export type ClearUserDataAction = { type: typeof CLEAR_USER_DATA };
 export type LoadingEndAction = { type: typeof LOADING_END };
 export type LoadingStartAction = { type: typeof LOADING_START };
 export type LogInAction = { type: typeof LOG_IN };
@@ -32,6 +34,10 @@ export const changePassword = (password: string): ChangePasswordAction => ({
 export const changeUid = (uid: string): ChangeUidAction => ({
   type: CHANGE_UID,
   payload: uid
+});
+
+export const clearUserData = (): ClearUserDataAction => ({
+  type: CLEAR_USER_DATA
 });
 
 export const loadingEnd = (): LoadingEndAction => ({ type: LOADING_END });

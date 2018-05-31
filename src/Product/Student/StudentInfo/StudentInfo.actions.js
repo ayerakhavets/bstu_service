@@ -9,25 +9,23 @@ export const CHANGE_SPECIALTY = 'CHANGE_SPECIALTY';
 export const CHANGE_STUDENT_ID = 'CHANGE_STUDENT_ID';
 export const CHANGE_SURNAME = 'CHANGE_SURNAME';
 export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
-export const LOADING_END = 'LOADING_END';
-export const LOADING_START = 'LOADING_START';
+export const LOG_OUT = 'LOG_OUT';
 export const SAVE_STUDENT_INFO_FAILURE = 'SAVE_STUDENT_INFO_FAILURE';
 export const SAVE_STUDENT_INFO_REQUEST = 'SAVE_STUDENT_INFO_REQUEST';
 export const SAVE_STUDENT_INFO_SUCCESS = 'SAVE_STUDENT_INFO_SUCCESS';
 
-type ChangeCourseAction = { type: typeof CHANGE_COURSE, payload: string };
-type ChangeFacultyAction = { type: typeof CHANGE_FACULTY, payload: string };
-type ChangeMiddleNameAction = { type: typeof CHANGE_MIDDLE_NAME, payload: string };
-type ChangeNameAction = { type: typeof CHANGE_NAME, payload: string };
-type СhangeSpecialtyAction = { type: typeof CHANGE_SPECIALTY, payload: string };
-type ChangeStudentIdAction = { type: typeof CHANGE_STUDENT_ID, payload: string };
-type ChangeSurnameAction = { type: typeof CHANGE_SURNAME, payload: string };
-type ChangeUserInfoAction = { type: typeof CHANGE_USER_INFO, payload: StudentInfo };
-type LoadingEndAction = { type: typeof LOADING_END };
-type LoadingStartAction = { type: typeof LOADING_START };
-type SaveStudentInfoFailureAction = { type: typeof SAVE_STUDENT_INFO_FAILURE };
-type SaveStudentInfoRequestAction = { type: typeof SAVE_STUDENT_INFO_REQUEST };
-type SaveStudentInfoSuccessAction = { type: typeof SAVE_STUDENT_INFO_SUCCESS };
+export type ChangeCourseAction = { type: typeof CHANGE_COURSE, payload: string };
+export type ChangeFacultyAction = { type: typeof CHANGE_FACULTY, payload: string };
+export type ChangeMiddleNameAction = { type: typeof CHANGE_MIDDLE_NAME, payload: string };
+export type ChangeNameAction = { type: typeof CHANGE_NAME, payload: string };
+export type СhangeSpecialtyAction = { type: typeof CHANGE_SPECIALTY, payload: string };
+export type ChangeStudentIdAction = { type: typeof CHANGE_STUDENT_ID, payload: string };
+export type ChangeSurnameAction = { type: typeof CHANGE_SURNAME, payload: string };
+export type ChangeUserInfoAction = { type: typeof CHANGE_USER_INFO, payload: StudentInfo };
+export type LogOutAction = { type: typeof LOG_OUT };
+export type SaveStudentInfoFailureAction = { type: typeof SAVE_STUDENT_INFO_FAILURE };
+export type SaveStudentInfoRequestAction = { type: typeof SAVE_STUDENT_INFO_REQUEST };
+export type SaveStudentInfoSuccessAction = { type: typeof SAVE_STUDENT_INFO_SUCCESS };
 
 export const changeCourse = (course: string): ChangeCourseAction => ({
   type: CHANGE_COURSE,
@@ -69,9 +67,7 @@ export const changeUserInfo = (userInfo: StudentInfo): ChangeUserInfoAction => (
   payload: userInfo
 });
 
-export const loadingEnd = (): LoadingEndAction => ({ type: LOADING_END });
-
-export const loadingStart = (): LoadingStartAction => ({ type: LOADING_START });
+export const logOut = (): LogOutAction => ({ type: LOG_OUT });
 
 export const saveStudentInfoFailure = (): SaveStudentInfoFailureAction =>
   ({ type: SAVE_STUDENT_INFO_FAILURE });
@@ -95,3 +91,4 @@ export type StudentInfoActions =
   | SaveStudentInfoFailureAction
   | SaveStudentInfoRequestAction
   | SaveStudentInfoSuccessAction
+  | LogOutAction

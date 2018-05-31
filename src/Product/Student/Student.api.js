@@ -57,4 +57,4 @@ export const getPaymentList = (uid: string): PaymentInfo[] =>
   // $FlowFixMe function once() requires another argument.
   firebase.database().ref(`/payments/${uid}`).once('value')
     // eslint-disable-next-line no-underscore-dangle
-    .then(response => Object.values(response._value));
+    .then(response => response._value);

@@ -9,6 +9,10 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     padding: 10
   },
+  emptyItemContainer: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   flatList: {
     marginTop: 10,
     width: '100%'
