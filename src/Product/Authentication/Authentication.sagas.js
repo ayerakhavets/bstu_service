@@ -3,14 +3,16 @@ import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
 import { NavigatorActions, Toast } from '../../Services';
-import { LOG_OUT, changeUserInfo } from '../Student';
+import { changeUserInfo, clearStudentInfo } from '../Student';
 import {
   createUserWithEmailAndPassword,
   getUserInfo,
+  sendEmailVerification,
   signInWithEmailAndPassword
 } from './Authentication.api';
 import {
   LOG_IN,
+  LOG_OUT,
   PRE_AUTHENTICATION,
   SIGN_UP,
   changeUid,
@@ -30,6 +32,8 @@ import {
 const EMAIL_KEY = 'EMAIL_KEY';
 const PASSWORD_KEY = 'PASSWORD_KEY';
 const UID_KEY = 'UID_KEY';
+const SHORT_PASSWORD_ERROR =
+  'The given password is invalid. [ Password should be at least 6 characters ]';
 
 export default function* authenticationSaga(): Saga<void> {
   yield takeEvery(LOG_IN, handleLogIn);
@@ -70,9 +74,11 @@ export function* handleLogIn(): Saga<void> {
 }
 
 export function* handleLogOut(): Saga<void> {
-  yield call(clearCredentials);
   yield put(clearUserData());
+  yield call(clearCredentials);
+  // FIXME: send `signOut` request.
   NavigatorActions.navigate('Auth');
+  yield put(clearStudentInfo());
 }
 
 export function* handlePreAuthentication(): Saga<void> {
@@ -123,13 +129,19 @@ export function* handleSignUp(): Saga<void> {
     const { user } = yield call(createUserWithEmailAndPassword, ...requestParams);
     yield put(changeUid(user.uid));
 
+    yield call(sendEmailVerification, user);
+
     if (isRemember) yield call(saveCredentials);
     yield put(loadingEnd());
 
     NavigatorActions.navigate('Student');
   } catch (error) {
     yield put(loadingEnd());
-    Toast.show('Ошибка');
+    if (error.message === SHORT_PASSWORD_ERROR) {
+      Toast.show('Пароль меньше 6 символов');
+    } else {
+      Toast.show('Ошибка');
+    }
   }
 }
 

@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
-import { Icon } from 'react-native-elements';
+import { Icon as RNIcon } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   LabelInput,
   LabelPicker,
@@ -17,11 +18,12 @@ import {
   type PickerItem
 } from '../../../Components';
 import {
-  uploadPaymentRequest,
   changeDate,
   changeMoneyAmount,
   changePaymentType,
-  openImagePicker
+  openImagePicker,
+  removePaymentRequest,
+  uploadPaymentRequest
 } from './Payment.actions';
 import type { PaymentImage } from './Payment.reducer';
 import {
@@ -43,16 +45,38 @@ type PaymentProps = {
   navigation: Objcet,
   paymentType: string,
   paymentTypes: PickerItem[],
-  uploadPaymentRequest: (type) => void,
   onChangeMoneyAmount: () => void,
   onChangePaymentType: () => void,
   onDateChange: () => void,
-  onOpenImagePicker: () => void
+  onOpenImagePicker: () => void,
+  removePaymentRequest: () => void,
+  uploadPaymentRequest: (type) => void
 }
 
 // FIXME: use https://github.com/wix/react-native-calendars instead of DatePicker.
 // eslint-disable-next-line react/prefer-stateless-function
 class Payment extends Component<PaymentProps> {
+  static navigationOptions = ({ navigation }) => {
+    const params = navigation.state.params || {};
+    const screenType = navigation.getParam('intent', 'ADD');
+
+    return {
+      headerRight: screenType === 'EDIT'
+        ? (<Icon
+          style={ styles.headerIcon }
+          color={ colors.white }
+          name="delete"
+          size={ 24 }
+          onPress={ params.removePayment }
+        />)
+        : null
+    };
+  };
+
+  componentWillMount() {
+    this.props.navigation.setParams({ removePayment: this.props.removePaymentRequest });
+  }
+
   addPayment = () => this.props.uploadPaymentRequest('ADD');
 
   editPayment = () => this.props.uploadPaymentRequest('EDIT')
@@ -63,7 +87,7 @@ class Payment extends Component<PaymentProps> {
     const screenType = navigation.getParam('intent', 'ADD');
     const imageSource = image.url || `file://${this.props.image.path}`;
     const submitButtonText = screenType === 'EDIT'
-      ? 'Сохранить'
+      ? 'Сохранить изменения'
       : 'Добавить';
     const isDataEmpty = !paymentType || !moneyAmount || !date || !image.name;
 
@@ -89,7 +113,7 @@ class Payment extends Component<PaymentProps> {
                   />
                   <Text>BYN</Text>
                 </View>
-                <Icon
+                <RNIcon
                   color={ colors.greenDark }
                   containerViewStyle={ styles.buttonIcon }
                   name="insert-photo"
@@ -143,11 +167,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  uploadPaymentRequest,
   onDateChange: changeDate,
   onChangeMoneyAmount: changeMoneyAmount,
   onChangePaymentType: changePaymentType,
-  onOpenImagePicker: openImagePicker
+  onOpenImagePicker: openImagePicker,
+  removePaymentRequest,
+  uploadPaymentRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Payment);

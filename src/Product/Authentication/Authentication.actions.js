@@ -6,6 +6,7 @@ export const CLEAR_USER_DATA = 'CLEAR_USER_DATA';
 export const LOADING_END = 'LOADING_END';
 export const LOADING_START = 'LOADING_START';
 export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';
 export const PRE_AUTHENTICATION = 'PRE_AUTHENTICATION';
 export const SIGN_UP = 'SIGN_UP';
 export const TOGGLE_IS_REMEMBER = 'TOGGLE_IS_REMEMBER';
@@ -17,6 +18,7 @@ export type ClearUserDataAction = { type: typeof CLEAR_USER_DATA };
 export type LoadingEndAction = { type: typeof LOADING_END };
 export type LoadingStartAction = { type: typeof LOADING_START };
 export type LogInAction = { type: typeof LOG_IN };
+export type LogOutAction = { type: typeof LOG_OUT };
 export type PreAuthenticationAction = { type: typeof PRE_AUTHENTICATION };
 export type SignUpAction = { type: typeof SIGN_UP };
 export type ToggleIsRememberAction = { type: typeof TOGGLE_IS_REMEMBER };
@@ -46,6 +48,8 @@ export const loadingStart = (): LoadingStartAction => ({ type: LOADING_START });
 
 export const logIn = (): LogInAction => ({ type: LOG_IN });
 
+export const logOut = (): LogOutAction => ({ type: LOG_OUT });
+
 export const preAuthentication = (): PreAuthenticationAction => ({ type: PRE_AUTHENTICATION });
 
 export const signUp = (): SignUpAction => ({ type: SIGN_UP });
@@ -59,6 +63,7 @@ export type AuthenticationActions =
   | LoadingEndAction
   | LoadingStartAction
   | LogInAction
+  | LogOutAction
   | PreAuthenticationAction
   | SignUpAction
   | ToggleIsRememberAction

@@ -8,6 +8,7 @@ import {
   CHANGE_STUDENT_ID,
   CHANGE_SURNAME,
   CHANGE_USER_INFO,
+  CLEAR_STUDENT_INFO,
   SAVE_STUDENT_INFO_FAILURE,
   SAVE_STUDENT_INFO_REQUEST,
   SAVE_STUDENT_INFO_SUCCESS,
@@ -87,6 +88,8 @@ export default (
       ...state,
       ...action.payload
     };
+  case CLEAR_STUDENT_INFO:
+    return initialState;
   case SAVE_STUDENT_INFO_FAILURE:
   case SAVE_STUDENT_INFO_SUCCESS:
     return {

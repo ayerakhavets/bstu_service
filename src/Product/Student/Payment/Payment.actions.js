@@ -11,6 +11,9 @@ export const CHANGE_PAYMENT_DATA = 'CHANGE_PAYMENT_DATA';
 export const CHANGE_PAYMENT_TYPE = 'CHANGE_PAYMENT_TYPE';
 export const CLEAR_PAYMENT_DATA = 'CLEAR_PAYMENT_DATA';
 export const OPEN_IMAGE_PICKER = 'OPEN_IMAGE_PICKER';
+export const REMOVE_PAYMENT_FAILURE = 'REMOVE_PAYMENT_FAILURE';
+export const REMOVE_PAYMENT_REQUEST = 'REMOVE_PAYMENT_REQUEST';
+export const REMOVE_PAYMENT_SUCCESS = 'REMOVE_PAYMENT_SUCCESS';
 export const UPLOAD_PAYMENT_FAILURE = 'UPLOAD_PAYMENT_FAILURE';
 export const UPLOAD_PAYMENT_REQUEST = 'UPLOAD_PAYMENT_REQUEST';
 export const UPLOAD_PAYMENT_SUCCESS = 'UPLOAD_PAYMENT_SUCCESS';
@@ -22,6 +25,9 @@ export type ChangePaymentDataAction = { type: typeof CHANGE_PAYMENT_DATA, payloa
 export type ChangePaymentTypeAction = { type: typeof CHANGE_PAYMENT_TYPE, payload: string };
 export type ClearPaymentDataAction = { type: typeof CLEAR_PAYMENT_DATA };
 export type OpenImagePickerAction = { type: typeof OPEN_IMAGE_PICKER };
+export type RemovePaymentFailureAction = { type: typeof REMOVE_PAYMENT_FAILURE };
+export type RemovePaymentRequestAction = { type: typeof REMOVE_PAYMENT_REQUEST };
+export type RemovePaymentSuccessAction = { type: typeof REMOVE_PAYMENT_SUCCESS };
 export type UploadPaymentFailureAction = { type: typeof UPLOAD_PAYMENT_FAILURE };
 export type UploadPaymentRequestAction = {
   type: typeof UPLOAD_PAYMENT_REQUEST,
@@ -58,6 +64,15 @@ export const clearPaymentData = (): ClearPaymentDataAction => ({ type: CLEAR_PAY
 
 export const openImagePicker = (): OpenImagePickerAction => ({ type: OPEN_IMAGE_PICKER });
 
+export const removePaymentFailure = (): RemovePaymentFailureAction =>
+  ({ type: REMOVE_PAYMENT_FAILURE });
+
+export const removePaymentRequest = (): RemovePaymentRequestAction =>
+  ({ type: REMOVE_PAYMENT_REQUEST });
+
+export const removePaymentSuccess = (): RemovePaymentSuccessAction =>
+  ({ type: REMOVE_PAYMENT_SUCCESS });
+
 export const uploadPaymentFailure = (): UploadPaymentFailureAction =>
   ({ type: UPLOAD_PAYMENT_FAILURE });
 
@@ -77,6 +92,9 @@ export type PaymentActions =
   | ChangePaymentTypeAction
   | ClearPaymentDataAction
   | OpenImagePickerAction
+  | RemovePaymentFailureAction
+  | RemovePaymentRequestAction
+  | RemovePaymentSuccessAction
   | UploadPaymentFailureAction
   | UploadPaymentRequestAction
   | UploadPaymentSuccessAction

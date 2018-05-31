@@ -9,7 +9,7 @@ import { Payment } from './Payment';
 
 // TODO: add internationalization.
 export const STUDENT = 'Пользователь';
-export const PAYMENT = 'Чек';
+export const PAYMENT = 'Платёж';
 export const PAYMENT_LIST = 'Платежи';
 
 const PaymentStack = createStackNavigator({

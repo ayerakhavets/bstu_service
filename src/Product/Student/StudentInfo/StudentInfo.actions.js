@@ -9,7 +9,7 @@ export const CHANGE_SPECIALTY = 'CHANGE_SPECIALTY';
 export const CHANGE_STUDENT_ID = 'CHANGE_STUDENT_ID';
 export const CHANGE_SURNAME = 'CHANGE_SURNAME';
 export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
-export const LOG_OUT = 'LOG_OUT';
+export const CLEAR_STUDENT_INFO = 'CLEAR_STUDENT_INFO';
 export const SAVE_STUDENT_INFO_FAILURE = 'SAVE_STUDENT_INFO_FAILURE';
 export const SAVE_STUDENT_INFO_REQUEST = 'SAVE_STUDENT_INFO_REQUEST';
 export const SAVE_STUDENT_INFO_SUCCESS = 'SAVE_STUDENT_INFO_SUCCESS';
@@ -22,7 +22,7 @@ export type СhangeSpecialtyAction = { type: typeof CHANGE_SPECIALTY, payload: s
 export type ChangeStudentIdAction = { type: typeof CHANGE_STUDENT_ID, payload: string };
 export type ChangeSurnameAction = { type: typeof CHANGE_SURNAME, payload: string };
 export type ChangeUserInfoAction = { type: typeof CHANGE_USER_INFO, payload: StudentInfo };
-export type LogOutAction = { type: typeof LOG_OUT };
+export type ClearStudentInfoAction = { type: typeof CLEAR_STUDENT_INFO };
 export type SaveStudentInfoFailureAction = { type: typeof SAVE_STUDENT_INFO_FAILURE };
 export type SaveStudentInfoRequestAction = { type: typeof SAVE_STUDENT_INFO_REQUEST };
 export type SaveStudentInfoSuccessAction = { type: typeof SAVE_STUDENT_INFO_SUCCESS };
@@ -67,7 +67,7 @@ export const changeUserInfo = (userInfo: StudentInfo): ChangeUserInfoAction => (
   payload: userInfo
 });
 
-export const logOut = (): LogOutAction => ({ type: LOG_OUT });
+export const clearStudentInfo = (): ClearStudentInfoAction => ({ type: CLEAR_STUDENT_INFO });
 
 export const saveStudentInfoFailure = (): SaveStudentInfoFailureAction =>
   ({ type: SAVE_STUDENT_INFO_FAILURE });
@@ -77,7 +77,6 @@ export const saveStudentInfoRequest = (): SaveStudentInfoRequestAction =>
 
 export const saveStudentInfoSuccess = (): SaveStudentInfoSuccessAction =>
   ({ type: SAVE_STUDENT_INFO_SUCCESS });
-
 
 export type StudentInfoActions =
   | ChangeCourseAction
@@ -91,4 +90,4 @@ export type StudentInfoActions =
   | SaveStudentInfoFailureAction
   | SaveStudentInfoRequestAction
   | SaveStudentInfoSuccessAction
-  | LogOutAction
+  | ClearStudentInfoAction

@@ -10,6 +10,8 @@ import {
   Screen,
   type PickerItem
 } from '../../../Components';
+// FIXME: cyclic dependency?
+import { logOut } from '../../Authentication/Authentication.actions';
 import {
   changeCourse,
   changeFaculty,
@@ -18,7 +20,6 @@ import {
   changeSpecialty,
   changeStudentId,
   changeSurname,
-  logOut,
   saveStudentInfoRequest
 } from './StudentInfo.actions';
 import {
@@ -59,6 +60,7 @@ type StudentInfoProps = {
   saveStudentInfoRequest: () => void
 }
 
+// FIXME: screen with initial data shouldn't be visible while log out.
 // eslint-disable-next-line react/prefer-stateless-function
 class StudentInfo extends Component<StudentInfoProps> {
   render() {
@@ -133,7 +135,7 @@ class StudentInfo extends Component<StudentInfoProps> {
               />
               <MyButton
                 containerViewStyle={ styles.button }
-                title="Сохранить"
+                title="Сохранить изменения"
                 onPress={ this.props.saveStudentInfoRequest }
               />
             </Fragment> }

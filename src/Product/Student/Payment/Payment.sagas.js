@@ -5,10 +5,19 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import ImagePicker, { type Response, type Options } from 'react-native-image-picker';
 import { NavigatorActions, Toast } from '../../../Services';
 import { selectUid } from '../../Authentication';
-import { addPayment, getNewPaymentKey, updatePayment } from '../Student.api';
 import {
-  UPLOAD_PAYMENT_REQUEST,
+  addPayment,
+  getNewPaymentKey,
+  removePayment,
+  updatePayment
+} from '../Student.api';
+import { loadPaymentListRequest } from '../PaymentList';
+import {
   OPEN_IMAGE_PICKER,
+  REMOVE_PAYMENT_REQUEST,
+  UPLOAD_PAYMENT_REQUEST,
+  removePaymentFailure,
+  removePaymentSuccess,
   uploadPaymentFailure,
   uploadPaymentSuccess,
   changeImage,
@@ -31,8 +40,9 @@ const imagePickerOptions: Options = {
 };
 
 export default function* paymentSaga(): Saga<void> {
-  yield takeEvery(UPLOAD_PAYMENT_REQUEST, handleUploadPaymentRequest);
   yield takeEvery(OPEN_IMAGE_PICKER, handleSetImage);
+  yield takeEvery(REMOVE_PAYMENT_REQUEST, handleRemovePayment);
+  yield takeEvery(UPLOAD_PAYMENT_REQUEST, handleUploadPayment);
 }
 
 const showImagePicker = (): Promise<Response> => new Promise((resolve) => {
@@ -57,7 +67,25 @@ export function* handleSetImage(): Saga<void> {
   }));
 }
 
-export function* handleUploadPaymentRequest({ payload }: UploadPaymentRequestAction): Saga<void> {
+export function* handleRemovePayment(): Saga<void> {
+  const uid = yield select(selectUid);
+  const key = yield select(selectKey);
+
+  const path = `${uid}/${key}`;
+
+  try {
+    yield call(removePayment, path);
+    yield put(removePaymentSuccess());
+    NavigatorActions.back();
+    yield put(loadPaymentListRequest());
+    Toast.show('Платёж удалён');
+  } catch (error) {
+    yield put(removePaymentFailure());
+    Toast.show('Ошибка при удалении данных');
+  }
+}
+
+export function* handleUploadPayment({ payload }: UploadPaymentRequestAction): Saga<void> {
   const date = yield select(selectDate);
   const paymentType = yield select(selectPaymentType);
   const moneyAmount = yield select(selectMoneyAmount);
@@ -96,6 +124,7 @@ export function* handleUploadPaymentRequest({ payload }: UploadPaymentRequestAct
     }
     NavigatorActions.back();
     yield put(uploadPaymentSuccess());
+    yield put(loadPaymentListRequest());
     Toast.show('Чек добавлен');
   } catch (error) {
     yield put(uploadPaymentFailure());

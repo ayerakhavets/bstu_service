@@ -48,7 +48,7 @@ export function* saveStudentInfo(): Saga<void> {
   try {
     yield call(updateStudentInfo, studentInfo, uid);
     yield put(saveStudentInfoSuccess());
-    Toast.show('Данные добавлены');
+    Toast.show('Данные обновлены');
   } catch (error) {
     yield put(saveStudentInfoFailure());
     Toast.show('Ошибка добавления данных');

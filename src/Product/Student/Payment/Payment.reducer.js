@@ -1,14 +1,17 @@
 // @flow
 import {
-  UPLOAD_PAYMENT_FAILURE,
-  UPLOAD_PAYMENT_REQUEST,
-  UPLOAD_PAYMENT_SUCCESS,
   CHANGE_DATE,
   CHANGE_IMAGE,
   CHANGE_MONEY_AMOUNT,
   CHANGE_PAYMENT_DATA,
   CHANGE_PAYMENT_TYPE,
   CLEAR_PAYMENT_DATA,
+  REMOVE_PAYMENT_FAILURE,
+  REMOVE_PAYMENT_REQUEST,
+  REMOVE_PAYMENT_SUCCESS,
+  UPLOAD_PAYMENT_FAILURE,
+  UPLOAD_PAYMENT_REQUEST,
+  UPLOAD_PAYMENT_SUCCESS,
   type PaymentActions
 } from './Payment.actions';
 
@@ -49,21 +52,6 @@ export default (
   state: PaymentState = initialState,
   action: PaymentActions): PaymentState => {
   switch (action.type) {
-  case UPLOAD_PAYMENT_FAILURE:
-    return {
-      ...state,
-      isLoading: false
-    };
-  case UPLOAD_PAYMENT_SUCCESS:
-    return {
-      ...state,
-      isLoading: false
-    };
-  case UPLOAD_PAYMENT_REQUEST:
-    return {
-      ...state,
-      isLoading: true
-    };
   case CHANGE_DATE:
     return {
       ...state,
@@ -99,6 +87,36 @@ export default (
     };
   case CLEAR_PAYMENT_DATA:
     return initialState;
+  case REMOVE_PAYMENT_FAILURE:
+    return {
+      ...state,
+      isLoading: false
+    };
+  case REMOVE_PAYMENT_REQUEST:
+    return {
+      ...state,
+      isLoading: true
+    };
+  case REMOVE_PAYMENT_SUCCESS:
+    return {
+      ...state,
+      isLoading: false
+    };
+  case UPLOAD_PAYMENT_FAILURE:
+    return {
+      ...state,
+      isLoading: false
+    };
+  case UPLOAD_PAYMENT_SUCCESS:
+    return {
+      ...state,
+      isLoading: false
+    };
+  case UPLOAD_PAYMENT_REQUEST:
+    return {
+      ...state,
+      isLoading: true
+    };
   default:
     return state;
   }

@@ -14,7 +14,7 @@ import {
   type OpenShowPaymentScreenAction
 } from './PaymentList.actions';
 
-export const PAYMENT = 'Чек';
+export const PAYMENT = 'Платёж';
 
 export default function* paymentListSaga(): Saga<void> {
   yield takeEvery(LOAD_PAYMENT_LIST_REQUEST, handleLoadPaymentList);
@@ -49,10 +49,11 @@ export function* handleLoadPaymentList(): Saga<void> {
 
   try {
     const paymentListReponse = yield call(getPaymentList, uid);
+    console.log('check3:', paymentListReponse);
     if (paymentListReponse) {
       yield put(loadPaymentListSuccess(Object.values(paymentListReponse)));
     } else {
-      yield put(loadPaymentListFailure());
+      yield put(loadPaymentListSuccess([]));
     }
   } catch (error) {
     yield put(loadPaymentListFailure());
