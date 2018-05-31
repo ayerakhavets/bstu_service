@@ -52,10 +52,12 @@ export const updatePayment = async (uid: string, paymentInfo: PaymentInfo,
   return firebase.database().ref('').update(updates);
 };
 
-export const removePayment = (path: string): Promise<void> => {
-  firebase.database().ref(`/payments/${path}`).remove();
+export const removePayment = async (
+  databasePath: string, storagePath: string): Promise<void> => {
+  await firebase.storage().ref(`${storagePath}`).delete();
+  return firebase.database().ref(`/payments/${databasePath}`).remove();
 };
-// FIXME: add type to getPaymentList.
+
 export const getPaymentList = (uid: string): PaymentInfo[] =>
   // $FlowFixMe function once() requires another argument.
   firebase.database().ref(`/payments/${uid}`).once('value')

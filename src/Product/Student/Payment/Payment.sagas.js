@@ -68,15 +68,17 @@ export function* handleSetImage(): Saga<void> {
 }
 
 export function* handleRemovePayment(): Saga<void> {
-  const uid = yield select(selectUid);
+  const image = yield select(selectImage);
   const key = yield select(selectKey);
+  const uid = yield select(selectUid);
 
-  const path = `${uid}/${key}`;
+  const databasePath = `${uid}/${key}`;
+  const storagePath = `${key}/${image.name}`;
 
   try {
-    yield call(removePayment, path);
-    yield put(removePaymentSuccess());
+    yield call(removePayment, databasePath, storagePath);
     NavigatorActions.back();
+    yield put(removePaymentSuccess());
     yield put(loadPaymentListRequest());
     Toast.show('Платёж удалён');
   } catch (error) {
