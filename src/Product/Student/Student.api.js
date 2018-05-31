@@ -2,6 +2,18 @@
 import firebase from 'react-native-firebase';
 import type { StudentInfo } from '../types';
 
+export type PaymentInfo = {
+  date: string,
+  image: {
+    name: string,
+    url: string
+  },
+  isResolved: boolean,
+  key: string,
+  moneyAmount: string,
+  paymentType: string
+}
+
 export const updateStudentInfo = (studentInfo: StudentInfo, uid: string): Promise<void> => {
   const updates = {};
   updates[`/students/${uid}`] = studentInfo;
@@ -9,28 +21,40 @@ export const updateStudentInfo = (studentInfo: StudentInfo, uid: string): Promis
   return firebase.database().ref('').update(updates);
 };
 
-export const getPaymentImageUrl = (pathToImage: string): Promise<string> =>
-  firebase.storage().ref(pathToImage).getDownloadURL();
+export const getPaymentImageUrl = (storageImagePath: string): Promise<string> =>
+  firebase.storage().ref(storageImagePath).getDownloadURL();
 
 // $FlowFixMe property `key` is missing in `Promise`.
-export const getNewPaymentKey = () => firebase.database().ref('').child('checks').push().key;
+export const getNewPaymentKey = () => firebase.database().ref('').child('payments').push().key;
 
-// FIXME: add type for paymentInfo.
-export const addPayment = async (
-  paymentInfo: Object, pathToImage: string, uid: string, key: string): Promise<void> => {
-  if (!pathToImage) throw new Error('Bad params');
-  // $FlowFixMe string is incompatible with object.
-  await firebase.storage().ref(paymentInfo.pathToImage).putFile(pathToImage);
+export const addPayment = async (uid: string, paymentInfo: PaymentInfo,
+  storageImagePath: string, localImagePath: string): Promise<void> => {
+  await firebase.storage().ref(storageImagePath).putFile(localImagePath);
 
   const updates = {};
-  updates[`/checks/${uid}/${key}`] = paymentInfo;
+  updates[`/payments/${uid}/${paymentInfo.key}`] = paymentInfo;
+  // FIXME: use more specific methods to add a record.
+  // eslint-disable-next-line consistent-return
+  return firebase.database().ref('').update(updates);
+};
+
+export const updatePayment = async (uid: string, paymentInfo: PaymentInfo,
+  storageImagePath: string, localImagePath: ?string): Promise<void> => {
+  if (localImagePath) {
+    // $FlowFixMe string is incompatible with object.
+    await firebase.storage().ref(storageImagePath).putFile(localImagePath);
+  }
+
+  const updates = {};
+  updates[`/payments/${uid}/${paymentInfo.key}`] = paymentInfo;
+  // FIXME: use more specific methods to add a record.
   // eslint-disable-next-line consistent-return
   return firebase.database().ref('').update(updates);
 };
 
 // FIXME: add type to getPaymentList.
-export const getPaymentList = (uid: string): Object =>
+export const getPaymentList = (uid: string): PaymentInfo[] =>
   // $FlowFixMe function once() requires another argument.
-  firebase.database().ref(`/checks/${uid}`).once('value')
+  firebase.database().ref(`/payments/${uid}`).once('value')
     // eslint-disable-next-line no-underscore-dangle
-    .then(response => response._value);
+    .then(response => Object.values(response._value));

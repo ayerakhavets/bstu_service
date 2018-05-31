@@ -22,8 +22,9 @@ function PaymentListItem(props: PaymentListItemProps) {
       <Text style={ styles.paymentTypeText }>{item.paymentType}</Text>
     </View>
   );
-  // eslint-disable-next-line global-require
-  const icon = require('../assets/receipt_gr.png');
+  const icon = item.isResolved
+    ? require('../assets/receipt_gr.png') // eslint-disable-line global-require
+    : require('../assets/receipt.png'); // eslint-disable-line global-require
   return (
     <ListItem
       avatar={ icon }

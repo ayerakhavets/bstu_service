@@ -10,6 +10,9 @@ export const selectDate = ({ student }: ApplicationState): string =>
 export const selectImage = ({ student }: ApplicationState): PaymentImage =>
   student.payment.image;
 
+export const selectKey = ({ student }: ApplicationState): string =>
+  student.payment.key;
+
 export const selectIsLoading = ({ student }: ApplicationState): boolean =>
   student.payment.isLoading;
 

@@ -47,7 +47,7 @@ function LabelPicker(props: LabelPickerProps) {
       >
         { pickerItemComponents }
       </Picker>
-      {errorMessage || isError
+      {isError
         ? <FormValidationMessage>{errorMessage || '* Обязательное поле'}</FormValidationMessage>
         : null
       }

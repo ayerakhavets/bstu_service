@@ -24,30 +24,32 @@ export default function* paymentListSaga(): Saga<void> {
 
 export function* handleOpenAddPaymentScreen(): Saga<void> {
   yield put(clearPaymentData());
-  NavigatorActions.navigate(PAYMENT);
+  // FIXME: use constants for params.
+  NavigatorActions.navigate(PAYMENT, { intent: 'ADD' });
 }
 
-export function* handleOpenShowPaymentScreen(action: OpenShowPaymentScreenAction): Saga<void> {
-  const imageUrl = yield call(getPaymentImageUrl, action.payload.pathToImage);
+export function* handleOpenShowPaymentScreen({ payload }: OpenShowPaymentScreenAction): Saga<void> {
+  const storageImagePath = `${payload.key}/${payload.image.name}`;
+  const imageUrl = yield call(getPaymentImageUrl, storageImagePath);
   const paymentData = {
-    ...action.payload,
-    pathToImage: imageUrl
+    ...payload,
+    image: {
+      ...payload.image,
+      url: imageUrl
+    }
   };
 
   yield put(changePaymentData(paymentData));
-  NavigatorActions.navigate(PAYMENT);
+  // FIXME: use constants for params.
+  NavigatorActions.navigate(PAYMENT, { intent: 'EDIT' });
 }
-
-const mapPaymentListResponseToPaymentListItems = paymentListObject =>
-  Object.entries(paymentListObject).map(value => ({ key: value[0], ...value[1] }));
 
 export function* handleLoadPaymentList(): Saga<void> {
   const uid = yield select(selectUid);
 
   try {
     const paymentListReponse = yield call(getPaymentList, uid);
-    const mappedPaymentList = mapPaymentListResponseToPaymentListItems(paymentListReponse);
-    yield put(loadPaymentListSuccess(mappedPaymentList));
+    yield put(loadPaymentListSuccess(paymentListReponse));
   } catch (error) {
     yield put(loadPaymentListFailure());
     Toast.show('Ошибка загрузки данных');

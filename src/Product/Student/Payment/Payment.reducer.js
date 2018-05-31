@@ -1,8 +1,8 @@
 // @flow
 import {
-  ADD_PAYMENT_FAILURE,
-  ADD_PAYMENT_REQUEST,
-  ADD_PAYMENT_SUCCESS,
+  UPLOAD_PAYMENT_FAILURE,
+  UPLOAD_PAYMENT_REQUEST,
+  UPLOAD_PAYMENT_SUCCESS,
   CHANGE_DATE,
   CHANGE_IMAGE,
   CHANGE_MONEY_AMOUNT,
@@ -21,6 +21,7 @@ export type PaymentImage = {
 export type PaymentState = {
   date: string,
   image: PaymentImage,
+  key: string,
   moneyAmount: string,
   paymentType: string,
   isLoading: boolean,
@@ -35,6 +36,7 @@ const initialState = {
     name: '',
     url: ''
   },
+  key: '',
   moneyAmount: '',
   paymentType: '',
   isLoading: false,
@@ -47,17 +49,17 @@ export default (
   state: PaymentState = initialState,
   action: PaymentActions): PaymentState => {
   switch (action.type) {
-  case ADD_PAYMENT_FAILURE:
+  case UPLOAD_PAYMENT_FAILURE:
     return {
       ...state,
       isLoading: false
     };
-  case ADD_PAYMENT_SUCCESS:
+  case UPLOAD_PAYMENT_SUCCESS:
     return {
       ...state,
       isLoading: false
     };
-  case ADD_PAYMENT_REQUEST:
+  case UPLOAD_PAYMENT_REQUEST:
     return {
       ...state,
       isLoading: true
@@ -71,9 +73,9 @@ export default (
     return {
       ...state,
       image: {
-        path: action.payload.path || state.image.path,
-        name: action.payload.name || state.image.name,
-        url: action.payload.url || state.image.url
+        path: action.payload.path,
+        name: action.payload.name,
+        url: action.payload.url
       }
     };
   case CHANGE_MONEY_AMOUNT:
@@ -87,7 +89,7 @@ export default (
       ...action.payload,
       image: {
         ...state.image,
-        url: action.payload.pathToImage
+        ...action.payload.image
       }
     };
   case CHANGE_PAYMENT_TYPE:

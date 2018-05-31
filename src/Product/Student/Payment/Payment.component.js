@@ -4,15 +4,20 @@ import {
   ActivityIndicator,
   Image,
   Text,
-  TextInput,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
 import { Icon } from 'react-native-elements';
-import { Screen, LabelPicker, MyButton, type PickerItem } from '../../../Components';
 import {
-  addPaymentRequest,
+  LabelInput,
+  LabelPicker,
+  MyButton,
+  Screen,
+  type PickerItem
+} from '../../../Components';
+import {
+  uploadPaymentRequest,
   changeDate,
   changeMoneyAmount,
   changePaymentType,
@@ -34,9 +39,11 @@ type PaymentProps = {
   image: PaymentImage,
   isLoading: boolean,
   moneyAmount: string,
+  // FIXME: use proper type for navigation.
+  navigation: Objcet,
   paymentType: string,
   paymentTypes: PickerItem[],
-  addPaymentRequest: () => void,
+  uploadPaymentRequest: (type) => void,
   onChangeMoneyAmount: () => void,
   onChangePaymentType: () => void,
   onDateChange: () => void,
@@ -46,11 +53,19 @@ type PaymentProps = {
 // FIXME: use https://github.com/wix/react-native-calendars instead of DatePicker.
 // eslint-disable-next-line react/prefer-stateless-function
 class Payment extends Component<PaymentProps> {
+  addPayment = () => this.props.uploadPaymentRequest('ADD');
+
+  editPayment = () => this.props.uploadPaymentRequest('EDIT')
+
   render() {
-    const imageSource = this.props.image.url || `file://${this.props.image.path}`;
-    const submitButtonText = this.props.image.url
+    const { date, image, moneyAmount, navigation, paymentType } = this.props;
+    // FIXME: use constants for params.
+    const screenType = navigation.getParam('intent', 'ADD');
+    const imageSource = image.url || `file://${this.props.image.path}`;
+    const submitButtonText = screenType === 'EDIT'
       ? 'Сохранить'
       : 'Добавить';
+    const isDataEmpty = !paymentType || !moneyAmount || !date || !image.name;
 
     return (
       <Screen>
@@ -60,14 +75,15 @@ class Payment extends Component<PaymentProps> {
             <Image
               source={{ uri: imageSource }}
               style={ styles.image }
+              resizeMethod="resize"
             />
             <View style={ styles.container }>
               <View style={ styles.rowContainer }>
                 <View style={ styles.inputContainer }>
-                  <TextInput
+                  <LabelInput
                     keyboardType="numeric"
                     maxLength={ 8 }
-                    style={ styles.input }
+                    containerViewStyle={ styles.input }
                     value={ this.props.moneyAmount }
                     onChangeText={ this.props.onChangeMoneyAmount }
                   />
@@ -89,13 +105,15 @@ class Payment extends Component<PaymentProps> {
                 customStyles={{
                   placeholderText: styles.datePlaceholderText
                 }}
-                date={ this.props.date }
+                date={ date }
                 format="DD MM YYYY"
                 placeholder="Дата платежа"
                 style={ styles.datePicker }
                 onDateChange={ this.props.onDateChange }
               />
               <LabelPicker
+                isError={ isDataEmpty }
+                errorMessage="* Заполните все поля"
                 label="Тип услуги"
                 pickerItems={ this.props.paymentTypes }
                 selectedValue={ this.props.paymentType }
@@ -104,7 +122,9 @@ class Payment extends Component<PaymentProps> {
               <MyButton
                 containerViewStyle={ styles.buttonAdd }
                 title={ submitButtonText }
-                onPress={ this.props.addPaymentRequest }
+                onPress={ screenType === 'EDIT'
+                  ? this.editPayment
+                  : this.addPayment }
               />
             </View>
           </Fragment> }
@@ -123,7 +143,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  addPaymentRequest,
+  uploadPaymentRequest,
   onDateChange: changeDate,
   onChangeMoneyAmount: changeMoneyAmount,
   onChangePaymentType: changePaymentType,

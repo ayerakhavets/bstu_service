@@ -24,6 +24,7 @@ export default StyleSheet.create({
   },
   datePicker: {
     alignSelf: 'flex-start',
+    marginLeft: 18,
     width: 200
   },
   datePlaceholderText: {
@@ -38,7 +39,7 @@ export default StyleSheet.create({
     width: '100%'
   },
   input: {
-    width: 66
+    width: 100
   },
   inputContainer: {
     alignItems: 'center',

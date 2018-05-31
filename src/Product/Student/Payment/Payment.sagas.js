@@ -5,17 +5,19 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import ImagePicker, { type Response, type Options } from 'react-native-image-picker';
 import { NavigatorActions, Toast } from '../../../Services';
 import { selectUid } from '../../Authentication';
-import { addPayment, getNewPaymentKey } from '../Student.api';
+import { addPayment, getNewPaymentKey, updatePayment } from '../Student.api';
 import {
-  ADD_PAYMENT_REQUEST,
+  UPLOAD_PAYMENT_REQUEST,
   OPEN_IMAGE_PICKER,
-  addPaymentFailure,
-  addPaymentSuccess,
-  changeImage
+  uploadPaymentFailure,
+  uploadPaymentSuccess,
+  changeImage,
+  type UploadPaymentRequestAction
 } from './Payment.actions';
 import {
   selectDate,
   selectImage,
+  selectKey,
   selectMoneyAmount,
   selectPaymentType
 } from './Payment.selectors';
@@ -29,7 +31,7 @@ const imagePickerOptions: Options = {
 };
 
 export default function* paymentSaga(): Saga<void> {
-  yield takeEvery(ADD_PAYMENT_REQUEST, handleAddPaymentRequest);
+  yield takeEvery(UPLOAD_PAYMENT_REQUEST, handleUploadPaymentRequest);
   yield takeEvery(OPEN_IMAGE_PICKER, handleSetImage);
 }
 
@@ -55,36 +57,48 @@ export function* handleSetImage(): Saga<void> {
   }));
 }
 
-export function* handleAddPaymentRequest(): Saga<void> {
+export function* handleUploadPaymentRequest({ payload }: UploadPaymentRequestAction): Saga<void> {
   const date = yield select(selectDate);
   const paymentType = yield select(selectPaymentType);
   const moneyAmount = yield select(selectMoneyAmount);
   const image = yield select(selectImage);
   const uid = yield select(selectUid);
+  const currentKey = yield select(selectKey);
 
-  if (!date || !paymentType || !moneyAmount || !image.name) {
+  const isDataEmpty = !date || !paymentType || !moneyAmount || !image.name;
+
+  if (isDataEmpty) {
     Toast.show('Введите все данные');
-    yield put(addPaymentFailure());
-    return;
+    yield put(uploadPaymentFailure());
   }
 
   try {
-    const key = yield call(getNewPaymentKey);
+    const newKey = yield call(getNewPaymentKey);
+    const key = payload === 'EDIT' ? currentKey : newKey;
 
     const paymentInfo = {
       date,
+      image: {
+        name: image.name,
+        url: ''
+      },
       isResolved: false,
+      key,
       moneyAmount,
-      pathToImage: `${key}/${image.name}`,
       paymentType
     };
+    const storageImagePath = `${key}/${image.name}`;
 
-    yield call(addPayment, paymentInfo, image.path, uid, key);
-    yield put(addPaymentSuccess());
+    if (payload === 'EDIT') {
+      yield call(updatePayment, uid, paymentInfo, storageImagePath, image.path);
+    } else {
+      yield call(addPayment, uid, paymentInfo, storageImagePath, image.path);
+    }
     NavigatorActions.back();
+    yield put(uploadPaymentSuccess());
     Toast.show('Чек добавлен');
   } catch (error) {
-    yield put(addPaymentFailure());
+    yield put(uploadPaymentFailure());
     Toast.show('Ошибка при добавлении данных');
   }
 }

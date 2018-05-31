@@ -1,7 +1,10 @@
 // @flow
 export type PaymentData = {
   date: string,
-  pathToImage: string,
+  image: {
+    name: string,
+    url: string
+  },
   key: string,
   moneyAmount: string,
   paymentType: string,
