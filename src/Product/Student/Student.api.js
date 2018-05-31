@@ -29,6 +29,7 @@ export const getNewPaymentKey = () => firebase.database().ref('').child('payment
 
 export const addPayment = async (uid: string, paymentInfo: PaymentInfo,
   storageImagePath: string, localImagePath: string): Promise<void> => {
+  // $FlowFixMe string is incompatible with object
   await firebase.storage().ref(storageImagePath).putFile(localImagePath);
 
   const updates = {};

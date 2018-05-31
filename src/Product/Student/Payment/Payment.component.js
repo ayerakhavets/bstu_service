@@ -23,7 +23,8 @@ import {
   changePaymentType,
   openImagePicker,
   removePaymentRequest,
-  uploadPaymentRequest
+  uploadPaymentRequest,
+  type UploadPaymentType
 } from './Payment.actions';
 import type { PaymentImage } from './Payment.reducer';
 import {
@@ -42,7 +43,7 @@ type PaymentProps = {
   isLoading: boolean,
   moneyAmount: string,
   // FIXME: use proper type for navigation.
-  navigation: Objcet,
+  navigation: Object,
   paymentType: string,
   paymentTypes: PickerItem[],
   onChangeMoneyAmount: () => void,
@@ -50,7 +51,7 @@ type PaymentProps = {
   onDateChange: () => void,
   onOpenImagePicker: () => void,
   removePaymentRequest: () => void,
-  uploadPaymentRequest: (type) => void
+  uploadPaymentRequest: (type: UploadPaymentType) => void
 }
 
 // FIXME: use https://github.com/wix/react-native-calendars instead of DatePicker.

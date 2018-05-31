@@ -16,8 +16,8 @@ import {
 } from './Payment.actions';
 
 export type PaymentImage = {
-  path: string,
   name: string,
+  path: string,
   url: string
 }
 
@@ -35,8 +35,8 @@ export type PaymentState = {
 const initialState = {
   date: '',
   image: {
-    path: '',
     name: '',
+    path: '',
     url: ''
   },
   key: '',
@@ -61,8 +61,8 @@ export default (
     return {
       ...state,
       image: {
-        path: action.payload.path,
         name: action.payload.name,
+        path: action.payload.path,
         url: action.payload.url
       }
     };
