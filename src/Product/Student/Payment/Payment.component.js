@@ -2,6 +2,7 @@
 import React, { Component, Fragment } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   Image,
   Text,
   View
@@ -55,11 +56,18 @@ type PaymentProps = {
 }
 
 // FIXME: use https://github.com/wix/react-native-calendars instead of DatePicker.
-// eslint-disable-next-line react/prefer-stateless-function
 class Payment extends Component<PaymentProps> {
   static navigationOptions = ({ navigation }) => {
     const params = navigation.state.params || {};
     const screenType = navigation.getParam('intent', 'ADD');
+    const onPress = () => Alert.alert(
+      'Удаление',
+      'Подтвердите удаление платежа',
+      [
+        { text: 'Отменить', style: 'cancel' },
+        { text: 'Удалить', onPress: params.removePayment }
+      ]
+    );
 
     return {
       headerRight: screenType === 'EDIT'
@@ -68,7 +76,8 @@ class Payment extends Component<PaymentProps> {
           color={ colors.white }
           name="delete"
           size={ 24 }
-          onPress={ params.removePayment }
+          // eslint-disable-next-line react/jsx-no-bind
+          onPress={ onPress }
         />)
         : null
     };

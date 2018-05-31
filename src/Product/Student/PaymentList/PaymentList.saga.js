@@ -49,7 +49,6 @@ export function* handleLoadPaymentList(): Saga<void> {
 
   try {
     const paymentListReponse = yield call(getPaymentList, uid);
-    console.log('check3:', paymentListReponse);
     if (paymentListReponse) {
       yield put(loadPaymentListSuccess(Object.values(paymentListReponse)));
     } else {

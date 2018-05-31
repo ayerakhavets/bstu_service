@@ -32,7 +32,7 @@ import {
 const EMAIL_KEY = 'EMAIL_KEY';
 const PASSWORD_KEY = 'PASSWORD_KEY';
 const UID_KEY = 'UID_KEY';
-const SHORT_PASSWORD_ERROR =
+const ERROR_SHORT_PASSWORD =
   'The given password is invalid. [ Password should be at least 6 characters ]';
 
 export default function* authenticationSaga(): Saga<void> {
@@ -137,7 +137,7 @@ export function* handleSignUp(): Saga<void> {
     NavigatorActions.navigate('Student');
   } catch (error) {
     yield put(loadingEnd());
-    if (error.message === SHORT_PASSWORD_ERROR) {
+    if (error.message === ERROR_SHORT_PASSWORD) {
       Toast.show('Пароль меньше 6 символов');
     } else {
       Toast.show('Ошибка');
