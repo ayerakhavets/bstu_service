@@ -1,62 +1,76 @@
 // @flow
 import React from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { PaymentList } from './PaymentList';
 import { StudentInfo } from './StudentInfo';
-import { colors, styles } from '../../Components';
+import { colors, HeaderRight, styles } from '../../Components';
 import { Payment } from './Payment';
 
 // TODO: add internationalization.
 export const STUDENT = 'Пользователь';
+export const STUDENT_TABS = 'Студент';
 export const PAYMENT = 'Платёж';
 export const PAYMENT_LIST = 'Платежи';
 
-const PaymentStack = createStackNavigator({
-  [PAYMENT_LIST]: PaymentList,
-  [PAYMENT]: Payment
-},
-{
-  navigationOptions: ({ navigation }) => ({
-    title: navigation.state.routeName,
-    headerTintColor: colors.white,
-    headerStyle: {
-      backgroundColor: colors.greenLight
-    }
-  })
-});
-
 const StudentTabs = createBottomTabNavigator({
-  [PAYMENT_LIST]: PaymentStack,
+  [PAYMENT_LIST]: PaymentList,
   [STUDENT]: StudentInfo
 },
 {
   initialRouteName: STUDENT,
-  tabBarOptions: {
-    activeTintColor: colors.greenDark
-  },
   navigationOptions: ({ navigation }) => ({
     // eslint-disable-next-line react/display-name, react/prop-types
     tabBarIcon: ({ focused }) => {
       let iconName;
       switch (navigation.state.routeName) {
       case PAYMENT_LIST:
-        iconName = `ios-list-box${focused ? '' : '-outline'}`; break;
+        iconName = 'view-list'; break;
       case STUDENT:
-        iconName = `ios-contact${focused ? '' : '-outline'}`; break;
+        iconName = 'account'; break;
       default: break;
       }
       return (<Icon
         color={ focused ? colors.greenDark : colors.grey }
         name={ iconName }
         size={ styles.tabIconSize }
-        type="ionicon"
       />);
     }
-  })
+  }),
+  tabBarOptions: {
+    showLabel: false
+  }
 });
 
-export default StudentTabs;
+const StudentStack = createStackNavigator({
+  [STUDENT_TABS]: {
+    screen: StudentTabs,
+    navigationOptions: ({ navigation }) => {
+      const params = navigation.state.routes[1].params || {};
+      const { index } = navigation.state;
+      return {
+        headerRight: <HeaderRight iconName="exit-to-app" onIconPress={ params.onLogOut } />,
+        title: navigation.state.routes[index].routeName
+      };
+    }
+  },
+  [PAYMENT]: {
+    screen: Payment,
+    navigationOptions: {
+      title: PAYMENT
+    }
+  }
+},
+{
+  navigationOptions: {
+    headerTintColor: colors.white,
+    headerStyle: {
+      backgroundColor: colors.greenLight
+    }
+  }
+});
+
+export default StudentStack;
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' +
@@ -64,16 +78,3 @@ export default StudentTabs;
 //   android: 'DOUBLE tap R on your keyboard to reload,\n' +
 //     'Shake or press menu button for dev menu'
 // });
-
-// checkList: {
-//   screen: CheckList,
-//   navigationOptions: () => ({
-//     tabBarIcon: ({ tintColor }) => (
-//       <Icon
-//         name="bookmark"
-//         color={ tintColor }
-//         size={ 24 }
-//       />
-//     )
-//   })
-// },

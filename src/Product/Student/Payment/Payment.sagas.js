@@ -127,7 +127,7 @@ export function* handleUploadPayment({ payload }: UploadPaymentRequestAction): S
     NavigatorActions.back();
     yield put(uploadPaymentSuccess());
     yield put(loadPaymentListRequest());
-    Toast.show('Чек добавлен');
+    Toast.show('Платёж добавлен');
   } catch (error) {
     yield put(uploadPaymentFailure());
     Toast.show('Ошибка при добавлении данных');

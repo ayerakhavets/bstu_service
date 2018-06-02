@@ -1,5 +1,5 @@
 // @flow
-import Authentication from './Authentication.component';
+import Authentication from './Authentication.navigator';
 import { logOut } from './Authentication.actions';
 import authenticationReducer, { type AuthenticationState } from './Authentication.reducer';
 import authenticationSaga from './Authentication.sagas';

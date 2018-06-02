@@ -3,7 +3,6 @@ import React, { Component, Fragment } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { connect } from 'react-redux';
 import {
-  Header,
   LabelInput,
   LabelPicker,
   MyButton,
@@ -45,6 +44,7 @@ type StudentInfoProps = {
   isLoading: boolean,
   middleName: string,
   name: string,
+  navigation: Object,
   specialty: string,
   specialties: PickerItem[],
   studentId: string,
@@ -61,86 +61,79 @@ type StudentInfoProps = {
 }
 
 // FIXME: screen with initial data shouldn't be visible while log out.
-// eslint-disable-next-line react/prefer-stateless-function
 class StudentInfo extends Component<StudentInfoProps> {
+  componentWillMount() {
+    this.props.navigation.setParams({ onLogOut: this.props.onLogOut });
+  }
+
   render() {
     return (
-      <Fragment>
-        <Header
-          title="Пользователь"
-          leftIcon={{
-            name: 'log-out',
-            onPress: this.props.onLogOut
-          }}
-        />
-
-        <Screen>
-          {this.props.isLoading
-            ? <ActivityIndicator size="large" />
-            : <Fragment>
-              <View style={ styles.twoItemsContainer }>
-                <LabelInput
-                  isError={ !this.props.name }
-                  label="Имя"
-                  value={ this.props.name }
-                  containerViewStyle={ styles.twoItemsContainerItem }
-                  onChangeText={ this.props.changeName }
-                />
-                <LabelInput
-                  isError={ !this.props.surname }
-                  label="Фамилия"
-                  value={ this.props.surname }
-                  containerViewStyle={ styles.twoItemsContainerItem }
-                  onChangeText={ this.props.changeSurname }
-                />
-              </View>
+      <Screen>
+        {this.props.isLoading
+          ? <ActivityIndicator size="large" />
+          : <Fragment>
+            <View style={ styles.twoItemsContainer }>
               <LabelInput
-                isError={ !this.props.middleName }
-                label="Отчество"
-                value={ this.props.middleName }
-                onChangeText={ this.props.changeMiddleName }
+                isError={ !this.props.name }
+                label="Имя"
+                value={ this.props.name }
+                containerViewStyle={ styles.twoItemsContainerItem }
+                onChangeText={ this.props.changeName }
               />
               <LabelInput
-                isError={ !this.props.studentId }
-                label="Номер билета"
-                maxLength={ 8 }
-                keyboardType="numeric"
-                value={ this.props.studentId }
-                onChangeText={ this.props.changeStudentId }
+                isError={ !this.props.surname }
+                label="Фамилия"
+                value={ this.props.surname }
+                containerViewStyle={ styles.twoItemsContainerItem }
+                onChangeText={ this.props.changeSurname }
               />
-              <View style={ styles.twoItemsContainer }>
-                <LabelPicker
-                  isError={ !this.props.faculty }
-                  label="Факультет"
-                  pickerItems={ this.props.faculties }
-                  selectedValue={ this.props.faculty }
-                  style={ styles.twoItemsContainerItem }
-                  onValueChange={ this.props.changeFaculty }
-                />
-                <LabelPicker
-                  isError={ !this.props.course }
-                  label="Курс"
-                  pickerItems={ this.props.courses }
-                  selectedValue={ this.props.course }
-                  style={ styles.twoItemsContainerItem }
-                  onValueChange={ this.props.changeCourse }
-                />
-              </View>
+            </View>
+            <LabelInput
+              isError={ !this.props.middleName }
+              label="Отчество"
+              value={ this.props.middleName }
+              onChangeText={ this.props.changeMiddleName }
+            />
+            <LabelInput
+              isError={ !this.props.studentId }
+              label="Номер билета"
+              maxLength={ 8 }
+              keyboardType="numeric"
+              value={ this.props.studentId }
+              onChangeText={ this.props.changeStudentId }
+            />
+            <View style={ styles.twoItemsContainer }>
               <LabelPicker
-                isError={ !this.props.specialty }
-                label="Специальность"
-                pickerItems={ this.props.specialties }
-                selectedValue={ this.props.specialty }
-                onValueChange={ this.props.changeSpecialty }
+                isError={ !this.props.faculty }
+                label="Факультет"
+                pickerItems={ this.props.faculties }
+                selectedValue={ this.props.faculty }
+                style={ styles.twoItemsContainerItem }
+                onValueChange={ this.props.changeFaculty }
               />
-              <MyButton
-                containerViewStyle={ styles.button }
-                title="Сохранить изменения"
-                onPress={ this.props.saveStudentInfoRequest }
+              <LabelPicker
+                isError={ !this.props.course }
+                label="Курс"
+                pickerItems={ this.props.courses }
+                selectedValue={ this.props.course }
+                style={ styles.twoItemsContainerItem }
+                onValueChange={ this.props.changeCourse }
               />
-            </Fragment> }
-        </Screen>
-      </Fragment>);
+            </View>
+            <LabelPicker
+              isError={ !this.props.specialty }
+              label="Специальность"
+              pickerItems={ this.props.specialties }
+              selectedValue={ this.props.specialty }
+              onValueChange={ this.props.changeSpecialty }
+            />
+            <MyButton
+              containerViewStyle={ styles.button }
+              title="Сохранить изменения"
+              onPress={ this.props.saveStudentInfoRequest }
+            />
+          </Fragment> }
+      </Screen>);
   }
 }
 

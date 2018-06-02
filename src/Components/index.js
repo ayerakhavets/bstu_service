@@ -1,6 +1,6 @@
 // @flow
 import colors from './colors';
-import Header from './Header';
+import HeaderRight from './HeaderRight';
 import helpers from './helpers';
 import LabelInput from './LabelInput';
 import LabelPicker, { type PickerItem } from './LabelPicker';
@@ -11,7 +11,7 @@ import styles from './styles';
 
 export {
   colors,
-  Header,
+  HeaderRight,
   helpers,
   LabelInput,
   LabelPicker,

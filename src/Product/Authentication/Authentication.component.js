@@ -4,7 +4,6 @@ import { ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { CheckBox } from 'react-native-elements';
 import {
-  Header,
   LabelInput,
   MyButton,
   Screen
@@ -58,46 +57,43 @@ class Authentication extends Component<AuthenticationProps> {
     } = this.props;
 
     return (
-      <Fragment>
-        <Header title="Вход в приложение" />
-        <Screen>
-          { isLoading
-            ? <ActivityIndicator size="large" />
-            : <Fragment>
-              <LabelInput
-                isError={ !email }
-                keyboardType="email-address"
-                placeholder="Электронная почта"
-                value={ email }
-                onChangeText={ onChangeEmail }
-              />
-              <LabelInput
-                containerViewStyle={ styles.input }
-                isError={ !password }
-                placeholder="Пароль"
-                secureTextEntry
-                value={ password }
-                onChangeText={ onChangePassword }
-              />
-              <MyButton
-                containerViewStyle={ styles.button }
-                title="Войти"
-                onPress={ onLogIn }
-              />
-              <MyButton
-                title="Зарегистрироваться"
-                onPress={ onSignUp }
-              />
-              <CheckBox
-                checked={ isRemember }
-                checkedColor={ colors.greenDark }
-                containerStyle={ styles.checkBox }
-                title="Запомнить меня"
-                onPress={ onPressIsRemember }
-              />
-            </Fragment> }
-        </Screen>
-      </Fragment>
+      <Screen>
+        { isLoading
+          ? <ActivityIndicator size="large" />
+          : <Fragment>
+            <LabelInput
+              isError={ !email }
+              keyboardType="email-address"
+              placeholder="Электронная почта"
+              value={ email }
+              onChangeText={ onChangeEmail }
+            />
+            <LabelInput
+              containerViewStyle={ styles.input }
+              isError={ !password }
+              placeholder="Пароль"
+              secureTextEntry
+              value={ password }
+              onChangeText={ onChangePassword }
+            />
+            <MyButton
+              containerViewStyle={ styles.button }
+              title="Войти"
+              onPress={ onLogIn }
+            />
+            <MyButton
+              title="Зарегистрироваться"
+              onPress={ onSignUp }
+            />
+            <CheckBox
+              checked={ isRemember }
+              checkedColor={ colors.greenDark }
+              containerStyle={ styles.checkBox }
+              title="Запомнить меня"
+              onPress={ onPressIsRemember }
+            />
+          </Fragment> }
+      </Screen>
     );
   }
 }

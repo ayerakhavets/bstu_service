@@ -10,8 +10,8 @@ import {
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
 import { Icon as RNIcon } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
+  HeaderRight,
   LabelInput,
   LabelPicker,
   MyButton,
@@ -71,14 +71,8 @@ class Payment extends Component<PaymentProps> {
 
     return {
       headerRight: screenType === 'EDIT'
-        ? (<Icon
-          style={ styles.headerIcon }
-          color={ colors.white }
-          name="delete"
-          size={ 24 }
-          // eslint-disable-next-line react/jsx-no-bind
-          onPress={ onPress }
-        />)
+        // eslint-disable-next-line react/jsx-no-bind
+        ? <HeaderRight iconName="delete" onIconPress={ onPress } />
         : null
     };
   };
@@ -95,7 +89,7 @@ class Payment extends Component<PaymentProps> {
     const { date, image, moneyAmount, navigation, paymentType } = this.props;
     // FIXME: use constants for params.
     const screenType = navigation.getParam('intent', 'ADD');
-    const imageSource = image.url || `file://${this.props.image.path}`;
+    const imageSource = image.url || `file://${image.path}`;
     const submitButtonText = screenType === 'EDIT'
       ? 'Сохранить изменения'
       : 'Добавить';

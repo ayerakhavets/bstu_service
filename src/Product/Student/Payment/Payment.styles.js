@@ -30,9 +30,6 @@ export default StyleSheet.create({
   datePlaceholderText: {
     color: colors.black
   },
-  headerIcon: {
-    marginRight: 16
-  },
   image: {
     borderWidth: 1,
     borderColor: colors.grey,
