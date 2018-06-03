@@ -14,7 +14,6 @@ export const sendEmailVerification = (user: User): Promise<void> =>
   user.sendEmailVerification();
 
 export const getUserInfo = (uid: string): StudentInfo =>
-  // $FlowFixMe function once() requires another argument.
+  // $FlowFixMe `once()` requires another argument.
   firebase.database().ref(`/students/${uid}`).once('value')
-    // eslint-disable-next-line no-underscore-dangle
-    .then(response => response._value);
+    .then(response => response._value); // eslint-disable-line no-underscore-dangle

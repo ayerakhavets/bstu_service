@@ -38,9 +38,7 @@ export const changeUid = (uid: string): ChangeUidAction => ({
   payload: uid
 });
 
-export const clearUserData = (): ClearUserDataAction => ({
-  type: CLEAR_USER_DATA
-});
+export const clearUserData = (): ClearUserDataAction => ({ type: CLEAR_USER_DATA });
 
 export const loadingEnd = (): LoadingEndAction => ({ type: LOADING_END });
 
@@ -60,6 +58,7 @@ export type AuthenticationActions =
   | ChangeEmailAction
   | ChangePasswordAction
   | ChangeUidAction
+  | ClearUserDataAction
   | LoadingEndAction
   | LoadingStartAction
   | LogInAction

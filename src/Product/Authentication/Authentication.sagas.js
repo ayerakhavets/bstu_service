@@ -59,6 +59,7 @@ export function* handleLogIn(): Saga<void> {
     const { user } = yield call(signInWithEmailAndPassword, ...requestParams);
     yield put(changeUid(user.uid));
 
+    // FIXME: move api call and result handling to the StudentInfo component.
     const userInfo = yield call(getUserInfo, user.uid);
     yield put(changeUserInfo(userInfo));
 
@@ -75,7 +76,12 @@ export function* handleLogIn(): Saga<void> {
 
 export function* handleLogOut(): Saga<void> {
   yield put(clearUserData());
-  yield call(clearCredentials);
+  yield call(AsyncStorage.multiRemove, [
+    EMAIL_KEY,
+    PASSWORD_KEY,
+    UID_KEY
+  ]);
+
   // FIXME: send `signOut` request.
   NavigatorActions.navigate('Auth');
   yield put(clearStudentInfo());
@@ -98,6 +104,7 @@ export function* handlePreAuthentication(): Saga<void> {
     yield put(changePassword(password));
     yield put(changeUid(uid));
 
+    // FIXME: move api call and result handling to the StudentInfo component.
     const userInfo = yield call(getUserInfo, uid);
     yield put(changeUserInfo(userInfo));
 
@@ -154,13 +161,5 @@ export function* saveCredentials(): Saga<void> {
     [EMAIL_KEY, email],
     [PASSWORD_KEY, password],
     [UID_KEY, uid]
-  ]);
-}
-
-export function* clearCredentials(): Saga<void> {
-  yield call(AsyncStorage.multiRemove, [
-    EMAIL_KEY,
-    PASSWORD_KEY,
-    UID_KEY
   ]);
 }

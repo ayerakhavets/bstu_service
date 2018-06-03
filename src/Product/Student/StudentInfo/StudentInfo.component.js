@@ -9,7 +9,7 @@ import {
   Screen,
   type PickerItem
 } from '../../../Components';
-// FIXME: cyclic dependency?
+// FIXME: cyclic dependency.
 import { logOut } from '../../Authentication/Authentication.actions';
 import {
   changeCourse,
@@ -60,7 +60,6 @@ type StudentInfoProps = {
   saveStudentInfoRequest: () => void
 }
 
-// FIXME: screen with initial data shouldn't be visible while log out.
 class StudentInfo extends Component<StudentInfoProps> {
   componentWillMount() {
     this.props.navigation.setParams({ onLogOut: this.props.onLogOut });

@@ -7,7 +7,6 @@ import { StudentInfo } from './StudentInfo';
 import { colors, HeaderRight, styles } from '../../Components';
 import { Payment } from './Payment';
 
-// TODO: add internationalization.
 export const STUDENT = 'Пользователь';
 export const STUDENT_TABS = 'Студент';
 export const PAYMENT = 'Платёж';
