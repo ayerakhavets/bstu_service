@@ -2,37 +2,38 @@
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { NavigatorActions, Toast } from '../../../Services';
-import { selectUid } from '../../Authentication';
 import {
-  updatePayment,
+  resolvePayment,
   removePayment
 } from '../Dean.api';
 import { loadPaymentListRequest } from '../PaymentList';
 import {
   REMOVE_PAYMENT_REQUEST,
-  UPLOAD_PAYMENT_REQUEST,
+  APPROVE_PAYMENT_REQUEST,
+  DECLINE_PAYMENT_REQUEST,
+  approvePaymentFailure,
+  approvePaymentSuccess,
+  declinePaymentFailure,
+  declinePaymentSuccess,
   removePaymentFailure,
-  removePaymentSuccess,
-  uploadPaymentFailure,
-  uploadPaymentSuccess
+  removePaymentSuccess
 } from './Payment.actions';
 import {
-  selectDate,
   selectImage,
-  selectKey,
-  selectMoneyAmount,
-  selectPaymentType
+  selectKey
 } from './Payment.selectors';
+import { selectCurrentStudent } from '../StudentList';
+
 
 export default function* paymentSaga(): Saga<void> {
   yield takeEvery(REMOVE_PAYMENT_REQUEST, handleRemovePayment);
-  yield takeEvery(UPLOAD_PAYMENT_REQUEST, handleUploadPayment);
+  yield takeEvery([APPROVE_PAYMENT_REQUEST, DECLINE_PAYMENT_REQUEST], handlePayment);
 }
 
 export function* handleRemovePayment(): Saga<void> {
   const image = yield select(selectImage);
   const key = yield select(selectKey);
-  const uid = yield select(selectUid);
+  const { uid } = yield select(selectCurrentStudent);
 
   const databasePath = `${uid}/${key}`;
   const storagePath = `${key}/${image.name}`;
@@ -49,46 +50,37 @@ export function* handleRemovePayment(): Saga<void> {
   }
 }
 
-export function* handleUploadPayment(): Saga<void> {
-  const date = yield select(selectDate);
-  const paymentType = yield select(selectPaymentType);
-  const moneyAmount = yield select(selectMoneyAmount);
-  const image = yield select(selectImage);
-  const uid = yield select(selectUid);
-  const currentKey = yield select(selectKey);
+export function* handlePayment({ type }): Saga<void> {
+  // APPROVE_PAYMENT_REQUEST
+  // DECLINE_PAYMENT_REQUEST
+  let isResolved;
+  let successAction;
+  let failureAction;
+  let resultPhrase;
 
-  const isDataEmpty = !date || !paymentType || !moneyAmount || !image.name;
-
-  if (isDataEmpty) {
-    Toast.show('Введите все данные');
-    yield put(uploadPaymentFailure());
+  if (type === APPROVE_PAYMENT_REQUEST) {
+    isResolved = true;
+    successAction = approvePaymentSuccess;
+    failureAction = approvePaymentFailure;
+    resultPhrase = 'Платёж одобрен';
+  } else {
+    isResolved = false;
+    successAction = declinePaymentSuccess;
+    failureAction = declinePaymentFailure;
+    resultPhrase = 'Платёж отклонён';
   }
+  const key = yield select(selectKey);
+  const student = yield select(selectCurrentStudent);
 
   try {
-    const key = currentKey;
-
-    const paymentInfo = {
-      date,
-      image: {
-        name: image.name,
-        url: ''
-      },
-      isResolved: false,
-      key,
-      moneyAmount,
-      paymentType
-    };
-    const storageImagePath = `${key}/${image.name}`;
-
-
-    yield call(updatePayment, uid, paymentInfo, storageImagePath, image.path);
+    yield call(resolvePayment, student.uid, key, isResolved);
 
     NavigatorActions.back();
-    yield put(uploadPaymentSuccess());
+    yield put(successAction());
     yield put(loadPaymentListRequest());
-    Toast.show('Платёж добавлен');
+    Toast.show(resultPhrase);
   } catch (error) {
-    yield put(uploadPaymentFailure());
-    Toast.show('Ошибка при добавлении данных');
+    yield put(failureAction());
+    Toast.show('Ошибка');
   }
 }

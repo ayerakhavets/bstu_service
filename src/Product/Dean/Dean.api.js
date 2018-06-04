@@ -37,3 +37,6 @@ export const removePayment = async (
 
 export const getPaymentImageUrl = (storageImagePath: string): Promise<string> =>
   firebase.storage().ref(storageImagePath).getDownloadURL();
+
+export const resolvePayment = (uid, key, isResolved) =>
+  firebase.database().ref(`payments/${uid}/${key}`).child('isResolved').set(isResolved);

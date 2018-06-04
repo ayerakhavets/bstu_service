@@ -4,52 +4,45 @@ import {
   ActivityIndicator,
   Alert,
   Image,
-  Text,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
 import {
   HeaderRight,
   LabelInput,
-  LabelPicker,
   MyButton,
-  Screen,
-  type PickerItem
+  Screen
 } from '../../../Components';
+import { type StudetnInfo } from '../../types';
 import {
-  changeDate,
-  changeMoneyAmount,
-  changePaymentType,
-  openImagePicker,
-  removePaymentRequest,
-  uploadPaymentRequest,
-  type UploadPaymentType
+  approvePaymentRequest,
+  declinePaymentRequest,
+  removePaymentRequest
 } from './Payment.actions';
 import type { PaymentImage } from './Payment.reducer';
 import {
   selectDate,
   selectImage,
   selectIsLoading,
-  selectMappedPaymentTypes,
   selectMoneyAmount,
   selectPaymentType
 } from './Payment.selectors';
 import styles, { colors } from './Payment.styles';
+import { selectCurrentStudent } from '../StudentList';
 
 type PaymentProps = {
+  currentUser: StudetnInfo,
   date: string,
   image: PaymentImage,
   isLoading: boolean,
   moneyAmount: string,
-  // FIXME: use proper type for navigation.
   navigation: Object,
   paymentType: string,
-  paymentTypes: PickerItem[],
-  removePaymentRequest: () => void,
-  uploadPaymentRequest: (type: UploadPaymentType) => void
+  onApprovePaymentRequest: () => void,
+  onDeclinePaymentRequest: () => void,
+  onRemovePaymentRequest: () => void
 }
 
-// FIXME: use https://github.com/wix/react-native-calendars instead of DatePicker.
 class Payment extends Component<PaymentProps> {
   static navigationOptions = ({ navigation }) => {
     const params = navigation.state.params || {};
@@ -62,71 +55,67 @@ class Payment extends Component<PaymentProps> {
       ]
     );
 
-    return (
-    // eslint-disable-next-line react/jsx-no-bind
-      <HeaderRight iconName="delete" onIconPress={ onPress } />
-    );
+    return {
+      // eslint-disable-next-line react/jsx-no-bind
+      headerRight: <HeaderRight iconName="delete" onIconPress={ onPress } />
+    };
   };
 
   componentWillMount() {
-    this.props.navigation.setParams({ removePayment: this.props.removePaymentRequest });
+    this.props.navigation.setParams({ removePayment: this.props.onRemovePaymentRequest });
   }
 
-  editPayment = () => this.props.uploadPaymentRequest('EDIT')
-
   render() {
-    const { date, image, moneyAmount, navigation, paymentType } = this.props;
-    // FIXME: use constants for params.
-    const screenType = navigation.getParam('intent', 'ADD');
-    const imageSource = image.url || `file://${image.path}`;
-    const submitButtonText = screenType === 'EDIT'
-      ? 'Сохранить изменения'
-      : 'Добавить';
-    const isDataEmpty = !paymentType || !moneyAmount || !date || !image.name;
-
     return (
       <Screen>
         { this.props.isLoading
           ? <ActivityIndicator size="large" />
           : <Fragment>
             <Image
-              source={{ uri: imageSource }}
+              source={{ uri: this.props.image.url }}
               style={ styles.image }
               resizeMethod="resize"
             />
             <View style={ styles.container }>
-              <View style={ styles.rowContainer }>
-                <View style={ styles.inputContainer }>
-                  <LabelInput
-                    keyboardType="numeric"
-                    maxLength={ 8 }
-                    containerViewStyle={ styles.input }
-                    value={ this.props.moneyAmount }
-                  />
-                  <Text>BYN</Text>
-                </View>
-              </View>
               <LabelInput
-                keyboardType="numeric"
-                maxLength={ 8 }
-                containerViewStyle={ styles.input }
+                label="ФИО"
+                value={ `${this.props.currentUser.surname} \
+                ${this.props.currentUser.name} 
+                ${this.props.currentUser.middleName}` }
+                editable={ false }
+              />
+              <LabelInput
+                label="Номер билета"
+                value={ this.props.currentUser.studentId }
+                editable={ false }
+              />
+              <LabelInput
+                label="Сумма"
+                value={ `${this.props.moneyAmount} BYN` }
+                editable={ false }
+              />
+              <LabelInput
+                label="Дата"
                 value={ this.props.date }
                 editable={ false }
               />
-              <LabelPicker
-                enabled={ false }
-                isError={ isDataEmpty }
-                errorMessage="* Заполните все поля"
-                label="Тип услуги"
-                pickerItems={ this.props.paymentTypes }
-                selectedValue={ this.props.paymentType }
+              <LabelInput
+                label="Тип платежа"
+                value={ this.props.paymentType }
+                editable={ false }
               />
               <MyButton
+                icon={{ name: 'done' }}
                 containerViewStyle={ styles.buttonAdd }
-                title={ submitButtonText }
-                onPress={ screenType === 'EDIT'
-                  ? this.editPayment
-                  : this.addPayment }
+                title="Одобрить"
+                onPress={ this.props.onApprovePaymentRequest }
+              />
+              <MyButton
+                backgroundColor={ colors.red }
+                icon={{ name: 'clear' }}
+                containerViewStyle={ styles.buttonAdd }
+                title="Отклонить"
+                onPress={ this.props.onDeclinePaymentRequest }
               />
             </View>
           </Fragment> }
@@ -136,21 +125,18 @@ class Payment extends Component<PaymentProps> {
 }
 
 const mapStateToProps = state => ({
+  currentUser: selectCurrentStudent(state),
   date: selectDate(state),
   image: selectImage(state),
   isLoading: selectIsLoading(state),
   moneyAmount: selectMoneyAmount(state),
-  paymentType: selectPaymentType(state),
-  paymentTypes: selectMappedPaymentTypes(state)
+  paymentType: selectPaymentType(state)
 });
 
 const mapDispatchToProps = {
-  onDateChange: changeDate,
-  onChangeMoneyAmount: changeMoneyAmount,
-  onChangePaymentType: changePaymentType,
-  onOpenImagePicker: openImagePicker,
-  removePaymentRequest,
-  uploadPaymentRequest
+  onApprovePaymentRequest: approvePaymentRequest,
+  onDeclinePaymentRequest: declinePaymentRequest,
+  onRemovePaymentRequest: removePaymentRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Payment);

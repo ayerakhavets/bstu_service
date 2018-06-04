@@ -1,17 +1,16 @@
 // @flow
 import {
-  CHANGE_DATE,
-  CHANGE_IMAGE,
-  CHANGE_MONEY_AMOUNT,
   CHANGE_PAYMENT_DATA,
-  CHANGE_PAYMENT_TYPE,
+  APPROVE_PAYMENT_FAILURE,
+  APPROVE_PAYMENT_REQUEST,
+  APPROVE_PAYMENT_SUCCESS,
+  DECLINE_PAYMENT_FAILURE,
+  DECLINE_PAYMENT_REQUEST,
+  DECLINE_PAYMENT_SUCCESS,
   CLEAR_PAYMENT_DATA,
   REMOVE_PAYMENT_FAILURE,
   REMOVE_PAYMENT_REQUEST,
   REMOVE_PAYMENT_SUCCESS,
-  UPLOAD_PAYMENT_FAILURE,
-  UPLOAD_PAYMENT_REQUEST,
-  UPLOAD_PAYMENT_SUCCESS,
   type PaymentActions
 } from './Payment.actions';
 
@@ -43,34 +42,13 @@ const initialState = {
   moneyAmount: '',
   paymentType: '',
   isLoading: false,
-  isResolved: false,
-  // TODO: use server data instead of the mocked one.
-  paymentTypes: ['', 'Академическая задолженность', 'Обучение', 'Общежитие', 'Пеня']
+  isResolved: false
 };
 
 export default (
   state: PaymentState = initialState,
   action: PaymentActions): PaymentState => {
   switch (action.type) {
-  case CHANGE_DATE:
-    return {
-      ...state,
-      date: action.payload
-    };
-  case CHANGE_IMAGE:
-    return {
-      ...state,
-      image: {
-        name: action.payload.name,
-        path: action.payload.path,
-        url: action.payload.url
-      }
-    };
-  case CHANGE_MONEY_AMOUNT:
-    return {
-      ...state,
-      moneyAmount: action.payload
-    };
   case CHANGE_PAYMENT_DATA:
     return {
       ...state,
@@ -79,11 +57,6 @@ export default (
         ...state.image,
         ...action.payload.image
       }
-    };
-  case CHANGE_PAYMENT_TYPE:
-    return {
-      ...state,
-      paymentType: action.payload
     };
   case CLEAR_PAYMENT_DATA:
     return initialState;
@@ -102,20 +75,35 @@ export default (
       ...state,
       isLoading: false
     };
-  case UPLOAD_PAYMENT_FAILURE:
+  case APPROVE_PAYMENT_FAILURE:
     return {
       ...state,
       isLoading: false
     };
-  case UPLOAD_PAYMENT_SUCCESS:
-    return {
-      ...state,
-      isLoading: false
-    };
-  case UPLOAD_PAYMENT_REQUEST:
+  case APPROVE_PAYMENT_REQUEST:
     return {
       ...state,
       isLoading: true
+    };
+  case APPROVE_PAYMENT_SUCCESS:
+    return {
+      ...state,
+      isLoading: false
+    };
+  case DECLINE_PAYMENT_FAILURE:
+    return {
+      ...state,
+      isLoading: false
+    };
+  case DECLINE_PAYMENT_REQUEST:
+    return {
+      ...state,
+      isLoading: true
+    };
+  case DECLINE_PAYMENT_SUCCESS:
+    return {
+      ...state,
+      isLoading: false
     };
   default:
     return state;

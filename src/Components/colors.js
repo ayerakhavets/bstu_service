@@ -12,5 +12,6 @@ export default {
 
   grey: '#808080',
   greyLight: '#d3d3d3',
+  red: '#572026',
   white: '#f5f5f5'
 };

@@ -46,8 +46,19 @@ class CourseList extends React.Component<CourseListProps> {
   />)
 
   renderSectionHeader = ({ section: { title } }) => (
-    <View>
-      <Text >{`Курс ${title}`}</Text>
+    <View style={{
+      backgroundColor: colors.greenDark,
+      alignItems: 'center'
+    }}
+    >
+      <Text
+        style={{
+          color: colors.white,
+          fontWeight: 'bold'
+        }}
+
+      >
+        {`Курс ${title}`}</Text>
     </View>
   )
 

@@ -4,26 +4,26 @@ import { helpers, type PickerItem } from '../../../Components';
 import type { ApplicationState } from '../../types';
 import type { PaymentImage } from './Payment.reducer';
 
-export const selectDate = ({ student }: ApplicationState): string =>
-  student.payment.date;
+export const selectDate = ({ dean }: ApplicationState): string =>
+  dean.payment.date;
 
-export const selectImage = ({ student }: ApplicationState): PaymentImage =>
-  student.payment.image;
+export const selectImage = ({ dean }: ApplicationState): PaymentImage =>
+  dean.payment.image;
 
-export const selectKey = ({ student }: ApplicationState): string =>
-  student.payment.key;
+export const selectKey = ({ dean }: ApplicationState): string =>
+  dean.payment.key;
 
-export const selectIsLoading = ({ student }: ApplicationState): boolean =>
-  student.payment.isLoading;
+export const selectIsLoading = ({ dean }: ApplicationState): boolean =>
+  dean.payment.isLoading;
 
-export const selectMoneyAmount = ({ student }: ApplicationState): string =>
-  student.payment.moneyAmount;
+export const selectMoneyAmount = ({ dean }: ApplicationState): string =>
+  dean.payment.moneyAmount;
 
-export const selectPaymentType = ({ student }: ApplicationState): string =>
-  student.payment.paymentType;
+export const selectPaymentType = ({ dean }: ApplicationState): string =>
+  dean.payment.paymentType;
 
-export const selectPaymentTypes = ({ student }: ApplicationState): string[] =>
-  student.payment.paymentTypes;
+export const selectPaymentTypes = ({ dean }: ApplicationState): string[] =>
+  dean.payment.paymentTypes;
 
 export const selectMappedPaymentTypes = createSelector(
   selectPaymentTypes,

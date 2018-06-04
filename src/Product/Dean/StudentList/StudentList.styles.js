@@ -6,8 +6,7 @@ export default StyleSheet.create({
   container: {
     alignItems: 'center',
     height: '100%',
-    backgroundColor: colors.white,
-    padding: 10
+    backgroundColor: colors.white
   },
   emptyItemContainer: {
     alignItems: 'center',

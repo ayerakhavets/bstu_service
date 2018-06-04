@@ -25,18 +25,24 @@ export function* handleOpenAddPaymentScreen(): Saga<void> {
 }
 
 export function* handleOpenShowPaymentScreen({ payload }: OpenShowPaymentScreenAction): Saga<void> {
-  const storageImagePath = `${payload.key}/${payload.image.name}`;
-  const imageUrl = yield call(getPaymentImageUrl, storageImagePath);
-  const paymentData = {
-    ...payload,
-    image: {
-      ...payload.image,
-      url: imageUrl
-    }
-  };
+  try {
+    const storageImagePath = `${payload.key}/${payload.image.name}`;
+    console.log('=== er', storageImagePath);
 
-  yield put(changePaymentData(paymentData));
-  yield call(NavigatorActions.navigate, PAYMENT);
+    const imageUrl = yield call(getPaymentImageUrl, storageImagePath);
+    const paymentData = {
+      ...payload,
+      image: {
+        ...payload.image,
+        url: imageUrl
+      }
+    };
+
+    yield put(changePaymentData(paymentData));
+    yield call(NavigatorActions.navigate, PAYMENT);
+  } catch (error) {
+    console.log('=== er', error);
+  }
 }
 
 export function* handleLoadPaymentList(): Saga<void> {
