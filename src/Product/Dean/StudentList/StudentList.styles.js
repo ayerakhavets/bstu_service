@@ -15,5 +15,9 @@ export default StyleSheet.create({
   flatList: {
     marginTop: 10,
     width: '100%'
+  },
+  searchBarContainer: {
+    backgroundColor: colors.greenLight,
+    width: '100%'
   }
 });

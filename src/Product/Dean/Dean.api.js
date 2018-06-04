@@ -15,20 +15,6 @@ export const getPaymentList = (uid: string): PaymentData[] =>
     // eslint-disable-next-line no-underscore-dangle
     .then(response => response._value);
 
-export const updatePayment = async (uid: string, paymentInfo: PaymentData,
-  storageImagePath: string, localImagePath: ?string): Promise<void> => {
-  if (localImagePath) {
-    // $FlowFixMe string is incompatible with object.
-    await firebase.storage().ref(storageImagePath).putFile(localImagePath);
-  }
-
-  const updates = {};
-  updates[`/payments/${uid}/${paymentInfo.key}`] = paymentInfo;
-  // FIXME: use more specific methods to add a record.
-  // eslint-disable-next-line consistent-return
-  return firebase.database().ref('').update(updates);
-};
-
 export const removePayment = async (
   databasePath: string, storagePath: string): Promise<void> => {
   await firebase.storage().ref(`${storagePath}`).delete();

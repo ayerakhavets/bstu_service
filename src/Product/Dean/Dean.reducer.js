@@ -1,20 +1,20 @@
 // @flow
 import { combineReducers } from 'redux';
-import { studentListReducer, type StudentListState } from './StudentList';
 import { courseListReducer, type CourseListState } from './CourseList';
 import { paymentListReducer, type PaymentListState } from './PaymentList';
 import { paymentReducer, type PaymentState } from './Payment';
+import { studentListReducer, type StudentListState } from './StudentList';
 
 export type StudentState = {
-  studentList: StudentListState,
   courseList: CourseListState,
+  payment: PaymentState,
   paymentList: PaymentListState,
-  payment: PaymentState
+  studentList: StudentListState
 }
 
 export default combineReducers({
-  studentList: studentListReducer,
   courseList: courseListReducer,
+  payment: paymentReducer,
   paymentList: paymentListReducer,
-  payment: paymentReducer
+  studentList: studentListReducer
 });

@@ -7,10 +7,10 @@ import { Payment } from './Payment';
 import { colors } from '../../Components';
 
 // FIXME:
-export const STUDENT_LIST = 'Студенты@Dean';
-export const COURSE_LIST = 'Курсы@Dean';
-export const PAYMENT_LIST = 'Платежи@Dean';
-export const PAYMENT = 'Платёж@Dean';
+export const STUDENT_LIST = 'Students.Dean';
+export const COURSE_LIST = 'Courses.Dean';
+export const PAYMENT_LIST = 'Payments.Dean';
+export const PAYMENT = 'Payment.Dean';
 
 const DeanStack = createStackNavigator({
   [COURSE_LIST]: {

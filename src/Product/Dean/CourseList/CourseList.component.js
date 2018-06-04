@@ -6,14 +6,18 @@ import { ListItem } from 'react-native-elements';
 import { colors, HeaderRight } from '../../../Components';
 import { logOut } from '../../Authentication';
 import { openStudentList, type NavigationParams } from './CourseList.actions';
+import styles from './CourseList.styles';
 
 // TODO: use server data instead of the mocked one.
-const specialties = ['ДЭиВИ', 'ПОиБМС', 'ПОИТ', 'ИСИТ'];
+const specialties1 = [];
+const specialties2 = ['ДЭиВИ', 'ПОиБМС'];
+const specialties3 = ['ДЭиВИ', 'ПОиБМС', 'ПОИТ', 'ИСИТ'];
+const specialties4 = ['ДЭиВИ', 'ПОиБМС', 'ПОИТ', 'ИСИТ'];
 const sections = [
-  { title: '1', data: specialties },
-  { title: '2', data: specialties },
-  { title: '3', data: specialties },
-  { title: '4', data: specialties }
+  { title: '1', data: specialties1 },
+  { title: '2', data: specialties2 },
+  { title: '3', data: specialties3 },
+  { title: '4', data: specialties4 }
 ];
 
 type CourseListProps = {
@@ -46,18 +50,8 @@ class CourseList extends React.Component<CourseListProps> {
   />)
 
   renderSectionHeader = ({ section: { title } }) => (
-    <View style={{
-      backgroundColor: colors.greenDark,
-      alignItems: 'center'
-    }}
-    >
-      <Text
-        style={{
-          color: colors.white,
-          fontWeight: 'bold'
-        }}
-
-      >
+    <View style={ styles.headerView }>
+      <Text style={ styles.headerText }>
         {`Курс ${title}`}</Text>
     </View>
   )

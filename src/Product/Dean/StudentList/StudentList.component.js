@@ -20,11 +20,29 @@ type StudentListProps = {
 }
 
 class StudentList extends Component<StudentListProps> {
+  state = {
+    searchValue: ''
+  };
+
   componentDidMount() {
     this.props.loadStudentList();
   }
 
+  onSearchInputChange = (searchValue: string) => this.setState({ searchValue });
+
   keyExtractor = (studentInfo: StudentInfo) => studentInfo.uid;
+
+  filterItems = () => {
+    const { searchValue } = this.state;
+    const { studentList } = this.props;
+
+    const searchValueUpper = searchValue.toUpperCase();
+    const filterBySearchValue = item => item.surname.toUpperCase().includes(searchValueUpper);
+
+    return searchValueUpper
+      ? studentList.filter(filterBySearchValue)
+      : studentList;
+  };
 
   renderEmptyItem = () => (<View style={ styles.emptyItemContainer }>
     <Text>Список студентов пуст. Потяните для обновления</Text>
@@ -33,7 +51,7 @@ class StudentList extends Component<StudentListProps> {
   renderItem = ({ item }) => (
     <ListItem
       keyExtractor={ this.keyExtractor }
-      title={ `${item.name} ${item.surname} ${item.middleName}` }
+      title={ `${item.surname} ${item.name}  ${item.middleName}` }
       subtitle={ item.studentId }
       // eslint-disable-next-line react/jsx-no-bind
       onPress={ () => this.props.onOpenPaymentList(item) }
@@ -43,19 +61,15 @@ class StudentList extends Component<StudentListProps> {
     return (
       <View style={ styles.container }>
         <SearchBar
-          lightTheme
           clearIcon
           borderColor={ colors.greenLight }
-          containerStyle={{
-            backgroundColor: colors.greenLight,
-            width: '100%'
-          }}
-          onChangeText={ () => console.log('onChangeText') }
-          onClearText={ () => console.log('onClearText') }
+          containerStyle={ styles.searchBarContainer }
+          onChangeText={ this.onSearchInputChange }
+
           placeholder="Type Here..."
         />
         <FlatList
-          data={ this.props.studentList }
+          data={ this.filterItems() }
           keyExtractor={ this.keyExtractor }
           ListEmptyComponent={ this.renderEmptyItem }
           refreshing={ this.props.isLoading }
