@@ -2,6 +2,8 @@
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { Toast } from '../../../Services';
+// FIXME: use this reducer part to select email and uid.
+// FIXME: set this values after registration.
 import { selectEmail, selectUid } from '../../Authentication';
 import { updateStudentInfo } from '../Student.api';
 import {
@@ -42,11 +44,12 @@ export function* saveStudentInfo(): Saga<void> {
     name,
     specialty,
     studentId,
-    surname
+    surname,
+    uid
   };
 
   try {
-    yield call(updateStudentInfo, studentInfo, uid);
+    yield call(updateStudentInfo, studentInfo);
     yield put(saveStudentInfoSuccess());
     Toast.show('Данные обновлены');
   } catch (error) {

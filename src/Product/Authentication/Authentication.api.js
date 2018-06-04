@@ -13,6 +13,7 @@ export const signInWithEmailAndPassword = (email: string,
 export const sendEmailVerification = (user: User): Promise<void> =>
   user.sendEmailVerification();
 
+// FIXME: move to StudentInfo component.
 export const getUserInfo = (uid: string): StudentInfo =>
   // $FlowFixMe `once()` requires another argument.
   firebase.database().ref(`/students/${uid}`).once('value')

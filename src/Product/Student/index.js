@@ -12,4 +12,6 @@ export {
   studentSaga
 };
 
-export type { StudentState };
+export type {
+  StudentState
+};

@@ -5,6 +5,7 @@ import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import styles from './LabelInput.styles';
 
+// FIXME: add TextInput styles
 type LabelInputProps = {
   containerViewStyle?: StyleObj,
   isError?: boolean,

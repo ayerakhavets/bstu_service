@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   button: {
-    marginTop: 16
+    marginTop: 14
   },
   twoItemsContainer: {
     flexDirection: 'row'

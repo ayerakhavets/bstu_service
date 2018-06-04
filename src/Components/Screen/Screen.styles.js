@@ -9,6 +9,6 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10
+    padding: 8
   }
 });

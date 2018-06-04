@@ -1,23 +1,11 @@
 // @flow
 import firebase from 'react-native-firebase';
-import type { StudentInfo } from '../types';
+import type { StudentInfo, PaymentData } from '../types';
 
-export type PaymentInfo = {
-  date: string,
-  image: {
-    name: string,
-    url: string
-  },
-  isResolved: boolean,
-  key: string,
-  moneyAmount: string,
-  paymentType: string
-}
-
-export const updateStudentInfo = (studentInfo: StudentInfo, uid: string): Promise<void> => {
+export const updateStudentInfo = (studentInfo: StudentInfo): Promise<void> => {
   const updates = {};
-  updates[`/students/${uid}`] = studentInfo;
-  updates[`/specialties/${studentInfo.specialty}/${uid}`] = studentInfo;
+  updates[`/students/${studentInfo.uid}`] = studentInfo;
+  updates[`/specialties/${studentInfo.specialty}/${studentInfo.uid}`] = studentInfo;
   return firebase.database().ref('').update(updates);
 };
 
@@ -27,7 +15,7 @@ export const getPaymentImageUrl = (storageImagePath: string): Promise<string> =>
 // $FlowFixMe property `key` is missing in `Promise`.
 export const getNewPaymentKey = () => firebase.database().ref('').child('payments').push().key;
 
-export const addPayment = async (uid: string, paymentInfo: PaymentInfo,
+export const addPayment = async (uid: string, paymentInfo: PaymentData,
   storageImagePath: string, localImagePath: string): Promise<void> => {
   // $FlowFixMe string is incompatible with object
   await firebase.storage().ref(storageImagePath).putFile(localImagePath);
@@ -39,7 +27,7 @@ export const addPayment = async (uid: string, paymentInfo: PaymentInfo,
   return firebase.database().ref('').update(updates);
 };
 
-export const updatePayment = async (uid: string, paymentInfo: PaymentInfo,
+export const updatePayment = async (uid: string, paymentInfo: PaymentData,
   storageImagePath: string, localImagePath: ?string): Promise<void> => {
   if (localImagePath) {
     // $FlowFixMe string is incompatible with object.
@@ -59,7 +47,7 @@ export const removePayment = async (
   return firebase.database().ref(`/payments/${databasePath}`).remove();
 };
 
-export const getPaymentList = (uid: string): PaymentInfo[] =>
+export const getPaymentList = (uid: string): PaymentData[] =>
   // $FlowFixMe function once() requires another argument.
   firebase.database().ref(`/payments/${uid}`).once('value')
     // eslint-disable-next-line no-underscore-dangle

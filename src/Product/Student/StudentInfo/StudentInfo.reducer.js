@@ -18,6 +18,7 @@ import {
 export type StudentInfoState = {
   course: string,
   courses: string[],
+  email: string,
   faculty: string,
   faculties: string[],
   isLoading: boolean,
@@ -33,6 +34,7 @@ export type StudentInfoState = {
 const initialState = {
   course: '',
   courses: ['', '1', '2', '3', '4'],
+  email: '',
   faculty: '',
   faculties: ['', 'ФИТ'],
   isLoading: false,

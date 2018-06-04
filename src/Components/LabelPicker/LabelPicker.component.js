@@ -10,6 +10,7 @@ export type PickerItem = {
   value: string
 }
 
+// FIXME: add Picker styles.
 type LabelPickerProps = {
   errorMessage?: string,
   isError?: boolean,
@@ -28,7 +29,8 @@ function LabelPicker(props: LabelPickerProps) {
     pickerItems,
     selectedValue,
     style,
-    onValueChange
+    onValueChange,
+    ...rest
   } = props;
 
   const pickerItemComponents: any = pickerItems
@@ -44,6 +46,7 @@ function LabelPicker(props: LabelPickerProps) {
         style={ styles.picker }
         selectedValue={ selectedValue }
         onValueChange={ onValueChange }
+        { ...rest }
       >
         { pickerItemComponents }
       </Picker>

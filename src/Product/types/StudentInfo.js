@@ -1,4 +1,5 @@
 // @flow
+// FIXME: rename to StudentData.
 export type StudentInfo = {
   course: string,
   email: string,
@@ -7,5 +8,6 @@ export type StudentInfo = {
   name: string,
   specialty: string,
   studentId: string,
-  surname: string
+  surname: string,
+  uid: string
 }

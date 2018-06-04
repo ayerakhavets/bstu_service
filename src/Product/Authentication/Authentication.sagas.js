@@ -33,8 +33,10 @@ const EMAIL_KEY = 'EMAIL_KEY';
 const PASSWORD_KEY = 'PASSWORD_KEY';
 const UID_KEY = 'UID_KEY';
 const ERROR_SHORT_PASSWORD =
-  'The given password is invalid. [ Password should be at least 6 characters ]';
+'The given password is invalid. [ Password should be at least 6 characters ]';
+const adminUid = 'a3uk0B1GwvSckgaagXPtGo4MAY32';
 
+// FIXME: fix handling of admin/student roles.
 export default function* authenticationSaga(): Saga<void> {
   yield takeEvery(LOG_IN, handleLogIn);
   yield takeEvery(LOG_OUT, handleLogOut);
@@ -59,14 +61,19 @@ export function* handleLogIn(): Saga<void> {
     const { user } = yield call(signInWithEmailAndPassword, ...requestParams);
     yield put(changeUid(user.uid));
 
+    if (isRemember) yield call(saveCredentials);
+
+    if (user.uid === adminUid) {
+      yield put(loadingEnd());
+      NavigatorActions.navigate('Dean');
+      return;
+    }
+
     // FIXME: move api call and result handling to the StudentInfo component.
     const userInfo = yield call(getUserInfo, user.uid);
     yield put(changeUserInfo(userInfo));
-
-    if (isRemember) yield call(saveCredentials);
     yield put(loadingEnd());
 
-    // TODO: handle admin/student roles.
     NavigatorActions.navigate('Student');
   } catch (error) {
     yield put(loadingEnd());
@@ -104,13 +111,18 @@ export function* handlePreAuthentication(): Saga<void> {
     yield put(changePassword(password));
     yield put(changeUid(uid));
 
+    if (uid === adminUid) {
+      yield put(loadingEnd());
+      NavigatorActions.navigate('Dean');
+      return;
+    }
+
     // FIXME: move api call and result handling to the StudentInfo component.
     const userInfo = yield call(getUserInfo, uid);
     yield put(changeUserInfo(userInfo));
 
     yield put(loadingEnd());
 
-    // TODO: handle admin/student roles.
     NavigatorActions.navigate('Student');
   } catch (error) {
     yield put(loadingEnd());
