@@ -150,6 +150,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(':react-native-svg')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-image-picker')
     implementation "com.android.support:appcompat-v7:23.0.1"

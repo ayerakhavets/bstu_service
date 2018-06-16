@@ -5,12 +5,14 @@ import { StudentList } from './StudentList';
 import { PaymentList } from './PaymentList';
 import { Payment } from './Payment';
 import { colors } from '../../Components';
+import { Charts } from './Charts';
 
-// FIXME:
+// FIXME: path names
 export const STUDENT_LIST = 'Students.Dean';
 export const COURSE_LIST = 'Courses.Dean';
 export const PAYMENT_LIST = 'Payments.Dean';
 export const PAYMENT = 'Payment.Dean';
+export const CHARTS = 'Charts.Dean';
 
 const DeanStack = createStackNavigator({
   [COURSE_LIST]: {
@@ -35,6 +37,12 @@ const DeanStack = createStackNavigator({
     screen: Payment,
     navigationOptions: {
       title: 'Платёж'
+    }
+  },
+  [CHARTS]: {
+    screen: Charts,
+    navigationOptions: {
+      title: 'Учёт'
     }
   }
 },

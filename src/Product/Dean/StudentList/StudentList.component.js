@@ -10,7 +10,7 @@ import {
 } from './StudentList.actions';
 import { selectIsLoading, selectStudentList } from './StudentList.selectors';
 import styles from './StudentList.styles';
-import { colors } from '../../../Components';
+import { colors, HeaderRight } from '../../../Components';
 
 type StudentListProps = {
   isLoading: boolean,
@@ -20,6 +20,13 @@ type StudentListProps = {
 }
 
 class StudentList extends Component<StudentListProps> {
+  static navigationOptions = ({ navigation }) => ({
+    headerRight: <HeaderRight
+      iconName="finance"
+      onIconPress={ () => navigation.navigate('Charts.Dean') }
+    />
+  });
+
   state = {
     searchValue: ''
   };
