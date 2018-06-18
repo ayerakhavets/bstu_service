@@ -5,7 +5,7 @@ export type PaymentData = {
     name: string,
     url: string
   },
-  isResolved: boolean,
+  status: string,
   key: string,
   moneyAmount: string,
   paymentType: string,

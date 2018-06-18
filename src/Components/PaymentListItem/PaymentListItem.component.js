@@ -22,9 +22,15 @@ function PaymentListItem(props: PaymentListItemProps) {
       <Text style={ styles.paymentTypeText }>{item.paymentType}</Text>
     </View>
   );
-  const icon = item.isResolved
-    ? require('../assets/receipt_gr.png') // eslint-disable-line global-require
-    : require('../assets/receipt.png'); // eslint-disable-line global-require
+
+  let icon = require('../assets/receipt.png'); // eslint-disable-line global-require
+
+  if (item.status !== 'declined') {
+    icon = item.status === 'approved'
+      ? require('../assets/receipt_gr.png') // eslint-disable-line global-require
+      : require('../assets/receipt_yel.png'); // eslint-disable-line global-require
+  }
+
   return (
     <ListItem
       avatar={ icon }

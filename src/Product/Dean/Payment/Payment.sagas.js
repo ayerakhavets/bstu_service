@@ -53,18 +53,18 @@ export function* handleRemovePayment(): Saga<void> {
 export function* handlePayment({ type }): Saga<void> {
   // APPROVE_PAYMENT_REQUEST
   // DECLINE_PAYMENT_REQUEST
-  let isResolved;
+  let status;
   let successAction;
   let failureAction;
   let resultPhrase;
 
   if (type === APPROVE_PAYMENT_REQUEST) {
-    isResolved = true;
+    status = 'approved';
     successAction = approvePaymentSuccess;
     failureAction = approvePaymentFailure;
     resultPhrase = 'Платёж одобрен';
   } else {
-    isResolved = false;
+    status = 'declined';
     successAction = declinePaymentSuccess;
     failureAction = declinePaymentFailure;
     resultPhrase = 'Платёж отклонён';
@@ -73,7 +73,7 @@ export function* handlePayment({ type }): Saga<void> {
   const student = yield select(selectCurrentStudent);
 
   try {
-    yield call(resolvePayment, student.uid, key, isResolved);
+    yield call(resolvePayment, student.uid, key, status);
 
     NavigatorActions.back();
     yield put(successAction());

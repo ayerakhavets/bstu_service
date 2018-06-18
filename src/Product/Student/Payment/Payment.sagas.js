@@ -112,7 +112,7 @@ export function* handleUploadPayment({ payload }: UploadPaymentRequestAction): S
         name: image.name,
         url: ''
       },
-      isResolved: false,
+      status: 'declined',
       key,
       moneyAmount,
       paymentType

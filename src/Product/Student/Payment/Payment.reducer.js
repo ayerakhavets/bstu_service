@@ -28,7 +28,7 @@ export type PaymentState = {
   moneyAmount: string,
   paymentType: string,
   isLoading: boolean,
-  isResolved: boolean,
+  status: string,
   paymentTypes: string[]
 }
 
@@ -43,7 +43,7 @@ const initialState = {
   moneyAmount: '',
   paymentType: '',
   isLoading: false,
-  isResolved: false,
+  status: 'declined',
   // TODO: use server data instead of the mocked one.
   paymentTypes: ['', 'Академическая задолженность', 'Обучение', 'Общежитие', 'Пеня']
 };
