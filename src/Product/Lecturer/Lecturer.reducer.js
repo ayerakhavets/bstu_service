@@ -1,20 +1,20 @@
 // @flow
 import { combineReducers } from 'redux';
-import { subjectListReducer, type SubjectListState } from './SubjectList';
-import { orderListReducer, type OrderListState } from './OrderList';
 import { orderReducer, type OrderState } from './Order';
+import { orderListReducer, type OrderListState } from './OrderList';
 import { studentListReducer, type StudentListState } from './StudentList';
+import { subjectListReducer, type SubjectListState } from './SubjectList';
 
-export type StudentState = {
-  subjectList: SubjectListState,
+export type LecturerState = {
   order: OrderState,
   orderList: OrderListState,
-  studentList: StudentListState
+  studentList: StudentListState,
+  subjectList: SubjectListState
 }
 
 export default combineReducers({
-  subjectList: subjectListReducer,
   order: orderReducer,
   orderList: orderListReducer,
-  studentList: studentListReducer
+  studentList: studentListReducer,
+  subjectList: subjectListReducer
 });

@@ -39,10 +39,9 @@ export const loadStudentListRequest = (): LoadStudentListRequestAction => ({
   type: LOAD_STUDENT_LIST_REQUEST
 });
 
-export const loadStudentListSuccess = (
-  paymentList: PaymentData[]): LoadStudentListSuccessAction => ({
+export const loadStudentListSuccess = (studentList: StudentInfo[]): LoadStudentListSuccessAction => ({
   type: LOAD_STUDENT_LIST_SUCCESS,
-  payload: paymentList
+  payload: studentList
 });
 
 export const openOrderList = (student: StudentInfo): OpenOrderListAction => ({
@@ -51,6 +50,7 @@ export const openOrderList = (student: StudentInfo): OpenOrderListAction => ({
 });
 
 export type StudentListActions =
+  | ChangeCurrentStudentAction
   | LoadStudentListFailureAction
   | LoadStudentListRequestAction
   | LoadStudentListSuccessAction

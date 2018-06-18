@@ -9,9 +9,9 @@ import {
   changeCurrentStudent,
   loadStudentListFailure,
   loadStudentListSuccess,
-  type OpenPaymentListAction
+  type OpenOrderListAction
 } from './StudentList.actions';
-import { selectSubject } from '../SubjectList';
+import { selectSubject } from './StudentList.selectors';
 import { ORDER_LIST } from '../Lecturer.navigator';
 
 export default function* studentListSaga(): Saga<void> {
@@ -19,7 +19,7 @@ export default function* studentListSaga(): Saga<void> {
   yield takeEvery(OPEN_ORDER_LIST, handleOpenOrderList);
 }
 
-export function* handleOpenOrderList({ payload }: OpenPaymentListAction): Saga<void> {
+export function* handleOpenOrderList({ payload }: OpenOrderListAction): Saga<void> {
   yield put(changeCurrentStudent(payload));
 
   // yield call(NavigatorActions.navigate, ORDER_LIST);

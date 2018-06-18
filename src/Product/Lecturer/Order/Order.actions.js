@@ -21,15 +21,9 @@ export type ClearPaymentDataAction = { type: typeof CLEAR_PAYMENT_DATA };
 export type CloseOrderFailureAction = { type: typeof CLOSE_ORDER_FAILURE };
 export type CloseOrderRequestAction = { type: typeof CLOSE_ORDER_REQUEST };
 export type CloseOrderSuccessAction = { type: typeof CLOSE_ORDER_SUCCESS };
-export type RemovePaymentFailureAction = { type: typeof REMOVE_PAYMENT_FAILURE };
-export type RemovePaymentRequestAction = { type: typeof REMOVE_PAYMENT_REQUEST };
-export type RemovePaymentSuccessAction = { type: typeof REMOVE_PAYMENT_SUCCESS };
 export type ApproveOrderFailureAction = { type: typeof APPROVE_ORDER_FAILURE };
 export type ApproveOrderRequestAction = { type: typeof APPROVE_ORDER_REQUEST };
 export type ApproveOrderSuccessAction = { type: typeof APPROVE_ORDER_SUCCESS };
-export type DeclinePaymentFailureAction = { type: typeof DECLINE_PAYMENT_FAILURE };
-export type DeclinePaymentRequestAction = { type: typeof DECLINE_PAYMENT_REQUEST };
-export type DeclinePaymentSuccessAction = { type: typeof DECLINE_PAYMENT_SUCCESS };
 
 export const changeOrderData = (orderData: PaymentData): ChangeOrderDataAction => ({
   type: CHANGE_ORDER_DATA,
@@ -63,15 +57,6 @@ export const changeEndDate = (date: string): ChangeEndDateAction => ({
 
 export const clearPaymentData = (): ClearPaymentDataAction => ({ type: CLEAR_PAYMENT_DATA });
 
-export const removePaymentFailure = (): RemovePaymentFailureAction =>
-  ({ type: REMOVE_PAYMENT_FAILURE });
-
-export const removePaymentRequest = (): RemovePaymentRequestAction =>
-  ({ type: REMOVE_PAYMENT_REQUEST });
-
-export const removePaymentSuccess = (): RemovePaymentSuccessAction =>
-  ({ type: REMOVE_PAYMENT_SUCCESS });
-
 export const approveOrderFailure = (): ApproveOrderFailureAction =>
   ({ type: APPROVE_ORDER_FAILURE });
 
@@ -81,17 +66,5 @@ export const approveOrderRequest = (): ApproveOrderRequestAction =>
 export const approveOrderSuccess = (): ApproveOrderSuccessAction =>
   ({ type: APPROVE_ORDER_SUCCESS });
 
-export const declinePaymentFailure = (): DeclinePaymentFailureAction =>
-  ({ type: DECLINE_PAYMENT_FAILURE });
-
-export const declinePaymentRequest = (): DeclinePaymentRequestAction =>
-  ({ type: DECLINE_PAYMENT_REQUEST });
-
-export const declinePaymentSuccess = (): DeclinePaymentSuccessAction =>
-  ({ type: DECLINE_PAYMENT_SUCCESS });
-
 export type PaymentActions =
   | ClearPaymentDataAction
-  | RemovePaymentFailureAction
-  | RemovePaymentRequestAction
-  | RemovePaymentSuccessAction

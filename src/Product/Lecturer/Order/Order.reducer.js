@@ -4,18 +4,12 @@ import {
   CHANGE_DATE,
   CHANGE_MARK,
   CLOSE_ORDER_FAILURE,
-CLOSE_ORDER_REQUEST,
-CLOSE_ORDER_SUCCESS,
+  CLOSE_ORDER_REQUEST,
+  CLOSE_ORDER_SUCCESS,
   APPROVE_ORDER_FAILURE,
   APPROVE_ORDER_REQUEST,
   APPROVE_ORDER_SUCCESS,
-  DECLINE_PAYMENT_FAILURE,
-  DECLINE_PAYMENT_REQUEST,
-  DECLINE_PAYMENT_SUCCESS,
   CLEAR_PAYMENT_DATA,
-  REMOVE_PAYMENT_FAILURE,
-  REMOVE_PAYMENT_REQUEST,
-  REMOVE_PAYMENT_SUCCESS,
   type PaymentActions
 } from './Order.actions';
 
@@ -58,8 +52,7 @@ const initialState = {
   status: 'declined'
 };
 
-export default (
-  state: PaymentState = initialState,
+export default (state: PaymentState = initialState,
   action: PaymentActions): PaymentState => {
   switch (action.type) {
   case CHANGE_ORDER_DATA:

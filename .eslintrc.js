@@ -15,6 +15,7 @@ module.exports = {
         "plugin:react/recommended"
     ],
     "rules": {
+        "max-len": ["error", 120],
         "comma-dangle": ["error", "never"],
         "flowtype/no-types-missing-file-annotation": "error",
         "indent": ["error", 2],

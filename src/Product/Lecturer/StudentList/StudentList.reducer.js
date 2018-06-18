@@ -1,4 +1,5 @@
 // @flow
+import type { StudentInfo } from '../../types';
 import {
   CHANGE_CURRENT_STUDENT,
   LOAD_STUDENT_LIST_FAILURE,
@@ -6,7 +7,6 @@ import {
   LOAD_STUDENT_LIST_SUCCESS,
   type StudentListActions
 } from './StudentList.actions';
-import type { StudentInfo } from '../../types';
 
 export type StudentListState = {
   currentStudent: StudentInfo,
@@ -20,8 +20,7 @@ const initialState = {
   studentList: []
 };
 
-export default (
-  state: StudentListState = initialState,
+export default (state: StudentListState = initialState,
   action: StudentListActions): StudentListState => {
   switch (action.type) {
   case CHANGE_CURRENT_STUDENT:

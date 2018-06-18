@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-// import { View, Text, SectionList } from 'react-native';
 import { connect } from 'react-redux';
 import { List, ListItem } from 'react-native-elements';
 import { colors, HeaderRight } from '../../../Components';

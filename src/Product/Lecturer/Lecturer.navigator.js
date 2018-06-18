@@ -1,27 +1,21 @@
 // @flow
 import { createStackNavigator } from 'react-navigation';
-import { SubjectList } from './SubjectList';
-import { StudentList } from './StudentList';
-import { OrderList } from './OrderList';
-import { Order } from './Order';
 import { colors } from '../../Components';
+import { Order } from './Order';
+import { OrderList } from './OrderList';
+import { StudentList } from './StudentList';
+import { SubjectList } from './SubjectList';
 
-export const STUDENT_LIST = 'Students.Lecturer';
-export const SUBJECT_LIST = 'Subjects.Lecturer';
-export const ORDER_LIST = 'Orders.Lecturer';
-export const ORDER = 'Order.Lecturer';
+export const ORDER = 'ORDER.Lecturer';
+export const ORDER_LIST = 'ORDER_LIST.Lecturer';
+export const STUDENT_LIST = 'STUDENT_LIST.Lecturer';
+export const SUBJECT_LIST = 'SUBJECT_LIST.Lecturer';
 
-const LecturerStack = createStackNavigator({
-  [SUBJECT_LIST]: {
-    screen: SubjectList,
+export default createStackNavigator({
+  [ORDER]: {
+    screen: Order,
     navigationOptions: {
-      title: 'Предметы'
-    }
-  },
-  [STUDENT_LIST]: {
-    screen: StudentList,
-    navigationOptions: {
-      title: 'Студенты'
+      title: 'Направление'
     }
   },
   [ORDER_LIST]: {
@@ -30,10 +24,16 @@ const LecturerStack = createStackNavigator({
       title: 'Направления'
     }
   },
-  [ORDER]: {
-    screen: Order,
+  [STUDENT_LIST]: {
+    screen: StudentList,
     navigationOptions: {
-      title: 'Направление'
+      title: 'Студенты'
+    }
+  },
+  [SUBJECT_LIST]: {
+    screen: SubjectList,
+    navigationOptions: {
+      title: 'Предметы'
     }
   }
 },
@@ -45,5 +45,3 @@ const LecturerStack = createStackNavigator({
     }
   }
 });
-
-export default LecturerStack;

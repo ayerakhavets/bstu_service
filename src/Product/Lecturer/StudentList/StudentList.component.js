@@ -1,8 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FlatList, View, Text } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
+import { colors } from '../../../Components';
 import type { StudentInfo } from '../../types';
 import {
   loadStudentListRequest,
@@ -10,16 +11,19 @@ import {
 } from './StudentList.actions';
 import { selectIsLoading, selectStudentList } from './StudentList.selectors';
 import styles from './StudentList.styles';
-import { colors } from '../../../Components';
 
 type StudentListProps = {
   isLoading: boolean,
   studentList: StudentInfo[],
   loadStudentList: () => void,
-  onOpenOrderList: () => void
+  onOpenOrderList: (student: StudentInfo) => void
 }
 
-class StudentList extends Component<StudentListProps> {
+type StudentListState = {
+  searchValue: string
+}
+
+class StudentList extends Component<StudentListProps, StudentListState> {
   state = {
     searchValue: ''
   };
@@ -64,7 +68,6 @@ class StudentList extends Component<StudentListProps> {
           borderColor={ colors.greenLight }
           containerStyle={ styles.searchBarContainer }
           onChangeText={ this.onSearchInputChange }
-
           placeholder="Type Here..."
         />
         <FlatList

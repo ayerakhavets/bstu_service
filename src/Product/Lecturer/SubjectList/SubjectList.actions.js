@@ -1,10 +1,8 @@
 // @flow
-export const OPEN_STUDENT_LIST = 'OPEN_STUDENT_LIST@Lecturer';
 export const CHANGE_SUBJECT = 'CHANGE_SUBJECT@Lecturer';
+export const OPEN_STUDENT_LIST = 'OPEN_STUDENT_LIST@Lecturer';
 
-type NavigationParams = {
-  subject: string
-}
+export type NavigationParams = { subject: string }
 
 export type ChangeSubjectAction = { type: typeof CHANGE_SUBJECT, payload: string };
 export type OpenStudentListAction = { type: typeof OPEN_STUDENT_LIST, payload: NavigationParams };
@@ -20,5 +18,5 @@ export const openStudentList = (navigationParams: NavigationParams): OpenStudent
 });
 
 export type SubjectListActions =
-  | ChangeCourseAction
+  | ChangeSubjectAction
   | OpenStudentListAction
