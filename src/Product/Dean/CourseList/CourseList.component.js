@@ -49,12 +49,10 @@ class CourseList extends React.Component<CourseListProps> {
     }) }
   />)
 
-  renderSectionHeader = ({ section: { title } }) => (
-    <View style={ styles.headerView }>
-      <Text style={ styles.headerText }>
-        {`Курс ${title}`}</Text>
-    </View>
-  )
+  renderSectionHeader = ({ section: { title } }) => (<View style={ styles.headerView }>
+    <Text style={ styles.headerText }>
+      {`Курс ${title}`}</Text>
+  </View>)
 
   render() {
     return (

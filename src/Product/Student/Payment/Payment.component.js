@@ -22,6 +22,8 @@ import {
   changeDate,
   changeMoneyAmount,
   changePaymentType,
+  сhangeSubject,
+  сhangeLecturer,
   openImagePicker,
   removePaymentRequest,
   uploadPaymentRequest,
@@ -30,6 +32,8 @@ import {
 import type { PaymentImage } from './Payment.reducer';
 import {
   selectDate,
+  selectLecturer,
+  selectSubject,
   selectImage,
   selectIsLoading,
   selectMappedPaymentTypes,
@@ -42,6 +46,8 @@ type PaymentProps = {
   date: string,
   image: PaymentImage,
   isLoading: boolean,
+  lecturer: string,
+  subject: string,
   moneyAmount: string,
   // FIXME: use proper type for navigation.
   navigation: Object,
@@ -49,6 +55,8 @@ type PaymentProps = {
   paymentTypes: PickerItem[],
   onChangeMoneyAmount: () => void,
   onChangePaymentType: () => void,
+  onChangeSubject: (subject: string) => void,
+  onChangeLecturer: (lecturer: string) => void,
   onDateChange: () => void,
   onOpenImagePicker: () => void,
   removePaymentRequest: () => void,
@@ -94,7 +102,10 @@ class Payment extends Component<PaymentProps> {
       ? 'Сохранить изменения'
       : 'Добавить';
     const isDataEmpty = !paymentType || !moneyAmount || !date || !image.name;
-
+    console.log('-==', this.props.subject,
+      this.props.onChangeSubject,
+      this.props.lecturer,
+      this.props.onChangeLecturer);
     return (
       <Screen>
         { this.props.isLoading
@@ -140,12 +151,31 @@ class Payment extends Component<PaymentProps> {
                 onDateChange={ this.props.onDateChange }
               />
               <LabelPicker
-                isError={ isDataEmpty }
-                errorMessage="* Заполните все поля"
                 label="Тип услуги"
                 pickerItems={ this.props.paymentTypes }
                 selectedValue={ this.props.paymentType }
                 onValueChange={ this.props.onChangePaymentType }
+              />
+              <LabelPicker
+                label="Название дисциплины"
+                pickerItems={ [
+                  { label: '', value: '' },
+                  { label: 'БД', value: 'БД' },
+                  { label: 'СУБД', value: 'СУБД' }
+                ] }
+                selectedValue={ this.props.subject }
+                onValueChange={ this.props.onChangeSubject }
+              />
+              <LabelPicker
+                isError={ isDataEmpty }
+                errorMessage="* Заполните все поля"
+                label="Преподаватель"
+                pickerItems={ [
+                  { label: '', value: '' },
+                  { label: 'Иванов И. И', value: 'Иванов И. И' }
+                ] }
+                selectedValue={ this.props.lecturer }
+                onValueChange={ this.props.onChangeLecturer }
               />
               <MyButton
                 containerViewStyle={ styles.buttonAdd }
@@ -166,11 +196,15 @@ const mapStateToProps = state => ({
   image: selectImage(state),
   isLoading: selectIsLoading(state),
   moneyAmount: selectMoneyAmount(state),
+  lecturer: selectLecturer(state),
+  subject: selectSubject(state),
   paymentType: selectPaymentType(state),
   paymentTypes: selectMappedPaymentTypes(state)
 });
 
 const mapDispatchToProps = {
+  onChangeSubject: сhangeSubject,
+  onChangeLecturer: сhangeLecturer,
   onDateChange: changeDate,
   onChangeMoneyAmount: changeMoneyAmount,
   onChangePaymentType: changePaymentType,

@@ -19,6 +19,12 @@ export const selectIsLoading = ({ student }: ApplicationState): boolean =>
 export const selectMoneyAmount = ({ student }: ApplicationState): string =>
   student.payment.moneyAmount;
 
+export const selectLecturer = ({ student }: ApplicationState): string =>
+  student.payment.lecturer;
+
+export const selectSubject = ({ student }: ApplicationState): string =>
+  student.payment.subject;
+
 export const selectPaymentType = ({ student }: ApplicationState): string =>
   student.payment.paymentType;
 

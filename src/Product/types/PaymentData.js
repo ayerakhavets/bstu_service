@@ -6,6 +6,8 @@ export type PaymentData = {
     url: string
   },
   status: string,
+  lecturer: string,
+  subject: string,
   key: string,
   moneyAmount: string,
   paymentType: string,

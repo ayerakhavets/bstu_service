@@ -7,6 +7,8 @@ export type UploadPaymentType = 'ADD' | 'EDIT'
 export const CHANGE_DATE = 'CHANGE_DATE';
 export const CHANGE_IMAGE = 'CHANGE_IMAGE';
 export const CHANGE_MONEY_AMOUNT = 'CHANGE_MONEY_AMOUNT';
+export const CHANGE_SUBJECT_TYPE = 'CHANGE_SUBJECT_TYPE';
+export const CHANGE_LECTURER_TYPE = 'CHANGE_LECTURER_TYPE';
 export const CHANGE_PAYMENT_DATA = 'CHANGE_PAYMENT_DATA';
 export const CHANGE_PAYMENT_TYPE = 'CHANGE_PAYMENT_TYPE';
 export const CLEAR_PAYMENT_DATA = 'CLEAR_PAYMENT_DATA';
@@ -23,6 +25,8 @@ export type ChangeImageAction = { type: typeof CHANGE_IMAGE, payload: PaymentIma
 export type ChangeMoneyAmountAction = { type: typeof CHANGE_MONEY_AMOUNT, payload: string };
 export type ChangePaymentDataAction = { type: typeof CHANGE_PAYMENT_DATA, payload: PaymentData };
 export type ChangePaymentTypeAction = { type: typeof CHANGE_PAYMENT_TYPE, payload: string };
+export type ChangeSubjectAction = { type: typeof CHANGE_SUBJECT_TYPE, payload: string };
+export type ChangeLecturerAction = { type: typeof CHANGE_LECTURER_TYPE, payload: string };
 export type ClearPaymentDataAction = { type: typeof CLEAR_PAYMENT_DATA };
 export type OpenImagePickerAction = { type: typeof OPEN_IMAGE_PICKER };
 export type RemovePaymentFailureAction = { type: typeof REMOVE_PAYMENT_FAILURE };
@@ -58,6 +62,16 @@ export const changePaymentData = (paymentData: PaymentData): ChangePaymentDataAc
 export const changePaymentType = (paymentType: string): ChangePaymentTypeAction => ({
   type: CHANGE_PAYMENT_TYPE,
   payload: paymentType
+});
+
+export const сhangeSubject = (subject: string): ChangeSubjectAction => ({
+  type: CHANGE_SUBJECT_TYPE,
+  payload: subject
+});
+
+export const сhangeLecturer = (lecturer: string): ChangeLecturerAction => ({
+  type: CHANGE_LECTURER_TYPE,
+  payload: lecturer
 });
 
 export const clearPaymentData = (): ClearPaymentDataAction => ({ type: CLEAR_PAYMENT_DATA });

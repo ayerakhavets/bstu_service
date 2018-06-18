@@ -25,6 +25,8 @@ import {
 } from './Payment.actions';
 import {
   selectDate,
+  selectLecturer,
+  selectSubject,
   selectImage,
   selectKey,
   selectMoneyAmount,
@@ -90,6 +92,8 @@ export function* handleRemovePayment(): Saga<void> {
 export function* handleUploadPayment({ payload }: UploadPaymentRequestAction): Saga<void> {
   const date = yield select(selectDate);
   const paymentType = yield select(selectPaymentType);
+  const lecturer = yield select(selectLecturer);
+  const subject = yield select(selectSubject);
   const moneyAmount = yield select(selectMoneyAmount);
   const image = yield select(selectImage);
   const uid = yield select(selectUid);
@@ -112,6 +116,8 @@ export function* handleUploadPayment({ payload }: UploadPaymentRequestAction): S
         name: image.name,
         url: ''
       },
+      lecturer,
+      subject,
       status: 'declined',
       key,
       moneyAmount,

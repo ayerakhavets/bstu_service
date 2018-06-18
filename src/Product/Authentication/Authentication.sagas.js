@@ -35,6 +35,7 @@ const UID_KEY = 'UID_KEY';
 const ERROR_SHORT_PASSWORD =
 'The given password is invalid. [ Password should be at least 6 characters ]';
 const adminUid = 'a3uk0B1GwvSckgaagXPtGo4MAY32';
+const lecturerUid = 'eZZKqqMXmVNqQ7wUacZiVDtAQWK2';
 
 // FIXME: fix handling of admin/student roles.
 export default function* authenticationSaga(): Saga<void> {
@@ -66,6 +67,10 @@ export function* handleLogIn(): Saga<void> {
     if (user.uid === adminUid) {
       yield put(loadingEnd());
       NavigatorActions.navigate('Dean');
+      return;
+    } else if (user.uid === lecturerUid) {
+      yield put(loadingEnd());
+      NavigatorActions.navigate('Lecturer');
       return;
     }
 
@@ -114,6 +119,10 @@ export function* handlePreAuthentication(): Saga<void> {
     if (uid === adminUid) {
       yield put(loadingEnd());
       NavigatorActions.navigate('Dean');
+      return;
+    } else if (uid === lecturerUid) {
+      yield put(loadingEnd());
+      NavigatorActions.navigate('Lecturer');
       return;
     }
 

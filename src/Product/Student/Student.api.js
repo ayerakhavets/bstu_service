@@ -1,6 +1,6 @@
 // @flow
 import firebase from 'react-native-firebase';
-import type { StudentInfo, PaymentData } from '../types';
+import type { OrderData, PaymentData, StudentInfo } from '../types';
 
 export const updateStudentInfo = (studentInfo: StudentInfo): Promise<void> => {
   const updates = {};
@@ -50,5 +50,11 @@ export const removePayment = async (
 export const getPaymentList = (uid: string): PaymentData[] =>
   // $FlowFixMe function once() requires another argument.
   firebase.database().ref(`/payments/${uid}`).once('value')
+    // eslint-disable-next-line no-underscore-dangle
+    .then(response => response._value);
+
+export const getOrderList = (uid: string): OrderData[] =>
+  // $FlowFixMe function once() requires another argument.
+  firebase.database().ref(`/orders/${uid}`).once('value')
     // eslint-disable-next-line no-underscore-dangle
     .then(response => response._value);

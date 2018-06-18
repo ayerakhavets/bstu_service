@@ -4,7 +4,8 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { NavigatorActions, Toast } from '../../../Services';
 import {
   resolvePayment,
-  removePayment
+  removePayment,
+  handleReslovePayment
 } from '../Dean.api';
 import { loadPaymentListRequest } from '../PaymentList';
 import {
@@ -19,6 +20,10 @@ import {
   removePaymentSuccess
 } from './Payment.actions';
 import {
+  selectStartDate,
+  selectEndDate,
+  selectLecturer,
+  selectSubject,
   selectImage,
   selectKey
 } from './Payment.selectors';
@@ -73,7 +78,27 @@ export function* handlePayment({ type }): Saga<void> {
   const student = yield select(selectCurrentStudent);
 
   try {
-    yield call(resolvePayment, student.uid, key, status);
+    if (type === APPROVE_PAYMENT_REQUEST) {
+      const startDate = yield select(selectStartDate);
+      const endDate = yield select(selectEndDate);
+      const lecturer = yield select(selectLecturer);
+      const subject = yield select(selectSubject);
+
+      const order = {
+        startDate,
+        endDate,
+        lecturer,
+        subject,
+        status: 'planning',
+        key,
+        date: '',
+        mark: ''
+      };
+
+      yield call(handleReslovePayment, student.uid, key, order, student);
+    } else {
+      yield call(resolvePayment, student.uid, key, status);
+    }
 
     NavigatorActions.back();
     yield put(successAction());

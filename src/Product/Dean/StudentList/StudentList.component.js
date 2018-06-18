@@ -32,6 +32,7 @@ class StudentList extends Component<StudentListProps> {
   };
 
   componentDidMount() {
+    console.log('this is it', this.props);
     this.props.loadStudentList();
   }
 

@@ -2,6 +2,8 @@
 import {
   CHANGE_DATE,
   CHANGE_IMAGE,
+  CHANGE_SUBJECT_TYPE,
+  CHANGE_LECTURER_TYPE,
   CHANGE_MONEY_AMOUNT,
   CHANGE_PAYMENT_DATA,
   CHANGE_PAYMENT_TYPE,
@@ -24,6 +26,8 @@ export type PaymentImage = {
 export type PaymentState = {
   date: string,
   image: PaymentImage,
+  subject: string,
+  lecturer: string,
   key: string,
   moneyAmount: string,
   paymentType: string,
@@ -40,6 +44,8 @@ const initialState = {
     url: ''
   },
   key: '',
+  subject: '',
+  lecturer: '',
   moneyAmount: '',
   paymentType: '',
   isLoading: false,
@@ -84,6 +90,16 @@ export default (
     return {
       ...state,
       paymentType: action.payload
+    };
+  case CHANGE_SUBJECT_TYPE:
+    return {
+      ...state,
+      subject: action.payload
+    };
+  case CHANGE_LECTURER_TYPE:
+    return {
+      ...state,
+      lecturer: action.payload
     };
   case CLEAR_PAYMENT_DATA:
     return initialState;

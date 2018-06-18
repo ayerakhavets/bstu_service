@@ -2,17 +2,21 @@
 import React from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { OrderList } from './OrderList';
 import { PaymentList } from './PaymentList';
 import { StudentInfo } from './StudentInfo';
 import { colors, HeaderRight, styles } from '../../Components';
 import { Payment } from './Payment';
 
-export const STUDENT = 'Пользователь';
-export const STUDENT_TABS = 'Студент';
+export const ORDER_LIST = 'Направления';
 export const PAYMENT = 'Платёж';
 export const PAYMENT_LIST = 'Платежи';
+export const STUDENT = 'Пользователь';
+export const STUDENT_TABS = 'Студент';
+
 
 const StudentTabs = createBottomTabNavigator({
+  [ORDER_LIST]: OrderList,
   [PAYMENT_LIST]: PaymentList,
   [STUDENT]: StudentInfo
 },
@@ -23,6 +27,8 @@ const StudentTabs = createBottomTabNavigator({
     tabBarIcon: ({ focused }) => {
       let iconName;
       switch (navigation.state.routeName) {
+      case ORDER_LIST:
+        iconName = 'file-multiple'; break;
       case PAYMENT_LIST:
         iconName = 'view-list'; break;
       case STUDENT:
