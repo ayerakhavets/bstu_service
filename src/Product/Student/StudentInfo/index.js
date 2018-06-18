@@ -1,5 +1,6 @@
 // @flow
 import StudentInfo from './StudentInfo.component';
+import { selectUid } from './StudentInfo.selectors';
 import studentInfoReducer, { type StudentInfoState } from './StudentInfo.reducer';
 import studentInfoSaga from './StudentInfo.saga';
 import { changeUserInfo, clearStudentInfo } from './StudentInfo.actions';
@@ -9,7 +10,8 @@ export {
   clearStudentInfo,
   StudentInfo,
   studentInfoReducer,
-  studentInfoSaga
+  studentInfoSaga,
+  selectUid
 };
 
 export type {

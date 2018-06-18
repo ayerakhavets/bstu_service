@@ -53,8 +53,9 @@ export const getPaymentList = (uid: string): PaymentData[] =>
     // eslint-disable-next-line no-underscore-dangle
     .then(response => response._value);
 
+
 export const getOrderList = (uid: string): OrderData[] =>
   // $FlowFixMe function once() requires another argument.
-  firebase.database().ref(`/orders/${uid}`).once('value')
-    // eslint-disable-next-line no-underscore-dangle
-    .then(response => response._value);
+  firebase.database().ref(`/orders/${uid}`)
+    .once('value')
+    .then(response => response._value); // eslint-disable-line no-underscore-dangle

@@ -12,7 +12,7 @@ import {
   type OpenPaymentListAction
 } from './StudentList.actions';
 import { selectCourse, selectSpecialty } from '../CourseList';
-import { PAYMENT_LIST } from '../Dean.navigator';
+import { STUDENT_LISTS_TABS } from '../Dean.navigator';
 
 export default function* studentListSaga(): Saga<void> {
   yield takeEvery(LOAD_STUDENT_LIST_REQUEST, handleLoadStudentList);
@@ -21,7 +21,7 @@ export default function* studentListSaga(): Saga<void> {
 
 export function* handleOpenPaymentList({ payload }: OpenPaymentListAction): Saga<void> {
   yield put(changeCurrentStudent(payload));
-  yield call(NavigatorActions.navigate, PAYMENT_LIST);
+  yield call(NavigatorActions.navigate, STUDENT_LISTS_TABS);
 }
 
 export function* handleLoadStudentList(): Saga<void> {

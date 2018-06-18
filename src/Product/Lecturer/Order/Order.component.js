@@ -65,17 +65,17 @@ class Payment extends Component<PaymentProps> {
                 value={ this.props.currentUser.studentId }
                 editable={ false }
               />
-                     <LabelInput
+              <LabelInput
                 label="Преподаватель"
                 value={ this.props.lecturer }
                 editable={ false }
               />
-                  <LabelInput
+              <LabelInput
                 label="Начало сдачи"
                 value={ this.props.startDate }
                 editable={ false }
               />
-                  <LabelInput
+              <LabelInput
                 label="Конец сдачи"
                 value={ this.props.endDate }
                 editable={ false }
@@ -86,52 +86,49 @@ class Payment extends Component<PaymentProps> {
                 editable={ false }
               />
               {
-                this.props.status === 'planning' 
-                ? <DatePicker
-                  cancelBtnText="Закрыть"
-                  confirmBtnText="Ок"
-                  customStyles={{
-                    placeholderText: styles.datePlaceholderText
-                  }}
-                  date={ this.props.date }
-                  format="DD MM YYYY"
-                  placeholder="Дата"
-                  style={ styles.datePicker }
-                  onDateChange={ this.props.onChangeDate }
-                /> 
-                : <LabelInput
-                label="Дата сдачи"
-                value={ this.props.date }
-                editable={ false }
-              />}
+                this.props.status === 'planning'
+                  ? <DatePicker
+                    cancelBtnText="Закрыть"
+                    confirmBtnText="Ок"
+                    customStyles={{
+                      placeholderText: styles.datePlaceholderText
+                    }}
+                    date={ this.props.date }
+                    format="DD MM YYYY"
+                    placeholder="Дата"
+                    style={ styles.datePicker }
+                    onDateChange={ this.props.onChangeDate }
+                  />
+                  : <LabelInput
+                    label="Дата сдачи"
+                    value={ this.props.date }
+                    editable={ false }
+                  />}
               {
-                this.props.status === 'set' 
-                ? <LabelInput
-                isError={ !this.props.mark }
-                label="Оценка"
-                maxLength={ 2 }
-                keyboardType="numeric"
-                value={ this.props.mark }
-                onChangeText={ this.props.onChangeMark }
-              />
-              :<LabelInput
-              label="Оценка"
-              value={ this.props.mark }
-              editable={ false }
-            />
+                this.props.status === 'set'
+                  ? <LabelInput
+                    isError={ !this.props.mark }
+                    label="Оценка"
+                    maxLength={ 2 }
+                    keyboardType="numeric"
+                    value={ this.props.mark }
+                    onChangeText={ this.props.onChangeMark }
+                  />
+                  : <LabelInput
+                    label="Оценка"
+                    value={ this.props.mark }
+                    editable={ false }
+                  />
               }
               <MyButton
                 icon={{ name: 'done' }}
                 containerViewStyle={ styles.buttonAdd }
-                title={
-                  this.props.status === 'planning' 
-                  ? "Назначить дату"
-                  : "Оценить"
-                }
-                onPress={ this.props.status === 'planning' 
-                ? this.props.onSetOrderRequest
-                :  this.props.onMarkOrder 
-              }
+                title={ this.props.status === 'planning'
+                  ? 'Назначить дату'
+                  : 'Оценить' }
+                onPress={ this.props.status === 'planning'
+                  ? this.props.onSetOrderRequest
+                  : this.props.onMarkOrder }
               />
             </View>
           </Fragment> }

@@ -14,7 +14,7 @@ import {
   type OpenShowPaymentScreenAction
 } from './OrderList.actions';
 
-export const ORDER = 'Order.Lecturer';
+export const ORDER = 'ORDER.Lecturer';
 
 export default function* orderListSaga(): Saga<void> {
   yield takeEvery(LOAD_ORDER_LIST_REQUEST, handleLoadOrderList);

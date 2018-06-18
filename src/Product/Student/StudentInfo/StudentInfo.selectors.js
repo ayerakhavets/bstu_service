@@ -6,6 +6,9 @@ import type { ApplicationState } from '../../types';
 export const selectCourse = ({ student }: ApplicationState): string =>
   student.studentInfo.course;
 
+export const selectUid = ({ student }: ApplicationState): string =>
+  student.studentInfo.uid;
+
 export const selectCourses = ({ student }: ApplicationState): string[] =>
   student.studentInfo.courses;
 

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, View, Text } from 'react-native';
-import { PaymentListItem } from '../../../Components';
+import { OrderListItem } from '../../../Components';
 import type { OrderData } from '../../types';
 import {
   loadOrderListRequest,
@@ -29,7 +29,7 @@ class OrderList extends Component<OrderListProps> {
     <Text>Список направлений пуст. Потяните для обновления</Text>
   </View>)
 
-  renderItem = ({ item }) => (<PaymentListItem
+  renderItem = ({ item }) => (<OrderListItem
     item={ item }
     onPress={ this.props.onOpenOrderInfo }
   />)

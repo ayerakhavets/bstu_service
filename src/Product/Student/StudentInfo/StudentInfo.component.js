@@ -62,6 +62,7 @@ type StudentInfoProps = {
 
 class StudentInfo extends Component<StudentInfoProps> {
   componentWillMount() {
+    console.log('m?');
     this.props.navigation.setParams({ onLogOut: this.props.onLogOut });
   }
 

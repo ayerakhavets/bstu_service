@@ -85,6 +85,7 @@ export function* handlePayment({ type }): Saga<void> {
       const subject = yield select(selectSubject);
 
       const order = {
+        student,
         startDate,
         endDate,
         lecturer,

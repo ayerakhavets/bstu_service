@@ -2,12 +2,14 @@
 import React from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Order } from './Order';
 import { OrderList } from './OrderList';
 import { PaymentList } from './PaymentList';
 import { StudentInfo } from './StudentInfo';
 import { colors, HeaderRight, styles } from '../../Components';
 import { Payment } from './Payment';
 
+export const ORDER = 'Направление';
 export const ORDER_LIST = 'Направления';
 export const PAYMENT = 'Платёж';
 export const PAYMENT_LIST = 'Платежи';
@@ -52,6 +54,7 @@ const StudentStack = createStackNavigator({
     screen: StudentTabs,
     navigationOptions: ({ navigation }) => {
       const params = navigation.state.routes[1].params || {};
+      console.log('params student navigator: ', params);
       const { index } = navigation.state;
       return {
         headerRight: <HeaderRight iconName="exit-to-app" onIconPress={ params.onLogOut } />,
@@ -63,6 +66,12 @@ const StudentStack = createStackNavigator({
     screen: Payment,
     navigationOptions: {
       title: PAYMENT
+    }
+  },
+  [ORDER]: {
+    screen: Order,
+    navigationOptions: {
+      title: ORDER
     }
   }
 },

@@ -1,10 +1,10 @@
 // @flow
 import type { OrderData } from '../../types';
 
-export const LOAD_ORDER_LIST_FAILURE = 'LOAD_ORDER_LIST_FAILURE';
-export const LOAD_ORDER_LIST_REQUEST = 'LOAD_ORDER_LIST_REQUEST';
-export const LOAD_ORDER_LIST_SUCCESS = 'LOAD_ORDER_LIST_SUCCESS';
-export const OPEN_ORDER_INFO = 'OPEN_ORDER_INFO';
+export const LOAD_ORDER_LIST_FAILURE = 'LOAD_ORDER_LIST_FAILURE@Student';
+export const LOAD_ORDER_LIST_REQUEST = 'LOAD_ORDER_LIST_REQUEST@Student';
+export const LOAD_ORDER_LIST_SUCCESS = 'LOAD_ORDER_LIST_SUCCESS@Student';
+export const OPEN_ORDER_INFO = 'OPEN_ORDER_INFO@Student';
 
 export type LoadOrderListFailureAction = { type: typeof LOAD_ORDER_LIST_FAILURE };
 

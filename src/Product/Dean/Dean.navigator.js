@@ -1,18 +1,54 @@
 // @flow
-import { createStackNavigator } from 'react-navigation';
+import React from 'react';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CourseList } from './CourseList';
+import { Order } from './Order';
+import { OrderList } from './OrderList';
 import { StudentList } from './StudentList';
 import { PaymentList } from './PaymentList';
 import { Payment } from './Payment';
-import { colors } from '../../Components';
+import { colors, styles } from '../../Components';
 import { Charts } from './Charts';
 
 // FIXME: path names
+export const ORDER = 'ORDER.Dean';
+export const ORDER_LIST = 'ORDER_LIST.Dean';
 export const STUDENT_LIST = 'Students.Dean';
+export const STUDENT_LISTS_TABS = 'STUDENT_LISTS_TABS.Dean';
 export const COURSE_LIST = 'Courses.Dean';
 export const PAYMENT_LIST = 'Payments.Dean';
 export const PAYMENT = 'Payment.Dean';
 export const CHARTS = 'Charts.Dean';
+
+const StudentListsTabs = createBottomTabNavigator({
+  [ORDER_LIST]: OrderList,
+  [PAYMENT_LIST]: PaymentList
+},
+{
+  initialRouteName: PAYMENT_LIST,
+  navigationOptions: ({ navigation }) => ({
+    // eslint-disable-next-line react/display-name, react/prop-types
+    tabBarIcon: ({ focused }) => {
+      let iconName;
+      switch (navigation.state.routeName) {
+      case ORDER_LIST:
+        iconName = 'file-multiple'; break;
+      case PAYMENT_LIST:
+        iconName = 'view-list'; break;
+      default: break;
+      }
+      return (<Icon
+        color={ focused ? colors.greenDark : colors.grey }
+        name={ iconName }
+        size={ styles.tabIconSize }
+      />);
+    }
+  }),
+  tabBarOptions: {
+    showLabel: false
+  }
+});
 
 const DeanStack = createStackNavigator({
   [COURSE_LIST]: {
@@ -27,8 +63,8 @@ const DeanStack = createStackNavigator({
       title: 'Студенты'
     }
   },
-  [PAYMENT_LIST]: {
-    screen: PaymentList,
+  [STUDENT_LISTS_TABS]: {
+    screen: StudentListsTabs,
     navigationOptions: {
       title: 'Платежи'
     }
@@ -37,6 +73,12 @@ const DeanStack = createStackNavigator({
     screen: Payment,
     navigationOptions: {
       title: 'Платёж'
+    }
+  },
+  [ORDER]: {
+    screen: Order,
+    navigationOptions: {
+      title: 'Направление'
     }
   },
   [CHARTS]: {

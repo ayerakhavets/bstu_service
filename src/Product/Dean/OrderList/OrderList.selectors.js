@@ -1,8 +1,8 @@
 // @flow
 import type { ApplicationState, OrderData } from '../../types';
 
-export const selectOrderList = ({ student }: ApplicationState): OrderData[] =>
-  student.orderList.orderList;
+export const selectOrderList = ({ dean }: ApplicationState): OrderData[] =>
+  dean.orderList.orderList;
 
-export const selectIsLoading = ({ student }: ApplicationState): boolean =>
-  student.orderList.isLoading;
+export const selectIsLoading = ({ dean }: ApplicationState): boolean =>
+  dean.orderList.isLoading;

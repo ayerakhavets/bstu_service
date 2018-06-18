@@ -38,6 +38,7 @@ export default createStackNavigator({
   }
 },
 {
+  initialRouteName: SUBJECT_LIST,
   navigationOptions: {
     headerTintColor: colors.white,
     headerStyle: {

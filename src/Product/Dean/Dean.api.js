@@ -37,3 +37,9 @@ export const handleReslovePayment = async (uid, key, order, student) => {
   updates[`/lecturers/${lecturerUid}/subjects/${order.subject}/${uid}`] = student;
   return firebase.database().ref('').update(updates);
 };
+
+export const getOrderList = (uid: string): OrderData[] =>
+  // $FlowFixMe function once() requires another argument.
+  firebase.database().ref(`/orders/${uid}`)
+    .once('value')
+    .then(response => response._value); // eslint-disable-line no-underscore-dangle

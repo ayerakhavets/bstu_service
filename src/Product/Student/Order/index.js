@@ -1,18 +1,15 @@
 // @flow
-import { changePaymentData, clearPaymentData } from './Payment.actions';
-import Payment from './Payment.component';
-import paymentReducer, { type PaymentState, type PaymentImage } from './Payment.reducer';
-import paymentSaga from './Payment.sagas';
+import { changeOrderData, clearOrderData } from './Order.actions';
+import Order from './Order.component';
+import orderReducer, { type OrderState } from './Order.reducer';
 
 export {
-  changePaymentData,
-  clearPaymentData,
-  Payment,
-  paymentReducer,
-  paymentSaga
+  changeOrderData,
+  clearOrderData,
+  Order,
+  orderReducer
 };
 
 export type {
-  PaymentState,
-  PaymentImage
+  OrderState
 };
