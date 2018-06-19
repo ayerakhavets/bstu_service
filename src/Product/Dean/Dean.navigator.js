@@ -65,8 +65,19 @@ const DeanStack = createStackNavigator({
   },
   [STUDENT_LISTS_TABS]: {
     screen: StudentListsTabs,
-    navigationOptions: {
-      title: 'Платежи'
+    navigationOptions: ({ navigation }) => {
+      const params = navigation || {};
+      console.log('params student navigator: ', params);
+      const { index } = navigation.state;
+      let titleName = '';
+      if (navigation.state.routes[index].routeName === 'ORDER_LIST.Dean') {
+titleName = 'Направления'
+      } else {
+      titleName = 'Платежи'
+      }
+      return {
+        title: titleName
+      };
     }
   },
   [PAYMENT]: {

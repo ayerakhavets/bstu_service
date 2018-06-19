@@ -33,7 +33,7 @@ export function* handleOrderClose(): Saga<void> {
   // DECLINE_PAYMENT_REQUEST
   let successAction;
   let failureAction;
-  let resultPhrase;
+  let resultPhrase = 'Пересдача закрыта';
 
   const key = yield select(selectKey);
   const mark = yield select(selectMark);
@@ -55,12 +55,12 @@ export function* handleOrderClose(): Saga<void> {
 export function* handlePayment({ type }): Saga<void> {
   // APPROVE_ORDER_REQUEST
   // DECLINE_PAYMENT_REQUEST
-  let status;
+
   let successAction;
   let failureAction;
   let resultPhrase;
 
-    status = 'set';
+
     successAction = approveOrderSuccess;
     failureAction = approveOrderFailure;
     resultPhrase = 'Дата сдачи назначена';
@@ -70,7 +70,7 @@ export function* handlePayment({ type }): Saga<void> {
 
   try {
     const date = yield select(selectDate);
-    yield call(setOrder, student.uid, key, status, date);
+    yield call(setOrder, student.uid, key, date);
 
     NavigatorActions.back();
     yield put(successAction());

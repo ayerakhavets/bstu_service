@@ -92,9 +92,7 @@ class Payment extends Component<PaymentProps> {
             <View style={ styles.container }>
               <LabelInput
                 label="ФИО"
-                value={ `${this.props.currentUser.surname} \
-                ${this.props.currentUser.name} 
-                ${this.props.currentUser.middleName}` }
+                value={ `${this.props.currentUser.surname}${this.props.currentUser.name}${this.props.currentUser.middleName}` }
                 editable={ false }
               />
               <LabelInput

@@ -19,19 +19,19 @@ function PaymentListItem(props: PaymentListItemProps) {
   const subtitle = () => {
     if (item.status === 'planning') {
       return (<View style={ styles.subtitle }>
-        <Text>{item.subject}</Text>
-        <Text style={ styles.paymentTypeText }>{`c '${item.startDate}' по '${item.endDate}'`}</Text>
+        <Text>{item.student.surname}</Text>
+        <Text style={ styles.paymentTypeText }>{`c ${item.startDate} по ${item.endDate}`}</Text>
       </View>);
     } else if (item.status === 'set') {
       return (<View style={ styles.subtitle }>
-        <Text>{item.subject}</Text>
-        <Text style={ styles.paymentTypeText }>{`дата: '${item.date}'`}</Text>
+        <Text>{item.student.surname}</Text>
+        <Text style={ styles.paymentTypeText }>{`дата: ${item.date}`}</Text>
       </View>);
     }
 
     return (<View style={ styles.subtitle }>
-      <Text>{item.subject}</Text>
-      <Text style={ styles.paymentTypeText }>{`дата: '${item.date}' оценка: ${item.mark}}`}</Text>
+      <Text>{item.student.surname}</Text>
+      <Text style={ styles.paymentTypeText }>{`дата: ${item.date} оценка: ${item.mark}`}</Text>
     </View>);
   };
 
