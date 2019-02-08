@@ -3,9 +3,9 @@ import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { ProductNavigator, productReducer, productSaga } from './src/Product';
-import NavigatorService from './src/Services/navigator';
-import { colors } from './src/Components';
+import { ProductNavigator, productReducer, productSaga } from './Product';
+import NavigatorService from './Services/navigator';
+import { colors } from './Components';
 
 // FIXME: put inside the component
 const sagaMiddleware = createSagaMiddleware();
