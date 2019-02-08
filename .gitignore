@@ -22,6 +22,9 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
+# Cocoa Pods
+ios/Pods
+
 # Android/IntelliJ
 #
 build/
@@ -35,6 +38,10 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
+
+# Ide settings
+#
+.vscode/
 
 # BUCK
 buck-out/
