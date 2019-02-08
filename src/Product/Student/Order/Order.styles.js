@@ -1,5 +1,5 @@
 // @flow
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors } from '../../../Components';
 
 export { colors };
@@ -38,7 +38,7 @@ export default StyleSheet.create({
     borderColor: colors.grey,
     height: 400,
     marginBottom: 10,
-    resizeMode: Image.resizeMode.contain,
+    resizeMode: 'contain',
     width: '100%'
   },
   input: {
