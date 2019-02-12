@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, View, Text } from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
+import { colors, HeaderRight } from '@my/components';
 import type { StudentInfo } from '../../types';
 import {
   loadStudentListRequest,
@@ -10,7 +11,6 @@ import {
 } from './StudentList.actions';
 import { selectIsLoading, selectStudentList } from './StudentList.selectors';
 import styles from './StudentList.styles';
-import { colors, HeaderRight } from '../../../Components';
 
 type StudentListProps = {
   isLoading: boolean,

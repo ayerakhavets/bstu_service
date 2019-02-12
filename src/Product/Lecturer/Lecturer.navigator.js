@@ -1,6 +1,6 @@
 // @flow
 import { createStackNavigator } from 'react-navigation';
-import { colors } from '../../Components';
+import { colors } from '@my/components';
 import { Order } from './Order';
 import { OrderList } from './OrderList';
 import { StudentList } from './StudentList';

@@ -1,6 +1,4 @@
 // @flow
-import { createSelector } from 'reselect';
-import { helpers, type PickerItem } from '../../../Components';
 import type { ApplicationState } from '../../types';
 
 export const selectDate = ({ student }: ApplicationState): string =>

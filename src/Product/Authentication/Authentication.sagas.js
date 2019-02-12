@@ -2,7 +2,7 @@
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
-import { NavigatorActions, Toast } from '../../Services';
+import { NavigatorActions, Toast } from '@my/framework';
 import { changeUserInfo, clearStudentInfo } from '../Student';
 import {
   createUserWithEmailAndPassword,

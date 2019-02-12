@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, View, Text } from 'react-native';
-import { PaymentListItem, MyButton } from '../../../Components';
+import { PaymentListItem, MyButton } from '@my/components';
 import type { PaymentData } from '../../types';
 import {
   loadPaymentListRequest,

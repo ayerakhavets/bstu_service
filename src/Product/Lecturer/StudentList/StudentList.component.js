@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, Text, View } from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
-import { colors } from '../../../Components';
+import { colors } from '@my/components';
 import type { StudentInfo } from '../../types';
 import {
   loadStudentListRequest,

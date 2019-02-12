@@ -13,7 +13,7 @@ import {
   LabelInput,
   MyButton,
   Screen
-} from '../../../Components';
+} from '@my/components';
 import { type StudetnInfo } from '../../types';
 import {
   approvePaymentRequest,

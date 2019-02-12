@@ -17,7 +17,7 @@ import {
   MyButton,
   Screen,
   type PickerItem
-} from '../../../Components';
+} from '@my/components';
 import {
   changeDate,
   changeMoneyAmount,

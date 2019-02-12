@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { List, ListItem } from 'react-native-elements';
-import { colors, HeaderRight } from '../../../Components';
+import { colors, HeaderRight } from '@my/components';
 import { logOut } from '../../Authentication';
 import { openStudentList, type NavigationParams } from './SubjectList.actions';
 import styles from './SubjectList.styles';

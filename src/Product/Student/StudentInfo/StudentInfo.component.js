@@ -8,7 +8,7 @@ import {
   MyButton,
   Screen,
   type PickerItem
-} from '../../../Components';
+} from '@my/components';
 // FIXME: cyclic dependency.
 import { logOut } from '../../Authentication/Authentication.actions';
 import {

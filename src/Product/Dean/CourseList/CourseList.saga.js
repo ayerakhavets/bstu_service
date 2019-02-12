@@ -1,7 +1,7 @@
 // @flow
 import { type Saga } from 'redux-saga';
 import { put, takeEvery } from 'redux-saga/effects';
-import { NavigatorActions } from '../../../Services';
+import { NavigatorActions } from '@my/framework';
 import {
   OPEN_STUDENT_LIST,
   changeCourse,

@@ -1,7 +1,7 @@
 // @flow
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { NavigatorActions, Toast } from '../../../Services';
+import { NavigatorActions, Toast } from '@my/framework';
 import { getStudentList } from '../Lecturer.api';
 import {
   LOAD_STUDENT_LIST_REQUEST,

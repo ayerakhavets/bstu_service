@@ -3,7 +3,7 @@ import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 // $FlowFixMe no default export.
 import ImagePicker, { type Response, type Options } from 'react-native-image-picker';
-import { NavigatorActions, Toast } from '../../../Services';
+import { NavigatorActions, Toast } from '@my/framework';
 import { selectUid } from '../../Authentication';
 import {
   addPayment,

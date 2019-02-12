@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, View, Text } from 'react-native';
-import { OrderListItem } from '../../../Components';
+import { OrderListItem } from '.@my/components';
 import type { OrderData } from '../../types';
 import {
   loadOrderListRequest,
