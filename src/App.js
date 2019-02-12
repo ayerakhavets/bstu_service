@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { colors } from '@my/components';
-import NavigatorActions from '@my/framework';
+import { NavigatorActions } from '@my/framework';
 import { ProductNavigator, productReducer, productSaga } from './Product';
 
 // FIXME: put inside the component
