@@ -2,11 +2,11 @@
 import React from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { colors, HeaderRight, styles } from '@my/components';
 import { Order } from './Order';
 import { OrderList } from './OrderList';
 import { PaymentList } from './PaymentList';
 import { StudentInfo } from './StudentInfo';
-import { colors, HeaderRight, styles } from '../../Components';
 import { Payment } from './Payment';
 
 export const ORDER = 'Направление';

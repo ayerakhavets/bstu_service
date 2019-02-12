@@ -1,7 +1,7 @@
 
 // @flow
 import { StyleSheet } from 'react-native';
-import { colors } from '../../Components';
+import { colors } from '@my/components';
 
 export { colors };
 

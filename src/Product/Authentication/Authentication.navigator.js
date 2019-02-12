@@ -1,6 +1,6 @@
 // @flow
 import { createStackNavigator } from 'react-navigation';
-import { colors } from '../../Components';
+import { colors } from '@my/components';
 import Authentication from './Authentication.component';
 
 export const APP_ENTRY = 'Вход в приложение';

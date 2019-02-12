@@ -2,9 +2,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { colors, styles } from '@my/components';
 import HorizontaBarChartWithYAxis from './charts.component';
 import SomeChart from './chart2.component';
-import { colors, styles } from '../../../Components';
 
 export const CHART_ONE = 'График';
 export const CHART_TWO = 'График2';

@@ -1,7 +1,7 @@
 // @flow
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { Toast } from '../../../Services';
+import { Toast } from '@my/framework';
 // FIXME: use this reducer part to select email and uid.
 // FIXME: set this values after registration.
 import { selectEmail, selectUid } from '../../Authentication';

@@ -2,13 +2,13 @@
 import React from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { colors, styles } from '@my/components';
 import { CourseList } from './CourseList';
 import { Order } from './Order';
 import { OrderList } from './OrderList';
 import { StudentList } from './StudentList';
 import { PaymentList } from './PaymentList';
 import { Payment } from './Payment';
-import { colors, styles } from '../../Components';
 import { Charts } from './Charts';
 
 // FIXME: path names
@@ -71,9 +71,9 @@ const DeanStack = createStackNavigator({
       const { index } = navigation.state;
       let titleName = '';
       if (navigation.state.routes[index].routeName === 'ORDER_LIST.Dean') {
-titleName = 'Направления'
+        titleName = 'Направления';
       } else {
-      titleName = 'Платежи'
+        titleName = 'Платежи';
       }
       return {
         title: titleName

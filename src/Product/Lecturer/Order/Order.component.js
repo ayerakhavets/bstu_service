@@ -10,7 +10,7 @@ import {
   LabelInput,
   MyButton,
   Screen
-} from '../../../Components';
+} from '@my/components';
 import { type StudetnInfo } from '../../types';
 import {
   approveOrderRequest,
@@ -70,20 +70,20 @@ class Payment extends Component<PaymentProps> {
                 value={ this.props.lecturer }
                 editable={ false }
               />
-               <View style={styles.dateView1}>
-              <LabelInput
-                label="Начало сдачи"
-                value={ this.props.startDate }
-                editable={ false }
-                containerViewStyle={styles.datePicker2}
-              />
-              <LabelInput
-                label="Конец сдачи"
-                value={ this.props.endDate }
-                editable={ false }
-                containerViewStyle={styles.datePicker2}
-              />
-              </View>
+              <View style={ styles.dateView1 }>
+                <LabelInput
+                  label="Начало сдачи"
+                  value={ this.props.startDate }
+                  editable={ false }
+                  containerViewStyle={ styles.datePicker2 }
+                />
+                <LabelInput
+                  label="Конец сдачи"
+                  value={ this.props.endDate }
+                  editable={ false }
+                  containerViewStyle={ styles.datePicker2 }
+                />
+               </View>
               <LabelInput
                 label="Название дисциплины"
                 value={ this.props.subject }
@@ -118,13 +118,13 @@ class Payment extends Component<PaymentProps> {
                     value={ this.props.mark }
                     onChangeText={ this.props.onChangeMark }
                   />
-                  : this.props.mark 
+                  : this.props.mark
                     ? <LabelInput
                       label="Оценка"
                       value={ this.props.mark }
                       editable={ false }
                     />
-                    :  null
+                    : null
               }
               <MyButton
                 icon={{ name: 'done' }}

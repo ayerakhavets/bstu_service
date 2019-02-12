@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text, SectionList } from 'react-native';
 import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
-import { colors, HeaderRight } from '../../../Components';
+import { colors, HeaderRight } from '@my/components';
 import { logOut } from '../../Authentication';
 import { openStudentList, type NavigationParams } from './CourseList.actions';
 import styles from './CourseList.styles';

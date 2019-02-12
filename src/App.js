@@ -3,9 +3,9 @@ import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { colors } from '@my/components';
+import NavigatorActions from '@my/framework';
 import { ProductNavigator, productReducer, productSaga } from './Product';
-import NavigatorService from './Services/navigator';
-import { colors } from './Components';
 
 // FIXME: put inside the component
 const sagaMiddleware = createSagaMiddleware();
@@ -21,7 +21,7 @@ sagaMiddleware.run(productSaga);
 
 class App extends Component {
   configureNavigator = (navigatorRef) => {
-    NavigatorService.setContainer(navigatorRef);
+    NavigatorActions.setContainer(navigatorRef);
   }
 
   render() {

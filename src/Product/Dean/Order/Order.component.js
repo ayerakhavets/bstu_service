@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import {
   LabelInput,
   Screen
-} from '../../../Components';
+} from '@my/components';
 import { type StudetnInfo } from '../../types';
 import {
   selectDate,
@@ -60,19 +60,19 @@ class Payment extends Component<PaymentProps> {
                 value={ this.props.lecturer }
                 editable={ false }
               />
-              <View style={styles.dateView}>
-              <LabelInput
-                label="Начало сдачи"
-                value={ this.props.startDate }
-                editable={ false }
-                containerViewStyle={styles.datePicker}
-              />
-              <LabelInput
-                label="Конец сдачи"
-                value={ this.props.endDate }
-                editable={ false }
-                containerViewStyle={styles.datePicker}
-              />
+              <View style={ styles.dateView }>
+                <LabelInput
+                  label="Начало сдачи"
+                  value={ this.props.startDate }
+                  editable={ false }
+                  containerViewStyle={ styles.datePicker }
+                />
+                <LabelInput
+                  label="Конец сдачи"
+                  value={ this.props.endDate }
+                  editable={ false }
+                  containerViewStyle={ styles.datePicker }
+                />
               </View>
               <LabelInput
                 label="Название дисциплины"
@@ -80,23 +80,23 @@ class Payment extends Component<PaymentProps> {
                 editable={ false }
               />
 
-            {this.props.date 
-            ?  <LabelInput
-                label="Дата сдачи"
-                value={ this.props.date }
-                editable={ false }
-              />
-              : null
-}
+              {this.props.date
+                ? <LabelInput
+                  label="Дата сдачи"
+                  value={ this.props.date }
+                  editable={ false }
+            />
+                : null
+              }
 
-              { this.props.mark 
-              ? <LabelInput
-                label="Оценка"
-                value={ this.props.mark }
-                editable={ false }
-              />
-              :  null
-}
+              { this.props.mark
+                ? <LabelInput
+                  label="Оценка"
+                  value={ this.props.mark }
+                  editable={ false }
+                />
+                : null
+              }
             </View>
           </Fragment> }
       </Screen>
