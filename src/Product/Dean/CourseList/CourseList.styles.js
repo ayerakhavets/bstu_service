@@ -1,7 +1,7 @@
 
 // @flow
 import { StyleSheet } from 'react-native';
-import { colors } from '.@my/components';
+import { colors } from '@my/components';
 
 export default StyleSheet.create({
   headerView: {
