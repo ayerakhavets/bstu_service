@@ -3,7 +3,7 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '@my/components';
 
-export { colors };
+export const checkboxColor = colors.greenDark;
 
 export default StyleSheet.create({
   button: {
