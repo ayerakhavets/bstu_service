@@ -16,6 +16,8 @@ import {
 
 import styles, { checkboxColor } from './Authentication.styles';
 
+import { translate } from '../../App';
+
 
 type AuthenticationProps = {
   email: string,
@@ -59,7 +61,7 @@ class Authentication extends Component<AuthenticationProps> {
               <LabelInput
                 isError={ !email }
                 keyboardType="email-address"
-                placeholder="Электронная почта"
+                placeholder={ translate('hello') }
                 value={ email }
                 onChangeText={ changeEmail }
               />
