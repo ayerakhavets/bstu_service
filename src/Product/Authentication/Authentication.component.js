@@ -60,32 +60,32 @@ class Authentication extends Component<AuthenticationProps> {
               <LabelInput
                 isError={ !email }
                 keyboardType="email-address"
-                placeholder={ I18n.translate('email') }
+                placeholder={ I18n.translate('auth.email') }
                 value={ email }
                 onChangeText={ changeEmail }
               />
               <LabelInput
                 containerViewStyle={ styles.input }
                 isError={ !password }
-                placeholder={ I18n.translate('password') }
+                placeholder={ I18n.translate('auth.password') }
                 secureTextEntry
                 value={ password }
                 onChangeText={ changePassword }
               />
               <MyButton
                 containerViewStyle={ styles.button }
-                title={ I18n.translate('logIn') }
+                title={ I18n.translate('auth.logIn') }
                 onPress={ logIn }
               />
               <MyButton
-                title={ I18n.translate('signUp') }
+                title={ I18n.translate('auth.signUp') }
                 onPress={ signUp }
               />
               <CheckBox
                 checked={ isRemember }
                 checkedColor={ checkboxColor }
                 containerStyle={ styles.checkBox }
-                title={ I18n.translate('remember') }
+                title={ I18n.translate('auth.remember') }
                 onPress={ toggleIsRemember }
               />
             </Fragment>

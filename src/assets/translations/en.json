@@ -1,7 +1,9 @@
 {
-  "email": "Email",
-  "password": "Password",
-  "logIn": "Login",
-  "signUp": "Sign Up",
-  "remember": "Remember me"
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "logIn": "Login",
+    "signUp": "Sign Up",
+    "remember": "Remember me"
+  }
 }
