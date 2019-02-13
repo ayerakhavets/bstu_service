@@ -136,6 +136,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-localize')
     implementation project(':react-native-firebase')
 
     // Firebase dependencies
