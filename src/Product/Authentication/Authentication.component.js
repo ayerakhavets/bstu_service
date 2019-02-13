@@ -1,98 +1,94 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import { ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
+
+import { ActivityIndicator } from 'react-native';
 import { CheckBox } from 'react-native-elements';
-import {
-  LabelInput,
-  MyButton,
-  Screen
-} from '@my/components';
-import {
-  changeEmail,
-  changePassword,
-  logIn,
-  preAuthentication,
-  signUp,
-  toggleIsRemember
-} from './Authentication.actions';
+import { LabelInput, MyButton, Screen } from '@my/components';
+
+import * as actions from './Authentication.actions';
 import {
   selectEmail,
   selectIsLoading,
   selectIsRemember,
   selectPassword
 } from './Authentication.selectors';
-import styles, { colors } from './Authentication.styles';
+
+import styles, { checkboxColor } from './Authentication.styles';
+
 
 type AuthenticationProps = {
   email: string,
   isLoading: boolean,
   isRemember: boolean,
   password: string,
-  onChangeEmail: () => void,
-  onChangePassword: () => void,
-  onLogIn: () => void,
-  onPreAuthentication: () => void,
-  onPressIsRemember: () => void,
-  onSignUp: () => void
+
+  changeEmail: () => void,
+  changePassword: () => void,
+  logIn: () => void,
+  preAuthentication: () => void,
+  signUp: () => void,
+  toggleIsRemember: () => void
 };
 
 class Authentication extends Component<AuthenticationProps> {
   constructor(props: AuthenticationProps) {
     super(props);
-    props.onPreAuthentication();
+    props.preAuthentication();
   }
 
   render() {
     const {
+      changeEmail,
+      changePassword,
       email,
       isLoading,
       isRemember,
+      logIn,
       password,
-      onChangeEmail,
-      onChangePassword,
-      onLogIn,
-      onSignUp,
-      onPressIsRemember
+      signUp,
+      toggleIsRemember
     } = this.props;
 
     return (
       <Screen>
         { isLoading
           ? <ActivityIndicator size="large" />
-          : <Fragment>
-            <LabelInput
-              isError={ !email }
-              keyboardType="email-address"
-              placeholder="Электронная почта"
-              value={ email }
-              onChangeText={ onChangeEmail }
-            />
-            <LabelInput
-              containerViewStyle={ styles.input }
-              isError={ !password }
-              placeholder="Пароль"
-              secureTextEntry
-              value={ password }
-              onChangeText={ onChangePassword }
-            />
-            <MyButton
-              containerViewStyle={ styles.button }
-              title="Войти"
-              onPress={ onLogIn }
-            />
-            <MyButton
-              title="Зарегистрироваться"
-              onPress={ onSignUp }
-            />
-            <CheckBox
-              checked={ isRemember }
-              checkedColor={ colors.greenDark }
-              containerStyle={ styles.checkBox }
-              title="Запомнить меня"
-              onPress={ onPressIsRemember }
-            />
-          </Fragment> }
+          : (
+            <Fragment>
+              <LabelInput
+                isError={ !email }
+                keyboardType="email-address"
+                placeholder="Электронная почта"
+                value={ email }
+                onChangeText={ changeEmail }
+              />
+              <LabelInput
+                containerViewStyle={ styles.input }
+                isError={ !password }
+                placeholder="Пароль"
+                secureTextEntry
+                value={ password }
+                onChangeText={ changePassword }
+              />
+              <MyButton
+                containerViewStyle={ styles.button }
+                title="Войти"
+                onPress={ logIn }
+              />
+              <MyButton
+                title="Зарегистрироваться"
+                onPress={ signUp }
+              />
+              <CheckBox
+                checked={ isRemember }
+                checkedColor={ checkboxColor }
+                containerStyle={ styles.checkBox }
+                title="Запомнить меня"
+                onPress={ toggleIsRemember }
+              />
+            </Fragment>
+          ) }
       </Screen>
     );
   }
@@ -106,12 +102,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  onChangeEmail: changeEmail,
-  onPreAuthentication: preAuthentication,
-  onPressIsRemember: toggleIsRemember,
-  onChangePassword: changePassword,
-  onLogIn: logIn,
-  onSignUp: signUp
+  changeEmail: actions.changeEmail,
+  preAuthentication: actions.preAuthentication,
+  toggleIsRemember: actions.toggleIsRemember,
+  changePassword: actions.changePassword,
+  logIn: actions.logIn,
+  signUp: actions.signUp
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Authentication);
