@@ -1,13 +1,14 @@
 // @flow
+import { handleActions } from 'redux-actions';
+
 import {
-  CHANGE_EMAIL,
-  CHANGE_PASSWORD,
-  CHANGE_UID,
+  CHANGE_EMAIL, type ChangeEmail,
+  CHANGE_PASSWORD, type ChangePassword,
+  CHANGE_UID, type ChangeUid,
   CLEAR_USER_DATA,
   LOADING_END,
   LOADING_START,
-  TOGGLE_IS_REMEMBER,
-  type AuthenticationActions
+  TOGGLE_IS_REMEMBER
 } from './Authentication.actions';
 
 export type AuthenticationState = {
@@ -17,6 +18,7 @@ export type AuthenticationState = {
   password: string,
   uid: string
 }
+type S = AuthenticationState;
 
 const initialState = {
   email: '',
@@ -26,42 +28,30 @@ const initialState = {
   uid: ''
 };
 
-export default (state: AuthenticationState = initialState,
-  action: AuthenticationActions): AuthenticationState => {
-  switch (action.type) {
-  case CHANGE_EMAIL:
-    return {
-      ...state,
-      email: action.payload
-    };
-  case CHANGE_PASSWORD:
-    return {
-      ...state,
-      password: action.payload
-    };
-  case CHANGE_UID:
-    return {
-      ...state,
-      uid: action.payload
-    };
-  case LOADING_END:
-    return {
-      ...state,
-      isLoading: false
-    };
-  case LOADING_START:
-    return {
-      ...state,
-      isLoading: true
-    };
-  case CLEAR_USER_DATA:
-    return initialState;
-  case TOGGLE_IS_REMEMBER:
-    return {
-      ...state,
-      isRemember: !state.isRemember
-    };
-  default:
-    return state;
-  }
-};
+export default handleActions({
+  [CHANGE_EMAIL]: (state: S, { payload }: ChangeEmail): S => ({
+    ...state,
+    email: payload
+  }),
+  [CHANGE_PASSWORD]: (state: S, { payload }: ChangePassword): S => ({
+    ...state,
+    password: payload
+  }),
+  [CHANGE_UID]: (state: S, { payload }: ChangeUid): S => ({
+    ...state,
+    uid: payload
+  }),
+  [LOADING_END]: (state: S): S => ({
+    ...state,
+    isLoading: false
+  }),
+  [LOADING_START]: (state: S): S => ({
+    ...state,
+    isLoading: true
+  }),
+  [CLEAR_USER_DATA]: (): S => initialState,
+  [TOGGLE_IS_REMEMBER]: (state: S): S => ({
+    ...state,
+    isRemember: !state.isRemember
+  })
+}, initialState);

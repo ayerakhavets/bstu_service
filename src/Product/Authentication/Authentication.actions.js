@@ -1,68 +1,40 @@
 // @flow
-export const CHANGE_EMAIL = 'CHANGE_EMAIL';
-export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
-export const CHANGE_UID = 'CHANGE_UID';
-export const CLEAR_USER_DATA = 'CLEAR_USER_DATA';
-export const LOADING_END = 'LOADING_END';
-export const LOADING_START = 'LOADING_START';
-export const LOG_IN = 'LOG_IN';
-export const LOG_OUT = 'LOG_OUT';
-export const PRE_AUTHENTICATION = 'PRE_AUTHENTICATION';
-export const SIGN_UP = 'SIGN_UP';
-export const TOGGLE_IS_REMEMBER = 'TOGGLE_IS_REMEMBER';
+import { createAction, type ActionType } from 'redux-actions';
 
-export type ChangeEmailAction = { type: typeof CHANGE_EMAIL, payload: string };
-export type ChangePasswordAction = { type: typeof CHANGE_PASSWORD, payload: string };
-export type ChangeUidAction = { type: typeof CHANGE_UID, payload: string };
-export type ClearUserDataAction = { type: typeof CLEAR_USER_DATA };
-export type LoadingEndAction = { type: typeof LOADING_END };
-export type LoadingStartAction = { type: typeof LOADING_START };
-export type LogInAction = { type: typeof LOG_IN };
-export type LogOutAction = { type: typeof LOG_OUT };
-export type PreAuthenticationAction = { type: typeof PRE_AUTHENTICATION };
-export type SignUpAction = { type: typeof SIGN_UP };
-export type ToggleIsRememberAction = { type: typeof TOGGLE_IS_REMEMBER };
+const AUTH = 'Authentication';
 
-export const changeEmail = (email: string): ChangeEmailAction => ({
-  type: CHANGE_EMAIL,
-  payload: email
-});
+export const CHANGE_EMAIL = `CHANGE_EMAIL@${AUTH}`;
+export const changeEmail = createAction(CHANGE_EMAIL, (email: string) => email);
+export type ChangeEmail = ActionType<typeof changeEmail>;
 
-export const changePassword = (password: string): ChangePasswordAction => ({
-  type: CHANGE_PASSWORD,
-  payload: password
-});
+export const CHANGE_PASSWORD = `CHANGE_PASSWORD@${AUTH}`;
+export const changePassword = createAction(CHANGE_PASSWORD, (password: string) => password);
+export type ChangePassword = ActionType<typeof ChangePassword>
 
-export const changeUid = (uid: string): ChangeUidAction => ({
-  type: CHANGE_UID,
-  payload: uid
-});
+export const CHANGE_UID = `CHANGE_UID@${AUTH}`;
+export const changeUid = createAction(CHANGE_UID, (uid: string) => uid);
+export type ChangeUid = ActionType<typeof changeUid>
 
-export const clearUserData = (): ClearUserDataAction => ({ type: CLEAR_USER_DATA });
+export const CLEAR_USER_DATA = `CLEAR_USER_DATA@${AUTH}`;
+export const clearUserData = createAction(CLEAR_USER_DATA, () => undefined);
 
-export const loadingEnd = (): LoadingEndAction => ({ type: LOADING_END });
+export const LOADING_END = `LOADING_END@${AUTH}`;
+export const loadingEnd = createAction(LOADING_END, () => undefined);
 
-export const loadingStart = (): LoadingStartAction => ({ type: LOADING_START });
+export const LOADING_START = `LOADING_START@${AUTH}`;
+export const loadingStart = createAction(LOADING_START, () => undefined);
 
-export const logIn = (): LogInAction => ({ type: LOG_IN });
+export const LOG_IN = `LOG_IN@${AUTH}`;
+export const logIn = createAction(LOG_IN, () => undefined);
 
-export const logOut = (): LogOutAction => ({ type: LOG_OUT });
+export const LOG_OUT = `LOG_OUT@${AUTH}`;
+export const logOut = createAction(LOG_OUT, () => undefined);
 
-export const preAuthentication = (): PreAuthenticationAction => ({ type: PRE_AUTHENTICATION });
+export const PRE_AUTHENTICATION = `PRE_AUTHENTICATION@${AUTH}`;
+export const preAuthentication = createAction(PRE_AUTHENTICATION, () => undefined);
 
-export const signUp = (): SignUpAction => ({ type: SIGN_UP });
+export const SIGN_UP = `SIGN_UP@${AUTH}`;
+export const signUp = createAction(SIGN_UP, () => undefined);
 
-export const toggleIsRemember = (): ToggleIsRememberAction => ({ type: TOGGLE_IS_REMEMBER });
-
-export type AuthenticationActions =
-  | ChangeEmailAction
-  | ChangePasswordAction
-  | ChangeUidAction
-  | ClearUserDataAction
-  | LoadingEndAction
-  | LoadingStartAction
-  | LogInAction
-  | LogOutAction
-  | PreAuthenticationAction
-  | SignUpAction
-  | ToggleIsRememberAction
+export const TOGGLE_IS_REMEMBER = `TOGGLE_IS_REMEMBER@${AUTH}`;
+export const toggleIsRemember = createAction(TOGGLE_IS_REMEMBER, () => undefined);
