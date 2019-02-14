@@ -41,6 +41,7 @@ export default handleActions({
     ...state,
     uid: payload
   }),
+  [CLEAR_USER_DATA]: (): S => initialState,
   [LOADING_END]: (state: S): S => ({
     ...state,
     isLoading: false
@@ -49,7 +50,6 @@ export default handleActions({
     ...state,
     isLoading: true
   }),
-  [CLEAR_USER_DATA]: (): S => initialState,
   [TOGGLE_IS_REMEMBER]: (state: S): S => ({
     ...state,
     isRemember: !state.isRemember

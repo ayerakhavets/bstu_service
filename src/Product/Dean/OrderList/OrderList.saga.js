@@ -10,7 +10,7 @@ import {
   OPEN_ORDER_INFO,
   loadOrderListFailure,
   loadOrderListSuccess,
-  type OpenShowPaymentScreenAction
+  type OpenOrderInfoAction
 } from './OrderList.actions';
 
 export const ORDER = 'ORDER.Dean';
@@ -20,7 +20,7 @@ export default function* orderListSaga(): Saga<void> {
   yield takeEvery(OPEN_ORDER_INFO, handleOpenShowPaymentScreen);
 }
 
-export function* handleOpenShowPaymentScreen({ payload }: OpenShowPaymentScreenAction): Saga<void> {
+export function* handleOpenShowPaymentScreen({ payload }: OpenOrderInfoAction): Saga<void> {
   yield put(changeOrderData(payload));
   NavigatorActions.navigate(ORDER);
 }

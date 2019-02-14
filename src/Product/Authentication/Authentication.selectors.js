@@ -1,6 +1,7 @@
 // @flow
 import type { ApplicationState } from '../types';
 
+
 export const selectEmail = ({ authentication }: ApplicationState): string => authentication.email;
 
 export const selectIsLoading = ({ authentication }: ApplicationState): boolean =>

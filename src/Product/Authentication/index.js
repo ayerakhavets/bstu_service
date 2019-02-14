@@ -1,8 +1,8 @@
 // @flow
 import Authentication from './Authentication.navigator';
-import { logOut } from './Authentication.actions';
 import authenticationReducer, { type AuthenticationState } from './Authentication.reducer';
-import authenticationSaga from './Authentication.sagas';
+import authenticationSaga from './Authentication.saga';
+import { logOut } from './Authentication.actions';
 import { selectEmail, selectUid } from './Authentication.selectors';
 
 export {
@@ -14,7 +14,4 @@ export {
   selectUid
 };
 
-export type {
-  AuthenticationState
-};
-
+export type { AuthenticationState };

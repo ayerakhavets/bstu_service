@@ -9,11 +9,11 @@ export default StyleSheet.create({
   button: {
     marginBottom: 10
   },
+  checkBox: {
+    backgroundColor: colors.white,
+    borderWidth: 0
+  },
   input: {
     marginBottom: 10
-  },
-  checkBox: {
-    borderWidth: 0,
-    backgroundColor: colors.white
   }
 });

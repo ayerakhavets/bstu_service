@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { Button } from 'react-native-elements';
 
 import styles from './MyButton.styles';
 import colors from '../colors';
 
 type ButtonProps = {
-  containerViewStyle?: StyleObj
+  containerViewStyle?: ViewStyleProp
 }
 
 function MyButton(props: ButtonProps) {

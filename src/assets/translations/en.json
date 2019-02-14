@@ -4,7 +4,8 @@
     "logIn": "Login",
     "password": "Password",
     "remember": "Remember me",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "title": "App entry"
   },
   "courseList": {
     "course": "Course {{title}}",

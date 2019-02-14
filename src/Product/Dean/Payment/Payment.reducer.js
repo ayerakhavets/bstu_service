@@ -51,6 +51,7 @@ const initialState = {
   key: '',
   moneyAmount: '',
   paymentType: '',
+  paymentTypes: [], // was added without any check.
   isLoading: false,
   status: 'declined'
 };

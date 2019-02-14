@@ -1,15 +1,16 @@
 // @flow
 import { createStackNavigator } from 'react-navigation';
+import { I18n } from '@my/framework';
 import { colors } from '@my/components';
+import { AUTHENTICATION } from './Authentication.constants';
 import Authentication from './Authentication.component';
 
-export const APP_ENTRY = 'Вход в приложение';
 
 export default createStackNavigator({
-  [APP_ENTRY]: {
+  [AUTHENTICATION]: {
     screen: Authentication,
     navigationOptions: {
-      title: APP_ENTRY,
+      title: I18n.translate('auth.title'),
       headerStyle: {
         backgroundColor: colors.greenLight
       },

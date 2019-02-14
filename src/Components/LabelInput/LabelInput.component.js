@@ -1,13 +1,17 @@
 // @flow
 import React from 'react';
 import { View } from 'react-native';
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import type {
+  ViewStyleProp
+  // TextStyleProp,
+  // ImageStyleProp,
+} from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import styles from './LabelInput.styles';
 
 // FIXME: add TextInput styles
 type LabelInputProps = {
-  containerViewStyle?: StyleObj,
+  containerViewStyle?: ViewStyleProp,
   isError?: boolean,
   errorMessage?: string,
   label?: string

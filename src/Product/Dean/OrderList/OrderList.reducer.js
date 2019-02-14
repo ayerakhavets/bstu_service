@@ -5,11 +5,10 @@ import {
   LOAD_ORDER_LIST_SUCCESS,
   type OrderListActions
 } from './OrderList.actions';
-import type { OrderList } from '../../types';
 
 export type OrderListState = {
   isLoading: boolean,
-  orderList: OrderList[]
+  orderList: any
 }
 
 const initialState = {

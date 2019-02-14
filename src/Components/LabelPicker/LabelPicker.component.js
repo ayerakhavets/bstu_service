@@ -2,7 +2,7 @@
 import React from 'react';
 import { Picker, View } from 'react-native';
 import { FormLabel, FormValidationMessage } from 'react-native-elements';
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import styles from './LabelPicker.styles';
 
 export type PickerItem = {
@@ -17,7 +17,7 @@ type LabelPickerProps = {
   pickerItems: PickerItem[],
   label: string,
   selectedValue?: string,
-  style?: StyleObj,
+  style?: ViewStyleProp,
   onValueChange: () => void
 }
 

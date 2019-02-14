@@ -23,7 +23,7 @@ const translationGetters = {
 //   (key, config) => i18n.t(key, config),
 //   (key, config) => (config ? key + JSON.stringify(config) : key),
 // );
-export const translate = (key, config) => i18n.t(key, config);
+export const translate = (key: i18n.Scope, config: i18n.TranslateOptions) => i18n.t(key, config);
 
 export const setI18nConfig = () => {
   // fallback if no available language fits
