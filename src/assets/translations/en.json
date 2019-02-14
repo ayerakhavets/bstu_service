@@ -1,9 +1,53 @@
 {
   "auth": {
     "email": "Email",
-    "password": "Password",
     "logIn": "Login",
-    "signUp": "Sign Up",
-    "remember": "Remember me"
+    "password": "Password",
+    "remember": "Remember me",
+    "signUp": "Sign Up"
+  },
+  "courseList": {
+    "course": "Course {{title}}",
+    "design": "Desig",
+    "mobile": "Mobile",
+    "software": "Software systems",
+    "system": "Informational systems"
+  },
+  "order": {
+    "date": "Date",
+    "dateFrom": "Date from",
+    "dateTo": "Date to",
+    "lecturer": "Lecturer",
+    "mark": "Mark",
+    "studentId": "Student ID",
+    "studentName": "Student",
+    "subject": "Subject"
+  },
+  "orderList": {
+    "pullToRefresh": "The list is empty. Pull to refresh"
+  },
+  "payment": {
+    "accept": "Accept",
+    "amount": "Amount",
+    "cancel": "Cancel",
+    "date": "Date",
+    "dateFrom": "Date from",
+    "dateTo": "Date to",
+    "decline": "Decline",
+    "id": "ID",
+    "lecturer": "Lecturer",
+    "name": "Name",
+    "ok": "Ok",
+    "paymentType": "Payment type",
+    "removal": "Removal",
+    "remove": "Remove",
+    "removeConfirm": "Confirm remove",
+    "subject": "Subject"
+  },
+  "paymentList": {
+    "pullToRefresh": "The list is empty. Pull to refresh"
+  },
+  "studentList": {
+    "pullToRefresh": "The list is empty. Pull to refresh"
   }
 }

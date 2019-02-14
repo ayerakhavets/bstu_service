@@ -3,7 +3,7 @@ export const CHANGE_COURSE = 'CHANGE_COURSE@Dean';
 export const CHANGE_SPECIALTY = 'CHANGE_SPECIALTY@Dean';
 export const OPEN_STUDENT_LIST = 'OPEN_STUDENT_LIST@Dean';
 
-type NavigationParams = {
+export type NavigationParams = {
   course: string,
   specialty: string
 }

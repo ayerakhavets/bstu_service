@@ -1,3 +1,5 @@
 # bstu_service
 
-TODO: add internationalization.
+## Getting started
+
+### Starting Project

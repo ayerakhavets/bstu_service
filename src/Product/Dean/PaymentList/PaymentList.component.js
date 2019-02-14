@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, View, Text } from 'react-native';
+import { I18n } from '@my/framework';
 import { PaymentListItem } from '@my/components';
 import type { PaymentData } from '../../types';
 import {
@@ -26,7 +27,7 @@ class PaymentList extends Component<PaymentListProps> {
   keyExtractor = checkItem => checkItem.key;
 
   renderEmptyItem = () => (<View style={ styles.emptyItemContainer }>
-    <Text>Список платежей пуст. Потяните для обновления</Text>
+    <Text>{ I18n.translate('paymentList.pullToRefresh') }</Text>
   </View>)
 
   renderItem = ({ item }) => (

@@ -1,15 +1,9 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import {
-  ActivityIndicator,
-  View
-} from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { connect } from 'react-redux';
-import {
-  LabelInput,
-  Screen
-} from '@my/components';
-import { type StudetnInfo } from '../../types';
+import { I18n } from '@my/framework';
+import { LabelInput, Screen } from '@my/components';
 import {
   selectDate,
   selectStudent,
@@ -21,16 +15,16 @@ import {
   selectIsLoading,
   selectStatus
 } from './Order.selectors';
-import styles, { colors } from './Order.styles';
+import styles from './Order.styles';
 
 
 type PaymentProps = {
-  student: string,
+  // TODO: add propr type (StudentInfo)
+  student: any,
   date: string,
   mark: string,
   lecturer: string,
   subject: string,
-  status: string,
   startDate: string,
   endDate: string,
   isLoading: boolean
@@ -43,62 +37,64 @@ class Payment extends Component<PaymentProps> {
       <Screen>
         { this.props.isLoading
           ? <ActivityIndicator size="large" />
-          : <Fragment>
-            <View style={ styles.container }>
-              <LabelInput
-                label="ФИО студента"
-                value={ `${this.props.student.surname} ${this.props.student.name} ${this.props.student.middleName}` }
-                editable={ false }
-              />
-              <LabelInput
-                label="Номер студенческого билета "
-                value={ this.props.student.studentId }
-                editable={ false }
-              />
-              <LabelInput
-                label="Преподаватель"
-                value={ this.props.lecturer }
-                editable={ false }
-              />
-              <View style={ styles.dateView }>
+          : (
+            <Fragment>
+              <View style={ styles.container }>
                 <LabelInput
-                  label="Начало сдачи"
-                  value={ this.props.startDate }
+                  label={ I18n.translate('order.studentName') }
+                  value={ `${this.props.student.surname} ${this.props.student.name} ${this.props.student.middleName}` }
                   editable={ false }
-                  containerViewStyle={ styles.datePicker }
                 />
                 <LabelInput
-                  label="Конец сдачи"
-                  value={ this.props.endDate }
+                  label={ I18n.translate('order.studentId') }
+                  value={ this.props.student.studentId }
                   editable={ false }
-                  containerViewStyle={ styles.datePicker }
                 />
+                <LabelInput
+                  label={ I18n.translate('order.lecturer') }
+                  value={ this.props.lecturer }
+                  editable={ false }
+                />
+                <View style={ styles.dateView }>
+                  <LabelInput
+                    label={ I18n.translate('order.dateFrom') }
+                    value={ this.props.startDate }
+                    editable={ false }
+                    containerViewStyle={ styles.datePicker }
+                  />
+                  <LabelInput
+                    label={ I18n.translate('order.dateTo') }
+                    value={ this.props.endDate }
+                    editable={ false }
+                    containerViewStyle={ styles.datePicker }
+                  />
+                </View>
+                <LabelInput
+                  label={ I18n.translate('order.subject') }
+                  value={ this.props.subject }
+                  editable={ false }
+                />
+
+                {this.props.date
+                  ? <LabelInput
+                    label={ I18n.translate('order.date') }
+                    value={ this.props.date }
+                    editable={ false }
+                  />
+                  : null
+                }
+
+                { this.props.mark
+                  ? <LabelInput
+                    label={ I18n.translate('order.mark') }
+                    value={ this.props.mark }
+                    editable={ false }
+                  />
+                  : null
+                }
               </View>
-              <LabelInput
-                label="Название дисциплины"
-                value={ this.props.subject }
-                editable={ false }
-              />
-
-              {this.props.date
-                ? <LabelInput
-                  label="Дата сдачи"
-                  value={ this.props.date }
-                  editable={ false }
-            />
-                : null
-              }
-
-              { this.props.mark
-                ? <LabelInput
-                  label="Оценка"
-                  value={ this.props.mark }
-                  editable={ false }
-                />
-                : null
-              }
-            </View>
-          </Fragment> }
+            </Fragment>
+          ) }
       </Screen>
     );
   }

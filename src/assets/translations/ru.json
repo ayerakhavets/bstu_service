@@ -1,9 +1,53 @@
 {
   "auth": {
     "email": "Электронная почта",
-    "password": "Пароль",
     "logIn": "Войти",
-    "signUp": "Зарегистрироваться",
-    "remember": "Запомнить меня"
+    "password": "Пароль",
+    "remember": "Запомнить меня",
+    "signUp": "Зарегистрироваться"
+  },
+  "courseList": {
+    "course": "Курс {{title}}",
+    "design": "ДЭиВИ",
+    "mobile": "ПОиБМС",
+    "software": "ПОИТ",
+    "system": "ИСИТ"
+  },
+  "order": {
+    "date": "Дата сдачи",
+    "dateFrom": "Начало сдачи",
+    "dateTo": "Конец сдачи",
+    "lecturer": "Преподаватель",
+    "mark": "Оценка",
+    "studentId": "Номер студенческого билета",
+    "studentName": "Студент",
+    "subject": "Название дисциплины"
+  },
+  "orderList": {
+    "pullToRefresh": "Список пуст. Потяните для обновления"
+  },
+  "payment": {
+    "accept": "Принять",
+    "amount": "Сумма",
+    "cancel": "Закрыть",
+    "date": "Дата",
+    "dateFrom": "Начало сдачи",
+    "dateTo": "Конец сдачи",
+    "decline": "Отклонить",
+    "id": "Номер билета",
+    "lecturer": "Преподаватель",
+    "name": "ФИО",
+    "ok": "Ок",
+    "paymentType": "Тип платежа",
+    "removal": "Удаление",
+    "remove": "Удалить",
+    "removeConfirm": "Подтвердить удаление",
+    "subject": "Предмет"
+  },
+  "paymentList": {
+    "pullToRefresh": "Список платежей пуст. Потяните для обновления"
+  },
+  "studentList": {
+    "pullToRefresh": "Список студентов пуст. Потяните для обновления"
   }
 }
