@@ -14,7 +14,8 @@ import {
   MyButton,
   Screen
 } from '@my/components';
-import { type StudetnInfo } from '../../types';
+import { I18n } from '@my/framework';
+import { type StudentInfo } from '../../types';
 import {
   approvePaymentRequest,
   changeStartDate,
@@ -38,7 +39,7 @@ import styles, { colors } from './Payment.styles';
 import { selectCurrentStudent } from '../StudentList';
 
 type PaymentProps = {
-  currentUser: StudetnInfo,
+  currentUser: StudentInfo,
   date: string,
   lecturer: string,
   subject: string,
@@ -60,11 +61,11 @@ class Payment extends Component<PaymentProps> {
   static navigationOptions = ({ navigation }) => {
     const params = navigation.state.params || {};
     const onPress = () => Alert.alert(
-      'Удаление',
-      'Подтвердите удаление платежа',
+      I18n.translate('payment.removal'),
+      I18n.translate('payment.removeConfirm'),
       [
-        { text: 'Отменить', style: 'cancel' },
-        { text: 'Удалить', onPress: params.removePayment }
+        { text: I18n.translate('payment.cancel'), style: 'cancel' },
+        { text: I18n.translate('payment.remove'), onPress: params.removePayment }
       ]
     );
 
@@ -79,6 +80,7 @@ class Payment extends Component<PaymentProps> {
   }
 
   render() {
+    const name = `${this.props.currentUser.surname}${this.props.currentUser.name}${this.props.currentUser.middleName}`;
     return (
       <Screen>
         { this.props.isLoading
@@ -91,62 +93,62 @@ class Payment extends Component<PaymentProps> {
             />
             <View style={ styles.container }>
               <LabelInput
-                label="ФИО"
-                value={ `${this.props.currentUser.surname}${this.props.currentUser.name}${this.props.currentUser.middleName}` }
+                label={ I18n.translate('payment.name') }
+                value={ name }
                 editable={ false }
               />
               <LabelInput
-                label="Номер билета"
+                label={ I18n.translate('payment.id') }
                 value={ this.props.currentUser.studentId }
                 editable={ false }
               />
               <LabelInput
-                label="Сумма"
+                label={ I18n.translate('payment.amount') }
                 value={ `${this.props.moneyAmount} BYN` }
                 editable={ false }
               />
               <LabelInput
-                label="Дата"
+                label={ I18n.translate('payment.date') }
                 value={ this.props.date }
                 editable={ false }
               />
               <LabelInput
-                label="Тип платежа"
+                label={ I18n.translate('payment.paymentType') }
                 value={ this.props.paymentType }
                 editable={ false }
               />
               <LabelInput
-                label="Название дисциплины"
+                label={ I18n.translate('payment.subject') }
                 value={ this.props.subject }
                 editable={ false }
               />
               <LabelInput
-                label="Преподаватель"
+                label={ I18n.translate('payment.lecturer') }
                 value={ this.props.lecturer }
                 editable={ false }
               />
               <View style={ styles.dateView }>
                 <DatePicker
-                  cancelBtnText="Закрыть"
-                  confirmBtnText="Ок"
+                  cancelBtnText={ I18n.translate('payment.cancel') }
+                  confirmBtnText={ I18n.translate('payment.ok') }
                   customStyles={{
                     placeholderText: styles.datePlaceholderText
                   }}
                   date={ this.props.startDate }
                   format="DD MM YYYY"
-                  placeholder="Начало сдачи"
+                  placeholder={ I18n.translate('payment.dateFrom') }
                   style={ styles.datePicker }
                   onDateChange={ this.props.onChangeStartDate }
                 />
                 <DatePicker
-                  cancelBtnText="Закрыть"
-                  confirmBtnText="Ок"
+                  cancelBtnText={ I18n.translate('payment.cancel') }
+                  confirmBtnText={ I18n.translate('payment.ok') }
                   customStyles={{
                     placeholderText: styles.datePlaceholderText
                   }}
                   date={ this.props.endDate }
                   format="DD MM YYYY"
-                  placeholder="Конец сдачи"
+                  placeholder={ I18n.translate('payment.dateTo') }
                   style={ styles.datePicker }
                   onDateChange={ this.props.onChangeEndDate }
                 />
@@ -154,14 +156,14 @@ class Payment extends Component<PaymentProps> {
               <MyButton
                 icon={{ name: 'done' }}
                 containerViewStyle={ styles.buttonAdd }
-                title="Одобрить"
+                title={ I18n.translate('payment.accept') }
                 onPress={ this.props.onApprovePaymentRequest }
               />
               <MyButton
                 backgroundColor={ colors.red }
                 icon={{ name: 'clear' }}
                 containerViewStyle={ styles.buttonAdd }
-                title="Отклонить"
+                title={ I18n.translate('payment.decline') }
                 onPress={ this.props.onDeclinePaymentRequest }
               />
             </View>

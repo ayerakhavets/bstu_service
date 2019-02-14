@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, SectionList } from 'react-native';
 import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
+import { I18n } from '@my/framework';
 import { colors, HeaderRight } from '@my/components';
 import { logOut } from '../../Authentication';
 import { openStudentList, type NavigationParams } from './CourseList.actions';
@@ -10,9 +11,13 @@ import styles from './CourseList.styles';
 
 // TODO: use server data instead of the mocked one.
 const specialties1 = [];
-const specialties2 = ['ДЭиВИ', 'ПОиБМС'];
-const specialties3 = ['ДЭиВИ', 'ПОиБМС', 'ПОИТ', 'ИСИТ'];
-const specialties4 = ['ДЭиВИ', 'ПОиБМС', 'ПОИТ', 'ИСИТ'];
+const specialties2 = [I18n.translate('courseList.design'), I18n.translate('courseList.mobile')];
+const specialties3 = [
+  I18n.translate('courseList.design'), I18n.translate('courseList.mobile'),
+  I18n.translate('courseList.system'), I18n.translate('courseList.software')];
+const specialties4 = [
+  I18n.translate('courseList.design'), I18n.translate('courseList.mobile'),
+  I18n.translate('courseList.system'), I18n.translate('courseList.software')];
 const sections = [
   { title: '1', data: specialties1 },
   { title: '2', data: specialties2 },
@@ -49,10 +54,13 @@ class CourseList extends React.Component<CourseListProps> {
     }) }
   />)
 
-  renderSectionHeader = ({ section: { title } }) => (<View style={ styles.headerView }>
-    <Text style={ styles.headerText }>
-      {`Курс ${title}`}</Text>
-  </View>)
+  renderSectionHeader = ({ section: { title } }) => (
+    <View style={ styles.headerView }>
+      <Text style={ styles.headerText }>
+        { I18n.translate('courseList.course', { title }) }
+      </Text>
+    </View>
+  )
 
   render() {
     return (

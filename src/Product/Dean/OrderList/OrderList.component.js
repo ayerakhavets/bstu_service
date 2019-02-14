@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, View, Text } from 'react-native';
+import { I18n } from '@my/framework';
 import { OrderListItem } from '@my/components';
 import type { OrderData } from '../../types';
 import {
@@ -25,9 +26,11 @@ class OrderList extends Component<OrderListProps> {
 
   keyExtractor = order => order.key;
 
-  renderEmptyItem = () => (<View style={ styles.emptyItemContainer }>
-    <Text>Список направлений пуст. Потяните для обновления</Text>
-  </View>)
+  renderEmptyItem = () => (
+    <View style={ styles.emptyItemContainer }>
+      <Text>{I18n.translate('orderList.pullToRefresh')}</Text>
+    </View>
+  )
 
   renderItem = ({ item }) => (<OrderListItem
     item={ item }

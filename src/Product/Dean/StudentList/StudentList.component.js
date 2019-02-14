@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, View, Text } from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
+import { I18n } from '@my/framework';
 import { colors, HeaderRight } from '@my/components';
 import type { StudentInfo } from '../../types';
 import {
@@ -19,7 +20,8 @@ type StudentListProps = {
   onOpenPaymentList: () => void
 }
 
-class StudentList extends Component<StudentListProps> {
+// TODO: add type for state.
+class StudentList extends Component<StudentListProps, any> {
   static navigationOptions = ({ navigation }) => ({
     headerRight: <HeaderRight
       iconName="finance"
@@ -32,7 +34,6 @@ class StudentList extends Component<StudentListProps> {
   };
 
   componentDidMount() {
-    console.log('this is it', this.props);
     this.props.loadStudentList();
   }
 
@@ -53,7 +54,7 @@ class StudentList extends Component<StudentListProps> {
   };
 
   renderEmptyItem = () => (<View style={ styles.emptyItemContainer }>
-    <Text>Список студентов пуст. Потяните для обновления</Text>
+    <Text>{ I18n.translate('studentList.pullToRefresh') }</Text>
   </View>)
 
   renderItem = ({ item }) => (
@@ -73,7 +74,6 @@ class StudentList extends Component<StudentListProps> {
           borderColor={ colors.greenLight }
           containerStyle={ styles.searchBarContainer }
           onChangeText={ this.onSearchInputChange }
-
           placeholder="Type Here..."
         />
         <FlatList

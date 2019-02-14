@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import { I18nManager, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { I18n, NavigatorActions } from '@my/framework';
 import * as RNLocalize from 'react-native-localize';
-import i18n from 'i18n-js';
-import { NavigatorActions } from '@my/framework';
 
 import { colors } from '@my/components';
 import { ProductNavigator, productReducer, productSaga } from './Product';
@@ -24,41 +23,10 @@ const store = createStore(
 sagaMiddleware.run(productSaga);
 
 
-const translationGetters = {
-  ru: () => require('./assets/translations/ru.json'),
-  en: () => require('./assets/translations/en.json')
-};
-
-// const translate = memoize(
-//   (key, config) => i18n.t(key, config),
-//   (key, config) => (config ? key + JSON.stringify(config) : key),
-// );
-export const translate = (key, config) => i18n.t(key, config);
-
-const setI18nConfig = () => {
-  // fallback if no available language fits
-  const fallback = { languageTag: 'en', isRTL: false };
-
-  const { languageTag, isRTL } =
-    RNLocalize.findBestAvailableLanguage(Object.keys(translationGetters)) ||
-    fallback;
-
-  // clear translation cache
-  // translate.cache.clear();
-
-  // update layout direction
-  I18nManager.forceRTL(isRTL);
-
-  // set i18n-js config
-  i18n.translations = { [languageTag]: translationGetters[languageTag]() };
-  i18n.locale = languageTag;
-};
-
-
 class App extends Component {
   constructor(props) {
     super(props);
-    setI18nConfig(); // set initial config
+    I18n.setI18nConfig(); // set initial config
   }
 
   componentDidMount() {
@@ -70,7 +38,7 @@ class App extends Component {
   }
 
   handleLocalizationChange = () => {
-    setI18nConfig();
+    I18n.setI18nConfig();
     this.forceUpdate();
   };
 
