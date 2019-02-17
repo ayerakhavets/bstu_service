@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { Picker, View } from 'react-native';
-import { FormLabel, FormValidationMessage } from 'react-native-elements';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import styles from './LabelPicker.styles';
 
@@ -41,7 +40,7 @@ function LabelPicker(props: LabelPickerProps) {
 
   return (
     <View style={ [styles.container, style] }>
-      <FormLabel>{ label }</FormLabel>
+      {/* <FormLabel>{ label }</FormLabel> */}
       <Picker
         style={ styles.picker }
         selectedValue={ selectedValue }
@@ -50,10 +49,10 @@ function LabelPicker(props: LabelPickerProps) {
       >
         { pickerItemComponents }
       </Picker>
-      {isError
+      {/* {isError
         ? <FormValidationMessage>{errorMessage || '* Обязательное поле'}</FormValidationMessage>
         : null
-      }
+      } */}
     </View>
   );
 }

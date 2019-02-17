@@ -1,4 +1,7 @@
 {
+  "components": {
+    "field": "REQUIRED FIELD"
+  },
   "auth": {
     "email": "Email",
     "logIn": "Login",
@@ -9,7 +12,7 @@
   },
   "courseList": {
     "course": "Course {{title}}",
-    "design": "Desig",
+    "design": "Design",
     "mobile": "Mobile",
     "software": "Software systems",
     "system": "Informational systems"

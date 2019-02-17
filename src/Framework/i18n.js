@@ -8,7 +8,6 @@ import en from '../assets/translations/en.json';
 
 // import memoize from "lodash.memoize";
 
-
 // const translationGetters = {
 //   ru: () => require('../assets/translations/ru.json'),
 //   en: () => require('../assets/translations/en.json')
@@ -44,3 +43,5 @@ export const setI18nConfig = () => {
   i18n.translations = { [languageTag]: translationGetters[languageTag] };
   i18n.locale = languageTag;
 };
+
+setI18nConfig();

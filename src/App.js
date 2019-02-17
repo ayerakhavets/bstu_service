@@ -15,19 +15,19 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   productReducer,
+  applyMiddleware(sagaMiddleware),
   // eslint-disable-next-line
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(sagaMiddleware)
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 sagaMiddleware.run(productSaga);
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    I18n.setI18nConfig(); // set initial config
-  }
+  // constructor(props) {
+  //   super(props);
+  //   I18n.setI18nConfig(); // set initial config
+  // }
 
   componentDidMount() {
     RNLocalize.addEventListener('change', this.handleLocalizationChange);

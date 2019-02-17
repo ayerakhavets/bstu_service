@@ -1,93 +1,53 @@
 // @flow
+import { createAction, type ActionType } from 'redux-actions';
 import type { StudentInfo } from '../../types';
+import { STUDENT } from '../Student.constants';
 
-export const CHANGE_COURSE = 'CHANGE_COURSE';
-export const CHANGE_FACULTY = 'CHANGE_FACULTY';
-export const CHANGE_MIDDLE_NAME = 'CHANGE_MIDDLE_NAME';
-export const CHANGE_NAME = 'CHANGE_NAME';
-export const CHANGE_SPECIALTY = 'CHANGE_SPECIALTY';
-export const CHANGE_STUDENT_ID = 'CHANGE_STUDENT_ID';
-export const CHANGE_SURNAME = 'CHANGE_SURNAME';
-export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
-export const CLEAR_STUDENT_INFO = 'CLEAR_STUDENT_INFO';
-export const SAVE_STUDENT_INFO_FAILURE = 'SAVE_STUDENT_INFO_FAILURE';
-export const SAVE_STUDENT_INFO_REQUEST = 'SAVE_STUDENT_INFO_REQUEST';
-export const SAVE_STUDENT_INFO_SUCCESS = 'SAVE_STUDENT_INFO_SUCCESS';
 
-export type ChangeCourseAction = { type: typeof CHANGE_COURSE, payload: string };
-export type ChangeFacultyAction = { type: typeof CHANGE_FACULTY, payload: string };
-export type ChangeMiddleNameAction = { type: typeof CHANGE_MIDDLE_NAME, payload: string };
-export type ChangeNameAction = { type: typeof CHANGE_NAME, payload: string };
-export type СhangeSpecialtyAction = { type: typeof CHANGE_SPECIALTY, payload: string };
-export type ChangeStudentIdAction = { type: typeof CHANGE_STUDENT_ID, payload: string };
-export type ChangeSurnameAction = { type: typeof CHANGE_SURNAME, payload: string };
-export type ChangeUserInfoAction = { type: typeof CHANGE_USER_INFO, payload: StudentInfo };
-export type ClearStudentInfoAction = { type: typeof CLEAR_STUDENT_INFO };
-export type SaveStudentInfoFailureAction = { type: typeof SAVE_STUDENT_INFO_FAILURE };
-export type SaveStudentInfoRequestAction = { type: typeof SAVE_STUDENT_INFO_REQUEST };
-export type SaveStudentInfoSuccessAction = { type: typeof SAVE_STUDENT_INFO_SUCCESS };
+export const CHANGE_COURSE = `CHANGE_COURSE@${STUDENT}`;
+export const changeCourse = createAction(CHANGE_COURSE, (course: string) => course);
+export type ChangeCourse = ActionType<typeof changeCourse>;
 
-export const changeCourse = (course: string): ChangeCourseAction => ({
-  type: CHANGE_COURSE,
-  payload: course
-});
+export const CHANGE_FACULTY = `CHANGE_FACULTY@${STUDENT}`;
+export const changeFaculty = createAction(CHANGE_FACULTY, (faculty: string) => faculty);
+export type ChangeFaculty = ActionType<typeof changeFaculty>
 
-export const changeFaculty = (faculty: string): ChangeFacultyAction => ({
-  type: CHANGE_FACULTY,
-  payload: faculty
-});
+export const CHANGE_MIDDLE_NAME = `CHANGE_MIDDLE_NAME@${STUDENT}`;
+export const changeMiddleName = createAction(CHANGE_MIDDLE_NAME, (middleName: string) => middleName);
+export type ChangeMiddleName = ActionType<typeof changeMiddleName>
 
-export const changeMiddleName = (middleName: string): ChangeMiddleNameAction => ({
-  type: CHANGE_MIDDLE_NAME,
-  payload: middleName
-});
+export const CHANGE_NAME = `CHANGE_NAME@${STUDENT}`;
+export const changeName = createAction(CHANGE_NAME, (name: string) => name);
+export type ChangeName = ActionType<typeof changeName>
 
-export const changeName = (name: string): ChangeNameAction => ({
-  type: CHANGE_NAME,
-  payload: name
-});
+export const CHANGE_SPECIALTY = `CHANGE_SPECIALTY@${STUDENT}`;
+export const changeSpecialty = createAction(CHANGE_SPECIALTY, (specialty: string) => specialty);
+export type СhangeSpecialty = ActionType<typeof changeSpecialty>
 
-export const changeSpecialty = (specialty: string): СhangeSpecialtyAction => ({
-  type: CHANGE_SPECIALTY,
-  payload: specialty
-});
+export const CHANGE_STUDENT_ID = `CHANGE_STUDENT_ID@${STUDENT}`;
+export const changeStudentId = createAction(CHANGE_STUDENT_ID, (studentId: string) => studentId);
+export type ChangeStudentId = ActionType<typeof changeStudentId>
 
-export const changeStudentId = (studentId: string): ChangeStudentIdAction => ({
-  type: CHANGE_STUDENT_ID,
-  payload: studentId
-});
+export const CHANGE_SURNAME = `CHANGE_SURNAME@${STUDENT}`;
+export const changeSurname = createAction(CHANGE_SURNAME, (surname: string) => surname);
+export type ChangeSurname = ActionType<typeof changeSurname>
 
-export const changeSurname = (surname: string): ChangeSurnameAction => ({
-  type: CHANGE_SURNAME,
-  payload: surname
-});
+export const CHANGE_USER_INFO = `CHANGE_USER_INFO@${STUDENT}`;
+export const changeUserInfo = createAction(CHANGE_USER_INFO, (userInfo: StudentInfo) => userInfo);
+export type ChangeUserInfo = ActionType<typeof changeUserInfo>
 
-export const changeUserInfo = (userInfo: StudentInfo): ChangeUserInfoAction => ({
-  type: CHANGE_USER_INFO,
-  payload: userInfo
-});
+export const CLEAR_STUDENT_INFO = `CLEAR_STUDENT_INFO@${STUDENT}`;
+export const clearStudentInfo = createAction(CLEAR_STUDENT_INFO, () => undefined);
+export type ClearStudentInfo = ActionType<typeof clearStudentInfo>
 
-export const clearStudentInfo = (): ClearStudentInfoAction => ({ type: CLEAR_STUDENT_INFO });
+export const SAVE_STUDENT_INFO_FAILURE = `SAVE_STUDENT_INFO_FAILURE@${STUDENT}`;
+export const saveStudentInfoFailure = createAction(SAVE_STUDENT_INFO_FAILURE, () => undefined);
+export type SaveStudentInfoFailure = ActionType<typeof saveStudentInfoFailure>
 
-export const saveStudentInfoFailure = (): SaveStudentInfoFailureAction =>
-  ({ type: SAVE_STUDENT_INFO_FAILURE });
+export const SAVE_STUDENT_INFO_REQUEST = `SAVE_STUDENT_INFO_REQUEST@${STUDENT}`;
+export const saveStudentInfoRequest = createAction(SAVE_STUDENT_INFO_REQUEST, () => undefined);
+export type SaveStudentInfoRequest = ActionType<typeof saveStudentInfoRequest>
 
-export const saveStudentInfoRequest = (): SaveStudentInfoRequestAction =>
-  ({ type: SAVE_STUDENT_INFO_REQUEST });
-
-export const saveStudentInfoSuccess = (): SaveStudentInfoSuccessAction =>
-  ({ type: SAVE_STUDENT_INFO_SUCCESS });
-
-export type StudentInfoActions =
-  | ChangeCourseAction
-  | ChangeFacultyAction
-  | ChangeMiddleNameAction
-  | ChangeNameAction
-  | СhangeSpecialtyAction
-  | ChangeStudentIdAction
-  | ChangeSurnameAction
-  | ChangeUserInfoAction
-  | SaveStudentInfoFailureAction
-  | SaveStudentInfoRequestAction
-  | SaveStudentInfoSuccessAction
-  | ClearStudentInfoAction
+export const SAVE_STUDENT_INFO_SUCCESS = `SAVE_STUDENT_INFO_SUCCESS@${STUDENT}`;
+export const saveStudentInfoSuccess = createAction(SAVE_STUDENT_INFO_SUCCESS, () => undefined);
+export type SaveStudentInfoSuccess = ActionType<typeof saveStudentInfoSuccess>
