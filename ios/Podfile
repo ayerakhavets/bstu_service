@@ -10,6 +10,7 @@ target 'bstu_service' do
   # Required by RNFirebase
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
   target 'bstu_serviceTests' do
     inherit! :search_paths

@@ -15,9 +15,9 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   productReducer,
-  applyMiddleware(sagaMiddleware),
   // eslint-disable-next-line
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(sagaMiddleware)
 );
 
 sagaMiddleware.run(productSaga);
