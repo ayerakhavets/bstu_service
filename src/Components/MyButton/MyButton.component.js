@@ -15,9 +15,11 @@ function MyButton(props: ButtonProps) {
 
   return (
     <Button
-      backgroundColor={ colors.greenDark }
+      buttonStyle={{
+        backgroundColor: colors.greenDark
+      }}
       borderRadius={ 3 }
-      containerViewStyle={ [styles.container, containerViewStyle] }
+      containerStyle={ [styles.container, containerViewStyle] }
       raised
       { ...rest }
     />
