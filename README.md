@@ -2,6 +2,8 @@
 
 ## Getting started
 
-### Starting Project
+For iOS:
+- in XCode:
+File -> Edit -> Workspace settings -> set Legacy Build System for Build system
 
-File -> Edit -> Workspace settings -> Build system -> set Legacy Build System
+### Starting Project

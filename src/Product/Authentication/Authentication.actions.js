@@ -2,7 +2,6 @@
 import { createAction, type ActionType } from 'redux-actions';
 import { AUTHENTICATION } from './Authentication.constants';
 
-
 export const CHANGE_EMAIL = `CHANGE_EMAIL@${AUTHENTICATION}`;
 export const changeEmail = createAction(CHANGE_EMAIL, (email: string) => email);
 export type ChangeEmail = ActionType<typeof changeEmail>;

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "flow": "flow",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios --simulator='iPhone 8'",
     "menu": "adb shell input keyevent KEYCODE_MENU",
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -35,8 +36,10 @@
     "reselect": "^3.0.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "22.4.3",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-react-native": "^4.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -45,7 +48,8 @@
     "eslint-plugin-jest": "^21.15.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.8.2",
-    "eslint-plugin-react-native": "^3.2.1"
+    "eslint-plugin-react-native": "^3.2.1",
+    "flow-bin": "^0.95.1"
   },
   "jest": {
     "preset": "react-native"
