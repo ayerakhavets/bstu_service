@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { I18n } from '@my/framework';
 
 import { ActivityIndicator } from 'react-native';
-import { CheckBox } from 'react-native-elements';
-import { LabelInput, MyButton, Screen } from '@my/components';
+import { Input, CheckBox } from 'react-native-elements';
+import { MyButton, Screen } from '@my/components';
 
 import * as actions from './Authentication.actions';
 import {
@@ -16,7 +16,6 @@ import {
 } from './Authentication.selectors';
 
 import styles, { checkboxColor } from './Authentication.styles';
-
 
 type AuthenticationProps = {
   email: string,
@@ -57,20 +56,22 @@ class Authentication extends Component<AuthenticationProps> {
           ? <ActivityIndicator size="large" />
           : (
             <Fragment>
-              <LabelInput
-                isError={ !email }
-                keyboardType="email-address"
-                placeholder={ I18n.translate('auth.email') }
+              <Input
                 value={ email }
+                keyboardType="email-address"
                 onChangeText={ changeEmail }
+                placeholder={ I18n.translate('auth.email') }
+                errorStyle={ styles.errorStyle }
+                errorMessage={ !email && I18n.translate('components.field') }
               />
-              <LabelInput
-                containerViewStyle={ styles.input }
-                isError={ !password }
-                placeholder={ I18n.translate('auth.password') }
-                secureTextEntry
+              <Input
+                containerStyle={ styles.input }
                 value={ password }
                 onChangeText={ changePassword }
+                secureTextEntry
+                placeholder={ I18n.translate('auth.password') }
+                errorStyle={ styles.errorStyle }
+                errorMessage={ !password && I18n.translate('components.field') }
               />
               <MyButton
                 containerViewStyle={ styles.button }

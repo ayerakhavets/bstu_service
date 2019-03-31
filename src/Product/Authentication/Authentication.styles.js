@@ -13,6 +13,9 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     borderWidth: 0
   },
+  errorStyle: {
+    color: 'red'
+  },
   input: {
     marginBottom: 10
   }
