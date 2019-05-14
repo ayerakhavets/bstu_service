@@ -10,6 +10,10 @@
     "signUp": "Sign Up",
     "title": "App entry"
   },
+  "dean": {
+    "courses": "Courses",
+    "students": "Students"
+  },
   "courseList": {
     "course": "Course {{title}}",
     "design": "Design",

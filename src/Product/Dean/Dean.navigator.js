@@ -2,6 +2,7 @@
 import React from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { I18n } from '@my/framework';
 import { colors, styles } from '@my/components';
 import { CourseList } from './CourseList';
 import { Order } from './Order';
@@ -54,20 +55,20 @@ const DeanStack = createStackNavigator({
   [COURSE_LIST]: {
     screen: CourseList,
     navigationOptions: {
-      title: 'Курсы'
+      title: I18n.translate('dean.courses')
     }
   },
   [STUDENT_LIST]: {
     screen: StudentList,
     navigationOptions: {
-      title: 'Студенты'
+      title: I18n.translate('dean.students')
     }
   },
   [STUDENT_LISTS_TABS]: {
     screen: StudentListsTabs,
     navigationOptions: ({ navigation }) => {
       const params = navigation || {};
-      console.log('params student navigator: ', params);
+      console.log('params dean navigator: ', params);
       const { index } = navigation.state;
       let titleName = '';
       if (navigation.state.routes[index].routeName === 'ORDER_LIST.Dean') {

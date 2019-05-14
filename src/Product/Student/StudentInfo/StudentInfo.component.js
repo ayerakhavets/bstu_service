@@ -129,13 +129,13 @@ class StudentInfo extends Component<StudentInfoProps> {
                   onValueChange={ this.props.changeCourse }
                 /> */}
               </View>
-              <LabelPicker
+              {/* <LabelPicker
                 isError={ !this.props.specialty }
                 label="Специальность"
                 pickerItems={ this.props.specialties }
                 selectedValue={ this.props.specialty }
                 onValueChange={ this.props.changeSpecialty }
-              />
+              /> */}
               <MyButton
                 containerViewStyle={ styles.button }
                 title="Сохранить изменения"

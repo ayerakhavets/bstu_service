@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon, { type MaterialCommunityIconsGlyphs } from 'react-native-vector-icons/MaterialCommunityIcons';
 import { colors, HeaderRight, styles } from '@my/components';
 import { Order } from './Order';
 import { OrderList } from './OrderList';
@@ -27,7 +27,7 @@ const StudentTabs = createBottomTabNavigator({
   navigationOptions: ({ navigation }) => ({
     // eslint-disable-next-line react/display-name, react/prop-types
     tabBarIcon: ({ focused }) => {
-      let iconName;
+      let iconName: MaterialCommunityIconsGlyphs = 'blank';
       switch (navigation.state.routeName) {
       case ORDER_LIST:
         iconName = 'file-multiple'; break;
