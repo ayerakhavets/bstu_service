@@ -19,7 +19,7 @@ import {
 
 export type PaymentImage = {
   name: string,
-  path: string,
+  path: ?string,
   url: string
 }
 
@@ -32,8 +32,7 @@ export type PaymentState = {
   moneyAmount: string,
   paymentType: string,
   isLoading: boolean,
-  status: string,
-  paymentTypes: string[]
+  status: string
 }
 
 const initialState = {
@@ -49,9 +48,7 @@ const initialState = {
   moneyAmount: '',
   paymentType: '',
   isLoading: false,
-  status: 'declined',
-  // TODO: use server data instead of the mocked one.
-  paymentTypes: ['', 'Академическая задолженность', 'Обучение', 'Общежитие', 'Пеня']
+  status: 'declined'
 };
 
 export default (

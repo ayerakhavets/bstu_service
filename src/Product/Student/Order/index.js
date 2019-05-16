@@ -1,11 +1,10 @@
 // @flow
-import { changeOrderData, clearOrderData } from './Order.actions';
+import { changeOrderData } from './Order.actions';
 import Order from './Order.component';
 import orderReducer, { type OrderState } from './Order.reducer';
 
 export {
   changeOrderData,
-  clearOrderData,
   Order,
   orderReducer
 };

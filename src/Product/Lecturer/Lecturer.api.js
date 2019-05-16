@@ -3,7 +3,7 @@ import firebase from 'react-native-firebase';
 import type { StudentInfo, OrderData } from '../types';
 
 export const getStudentList = async (lecturerUid: string, subject: string): Promise<StudentInfo[]> =>
-  firebase.database().ref(`lecturers/${lecturerUid}/subjects/${subject}`)
+  firebase.database().ref(`/lecturers/${lecturerUid}/subjects/${subject}`)
     // $FlowFixMe function once() requires another argument.
     .once('value')
     .then(response => response._value); // eslint-disable-line no-underscore-dangle

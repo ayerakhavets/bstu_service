@@ -53,5 +53,25 @@
   },
   "studentList": {
     "pullToRefresh": "Список студентов пуст. Потяните для обновления"
+  },
+  "student": {
+    "payment": {
+      "money": "Сумма (BYN)"
+    },
+    "paymentList": {
+      "newPayment": "Новый платёж",
+      "emptyList": "Список платежей пуст. Потяните для обновления"
+    },
+    "studentInfo": {
+      "name": "Имя",
+      "surname": "Фамилия",
+      "middleName": "Отчество",
+      "studentId": "Номер студенческого билета",
+      "faculty": "Факультет",
+      "course": "Курс",
+      "speciality": "Специальность",
+      "save": "Сохранить",
+      "requiredField": "Обязательное поле"
+    }
   }
 }

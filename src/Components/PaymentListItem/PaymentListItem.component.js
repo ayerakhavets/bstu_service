@@ -33,7 +33,7 @@ function PaymentListItem(props: PaymentListItemProps) {
 
   return (
     <ListItem
-      avatar={ icon }
+      leftAvatar={{ source: icon }}
       avatarContainerStyle={ styles.avatar }
       avatarStyle={ styles.avatar }
       containerStyle={ styles.container }

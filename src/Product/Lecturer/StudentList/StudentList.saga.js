@@ -13,6 +13,7 @@ import {
 } from './StudentList.actions';
 import { selectSubject } from './StudentList.selectors';
 import { ORDER_LIST } from '../Lecturer.navigator';
+import { lecturerUid } from '../../Authentication/Authentication.constants';
 
 export default function* studentListSaga(): Saga<void> {
   yield takeEvery(LOAD_STUDENT_LIST_REQUEST, handleLoadStudentList);
@@ -28,10 +29,10 @@ export function* handleOpenOrderList({ payload }: OpenOrderListAction): Saga<voi
 
 export function* handleLoadStudentList(): Saga<void> {
   const subject = yield select(selectSubject);
-  const lecturerUid = 'eZZKqqMXmVNqQ7wUacZiVDtAQWK2';
 
   try {
     const studentListReponse = yield call(getStudentList, lecturerUid, subject);
+
     if (studentListReponse) {
       yield put(loadStudentListSuccess(Object.values(studentListReponse)));
     } else {

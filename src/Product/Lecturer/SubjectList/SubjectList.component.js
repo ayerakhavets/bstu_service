@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { List, ListItem } from 'react-native-elements';
+import { FlatList } from 'react-native';
+import { ListItem } from 'react-native-elements';
 import { colors, HeaderRight } from '@my/components';
 import { logOut } from '../../Authentication';
 import { openStudentList, type NavigationParams } from './SubjectList.actions';
@@ -30,18 +31,25 @@ class SubjectList extends React.Component<SubjectListProps> {
     this.props.navigation.setParams({ onLogOut: this.props.onLogOut });
   }
 
-  renderItem = item => (<ListItem
-    chevronColor={ colors.greenDark }
-    title={ item }
-    // eslint-disable-next-line react/jsx-no-bind
-    onPress={ () => this.props.onOpenStudentList({ subject: item }) }
-  />)
+  keyExtractor = (item, index) => item + index
+
+  renderItem = ({ item }) => (
+    <ListItem
+      chevronColor={ colors.greenDark }
+      title={ item }
+      // eslint-disable-next-line react/jsx-no-bind
+      onPress={ () => this.props.onOpenStudentList({ subject: item }) }
+    />
+  )
 
   render() {
     return (
-      <List containerStyle={ styles.list }>
-        { list.map(this.renderItem) }
-      </List>
+      <FlatList
+        data={ list }
+        keyExtractor={ this.keyExtractor }
+        renderItem={ this.renderItem }
+        style={ styles.list }
+      />
     );
   }
 }

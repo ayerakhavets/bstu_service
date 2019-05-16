@@ -47,9 +47,9 @@ function PaymentListItem(props: PaymentListItemProps) {
 
   return (
     <ListItem
-      avatar={ icon }
-      avatarContainerStyle={ styles.avatar }
-      avatarStyle={ styles.avatar }
+      leftAvatar={{ source: icon }}
+      // avatarContainerStyle={ styles.avatar }
+      // avatarStyle={ styles.avatar }
       containerStyle={ styles.container }
       chevronColor={ colors.greenDark }
       subtitle={ subtitle() }

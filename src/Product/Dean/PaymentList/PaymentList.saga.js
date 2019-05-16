@@ -27,7 +27,6 @@ export function* handleOpenAddPaymentScreen(): Saga<void> {
 export function* handleOpenShowPaymentScreen({ payload }: OpenShowPaymentScreenAction): Saga<void> {
   try {
     const storageImagePath = `${payload.key}/${payload.image.name}`;
-    console.log('=== er', storageImagePath);
 
     const imageUrl = yield call(getPaymentImageUrl, storageImagePath);
     const paymentData = {

@@ -57,5 +57,25 @@
   },
   "studentList": {
     "pullToRefresh": "The list is empty. Pull to refresh"
+  },
+  "student": {
+    "payment": {
+      "money": "Money amount (BYN)"
+    },
+    "paymentList": {
+      "newPayment": "New Payment",
+      "emptyList": "Payment list is empty. Pull to refresh"
+    },
+    "studentInfo": {
+      "name": "Name",
+      "surname": "Surname",
+      "middleName": "Middle Name",
+      "studentId": "Student ID",
+      "faculty": "Faculty",
+      "course": "Course",
+      "speciality": "Speciality",
+      "save": "Save",
+      "requiredField": "Required Field"
+    }
   }
 }

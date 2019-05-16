@@ -1,43 +1,35 @@
 // @flow
+import { handleActions } from 'redux-actions';
+import { type PaymentData } from '../../types';
 import {
   LOAD_PAYMENT_LIST_FAILURE,
   LOAD_PAYMENT_LIST_REQUEST,
-  LOAD_PAYMENT_LIST_SUCCESS,
-  type PaymentListActions
+  LOAD_PAYMENT_LIST_SUCCESS, type LoadPaymentListSuccess
 } from './PaymentList.actions';
-import type { PaymentData } from '../../types';
 
 export type PaymentListState = {
   isLoading: boolean,
   paymentList: PaymentData[]
 }
+type S = PaymentListState;
 
 const initialState = {
   isLoading: false,
   paymentList: []
 };
 
-export default (
-  state: PaymentListState = initialState,
-  action: PaymentListActions): PaymentListState => {
-  switch (action.type) {
-  case LOAD_PAYMENT_LIST_FAILURE:
-    return {
-      ...state,
-      isLoading: false
-    };
-  case LOAD_PAYMENT_LIST_REQUEST:
-    return {
-      ...state,
-      isLoading: true
-    };
-  case LOAD_PAYMENT_LIST_SUCCESS:
-    return {
-      ...state,
-      isLoading: false,
-      paymentList: action.payload
-    };
-  default:
-    return state;
-  }
-};
+export default handleActions({
+  [LOAD_PAYMENT_LIST_FAILURE]: (state: S) => ({
+    ...state,
+    isLoading: false
+  }),
+  [LOAD_PAYMENT_LIST_REQUEST]: (state: S) => ({
+    ...state,
+    isLoading: false
+  }),
+  [LOAD_PAYMENT_LIST_SUCCESS]: (state: S, { payload }: LoadPaymentListSuccess) => ({
+    ...state,
+    isLoading: false,
+    paymentList: payload
+  })
+}, initialState);

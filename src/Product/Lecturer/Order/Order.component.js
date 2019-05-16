@@ -6,8 +6,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
+import { Input } from 'react-native-elements';
 import {
-  LabelInput,
   MyButton,
   Screen
 } from '@my/components';
@@ -55,36 +55,36 @@ class Payment extends Component<PaymentProps> {
           ? <ActivityIndicator size="large" />
           : <Fragment>
             <View style={ styles.container }>
-              <LabelInput
+              <Input
                 label="ФИО студента"
                 value={ `${this.props.currentUser.surname} ${this.props.currentUser.name} ${this.props.currentUser.middleName}` }
                 editable={ false }
               />
-              <LabelInput
+              <Input
                 label="Номер студенческого билета "
                 value={ this.props.currentUser.studentId }
                 editable={ false }
               />
-              <LabelInput
+              <Input
                 label="Преподаватель"
                 value={ this.props.lecturer }
                 editable={ false }
               />
               <View style={ styles.dateView1 }>
-                <LabelInput
+                <Input
                   label="Начало сдачи"
                   value={ this.props.startDate }
                   editable={ false }
                   containerViewStyle={ styles.datePicker2 }
                 />
-                <LabelInput
+                <Input
                   label="Конец сдачи"
                   value={ this.props.endDate }
                   editable={ false }
                   containerViewStyle={ styles.datePicker2 }
                 />
-               </View>
-              <LabelInput
+              </View>
+              <Input
                 label="Название дисциплины"
                 value={ this.props.subject }
                 editable={ false }
@@ -103,14 +103,14 @@ class Payment extends Component<PaymentProps> {
                     style={ styles.datePicker }
                     onDateChange={ this.props.onChangeDate }
                   />
-                  : <LabelInput
+                  : <Input
                     label="Дата сдачи"
                     value={ this.props.date }
                     editable={ false }
                   />}
               {
                 this.props.status === 'set'
-                  ? <LabelInput
+                  ? <Input
                     isError={ !this.props.mark }
                     label="Оценка"
                     maxLength={ 2 }
@@ -119,7 +119,7 @@ class Payment extends Component<PaymentProps> {
                     onChangeText={ this.props.onChangeMark }
                   />
                   : this.props.mark
-                    ? <LabelInput
+                    ? <Input
                       label="Оценка"
                       value={ this.props.mark }
                       editable={ false }

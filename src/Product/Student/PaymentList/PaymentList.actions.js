@@ -1,55 +1,26 @@
 // @flow
+import { createAction, type ActionType } from 'redux-actions';
+import { STUDENT } from '../Student.constants';
 import type { PaymentData } from '../../types';
 
-export const LOAD_PAYMENT_LIST_FAILURE = 'LOAD_PAYMENT_LIST_FAILURE';
-export const LOAD_PAYMENT_LIST_REQUEST = 'LOAD_PAYMENT_LIST_REQUEST';
-export const LOAD_PAYMENT_LIST_SUCCESS = 'LOAD_PAYMENT_LIST_SUCCESS';
-export const OPEN_ADD_PAYMENT_SCREEN = 'OPEN_ADD_PAYMENT_SCREEN';
-export const OPEN_SHOW_PAYMENT_SCREEN = 'OPEN_SHOW_PAYMENT_SCREEN';
+export const LOAD_PAYMENT_LIST_FAILURE = `LOAD_PAYMENT_LIST_FAILURE${STUDENT}`;
+export const loadPaymentListFailure = createAction(LOAD_PAYMENT_LIST_FAILURE, () => undefined);
+export type LoadPaymentListFailure = ActionType<typeof loadPaymentListFailure>;
 
-export type LoadPaymentListFailureAction = { type: typeof LOAD_PAYMENT_LIST_FAILURE };
+export const LOAD_PAYMENT_LIST_REQUEST = `LOAD_PAYMENT_LIST_REQUEST${STUDENT}`;
+export const loadPaymentListRequest = createAction(LOAD_PAYMENT_LIST_REQUEST, () => undefined);
+export type LoadPaymentListRequest = ActionType<typeof loadPaymentListRequest>;
 
-export type LoadPaymentListRequestAction = { type: typeof LOAD_PAYMENT_LIST_REQUEST };
+export const LOAD_PAYMENT_LIST_SUCCESS = `LOAD_PAYMENT_LIST_SUCCESS${STUDENT}`;
+export const loadPaymentListSuccess = createAction(
+  LOAD_PAYMENT_LIST_SUCCESS, (paymentList: PaymentData[]) => paymentList
+);
+export type LoadPaymentListSuccess = ActionType<typeof loadPaymentListSuccess>;
 
-export type LoadPaymentListSuccessAction = {
-  type: typeof LOAD_PAYMENT_LIST_SUCCESS,
-  payload: PaymentData[]
-};
+export const OPEN_ADD_PAYMENT_SCREEN = `OPEN_ADD_PAYMENT_SCREEN${STUDENT}`;
+export const openAddPaymentScreen = createAction(OPEN_ADD_PAYMENT_SCREEN, () => undefined);
+export type OpenAddPaymentScreen = ActionType<typeof openAddPaymentScreen>;
 
-export type OpenAddPaymentScreenAction = { type: typeof OPEN_ADD_PAYMENT_SCREEN };
-
-export type OpenShowPaymentScreenAction = {
-   type: typeof OPEN_SHOW_PAYMENT_SCREEN,
-   payload: PaymentData
-};
-
-export const loadPaymentListFailure = (): LoadPaymentListFailureAction => ({
-  type: LOAD_PAYMENT_LIST_FAILURE
-});
-
-export const loadPaymentListRequest = (): LoadPaymentListRequestAction => ({
-  type: LOAD_PAYMENT_LIST_REQUEST
-});
-
-export const loadPaymentListSuccess = (paymentList: PaymentData[]): LoadPaymentListSuccessAction =>
-  ({
-    type: LOAD_PAYMENT_LIST_SUCCESS,
-    payload: paymentList
-  });
-
-export const openAddPaymentScreen = (): OpenAddPaymentScreenAction => ({
-  type: OPEN_ADD_PAYMENT_SCREEN
-});
-
-export const openShowPaymentScreen = (paymentData: PaymentData): OpenShowPaymentScreenAction =>
-  ({
-    type: OPEN_SHOW_PAYMENT_SCREEN,
-    payload: paymentData
-  });
-
-export type PaymentListActions =
-  | LoadPaymentListFailureAction
-  | LoadPaymentListRequestAction
-  | LoadPaymentListSuccessAction
-  | OpenAddPaymentScreenAction
-  | OpenShowPaymentScreenAction
+export const OPEN_SHOW_PAYMENT_SCREEN = `OPEN_SHOW_PAYMENT_SCREEN${STUDENT}`;
+export const openShowPaymentScreen = createAction(OPEN_SHOW_PAYMENT_SCREEN, (paymentData: PaymentData) => paymentData);
+export type OpenShowPaymentScreen = ActionType<typeof openShowPaymentScreen>;

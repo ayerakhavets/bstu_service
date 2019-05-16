@@ -1,6 +1,7 @@
 // @flow
 import firebase from 'react-native-firebase';
 import type { StudentInfo } from '../types';
+import { lecturerUid } from '../Authentication/Authentication.constants';
 
 export const getStudentList = async (specialty: string, course: string): StudentInfo[] =>
   firebase.database().ref(`specialties/${specialty}`)
@@ -26,8 +27,6 @@ export const getPaymentImageUrl = (storageImagePath: string): Promise<string> =>
 
 export const resolvePayment = (uid, key, status) =>
   firebase.database().ref(`payments/${uid}/${key}`).child('status').set(status);
-
-const lecturerUid = 'eZZKqqMXmVNqQ7wUacZiVDtAQWK2';
 
 export const handleReslovePayment = async (uid, key, order, student) => {
   await firebase.database().ref(`payments/${uid}/${key}`).child('status').set('approved');

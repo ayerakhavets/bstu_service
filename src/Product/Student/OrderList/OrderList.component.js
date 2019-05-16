@@ -29,10 +29,12 @@ class OrderList extends Component<OrderListProps> {
     <Text>Список направлений пуст. Потяните для обновления</Text>
   </View>)
 
-  renderItem = ({ item }) => (<OrderListItem
-    item={ item }
-    onPress={ this.props.onOpenOrderInfo }
-  />)
+  renderItem = ({ item }) => (
+    <OrderListItem
+      item={ item }
+      onPress={ this.props.onOpenOrderInfo }
+    />
+  )
 
   render() {
     return (

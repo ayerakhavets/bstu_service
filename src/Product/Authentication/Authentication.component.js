@@ -62,7 +62,7 @@ class Authentication extends Component<AuthenticationProps> {
                 onChangeText={ changeEmail }
                 placeholder={ I18n.translate('auth.email') }
                 errorStyle={ styles.errorStyle }
-                errorMessage={ !email && I18n.translate('components.field') }
+                errorMessage={ !email ? I18n.translate('components.field') : null }
               />
               <Input
                 containerStyle={ styles.input }
@@ -71,7 +71,7 @@ class Authentication extends Component<AuthenticationProps> {
                 secureTextEntry
                 placeholder={ I18n.translate('auth.password') }
                 errorStyle={ styles.errorStyle }
-                errorMessage={ !password && I18n.translate('components.field') }
+                errorMessage={ !password ? I18n.translate('components.field') : null }
               />
               <MyButton
                 containerViewStyle={ styles.button }

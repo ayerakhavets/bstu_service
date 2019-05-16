@@ -1,55 +1,20 @@
 // @flow
-import { createSelector } from 'reselect';
-import { helpers, type PickerItem } from '@my/components';
-import type { ApplicationState } from '../../types';
+import type { ApplicationState as S } from '../../types';
 
-export const selectCourse = ({ student }: ApplicationState): string =>
-  student.studentInfo.course;
+export const selectCourse = ({ student }: S): string => student.studentInfo.course;
 
-export const selectUid = ({ student }: ApplicationState): string =>
-  student.studentInfo.uid;
+export const selectFaculty = ({ student }: S): string => student.studentInfo.faculty;
 
-export const selectCourses = ({ student }: ApplicationState): string[] =>
-  student.studentInfo.courses;
+export const selectIsLoading = ({ student }: S): boolean => student.studentInfo.isLoading;
 
-export const selectFaculty = ({ student }: ApplicationState): string =>
-  student.studentInfo.faculty;
+export const selectMiddleName = ({ student }: S): string => student.studentInfo.middleName;
 
-export const selectFaculties = ({ student }: ApplicationState): string[] =>
-  student.studentInfo.faculties;
+export const selectName = ({ student }: S): string => student.studentInfo.name;
 
-export const selectIsLoading = ({ student }: ApplicationState): boolean =>
-  student.studentInfo.isLoading;
+export const selectSpecialty = ({ student }: S): string => student.studentInfo.specialty;
 
-export const selectMiddleName = ({ student }: ApplicationState): string =>
-  student.studentInfo.middleName;
+export const selectStudentId = ({ student }: S): string => student.studentInfo.studentId;
 
-export const selectName = ({ student }: ApplicationState): string =>
-  student.studentInfo.name;
+export const selectSurname = ({ student }: S): string => student.studentInfo.surname;
 
-export const selectSpecialty = ({ student }: ApplicationState): string =>
-  student.studentInfo.specialty;
-
-export const selectSpecialties = ({ student }: ApplicationState): string[] =>
-  student.studentInfo.specialties;
-
-export const selectStudentId = ({ student }: ApplicationState): string =>
-  student.studentInfo.studentId;
-
-export const selectSurname = ({ student }: ApplicationState): string =>
-  student.studentInfo.surname;
-
-export const selectMappedCourses = createSelector(
-  selectCourses,
-  (courses): PickerItem[] => courses.map(helpers.mapItemToPickerItem)
-);
-
-export const selectMappedFaculties = createSelector(
-  selectFaculties,
-  (faculties): PickerItem[] => faculties.map(helpers.mapItemToPickerItem)
-);
-
-export const selectMappedSpecialties = createSelector(
-  selectSpecialties,
-  (specialties): PickerItem[] => specialties.map(helpers.mapItemToPickerItem)
-);
+export const selectUid = ({ student }: S): string => student.studentInfo.uid;

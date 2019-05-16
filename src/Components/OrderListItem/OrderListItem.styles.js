@@ -12,7 +12,7 @@ export default StyleSheet.create({
     backgroundColor: colors.greyLight
   },
   subtitle: {
-    marginLeft: 10
+    // marginLeft: 10
   },
   paymentTypeText: {
     // FIXME: use the color of the ListItem title.

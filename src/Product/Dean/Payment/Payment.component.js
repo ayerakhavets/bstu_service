@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
+import { Input } from 'react-native-elements';
 import {
   HeaderRight,
-  LabelInput,
   MyButton,
   Screen
 } from '@my/components';
@@ -85,89 +85,91 @@ class Payment extends Component<PaymentProps> {
       <Screen>
         { this.props.isLoading
           ? <ActivityIndicator size="large" />
-          : <Fragment>
-            <Image
-              source={{ uri: this.props.image.url }}
-              style={ styles.image }
-              resizeMethod="resize"
-            />
-            <View style={ styles.container }>
-              <LabelInput
-                label={ I18n.translate('payment.name') }
-                value={ name }
-                editable={ false }
+          : (
+            <Fragment>
+              <Image
+                source={{ uri: this.props.image.url }}
+                style={ styles.image }
+                resizeMethod="resize"
               />
-              <LabelInput
-                label={ I18n.translate('payment.id') }
-                value={ this.props.currentUser.studentId }
-                editable={ false }
-              />
-              <LabelInput
-                label={ I18n.translate('payment.amount') }
-                value={ `${this.props.moneyAmount} BYN` }
-                editable={ false }
-              />
-              <LabelInput
-                label={ I18n.translate('payment.date') }
-                value={ this.props.date }
-                editable={ false }
-              />
-              <LabelInput
-                label={ I18n.translate('payment.paymentType') }
-                value={ this.props.paymentType }
-                editable={ false }
-              />
-              <LabelInput
-                label={ I18n.translate('payment.subject') }
-                value={ this.props.subject }
-                editable={ false }
-              />
-              <LabelInput
-                label={ I18n.translate('payment.lecturer') }
-                value={ this.props.lecturer }
-                editable={ false }
-              />
-              <View style={ styles.dateView }>
-                <DatePicker
-                  cancelBtnText={ I18n.translate('payment.cancel') }
-                  confirmBtnText={ I18n.translate('payment.ok') }
-                  customStyles={{
-                    placeholderText: styles.datePlaceholderText
-                  }}
-                  date={ this.props.startDate }
-                  format="DD MM YYYY"
-                  placeholder={ I18n.translate('payment.dateFrom') }
-                  style={ styles.datePicker }
-                  onDateChange={ this.props.onChangeStartDate }
+              <View style={ styles.container }>
+                <Input
+                  label={ I18n.translate('payment.name') }
+                  value={ name }
+                  editable={ false }
                 />
-                <DatePicker
-                  cancelBtnText={ I18n.translate('payment.cancel') }
-                  confirmBtnText={ I18n.translate('payment.ok') }
-                  customStyles={{
-                    placeholderText: styles.datePlaceholderText
-                  }}
-                  date={ this.props.endDate }
-                  format="DD MM YYYY"
-                  placeholder={ I18n.translate('payment.dateTo') }
-                  style={ styles.datePicker }
-                  onDateChange={ this.props.onChangeEndDate }
+                <Input
+                  label={ I18n.translate('payment.id') }
+                  value={ this.props.currentUser.studentId }
+                  editable={ false }
+                />
+                <Input
+                  label={ I18n.translate('payment.amount') }
+                  value={ `${this.props.moneyAmount} BYN` }
+                  editable={ false }
+                />
+                <Input
+                  label={ I18n.translate('payment.date') }
+                  value={ this.props.date }
+                  editable={ false }
+                />
+                <Input
+                  label={ I18n.translate('payment.paymentType') }
+                  value={ this.props.paymentType }
+                  editable={ false }
+                />
+                <Input
+                  label={ I18n.translate('payment.subject') }
+                  value={ this.props.subject }
+                  editable={ false }
+                />
+                <Input
+                  label={ I18n.translate('payment.lecturer') }
+                  value={ this.props.lecturer }
+                  editable={ false }
+                />
+                <View style={ styles.dateView }>
+                  <DatePicker
+                    cancelBtnText={ I18n.translate('payment.cancel') }
+                    confirmBtnText={ I18n.translate('payment.ok') }
+                    customStyles={{
+                      placeholderText: styles.datePlaceholderText
+                    }}
+                    date={ this.props.startDate }
+                    format="DD MM YYYY"
+                    placeholder={ I18n.translate('payment.dateFrom') }
+                    style={ styles.datePicker }
+                    onDateChange={ this.props.onChangeStartDate }
+                  />
+                  <DatePicker
+                    cancelBtnText={ I18n.translate('payment.cancel') }
+                    confirmBtnText={ I18n.translate('payment.ok') }
+                    customStyles={{
+                      placeholderText: styles.datePlaceholderText
+                    }}
+                    date={ this.props.endDate }
+                    format="DD MM YYYY"
+                    placeholder={ I18n.translate('payment.dateTo') }
+                    style={ styles.datePicker }
+                    onDateChange={ this.props.onChangeEndDate }
+                  />
+                </View>
+                <MyButton
+                  icon={{ name: 'done' }}
+                  containerViewStyle={ styles.buttonAdd }
+                  title={ I18n.translate('payment.accept') }
+                  onPress={ this.props.onApprovePaymentRequest }
+                />
+                <MyButton
+                  backgroundColor={ colors.red }
+                  icon={{ name: 'clear' }}
+                  containerViewStyle={ styles.buttonAdd }
+                  title={ I18n.translate('payment.decline') }
+                  onPress={ this.props.onDeclinePaymentRequest }
                 />
               </View>
-              <MyButton
-                icon={{ name: 'done' }}
-                containerViewStyle={ styles.buttonAdd }
-                title={ I18n.translate('payment.accept') }
-                onPress={ this.props.onApprovePaymentRequest }
-              />
-              <MyButton
-                backgroundColor={ colors.red }
-                icon={{ name: 'clear' }}
-                containerViewStyle={ styles.buttonAdd }
-                title={ I18n.translate('payment.decline') }
-                onPress={ this.props.onDeclinePaymentRequest }
-              />
-            </View>
-          </Fragment> }
+            </Fragment>
+          ) }
       </Screen>
     );
   }

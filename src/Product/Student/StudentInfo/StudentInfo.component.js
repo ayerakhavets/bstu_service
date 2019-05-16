@@ -1,14 +1,13 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { Input } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { I18n } from '@my/framework';
 import {
-  LabelInput,
   LabelPicker,
   MyButton,
-  Screen,
-  type PickerItem
+  Screen
 } from '@my/components';
 // FIXME: cyclic dependency.
 import { logOut } from '../../Authentication/Authentication.actions';
@@ -17,9 +16,6 @@ import {
   selectCourse,
   selectFaculty,
   selectIsLoading,
-  selectMappedCourses,
-  selectMappedFaculties,
-  selectMappedSpecialties,
   selectMiddleName,
   selectName,
   selectSpecialty,
@@ -30,18 +26,17 @@ import styles from './StudentInfo.styles';
 
 type StudentInfoProps = {
   course: string,
-  courses: PickerItem[],
+  courses: string[],
   faculty: string,
-  faculties: PickerItem[],
+  faculties: string[],
   isLoading: boolean,
   middleName: string,
   name: string,
   navigation: Object,
   specialty: string,
-  specialties: PickerItem[],
+  specialties: string[],
   studentId: string,
   surname: string,
-
   changeCourse: () => void,
   changeFaculty: () => void,
   changeMiddleName: () => void,
@@ -55,90 +50,76 @@ type StudentInfoProps = {
 
 class StudentInfo extends Component<StudentInfoProps> {
   componentWillMount() {
-    console.log('m?');
     this.props.navigation.setParams({ onLogOut: this.props.onLogOut });
   }
 
   render() {
+    const errorMessage = I18n.translate('order.studentInfo.requiredField').toUpperCase();
+
     return (
       <Screen>
-        {this.props.isLoading
+        { this.props.isLoading
           ? <ActivityIndicator size="large" />
           : (
             <Fragment>
-              {/* <View style={ styles.twoItemsContainer }> */}
               <Input
-                // labelStyle={{
-                //   paddingLeft: 20
-                // }}
-                // inputStyle={{
-                //   height: 40
-                // }}
-                // inputContainerStyle={{
-                //   paddingLeft: 10
-                // borderRadius: 45,
-                // borderWidth: 1
-                // }}
-                label="Имя:"
+                label={ I18n.translate('student.studentInfo.name') }
                 value={ this.props.name }
                 onChangeText={ this.props.changeName }
-                placeholder="Имя1"
-                errorStyle={{ color: 'red' }}
-                errorMessage={ !this.props.name && 'ENTER A VALID ERROR HERE' }
+                placeholder={ I18n.translate('student.studentInfo.name') }
+                errorStyle={ styles.inputError }
+                errorMessage={ !this.props.name ? errorMessage : null }
               />
               <Input
-                label="Фамилия:"
+                label={ I18n.translate('student.studentInfo.surname') }
                 value={ this.props.surname }
                 onChangeText={ this.props.changeSurname }
-                errorStyle={{ color: 'red' }}
-                errorMessage={ !this.props.surname && 'ENTER A VALID ERROR HERE' }
+                placeholder={ I18n.translate('student.studentInfo.surname') }
+                errorStyle={ styles.inputError }
+                errorMessage={ !this.props.surname ? errorMessage : null }
               />
-              {/* </View> */}
               <Input
-                label="Отчество:"
+                label={ I18n.translate('student.studentInfo.middleName') }
                 value={ this.props.middleName }
                 onChangeText={ this.props.changeMiddleName }
-                errorStyle={{ color: 'red' }}
-                errorMessage={ !this.props.middleName && 'ENTER A VALID ERROR HERE' }
+                placeholder={ I18n.translate('student.studentInfo.middleName') }
+                errorStyle={ styles.inputError }
+                errorMessage={ !this.props.middleName ? errorMessage : null }
               />
               <Input
-                label="Номер билета:"
+                label={ I18n.translate('student.studentInfo.studentId') }
                 maxLength={ 8 }
                 keyboardType="numeric"
                 value={ this.props.studentId }
                 onChangeText={ this.props.changeStudentId }
-                errorStyle={{ color: 'red' }}
-                errorMessage={ !this.props.studentId && 'ENTER A VALID ERROR HERE' }
+                placeholder="12345678"
+                errorStyle={ styles.inputError }
+                errorMessage={ !this.props.studentId ? errorMessage : null }
               />
-              <View style={ styles.twoItemsContainer }>
-                {/*
-                <LabelPicker
-                  isError={ !this.props.faculty }
-                  label="Факультет"
-                  pickerItems={ this.props.faculties }
-                  selectedValue={ this.props.faculty }
-                  style={ styles.twoItemsContainerItem }
-                  onValueChange={ this.props.changeFaculty }
-                />
-                <LabelPicker
-                  isError={ !this.props.course }
-                  label="Курс"
-                  pickerItems={ this.props.courses }
-                  selectedValue={ this.props.course }
-                  style={ styles.twoItemsContainerItem }
-                  onValueChange={ this.props.changeCourse }
-                /> */}
-              </View>
-              {/* <LabelPicker
-                isError={ !this.props.specialty }
-                label="Специальность"
+              <LabelPicker
+                errorMessage={ !this.props.faculty ? errorMessage : null }
+                label={ I18n.translate('student.studentInfo.faculty') }
+                pickerItems={ this.props.faculties }
+                selectedValue={ this.props.faculty }
+                onValueChange={ this.props.changeFaculty }
+              />
+              <LabelPicker
+                errorMessage={ !this.props.course ? errorMessage : null }
+                label={ I18n.translate('student.studentInfo.course') }
+                pickerItems={ this.props.courses }
+                selectedValue={ this.props.course }
+                onValueChange={ this.props.changeCourse }
+              />
+              <LabelPicker
+                errorMessage={ !this.props.specialty ? errorMessage : null }
+                label={ I18n.translate('student.studentInfo.speciality') }
                 pickerItems={ this.props.specialties }
                 selectedValue={ this.props.specialty }
                 onValueChange={ this.props.changeSpecialty }
-              /> */}
+              />
               <MyButton
                 containerViewStyle={ styles.button }
-                title="Сохранить изменения"
+                title={ I18n.translate('student.studentInfo.save') }
                 onPress={ this.props.saveStudentInfoRequest }
               />
             </Fragment>
@@ -147,19 +128,26 @@ class StudentInfo extends Component<StudentInfoProps> {
   }
 }
 
-const mapStateToProps = state => ({
-  course: selectCourse(state),
-  courses: selectMappedCourses(state),
-  faculty: selectFaculty(state),
-  faculties: selectMappedFaculties(state),
-  isLoading: selectIsLoading(state),
-  middleName: selectMiddleName(state),
-  name: selectName(state),
-  specialty: selectSpecialty(state),
-  specialties: selectMappedSpecialties(state),
-  studentId: selectStudentId(state),
-  surname: selectSurname(state)
-});
+const mapStateToProps = (state) => {
+  const courses = ['', '1', '2', '3', '4'];
+  // TODO: translate.
+  const faculties = ['', 'ФИТ'];
+  const specialties = ['', 'ДЭиВИ', 'ПОиБМС', 'ПОИТ', 'ИСИТ'];
+
+  return {
+    course: selectCourse(state),
+    courses,
+    faculties,
+    faculty: selectFaculty(state),
+    isLoading: selectIsLoading(state),
+    middleName: selectMiddleName(state),
+    name: selectName(state),
+    specialties,
+    specialty: selectSpecialty(state),
+    studentId: selectStudentId(state),
+    surname: selectSurname(state)
+  };
+};
 
 const mapDispatchToProps = {
   changeCourse: actions.changeCourse,
@@ -169,8 +157,8 @@ const mapDispatchToProps = {
   changeSpecialty: actions.changeSpecialty,
   changeStudentId: actions.changeStudentId,
   changeSurname: actions.changeSurname,
-  saveStudentInfoRequest: actions.saveStudentInfoRequest,
-  onLogOut: logOut
+  onLogOut: logOut,
+  saveStudentInfoRequest: actions.saveStudentInfoRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentInfo);

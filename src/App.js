@@ -5,7 +5,6 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { I18n, NavigatorActions } from '@my/framework';
 import * as RNLocalize from 'react-native-localize';
-
 import { colors } from '@my/components';
 import { ProductNavigator, productReducer, productSaga } from './Product';
 

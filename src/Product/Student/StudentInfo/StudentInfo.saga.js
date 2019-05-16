@@ -22,19 +22,19 @@ import {
 } from './StudentInfo.selectors';
 
 export default function* studentInfoSaga(): Saga<void> {
-  yield takeEvery(SAVE_STUDENT_INFO_REQUEST, saveStudentInfo);
+  yield takeEvery(SAVE_STUDENT_INFO_REQUEST, saveStudentInfoSaga);
 }
 
-export function* saveStudentInfo(): Saga<void> {
-  const course = yield select(selectCourse);
-  const email = yield select(selectEmail);
-  const faculty = yield select(selectFaculty);
-  const middleName = yield select(selectMiddleName);
-  const name = yield select(selectName);
-  const specialty = yield select(selectSpecialty);
-  const studentId = yield select(selectStudentId);
-  const surname = yield select(selectSurname);
-  const uid = yield select(selectUid);
+export function* saveStudentInfoSaga(): Saga<void> {
+  const course: string = yield select(selectCourse);
+  const email: string = yield select(selectEmail);
+  const faculty: string = yield select(selectFaculty);
+  const middleName: string = yield select(selectMiddleName);
+  const name: string = yield select(selectName);
+  const specialty: string = yield select(selectSpecialty);
+  const studentId: string = yield select(selectStudentId);
+  const surname: string = yield select(selectSurname);
+  const uid: string = yield select(selectUid);
 
   const studentInfo = {
     course,
