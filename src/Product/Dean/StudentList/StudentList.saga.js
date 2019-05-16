@@ -24,12 +24,15 @@ export function* handleOpenPaymentList({ payload }: OpenPaymentListAction): Saga
   yield call(NavigatorActions.navigate, STUDENT_LISTS_TABS);
 }
 
+const mapper = {
+  Mobile: 'ПОиБМС'
+};
 export function* handleLoadStudentList(): Saga<void> {
   const course = yield select(selectCourse);
   const specialty = yield select(selectSpecialty);
 
   try {
-    const studentListReponse = yield call(getStudentList, specialty, course);
+    const studentListReponse = yield call(getStudentList, mapper[specialty], course);
     if (studentListReponse) {
       yield put(loadStudentListSuccess(Object.values(studentListReponse)));
     } else {

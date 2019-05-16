@@ -11,7 +11,7 @@ import {
   OPEN_SHOW_PAYMENT_SCREEN,
   loadPaymentListFailure,
   loadPaymentListSuccess,
-  type OpenShowPaymentScreenAction
+  type OpenShowPaymentScreen
 } from './PaymentList.actions';
 
 export const PAYMENT = 'Платёж';
@@ -28,7 +28,7 @@ export function* handleOpenAddPaymentScreen(): Saga<void> {
   NavigatorActions.navigate(PAYMENT, { intent: 'ADD' });
 }
 
-export function* handleOpenShowPaymentScreen({ payload }: OpenShowPaymentScreenAction): Saga<void> {
+export function* handleOpenShowPaymentScreen({ payload }: OpenShowPaymentScreen): Saga<void> {
   const storageImagePath = `${payload.key}/${payload.image.name}`;
   const imageUrl = yield call(getPaymentImageUrl, storageImagePath);
   const paymentData = {

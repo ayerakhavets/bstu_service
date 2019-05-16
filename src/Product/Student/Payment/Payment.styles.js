@@ -23,6 +23,7 @@ export default StyleSheet.create({
     width: '100%'
   },
   datePicker: {
+    marginTop: 10,
     alignSelf: 'flex-start',
     marginLeft: 18,
     width: 200
@@ -39,16 +40,16 @@ export default StyleSheet.create({
     width: '100%'
   },
   input: {
-    width: 100
-  },
-  inputContainer: {
-    alignItems: 'center',
-    flexDirection: 'row'
+    width: 200
   },
   rowContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%'
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 12
   }
 });

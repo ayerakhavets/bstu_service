@@ -1,6 +1,4 @@
 // @flow
-import { createSelector } from 'reselect';
-import { helpers, type PickerItem } from '@my/components';
 import type { ApplicationState } from '../../types';
 import type { PaymentImage } from './Payment.reducer';
 
@@ -33,11 +31,3 @@ export const selectMoneyAmount = ({ dean }: ApplicationState): string =>
 
 export const selectPaymentType = ({ dean }: ApplicationState): string =>
   dean.payment.paymentType;
-
-export const selectPaymentTypes = ({ dean }: ApplicationState): string[] =>
-  dean.payment.paymentTypes;
-
-export const selectMappedPaymentTypes = createSelector(
-  selectPaymentTypes,
-  (paymentTypes): PickerItem[] => paymentTypes.map(helpers.mapItemToPickerItem)
-);

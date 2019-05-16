@@ -16,9 +16,6 @@ export const selectEndDate = ({ student }: ApplicationState): string =>
 export const selectLecturer = ({ student }: ApplicationState): string =>
   student.order.lecturer;
 
-export const selectStatus = ({ student }: ApplicationState): string =>
-  student.order.status;
-
 export const selectMark = ({ student }: ApplicationState): string =>
   student.order.mark;
 

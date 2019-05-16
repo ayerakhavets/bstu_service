@@ -4,19 +4,18 @@ import {
   ActivityIndicator,
   Alert,
   Image,
-  Text,
-  View
+  View,
+  Text
 } from 'react-native';
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
-import { Icon as RNIcon } from 'react-native-elements';
+import { Input, Icon as RNIcon } from 'react-native-elements';
+import { I18n } from '@my/framework';
 import {
   HeaderRight,
-  LabelInput,
   LabelPicker,
   MyButton,
-  Screen,
-  type PickerItem
+  Screen
 } from '@my/components';
 import {
   changeDate,
@@ -36,7 +35,6 @@ import {
   selectSubject,
   selectImage,
   selectIsLoading,
-  selectMappedPaymentTypes,
   selectMoneyAmount,
   selectPaymentType
 } from './Payment.selectors';
@@ -48,11 +46,13 @@ type PaymentProps = {
   isLoading: boolean,
   lecturer: string,
   subject: string,
+  subjects: string[],
   moneyAmount: string,
+  lecturers: string[],
   // FIXME: use proper type for navigation.
   navigation: Object,
   paymentType: string,
-  paymentTypes: PickerItem[],
+  paymentTypes: string[],
   onChangeMoneyAmount: () => void,
   onChangePaymentType: () => void,
   onChangeSubject: (subject: string) => void,
@@ -97,110 +97,117 @@ class Payment extends Component<PaymentProps> {
     const { date, image, moneyAmount, navigation, paymentType } = this.props;
     // FIXME: use constants for params.
     const screenType = navigation.getParam('intent', 'ADD');
-    const imageSource = image.url || `file://${image.path}`;
+
+    let imageSource = '';
+    if (image.url) {
+      imageSource = image.url;
+    } else if (image.path) {
+      imageSource = `file://${image.path}`;
+    } else {
+      imageSource = '';
+    }
+
     const submitButtonText = screenType === 'EDIT'
       ? 'Сохранить изменения'
-      : 'Добавить';
+      : 'Готово';
     const isDataEmpty = !paymentType || !moneyAmount || !date || !image.name;
-    console.log('-==', this.props.subject,
-      this.props.onChangeSubject,
-      this.props.lecturer,
-      this.props.onChangeLecturer);
+
     return (
       <Screen>
         { this.props.isLoading
           ? <ActivityIndicator size="large" />
-          : <Fragment>
-            <Image
-              source={{ uri: imageSource }}
-              style={ styles.image }
-              resizeMethod="resize"
-            />
-            <View style={ styles.container }>
-              <View style={ styles.rowContainer }>
-                <View style={ styles.inputContainer }>
-                  <LabelInput
-                    keyboardType="numeric"
+          : (
+            <Fragment>
+              <Image
+                source={{ uri: imageSource }}
+                style={ styles.image }
+                resizeMethod="resize"
+              />
+              <View style={ styles.container }>
+                <View style={ styles.rowContainer }>
+                  <Input
+                    label={ I18n.translate('student.payment.money') }
                     maxLength={ 8 }
-                    containerViewStyle={ styles.input }
+                    containerStyle={ styles.input }
+                    keyboardType="numeric"
                     value={ this.props.moneyAmount }
                     onChangeText={ this.props.onChangeMoneyAmount }
                   />
-                  <Text>BYN</Text>
+                  <RNIcon
+                    color={ colors.greenDark }
+                    containerViewStyle={ styles.buttonIcon }
+                    name="insert-photo"
+                    raised
+                    reverse
+                    size={ 20 }
+                    onPress={ this.props.onOpenImagePicker }
+                  />
                 </View>
-                <RNIcon
-                  color={ colors.greenDark }
-                  containerViewStyle={ styles.buttonIcon }
-                  name="insert-photo"
-                  raised
-                  reverse
-                  size={ 20 }
-                  onPress={ this.props.onOpenImagePicker }
+                <DatePicker
+                  cancelBtnText="Закрыть"
+                  confirmBtnText="Ок"
+                  customStyles={{
+                    placeholderText: styles.datePlaceholderText
+                  }}
+                  date={ date }
+                  format="DD MM YYYY"
+                  placeholder="Дата платежа"
+                  style={ styles.datePicker }
+                  onDateChange={ this.props.onDateChange }
+                />
+                <LabelPicker
+                  label="Тип услуги"
+                  pickerItems={ this.props.paymentTypes }
+                  selectedValue={ this.props.paymentType }
+                  onValueChange={ this.props.onChangePaymentType }
+                />
+                <LabelPicker
+                  label="Название дисциплины"
+                  pickerItems={ this.props.subjects }
+                  selectedValue={ this.props.subject }
+                  onValueChange={ this.props.onChangeSubject }
+                />
+                <LabelPicker
+                  label="Преподаватель"
+                  pickerItems={ this.props.lecturers }
+                  selectedValue={ this.props.lecturer }
+                  onValueChange={ this.props.onChangeLecturer }
+                />
+                { !!isDataEmpty && <Text style={ styles.errorText }>{'заполните все поля'.toUpperCase()}</Text> }
+                <MyButton
+                  containerViewStyle={ styles.buttonAdd }
+                  title={ submitButtonText }
+                  onPress={ screenType === 'EDIT'
+                    ? this.editPayment
+                    : this.addPayment }
                 />
               </View>
-              <DatePicker
-                cancelBtnText="Закрыть"
-                confirmBtnText="Ок"
-                customStyles={{
-                  placeholderText: styles.datePlaceholderText
-                }}
-                date={ date }
-                format="DD MM YYYY"
-                placeholder="Дата платежа"
-                style={ styles.datePicker }
-                onDateChange={ this.props.onDateChange }
-              />
-              <LabelPicker
-                label="Тип услуги"
-                pickerItems={ this.props.paymentTypes }
-                selectedValue={ this.props.paymentType }
-                onValueChange={ this.props.onChangePaymentType }
-              />
-              <LabelPicker
-                label="Название дисциплины"
-                pickerItems={ [
-                  { label: '', value: '' },
-                  { label: 'БД', value: 'БД' },
-                  { label: 'СУБД', value: 'СУБД' }
-                ] }
-                selectedValue={ this.props.subject }
-                onValueChange={ this.props.onChangeSubject }
-              />
-              <LabelPicker
-                isError={ isDataEmpty }
-                errorMessage="* Заполните все поля"
-                label="Преподаватель"
-                pickerItems={ [
-                  { label: '', value: '' },
-                  { label: 'Иванов И. И', value: 'Иванов И. И' }
-                ] }
-                selectedValue={ this.props.lecturer }
-                onValueChange={ this.props.onChangeLecturer }
-              />
-              <MyButton
-                containerViewStyle={ styles.buttonAdd }
-                title={ submitButtonText }
-                onPress={ screenType === 'EDIT'
-                  ? this.editPayment
-                  : this.addPayment }
-              />
-            </View>
-          </Fragment> }
+            </Fragment>
+          )}
       </Screen>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  date: selectDate(state),
-  image: selectImage(state),
-  isLoading: selectIsLoading(state),
-  moneyAmount: selectMoneyAmount(state),
-  lecturer: selectLecturer(state),
-  subject: selectSubject(state),
-  paymentType: selectPaymentType(state),
-  paymentTypes: selectMappedPaymentTypes(state)
-});
+const mapStateToProps = (state) => {
+  // TODO: translate.
+  const subjects = ['', 'БД', 'СУБД'];
+  const paymentTypes = ['', 'Академическая задолженность', 'Обучение', 'Общежитие', 'Пеня'];
+  const lecturers = ['', 'Иванов И. И'];
+
+  return {
+    date: selectDate(state),
+    image: selectImage(state),
+    isLoading: selectIsLoading(state),
+    lecturer: selectLecturer(state),
+    lecturers,
+    moneyAmount: selectMoneyAmount(state),
+    paymentType: selectPaymentType(state),
+    paymentTypes,
+    subject: selectSubject(state),
+    subjects
+  };
+};
 
 const mapDispatchToProps = {
   onChangeSubject: сhangeSubject,

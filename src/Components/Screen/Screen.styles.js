@@ -7,7 +7,7 @@ export default StyleSheet.create({
     minHeight: '100%',
     width: '100%',
     backgroundColor: colors.white,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
     padding: 8
   }

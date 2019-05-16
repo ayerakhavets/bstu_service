@@ -54,7 +54,6 @@ const StudentStack = createStackNavigator({
     screen: StudentTabs,
     navigationOptions: ({ navigation }) => {
       const params = navigation.state.routes[1].params || {};
-      console.log('params student navigator: ', params);
       const { index } = navigation.state;
       return {
         headerRight: <HeaderRight iconName="exit-to-app" onIconPress={ params.onLogOut } />,
@@ -85,10 +84,3 @@ const StudentStack = createStackNavigator({
 });
 
 export default StudentStack;
-
-// const instructions = Platform.select({
-//   ios: 'Press Cmd+R to reload,\n' +
-//     'Cmd+D or shake for dev menu',
-//   android: 'DOUBLE tap R on your keyboard to reload,\n' +
-//     'Shake or press menu button for dev menu'
-// });

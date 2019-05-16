@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Picker, View } from 'react-native';
+import { Picker, View, Text } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import styles from './LabelPicker.styles';
 
@@ -9,21 +9,22 @@ export type PickerItem = {
   value: string
 }
 
+const mapItemToPickerItem = (item: string): PickerItem => ({ label: item, value: item });
+
 // FIXME: add Picker styles.
 type LabelPickerProps = {
-  errorMessage?: string,
+  errorMessage?: ?string,
   isError?: boolean,
-  pickerItems: PickerItem[],
+  pickerItems: string[],
   label: string,
   selectedValue?: string,
   style?: ViewStyleProp,
-  onValueChange: () => void
+  onValueChange: (value: string) => void
 }
 
 function LabelPicker(props: LabelPickerProps) {
   const {
     errorMessage,
-    isError,
     label,
     pickerItems,
     selectedValue,
@@ -32,15 +33,16 @@ function LabelPicker(props: LabelPickerProps) {
     ...rest
   } = props;
 
+  const mappedPickerItems = pickerItems.map(mapItemToPickerItem);
+
   const pickerItemComponents: any = pickerItems
-    ? pickerItems.map((picker, index) =>
-      // eslint-disable-next-line react/no-array-index-key
-      <Picker.Item key={ index } label={ picker.label } value={ picker.value } />)
+    ? mappedPickerItems.map(picker =>
+      <Picker.Item key={ picker.label } label={ picker.label } value={ picker.value } />)
     : null;
 
   return (
     <View style={ [styles.container, style] }>
-      {/* <FormLabel>{ label }</FormLabel> */}
+      <Text style={ styles.labelText }>{ label }</Text>
       <Picker
         style={ styles.picker }
         selectedValue={ selectedValue }
@@ -49,10 +51,7 @@ function LabelPicker(props: LabelPickerProps) {
       >
         { pickerItemComponents }
       </Picker>
-      {/* {isError
-        ? <FormValidationMessage>{errorMessage || '* Обязательное поле'}</FormValidationMessage>
-        : null
-      } */}
+      { !!errorMessage && <Text style={ styles.errorText }>{ errorMessage }</Text> }
     </View>
   );
 }

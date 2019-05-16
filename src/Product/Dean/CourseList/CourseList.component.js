@@ -31,7 +31,6 @@ type CourseListProps = {
   onLogOut: () => void,
 }
 
-// FIXME: add keyExtractor and keys to the items.
 class CourseList extends React.Component<CourseListProps> {
   static navigationOptions = ({ navigation }) => {
     const params = navigation.state.params || {};
@@ -40,9 +39,12 @@ class CourseList extends React.Component<CourseListProps> {
     };
   };
 
+
   componentWillMount() {
     this.props.navigation.setParams({ onLogOut: this.props.onLogOut });
   }
+
+  keyExtractor = (item, index) => item + index
 
   renderItem = ({ item, section }) => (<ListItem
     chevronColor={ colors.greenDark }
@@ -65,6 +67,7 @@ class CourseList extends React.Component<CourseListProps> {
   render() {
     return (
       <SectionList
+        keyExtractor={ this.keyExtractor }
         stickySectionHeadersEnabled
         renderItem={ this.renderItem }
         renderSectionHeader={ this.renderSectionHeader }

@@ -64,11 +64,12 @@ class StudentList extends Component<StudentListProps, StudentListState> {
     return (
       <View style={ styles.container }>
         <SearchBar
+          value={ this.state.searchValue }
           clearIcon
           borderColor={ colors.greenLight }
           containerStyle={ styles.searchBarContainer }
           onChangeText={ this.onSearchInputChange }
-          placeholder="Type Here..."
+          placeholder="Search by surname..."
         />
         <FlatList
           data={ this.filterItems() }

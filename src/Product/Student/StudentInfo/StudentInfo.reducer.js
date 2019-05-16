@@ -1,6 +1,5 @@
 // @flow
 import { combineActions, handleActions } from 'redux-actions';
-
 import {
   CHANGE_COURSE, type ChangeCourse,
   CHANGE_FACULTY, type ChangeFaculty,
@@ -19,34 +18,29 @@ import {
 
 export type StudentInfoState = {
   course: string,
-  courses: string[],
   email: string,
-  faculties: string[],
   faculty: string,
   isLoading: boolean,
   middleName: string,
   name: string,
-  specialties: string[],
   specialty: string,
   studentId: string,
-  surname: string
+  surname: string,
+  uid: string
 }
 type S = StudentInfoState;
 
-// TODO: use server data instead of the mocked one.
 const initialState = {
   course: '',
-  courses: ['', '1', '2', '3', '4'],
   email: '',
-  faculties: ['', 'ФИТ'],
   faculty: '',
   isLoading: false,
   middleName: '',
   name: '',
-  specialties: ['', 'ДЭиВИ', 'ПОиБМС', 'ПОИТ', 'ИСИТ'],
   specialty: '',
   studentId: '',
-  surname: ''
+  surname: '',
+  uid: ''
 };
 
 export default handleActions({

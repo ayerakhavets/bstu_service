@@ -1,32 +1,20 @@
 // @flow
-import type { ApplicationState } from '../../types';
+import { type ApplicationState as S } from '../../types';
 
-export const selectDate = ({ student }: ApplicationState): string =>
-  student.order.date;
+export const selectDate = ({ student }: S): string => student.order.date;
 
-export const selectStudent = ({ student }: ApplicationState): string =>
-  student.order.student;
+export const selectStudent = ({ student }: S): string => student.order.student;
 
-export const selectStartDate = ({ student }: ApplicationState): string =>
-  student.order.startDate;
+export const selectStartDate = ({ student }: S): string => student.order.startDate;
 
-export const selectEndDate = ({ student }: ApplicationState): string =>
-  student.order.endDate;
+export const selectEndDate = ({ student }: S): string => student.order.endDate;
 
-export const selectLecturer = ({ student }: ApplicationState): string =>
-  student.order.lecturer;
+export const selectLecturer = ({ student }: S): string => student.order.lecturer;
 
-export const selectStatus = ({ student }: ApplicationState): string =>
-  student.order.status;
+export const selectMark = ({ student }: S): string => student.order.mark;
 
-export const selectMark = ({ student }: ApplicationState): string =>
-  student.order.mark;
+export const selectSubject = ({ student }: S): string => student.order.subject;
 
-export const selectSubject = ({ student }: ApplicationState): string =>
-  student.order.subject;
+export const selectKey = ({ student }: S): string => student.order.key;
 
-export const selectKey = ({ student }: ApplicationState): string =>
-  student.order.key;
-
-export const selectIsLoading = ({ student }: ApplicationState): boolean =>
-  student.order.isLoading;
+export const selectIsLoading = ({ student }: S): boolean => student.order.isLoading;

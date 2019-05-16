@@ -10,8 +10,10 @@ import {
   OPEN_ORDER_INFO,
   loadOrderListFailure,
   loadOrderListSuccess,
-  type OpenShowPaymentScreenAction
+  type OpenOrderInfoAction
 } from './OrderList.actions';
+import type { OrderData } from '../../types';
+
 
 export const ORDER = 'Направление';
 
@@ -20,7 +22,7 @@ export default function* orderListSaga(): Saga<void> {
   yield takeEvery(OPEN_ORDER_INFO, handleOpenShowPaymentScreen);
 }
 
-export function* handleOpenShowPaymentScreen({ payload }: OpenShowPaymentScreenAction): Saga<void> {
+export function* handleOpenShowPaymentScreen({ payload }: OpenOrderInfoAction): Saga<void> {
   yield put(changeOrderData(payload));
   NavigatorActions.navigate(ORDER);
 }
@@ -31,7 +33,9 @@ export function* handleLoadOrderList(): Saga<void> {
   try {
     const orderListReponse = yield call(getOrderList, uid);
     if (orderListReponse) {
-      yield put(loadOrderListSuccess(Object.values(orderListReponse)));
+      // TODO: refactor the type (according to the comment below).
+      const orderList: OrderData[] = (Object.values(orderListReponse): any);
+      yield put(loadOrderListSuccess(orderList));
     } else {
       yield put(loadOrderListSuccess([]));
     }
@@ -40,3 +44,25 @@ export function* handleLoadOrderList(): Saga<void> {
     Toast.show('Ошибка загрузки данных');
   }
 }
+
+/*
+date : "17 05 2019"
+endDate : "17 05 2019"
+key : "-LexXCWddzoJQ5KVFs6o"
+lecturer : "Иванов И. И"
+mark : "9"
+startDate : "16 05 2019"
+status : "closed"
+student : Object
+course : "4"
+email : "user@mail.com"
+faculty : "ФИТ"
+middleName : "vlad"
+name : "alexa"
+specialty : "ПОиБМС"
+studentId : "12378945"
+surname : "yero"
+uid : "4FOnlGl0rdNFq9w8GmBkafrqqAO2"
+__proto__ : Object
+subject : "СУБД"
+*/
