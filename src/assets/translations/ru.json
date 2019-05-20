@@ -55,7 +55,27 @@
     "pullToRefresh": "Список студентов пуст. Потяните для обновления"
   },
   "student": {
+    "dataUpdateToast": "Данные обновлены",
+    "errors": {
+      "dataLoading": "Ошибка загрузки данных",
+      "dataAdding": "Ошибка добавления данных"
+    },
+    "routes": {
+      "paymentList": "Платежи",
+      "orderList": "Направления",
+      "studentInfo": "Личная информация",
+      "order": "Направление",
+      "payment": "Платёж"
+    },
     "payment": {
+      "removeDialogTitle": "Удаление",
+      "confirmRemove": "Подтвердите удаление платежа",
+      "cancelDialog": "Отменить",
+      "remove": "Удалить",
+      "done": "Готово",
+      "saveChanges": "Сохранить изменения",
+      "requiredFieldsText": "Заполните все поля",
+      "date": "Дата платежа",
       "money": "Сумма (BYN)"
     },
     "paymentList": {

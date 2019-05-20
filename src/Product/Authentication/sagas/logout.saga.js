@@ -1,7 +1,7 @@
 // @flow
 import { type Saga } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { NavigatorActions } from '@my/framework';
 import { clearStudentInfo } from '../../Student';
 import { clearUserData } from '../Authentication.actions';

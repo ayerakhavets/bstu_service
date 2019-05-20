@@ -7,5 +7,11 @@ export default StyleSheet.create({
   },
   inputError: {
     color: 'red'
+  },
+  picker: {
+    flex: 1
+  },
+  pickersContainer: {
+    flexDirection: 'row'
   }
 });

@@ -69,11 +69,11 @@ class Payment extends Component<PaymentProps> {
     const params = navigation.state.params || {};
     const screenType = navigation.getParam('intent', 'ADD');
     const onPress = () => Alert.alert(
-      'Удаление',
-      'Подтвердите удаление платежа',
+      I18n.translate('student.payment.removeDialogTitle'),
+      I18n.translate('student.payment.confirmRemove'),
       [
-        { text: 'Отменить', style: 'cancel' },
-        { text: 'Удалить', onPress: params.removePayment }
+        { text: I18n.translate('student.payment.cancelDialog'), style: 'cancel' },
+        { text: I18n.translate('student.payment.remove'), onPress: params.removePayment }
       ]
     );
 
@@ -95,6 +95,7 @@ class Payment extends Component<PaymentProps> {
 
   render() {
     const { date, image, moneyAmount, navigation, paymentType } = this.props;
+    console.log('TCL: render -> image', image);
     // FIXME: use constants for params.
     const screenType = navigation.getParam('intent', 'ADD');
 
@@ -103,13 +104,11 @@ class Payment extends Component<PaymentProps> {
       imageSource = image.url;
     } else if (image.path) {
       imageSource = `file://${image.path}`;
-    } else {
-      imageSource = '';
     }
 
     const submitButtonText = screenType === 'EDIT'
-      ? 'Сохранить изменения'
-      : 'Готово';
+      ? I18n.translate('student.payment.saveChanges')
+      : I18n.translate('student.payment.done');
     const isDataEmpty = !paymentType || !moneyAmount || !date || !image.name;
 
     return (
@@ -118,11 +117,11 @@ class Payment extends Component<PaymentProps> {
           ? <ActivityIndicator size="large" />
           : (
             <Fragment>
-              <Image
-                source={{ uri: imageSource }}
+              { !!imageSource && (<Image
+                source={{ uri: image.uri }}
                 style={ styles.image }
                 resizeMethod="resize"
-              />
+              />) }
               <View style={ styles.container }>
                 <View style={ styles.rowContainer }>
                   <Input
@@ -144,36 +143,40 @@ class Payment extends Component<PaymentProps> {
                   />
                 </View>
                 <DatePicker
-                  cancelBtnText="Закрыть"
-                  confirmBtnText="Ок"
+                  cancelBtnText={ I18n.translate('payment.cancel') }
+                  confirmBtnText={ I18n.translate('payment.ok') }
                   customStyles={{
                     placeholderText: styles.datePlaceholderText
                   }}
                   date={ date }
                   format="DD MM YYYY"
-                  placeholder="Дата платежа"
+                  placeholder={ I18n.translate('student.payment.date') }
                   style={ styles.datePicker }
                   onDateChange={ this.props.onDateChange }
                 />
                 <LabelPicker
-                  label="Тип услуги"
+                  label={ I18n.translate('payment.paymentType') }
                   pickerItems={ this.props.paymentTypes }
                   selectedValue={ this.props.paymentType }
                   onValueChange={ this.props.onChangePaymentType }
                 />
                 <LabelPicker
-                  label="Название дисциплины"
+                  label={ I18n.translate('payment.subject') }
                   pickerItems={ this.props.subjects }
                   selectedValue={ this.props.subject }
                   onValueChange={ this.props.onChangeSubject }
                 />
                 <LabelPicker
-                  label="Преподаватель"
+                  label={ I18n.translate('payment.lecturer') }
                   pickerItems={ this.props.lecturers }
                   selectedValue={ this.props.lecturer }
                   onValueChange={ this.props.onChangeLecturer }
                 />
-                { !!isDataEmpty && <Text style={ styles.errorText }>{'заполните все поля'.toUpperCase()}</Text> }
+                { !!isDataEmpty && (
+                  <Text style={ styles.errorText }>
+                    { I18n.translate('student.payment.requiredFieldsText').toUpperCase() }
+                  </Text>
+                ) }
                 <MyButton
                   containerViewStyle={ styles.buttonAdd }
                   title={ submitButtonText }

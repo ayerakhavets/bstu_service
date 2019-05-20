@@ -1,9 +1,10 @@
 // @flow
 import firebase from 'react-native-firebase';
-import type { StudentInfo } from '../types';
+import type { OrderData, PaymentData, StudentInfo } from '../types';
 import { lecturerUid } from '../Authentication/Authentication.constants';
 
 export const getStudentList = async (specialty: string, course: string): StudentInfo[] =>
+  // $FlowFixMe
   firebase.database().ref(`specialties/${specialty}`)
     .orderByChild('course')
     .equalTo(course)
@@ -25,10 +26,10 @@ export const removePayment = async (
 export const getPaymentImageUrl = (storageImagePath: string): Promise<string> =>
   firebase.storage().ref(storageImagePath).getDownloadURL();
 
-export const resolvePayment = (uid, key, status) =>
+export const resolvePayment = (uid: string, key: string, status: string) =>
   firebase.database().ref(`payments/${uid}/${key}`).child('status').set(status);
 
-export const handleReslovePayment = async (uid, key, order, student) => {
+export const handleReslovePayment = async (uid: string, key: string, order: any, student: StudentInfo) => {
   await firebase.database().ref(`payments/${uid}/${key}`).child('status').set('approved');
 
   const updates = {};

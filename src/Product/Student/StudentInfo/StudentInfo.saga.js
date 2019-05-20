@@ -1,7 +1,7 @@
 // @flow
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { Toast } from '@my/framework';
+import { I18n, Toast } from '@my/framework';
 // FIXME: use this reducer part to select email and uid.
 // FIXME: set this values after registration.
 import { selectEmail, selectUid } from '../../Authentication';
@@ -51,9 +51,9 @@ export function* saveStudentInfoSaga(): Saga<void> {
   try {
     yield call(updateStudentInfo, studentInfo);
     yield put(saveStudentInfoSuccess());
-    Toast.show('Данные обновлены');
+    Toast.show(I18n.translate('student.dataUpdateToast'));
   } catch (error) {
     yield put(saveStudentInfoFailure());
-    Toast.show('Ошибка добавления данных');
+    Toast.show(I18n.translate('student.errors.dataAdding'));
   }
 }

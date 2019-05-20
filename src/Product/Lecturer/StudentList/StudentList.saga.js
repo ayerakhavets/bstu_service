@@ -14,6 +14,7 @@ import {
 import { selectSubject } from './StudentList.selectors';
 import { ORDER_LIST } from '../Lecturer.navigator';
 import { lecturerUid } from '../../Authentication/Authentication.constants';
+import { type StudentInfo } from '../../types';
 
 export default function* studentListSaga(): Saga<void> {
   yield takeEvery(LOAD_STUDENT_LIST_REQUEST, handleLoadStudentList);
@@ -22,19 +23,17 @@ export default function* studentListSaga(): Saga<void> {
 
 export function* handleOpenOrderList({ payload }: OpenOrderListAction): Saga<void> {
   yield put(changeCurrentStudent(payload));
-
-  // yield call(NavigatorActions.navigate, ORDER_LIST);
-  NavigatorActions.navigate(ORDER_LIST);
+  yield call(NavigatorActions.navigate, ORDER_LIST);
 }
 
 export function* handleLoadStudentList(): Saga<void> {
-  const subject = yield select(selectSubject);
-
   try {
-    const studentListReponse = yield call(getStudentList, lecturerUid, subject);
+    const subject: string = yield select(selectSubject);
+    const studentListReponse: Object[] = yield call(getStudentList, lecturerUid, subject);
 
     if (studentListReponse) {
-      yield put(loadStudentListSuccess(Object.values(studentListReponse)));
+      const students: StudentInfo[] = (Object.values(studentListReponse): Object[]);
+      yield put(loadStudentListSuccess(students));
     } else {
       yield put(loadStudentListSuccess([]));
     }

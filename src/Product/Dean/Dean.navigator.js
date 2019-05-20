@@ -28,17 +28,19 @@ const StudentListsTabs = createBottomTabNavigator({
 },
 {
   initialRouteName: PAYMENT_LIST,
-  navigationOptions: ({ navigation }) => ({
+  defaultNavigationOptions: ({ navigation }) => ({
     // eslint-disable-next-line react/display-name, react/prop-types
     tabBarIcon: ({ focused }) => {
-      let iconName;
+      let iconName: string;
       switch (navigation.state.routeName) {
       case ORDER_LIST:
         iconName = 'file-multiple'; break;
       case PAYMENT_LIST:
         iconName = 'view-list'; break;
-      default: break;
+      default:
+        iconName = 'blank';
       }
+
       return (<Icon
         color={ focused ? colors.greenDark : colors.grey }
         name={ iconName }
@@ -67,8 +69,6 @@ const DeanStack = createStackNavigator({
   [STUDENT_LISTS_TABS]: {
     screen: StudentListsTabs,
     navigationOptions: ({ navigation }) => {
-      const params = navigation || {};
-      console.log('params dean navigator: ', params);
       const { index } = navigation.state;
       let titleName = '';
       if (navigation.state.routes[index].routeName === 'ORDER_LIST.Dean') {
@@ -101,7 +101,7 @@ const DeanStack = createStackNavigator({
   }
 },
 {
-  navigationOptions: {
+  defaultNavigationOptions: {
     headerTintColor: colors.white,
     headerStyle: {
       backgroundColor: colors.greenLight

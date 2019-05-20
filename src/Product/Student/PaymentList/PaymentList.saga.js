@@ -1,7 +1,8 @@
 // @flow
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { NavigatorActions, Toast } from '@my/framework';
+
+import { I18n, NavigatorActions, Toast } from '@my/framework';
 import { selectUid } from '../../Authentication';
 import { getPaymentList, getPaymentImageUrl } from '../Student.api';
 import { changePaymentData, clearPaymentData } from '../Payment';
@@ -13,8 +14,7 @@ import {
   loadPaymentListSuccess,
   type OpenShowPaymentScreen
 } from './PaymentList.actions';
-
-export const PAYMENT = 'Платёж';
+import { PAYMENT_ROUTE } from '../Student.constants';
 
 export default function* paymentListSaga(): Saga<void> {
   yield takeEvery(LOAD_PAYMENT_LIST_REQUEST, handleLoadPaymentList);
@@ -25,7 +25,7 @@ export default function* paymentListSaga(): Saga<void> {
 export function* handleOpenAddPaymentScreen(): Saga<void> {
   yield put(clearPaymentData());
   // FIXME: use constants for params.
-  NavigatorActions.navigate(PAYMENT, { intent: 'ADD' });
+  NavigatorActions.navigate(PAYMENT_ROUTE, { intent: 'ADD' });
 }
 
 export function* handleOpenShowPaymentScreen({ payload }: OpenShowPaymentScreen): Saga<void> {
@@ -41,7 +41,7 @@ export function* handleOpenShowPaymentScreen({ payload }: OpenShowPaymentScreen)
 
   yield put(changePaymentData(paymentData));
   // FIXME: use constants for params.
-  NavigatorActions.navigate(PAYMENT, { intent: 'EDIT' });
+  NavigatorActions.navigate(PAYMENT_ROUTE, { intent: 'EDIT' });
 }
 
 export function* handleLoadPaymentList(): Saga<void> {
@@ -56,6 +56,6 @@ export function* handleLoadPaymentList(): Saga<void> {
     }
   } catch (error) {
     yield put(loadPaymentListFailure());
-    Toast.show('Ошибка загрузки данных');
+    Toast.show(I18n.translate('student.errors.dataLoading'));
   }
 }

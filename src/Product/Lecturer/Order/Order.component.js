@@ -1,17 +1,11 @@
 // @flow
-import React, { Component, Fragment } from 'react';
-import {
-  ActivityIndicator,
-  View
-} from 'react-native';
+import React, { PureComponent, Fragment } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
 import { Input } from 'react-native-elements';
-import {
-  MyButton,
-  Screen
-} from '@my/components';
-import { type StudetnInfo } from '../../types';
+import { MyButton, Screen } from '@my/components';
+import { type StudentInfo } from '../../types';
 import {
   approveOrderRequest,
   changeDate,
@@ -28,11 +22,11 @@ import {
   selectIsLoading,
   selectStatus
 } from './Order.selectors';
-import styles, { colors } from './Order.styles';
+import styles from './Order.styles';
 import { selectCurrentStudent } from '../StudentList';
 
 type PaymentProps = {
-  currentUser: StudetnInfo,
+  currentUser: StudentInfo,
   date: string,
   mark: string,
   lecturer: string,
@@ -43,12 +37,15 @@ type PaymentProps = {
   isLoading: boolean,
   onSetOrderRequest: () => void,
   onChangeMark: (mark: string) => void,
+  onMarkOrder: () => void,
   onChangeDate: (date: string) => void
 }
 
-// eslint-disable-next-line
-class Payment extends Component<PaymentProps> {
+class Payment extends PureComponent<PaymentProps> {
   render() {
+    const studentName =
+      `${this.props.currentUser.surname} ${this.props.currentUser.name} ${this.props.currentUser.middleName}`;
+
     return (
       <Screen>
         { this.props.isLoading
@@ -57,7 +54,7 @@ class Payment extends Component<PaymentProps> {
             <View style={ styles.container }>
               <Input
                 label="ФИО студента"
-                value={ `${this.props.currentUser.surname} ${this.props.currentUser.name} ${this.props.currentUser.middleName}` }
+                value={ studentName }
                 editable={ false }
               />
               <Input

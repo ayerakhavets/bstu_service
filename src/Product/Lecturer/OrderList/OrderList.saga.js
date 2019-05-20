@@ -2,7 +2,6 @@
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { NavigatorActions, Toast } from '@my/framework';
-import { selectUid } from '../../Authentication';
 import { getOrderList } from '../Lecturer.api';
 import { changeOrderData } from '../Order';
 import { selectCurrentStudent } from '../StudentList';
@@ -11,8 +10,9 @@ import {
   OPEN_ORDER_INFO,
   loadOrderListFailure,
   loadOrderListSuccess,
-  type OpenShowPaymentScreenAction
+  type OpenOrderInfoAction
 } from './OrderList.actions';
+import type { OrderData } from '../../types';
 
 export const ORDER = 'ORDER.Lecturer';
 
@@ -21,18 +21,19 @@ export default function* orderListSaga(): Saga<void> {
   yield takeEvery(OPEN_ORDER_INFO, handleOpenShowPaymentScreen);
 }
 
-export function* handleOpenShowPaymentScreen({ payload }: OpenShowPaymentScreenAction): Saga<void> {
+export function* handleOpenShowPaymentScreen({ payload }: OpenOrderInfoAction): Saga<void> {
   yield put(changeOrderData(payload));
-  NavigatorActions.navigate(ORDER);
+  yield call(NavigatorActions.navigate, ORDER);
 }
 
 export function* handleLoadOrderList(): Saga<void> {
   const { uid } = yield select(selectCurrentStudent);
 
   try {
-    const orderListReponse = yield call(getOrderList, uid);
+    const orderListReponse: Object[] = yield call(getOrderList, uid);
     if (orderListReponse) {
-      yield put(loadOrderListSuccess(Object.values(orderListReponse)));
+      const orders: OrderData[] = (Object.values(orderListReponse): Object[]);
+      yield put(loadOrderListSuccess(orders));
     } else {
       yield put(loadOrderListSuccess([]));
     }

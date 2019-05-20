@@ -1,16 +1,10 @@
 // @flow
-import React, { Component, Fragment } from 'react';
-import { ActivityIndicator } from 'react-native';
+import React, { PureComponent, Fragment } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 import { Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { I18n } from '@my/framework';
-import {
-  LabelPicker,
-  MyButton,
-  Screen
-} from '@my/components';
-// FIXME: cyclic dependency.
-import { logOut } from '../../Authentication/Authentication.actions';
+import { LabelPicker, MyButton, Screen } from '@my/components';
 import * as actions from './StudentInfo.actions';
 import {
   selectCourse,
@@ -32,7 +26,6 @@ type StudentInfoProps = {
   isLoading: boolean,
   middleName: string,
   name: string,
-  navigation: Object,
   specialty: string,
   specialties: string[],
   studentId: string,
@@ -44,17 +37,12 @@ type StudentInfoProps = {
   changeSpecialty: () => void,
   changeStudentId: () => void,
   changeSurname: () => void,
-  onLogOut: () => void,
   saveStudentInfoRequest: () => void
 }
 
-class StudentInfo extends Component<StudentInfoProps> {
-  componentWillMount() {
-    this.props.navigation.setParams({ onLogOut: this.props.onLogOut });
-  }
-
+class StudentInfo extends PureComponent<StudentInfoProps> {
   render() {
-    const errorMessage = I18n.translate('order.studentInfo.requiredField').toUpperCase();
+    const errorMessage = I18n.translate('student.studentInfo.requiredField').toUpperCase();
 
     return (
       <Screen>
@@ -96,20 +84,24 @@ class StudentInfo extends Component<StudentInfoProps> {
                 errorStyle={ styles.inputError }
                 errorMessage={ !this.props.studentId ? errorMessage : null }
               />
-              <LabelPicker
-                errorMessage={ !this.props.faculty ? errorMessage : null }
-                label={ I18n.translate('student.studentInfo.faculty') }
-                pickerItems={ this.props.faculties }
-                selectedValue={ this.props.faculty }
-                onValueChange={ this.props.changeFaculty }
-              />
-              <LabelPicker
-                errorMessage={ !this.props.course ? errorMessage : null }
-                label={ I18n.translate('student.studentInfo.course') }
-                pickerItems={ this.props.courses }
-                selectedValue={ this.props.course }
-                onValueChange={ this.props.changeCourse }
-              />
+              <View style={ styles.pickersContainer }>
+                <LabelPicker
+                  style={ styles.picker }
+                  errorMessage={ !this.props.faculty ? errorMessage : null }
+                  label={ I18n.translate('student.studentInfo.faculty') }
+                  pickerItems={ this.props.faculties }
+                  selectedValue={ this.props.faculty }
+                  onValueChange={ this.props.changeFaculty }
+                />
+                <LabelPicker
+                  style={ styles.picker }
+                  errorMessage={ !this.props.course ? errorMessage : null }
+                  label={ I18n.translate('student.studentInfo.course') }
+                  pickerItems={ this.props.courses }
+                  selectedValue={ this.props.course }
+                  onValueChange={ this.props.changeCourse }
+                />
+              </View>
               <LabelPicker
                 errorMessage={ !this.props.specialty ? errorMessage : null }
                 label={ I18n.translate('student.studentInfo.speciality') }
@@ -157,7 +149,6 @@ const mapDispatchToProps = {
   changeSpecialty: actions.changeSpecialty,
   changeStudentId: actions.changeStudentId,
   changeSurname: actions.changeSurname,
-  onLogOut: logOut,
   saveStudentInfoRequest: actions.saveStudentInfoRequest
 };
 

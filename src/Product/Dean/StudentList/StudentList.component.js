@@ -17,7 +17,7 @@ type StudentListProps = {
   isLoading: boolean,
   studentList: StudentInfo[],
   loadStudentList: () => void,
-  onOpenPaymentList: () => void
+  onOpenPaymentList: (student: StudentInfo) => void
 }
 
 // TODO: add type for state.
@@ -25,6 +25,7 @@ class StudentList extends Component<StudentListProps, any> {
   static navigationOptions = ({ navigation }) => ({
     headerRight: <HeaderRight
       iconName="finance"
+      // eslint-disable-next-line
       onIconPress={ () => navigation.navigate('Charts.Dean') }
     />
   });

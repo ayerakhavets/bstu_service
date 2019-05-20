@@ -5,7 +5,6 @@ import { colors } from '@my/components';
 import { AUTHENTICATION } from './Authentication.constants';
 import Authentication from './Authentication.component';
 
-
 export default createStackNavigator({
   [AUTHENTICATION]: {
     screen: Authentication,

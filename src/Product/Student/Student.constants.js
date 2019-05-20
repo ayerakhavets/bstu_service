@@ -1,2 +1,9 @@
 // @flow
 export const STUDENT = 'Student.Product';
+
+export const ORDER_LIST_ROUTE = `ORDER_LIST_ROUTE@${STUDENT}`;
+export const ORDER_ROUTE = `ORDER_ROUTE@${STUDENT}`;
+export const PAYMENT_LIST_ROUTE = `PAYMENT_LIST_ROUTE@${STUDENT}`;
+export const PAYMENT_ROUTE = `PAYMENT_ROUTE@${STUDENT}`;
+export const STUDENT_INFO_ROUTE = `STUDENT_INFO_ROUTE@${STUDENT}`;
+export const STUDENT_ROUTE = `STUDENT_ROUTE@${STUDENT}`;

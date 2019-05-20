@@ -1,7 +1,7 @@
 // @flow
 import type { ApplicationState, StudentInfo } from '../../types';
 
-export const selectCurrentStudent = ({ dean }: ApplicationState): boolean =>
+export const selectCurrentStudent = ({ dean }: ApplicationState): StudentInfo =>
   dean.studentList.currentStudent;
 
 export const selectStudentList = ({ dean }: ApplicationState): StudentInfo[] =>

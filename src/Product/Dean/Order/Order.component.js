@@ -19,7 +19,7 @@ import styles from './Order.styles';
 
 
 type PaymentProps = {
-  // TODO: add propr type (StudentInfo)
+  // TODO: add proper type (StudentInfo)
   student: any,
   date: string,
   mark: string,
