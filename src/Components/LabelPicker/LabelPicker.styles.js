@@ -7,6 +7,10 @@ export default StyleSheet.create({
     paddingHorizontal: 12,
     marginTop: 8
   },
+  button: {
+    alignItems: 'center',
+    padding: 10
+  },
   picker: {
     height: 40
   },

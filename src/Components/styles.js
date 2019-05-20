@@ -1,7 +1,6 @@
 // @flow
-const tabIconSize = 28;
+const tabIconSize = 25;
 
 export default {
   tabIconSize
 };
-

@@ -2,10 +2,7 @@
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { NavigatorActions, Toast } from '@my/framework';
-import {
-  setOrder,
-  closeOrder
-} from '../Lecturer.api';
+import { setOrder, closeOrder } from '../Lecturer.api';
 import { loadOrderListRequest } from '../OrderList';
 import {
   APPROVE_ORDER_REQUEST,
@@ -13,7 +10,7 @@ import {
   approveOrderFailure,
   approveOrderSuccess,
   closeOrderFailure,
-closeOrderSuccess
+  closeOrderSuccess
 } from './Order.actions';
 import {
   selectMark,
@@ -29,11 +26,7 @@ export default function* orderSaga(): Saga<void> {
 }
 
 export function* handleOrderClose(): Saga<void> {
-  // APPROVE_ORDER_REQUEST
-  // DECLINE_PAYMENT_REQUEST
-  let successAction;
-  let failureAction;
-  let resultPhrase = 'Пересдача закрыта';
+  const resultPhrase = 'Пересдача закрыта';
 
   const key = yield select(selectKey);
   const mark = yield select(selectMark);
@@ -52,18 +45,10 @@ export function* handleOrderClose(): Saga<void> {
   }
 }
 
-export function* handlePayment({ type }): Saga<void> {
-  // APPROVE_ORDER_REQUEST
-  // DECLINE_PAYMENT_REQUEST
-
-  let successAction;
-  let failureAction;
-  let resultPhrase;
-
-
-    successAction = approveOrderSuccess;
-    failureAction = approveOrderFailure;
-    resultPhrase = 'Дата сдачи назначена';
+export function* handlePayment(): Saga<void> {
+  const successAction = approveOrderSuccess;
+  const failureAction = approveOrderFailure;
+  const resultPhrase = 'Дата сдачи назначена';
 
   const key = yield select(selectKey);
   const student = yield select(selectCurrentStudent);

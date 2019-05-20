@@ -14,7 +14,6 @@ const mapItemToPickerItem = (item: string): PickerItem => ({ label: item, value:
 // FIXME: add Picker styles.
 type LabelPickerProps = {
   errorMessage?: ?string,
-  isError?: boolean,
   pickerItems: string[],
   label: string,
   selectedValue?: string,

@@ -39,7 +39,7 @@ export const loadStudentListRequest = (): LoadStudentListRequestAction => ({
   type: LOAD_STUDENT_LIST_REQUEST
 });
 
-export const loadStudentListSuccess = (paymentList: PaymentData[]): LoadStudentListSuccessAction =>
+export const loadStudentListSuccess = (paymentList: StudentInfo[]): LoadStudentListSuccessAction =>
   ({
     type: LOAD_STUDENT_LIST_SUCCESS,
     payload: paymentList

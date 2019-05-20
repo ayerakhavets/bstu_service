@@ -59,7 +59,27 @@
     "pullToRefresh": "The list is empty. Pull to refresh"
   },
   "student": {
+    "dataUpdateToast": "data was updated",
+    "errors": {
+      "dataLoading": "Error loading data",
+      "dataAdding": "Error adding data"
+    },
+    "routes": {
+      "paymentList": "Payments",
+      "orderList": "Orders",
+      "studentInfo": "Personal Info",
+      "order": "Order",
+      "payment": "Payment"
+    },
     "payment": {
+      "removeDialogTitle": "Removal",
+      "confirmRemove": "Confirm payment removal",
+      "cancelDialog": "Cancel",
+      "remove": "Remove",
+      "done": "Done",
+      "saveChanges": "Save changes",
+      "requiredFieldsText": "Fill all fields",
+      "date": "Payment date",
       "money": "Money amount (BYN)"
     },
     "paymentList": {

@@ -12,6 +12,7 @@ import {
   loadOrderListSuccess,
   type OpenOrderInfoAction
 } from './OrderList.actions';
+import type { OrderData } from '../../types';
 
 export const ORDER = 'ORDER.Dean';
 
@@ -22,7 +23,7 @@ export default function* orderListSaga(): Saga<void> {
 
 export function* handleOpenShowPaymentScreen({ payload }: OpenOrderInfoAction): Saga<void> {
   yield put(changeOrderData(payload));
-  NavigatorActions.navigate(ORDER);
+  yield call(NavigatorActions.navigate, ORDER);
 }
 
 export function* handleLoadOrderList(): Saga<void> {
@@ -31,7 +32,8 @@ export function* handleLoadOrderList(): Saga<void> {
   try {
     const orderListReponse = yield call(getOrderList, uid);
     if (orderListReponse) {
-      yield put(loadOrderListSuccess(Object.values(orderListReponse)));
+      const orders: OrderData[] = (Object.values(orderListReponse): Object[]);
+      yield put(loadOrderListSuccess(orders));
     } else {
       yield put(loadOrderListSuccess([]));
     }

@@ -1,8 +1,6 @@
 // @flow
-import type { ApplicationState, PaymentData } from '../../types';
+import type { ApplicationState as S, PaymentData } from '../../types';
 
-export const selectPaymentList = ({ student }: ApplicationState): PaymentData[] =>
-  student.paymentList.paymentList;
+export const selectPaymentList = ({ student }: S): PaymentData[] => student.paymentList.paymentList;
 
-export const selectIsLoading = ({ student }: ApplicationState): boolean =>
-  student.paymentList.isLoading;
+export const selectIsLoading = ({ student }: S): boolean => student.paymentList.isLoading;

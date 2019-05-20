@@ -1,6 +1,6 @@
 // @flow
 import { createSwitchNavigator } from 'react-navigation';
-import { Authentication } from './Authentication';
+import { Authentication as Auth } from './Authentication';
 import { Dean } from './Dean';
 import { Lecturer } from './Lecturer';
 import { Student } from './Student';
@@ -8,9 +8,9 @@ import { Student } from './Student';
 // $FlowFixMe property ignoredYellowBox is missing
 console.ignoredYellowBox = ['Warning: isMounted']; // eslint-disable-line no-console
 
-export default createSwitchNavigator(
+const AppNavigator = createSwitchNavigator(
   {
-    Auth: Authentication,
+    Auth,
     Lecturer,
     Dean,
     Student
@@ -19,3 +19,5 @@ export default createSwitchNavigator(
     initialRouteName: 'Auth'
   }
 );
+
+export default AppNavigator;

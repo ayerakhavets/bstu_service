@@ -54,6 +54,7 @@ const showImagePicker = (): Promise<Response> => new Promise((resolve) => {
 
 export function* handleSetImage(): Saga<void> {
   const response = yield call(showImagePicker);
+  console.log('TCL: response', response);
 
   if (response.didCancel) {
     return;
@@ -65,6 +66,7 @@ export function* handleSetImage(): Saga<void> {
   yield put(changeImage({
     name: response.fileName,
     path: response.path,
+    uri: response.uri,
     url: ''
   }));
 }

@@ -15,16 +15,17 @@ export default createBottomTabNavigator({
 },
 {
   initialRouteName: CHART_ONE,
-  navigationOptions: ({ navigation }) => ({
+  defaultNavigationOptions: ({ navigation }) => ({
     // eslint-disable-next-line react/display-name, react/prop-types
     tabBarIcon: ({ focused }) => {
-      let iconName;
+      let iconName: string;
       switch (navigation.state.routeName) {
       case CHART_ONE:
         iconName = 'chart-bar'; break;
       case CHART_TWO:
         iconName = 'chart-arc'; break;
-      default: break;
+      default:
+        iconName = 'blank';
       }
       return (<Icon
         color={ focused ? colors.greenDark : colors.grey }

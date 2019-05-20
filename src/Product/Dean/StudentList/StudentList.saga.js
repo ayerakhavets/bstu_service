@@ -13,6 +13,7 @@ import {
 } from './StudentList.actions';
 import { selectCourse, selectSpecialty } from '../CourseList';
 import { STUDENT_LISTS_TABS } from '../Dean.navigator';
+import type { StudentInfo } from '../../types';
 
 export default function* studentListSaga(): Saga<void> {
   yield takeEvery(LOAD_STUDENT_LIST_REQUEST, handleLoadStudentList);
@@ -34,7 +35,8 @@ export function* handleLoadStudentList(): Saga<void> {
   try {
     const studentListReponse = yield call(getStudentList, mapper[specialty], course);
     if (studentListReponse) {
-      yield put(loadStudentListSuccess(Object.values(studentListReponse)));
+      const studentList: StudentInfo[] = (Object.values(studentListReponse): Object[]);
+      yield put(loadStudentListSuccess(studentList));
     } else {
       yield put(loadStudentListSuccess([]));
     }

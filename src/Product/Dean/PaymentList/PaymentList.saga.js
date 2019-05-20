@@ -13,6 +13,7 @@ import {
 } from './PaymentList.actions';
 import { selectCurrentStudent } from '../StudentList';
 import { PAYMENT } from '../Dean.navigator';
+import { type PaymentData } from '../../types';
 
 export default function* paymentListSaga(): Saga<void> {
   yield takeEvery(LOAD_PAYMENT_LIST_REQUEST, handleLoadPaymentList);
@@ -50,7 +51,8 @@ export function* handleLoadPaymentList(): Saga<void> {
   try {
     const paymentListReponse = yield call(getPaymentList, student.uid);
     if (paymentListReponse) {
-      yield put(loadPaymentListSuccess(Object.values(paymentListReponse)));
+      const paymentList: PaymentData[] = (Object.values(paymentListReponse): Object[]);
+      yield put(loadPaymentListSuccess(paymentList));
     } else {
       yield put(loadPaymentListSuccess([]));
     }

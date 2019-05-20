@@ -7,7 +7,7 @@ import { orderReducer, type OrderState } from './Order';
 import { paymentReducer, type PaymentState } from './Payment';
 import { studentListReducer, type StudentListState } from './StudentList';
 
-export type StudentState = {
+export type DeanState = {
   courseList: CourseListState,
   payment: PaymentState,
   order: OrderState,

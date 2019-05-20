@@ -1,7 +1,7 @@
 // @flow
 import { type Saga } from 'redux-saga';
 import { call, select } from 'redux-saga/effects';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { selectEmail, selectPassword, selectUid } from '../Authentication.selectors';
 import { EMAIL_KEY, PASSWORD_KEY, UID_KEY } from '../Authentication.constants';
 

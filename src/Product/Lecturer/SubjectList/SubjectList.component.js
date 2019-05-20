@@ -27,7 +27,7 @@ class SubjectList extends React.Component<SubjectListProps> {
     };
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.navigation.setParams({ onLogOut: this.props.onLogOut });
   }
 

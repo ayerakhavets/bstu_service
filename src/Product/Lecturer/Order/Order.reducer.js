@@ -8,9 +8,7 @@ import {
   CLOSE_ORDER_SUCCESS,
   APPROVE_ORDER_FAILURE,
   APPROVE_ORDER_REQUEST,
-  APPROVE_ORDER_SUCCESS,
-  CLEAR_PAYMENT_DATA,
-  type PaymentActions
+  APPROVE_ORDER_SUCCESS
 } from './Order.actions';
 
 export type PaymentImage = {
@@ -19,7 +17,7 @@ export type PaymentImage = {
   url: string
 }
 
-export type PaymentState = {
+export type OrderState = {
   date: string,
   startDate: string,
   endDate: string,
@@ -27,11 +25,11 @@ export type PaymentState = {
   lecturer: string,
   image: PaymentImage,
   key: string,
+  mark: string,
   moneyAmount: string,
   paymentType: string,
   isLoading: boolean,
-  status: string,
-  paymentTypes: string[]
+  status: string
 }
 
 const initialState = {
@@ -46,14 +44,14 @@ const initialState = {
     url: ''
   },
   key: '',
+  mark: '',
   moneyAmount: '',
   paymentType: '',
   isLoading: false,
   status: 'declined'
 };
 
-export default (state: PaymentState = initialState,
-  action: PaymentActions): PaymentState => {
+export default (state: OrderState = initialState, action: any): OrderState => {
   switch (action.type) {
   case CHANGE_ORDER_DATA:
     return {
@@ -70,8 +68,6 @@ export default (state: PaymentState = initialState,
       ...state,
       date: action.payload
     };
-  case CLEAR_PAYMENT_DATA:
-    return initialState;
   case CLOSE_ORDER_FAILURE:
     return {
       ...state,

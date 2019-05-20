@@ -1,64 +1,40 @@
-import React from 'react';
-import { PieChart } from 'react-native-svg-charts';
-import { Text } from 'react-native-svg';
+import React, { PureComponent } from 'react';
+import { Dimensions } from 'react-native';
+import { PieChart } from 'react-native-chart-kit';
 
 // eslint-disable-next-line
-class PieChartWithCenteredLabels extends React.PureComponent {
-
+class PieChartWithCenteredLabels extends PureComponent {
   render() {
-    const randomColor = () => (`#${(Math.random() * 0xFFFFFF << 0).toString(16)}000000`).slice(0, 7);
+    const chartConfig = {
+      backgroundGradientFrom: '#1E2923',
+      backgroundGradientTo: '#08130D',
+      color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+      strokeWidth: 2 // optional, default 3
+    };
+    const screenWidth = Dimensions.get('window').width;
     const data = [
-      {
-        key: 2,
-        amount: 20,
-        svg: { fill: 'grey' }
-      },
-      {
-        key: 3,
-        amount: 35,
-        svg: { fill: 'black' }
-      },
-      {
-        key: 4,
-        amount: 35,
-        svg: { fill: 'brown' }
-      },
-      {
-        key: 5,
-        amount: 10,
-        svg: { fill: randomColor() }
-      }
+      { name: 'Seoul',
+        population: 21500000,
+        color: 'rgba(131, 167, 234, 1)',
+        legendFontColor: '#7F7F7F',
+        legendFontSize: 15 },
+      { name: 'Toronto', population: 2800000, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+      { name: 'Beijing', population: 527612, color: 'red', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+      { name: 'New York', population: 8538000, color: '#ffffff', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+      { name: 'Moscow', population: 11920000, color: 'rgb(0, 0, 255)', legendFontColor: '#7F7F7F', legendFontSize: 15 }
     ];
-
-    const Labels = ({ slices, height, width }) => slices.map((slice, index) => {
-      const { labelCentroid, pieCentroid, data } = slice;
-      return (
-        <Text
-          key={ index }
-          x={ pieCentroid[0] }
-          y={ pieCentroid[1] }
-          fill="white"
-          textAnchor="middle"
-          alignmentBaseline="middle"
-          fontSize={ 24 }
-          stroke="black"
-          strokeWidth={ 0.2 }
-        >
-          {data.amount}
-        </Text>
-      );
-    });
 
     return (
       <PieChart
-        style={{ height: 370, paddingTop: 100 }}
-        valueAccessor={ ({ item }) => item.amount }
         data={ data }
-        spacing={ 0 }
-        outerRadius="95%"
-      >
-        <Labels />
-      </PieChart>
+        width={ screenWidth }
+        height={ 220 }
+        chartConfig={ chartConfig }
+        accessor="population"
+        backgroundColor="transparent"
+        paddingLeft="15"
+        absolute
+      />
     );
   }
 }

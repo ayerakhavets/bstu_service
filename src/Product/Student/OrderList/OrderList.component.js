@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, View, Text } from 'react-native';
+import { I18n } from '@my/framework';
 import { OrderListItem } from '@my/components';
 import type { OrderData } from '../../types';
 import {
@@ -10,23 +11,27 @@ import {
 } from './OrderList.actions';
 import { selectIsLoading, selectOrderList } from './OrderList.selectors';
 import styles from './OrderList.styles';
+import { logOut } from '../../Authentication/Authentication.actions';
 
 type OrderListProps = {
   isLoading: boolean,
   orderList: OrderData[],
+  navigation: Object,
   loadOrderList: () => void,
+  onLogOut: () => void,
   onOpenOrderInfo: (payment: OrderData) => void
 }
 
 class OrderList extends Component<OrderListProps> {
   componentDidMount() {
     this.props.loadOrderList();
+    this.props.navigation.setParams({ onLogOut: this.props.onLogOut });
   }
 
   keyExtractor = order => order.key;
 
   renderEmptyItem = () => (<View style={ styles.emptyItemContainer }>
-    <Text>Список направлений пуст. Потяните для обновления</Text>
+    <Text>{ I18n.translate('orderList.pullToRefresh') }</Text>
   </View>)
 
   renderItem = ({ item }) => (
@@ -60,7 +65,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   loadOrderList: loadOrderListRequest,
-  onOpenOrderInfo: openOrderInfo
+  onOpenOrderInfo: openOrderInfo,
+  onLogOut: logOut
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderList);

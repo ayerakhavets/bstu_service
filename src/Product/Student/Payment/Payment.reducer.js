@@ -20,6 +20,7 @@ import {
 export type PaymentImage = {
   name: string,
   path: ?string,
+  uri: string,
   url: string
 }
 
@@ -37,11 +38,7 @@ export type PaymentState = {
 
 const initialState = {
   date: '',
-  image: {
-    name: '',
-    path: '',
-    url: ''
-  },
+  image: { },
   key: '',
   subject: '',
   lecturer: '',
@@ -66,6 +63,7 @@ export default (
       image: {
         name: action.payload.name,
         path: action.payload.path,
+        uri: action.payload.uri,
         url: action.payload.url
       }
     };

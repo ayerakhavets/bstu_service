@@ -1,27 +1,51 @@
+// @flow
 import React from 'react';
-import { BarChart, XAxis } from 'react-native-svg-charts';
-import { View } from 'react-native';
-import * as scale from 'd3-scale';
+import { Dimensions, View, Text } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 
 // eslint-disable-next-line
 class XAxisExample extends React.PureComponent {
 
   render() {
-    const data = [14, 80, 100, 55];
+    const style = {
+      marginVertical: 8,
+      borderRadius: 16
+    };
 
     return (
-      <View style={{ height: 370, padding: 20, paddingTop: 100 }}>
-        <BarChart
-          style={{ flex: 1 }}
-          data={ data }
-          gridMin={ 0 }
-          svg={{ fill: 'grey' }}
-        />
-        <XAxis
-          style={{ marginTop: 10, margingHorizontal: 10 }}
-          data={ data }
-          formatLabel={ (value, index) => `${index + 1} курс` }
-          labelStyle={{ color: 'black' }}
+      <View>
+        <Text>
+          Bezier Line Chart
+        </Text>
+        <LineChart
+          data={{
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+              data: [
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100
+              ]
+            }]
+          }}
+          width={ Dimensions.get('window').width } // from react-native
+          height={ 220 }
+          yAxisLabel="$"
+          chartConfig={{
+            backgroundColor: '#e26a00',
+            backgroundGradientFrom: '#fb8c00',
+            backgroundGradientTo: '#ffa726',
+            decimalPlaces: 2, // optional, defaults to 2dp
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            style: {
+              borderRadius: 16
+            }
+          }}
+          bezier
+          style={ style }
         />
       </View>
     );
