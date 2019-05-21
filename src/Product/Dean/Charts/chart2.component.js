@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
 
 // eslint-disable-next-line
-class PieChartWithCenteredLabels extends PureComponent {
+class PieChartWithCenteredLabels extends PureComponent<null> {
   render() {
     const chartConfig = {
       backgroundGradientFrom: '#1E2923',
@@ -18,10 +18,14 @@ class PieChartWithCenteredLabels extends PureComponent {
         color: 'rgba(131, 167, 234, 1)',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15 },
-      { name: 'Toronto', population: 2800000, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-      { name: 'Beijing', population: 527612, color: 'red', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-      { name: 'New York', population: 8538000, color: '#ffffff', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-      { name: 'Moscow', population: 11920000, color: 'rgb(0, 0, 255)', legendFontColor: '#7F7F7F', legendFontSize: 15 }
+      { name: 'Общежитие', population: 2800000, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+      { name: 'Академическая задолженность',
+        population: 527612,
+        color: 'red',
+        legendFontColor: '#7F7F7F',
+        legendFontSize: 15 },
+      { name: 'Пеня', population: 8538000, color: '#ffffff', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+      { name: 'Счастье', population: 11920000, color: 'rgb(0, 0, 255)', legendFontColor: '#7F7F7F', legendFontSize: 15 }
     ];
 
     return (

@@ -20,7 +20,7 @@ export default function* loginSaga(): Saga<void> {
   const requestParams = [email, password];
 
   if (!email || !password) {
-    Toast.show('Введите данные');
+    yield call(Toast.show, 'Введите данные');
     return;
   }
 
@@ -33,11 +33,11 @@ export default function* loginSaga(): Saga<void> {
 
     if (user.uid === adminUid) {
       yield put(loadingEnd());
-      NavigatorActions.navigate('Dean');
+      yield call(NavigatorActions.navigate, 'Dean');
       return;
     } else if (user.uid === lecturerUid) {
       yield put(loadingEnd());
-      NavigatorActions.navigate('Lecturer');
+      yield call(NavigatorActions.navigate, 'Lecturer');
       return;
     }
 
@@ -46,9 +46,9 @@ export default function* loginSaga(): Saga<void> {
     yield put(changeUserInfo(userInfo));
     yield put(loadingEnd());
 
-    NavigatorActions.navigate('Student');
+    yield call(NavigatorActions.navigate, 'Student');
   } catch (error) {
     yield put(loadingEnd());
-    Toast.show('Ошибка');
+    yield call(Toast.show, 'Ошибка');
   }
 }

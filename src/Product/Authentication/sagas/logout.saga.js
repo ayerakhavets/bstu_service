@@ -17,6 +17,6 @@ export default function* logOut(): Saga<void> {
   ]);
 
   // FIXME: send `signOut` request.
-  NavigatorActions.navigate('Auth');
+  yield call(NavigatorActions.navigate, 'Auth');
   yield put(clearStudentInfo());
 }

@@ -1,52 +1,37 @@
 // @flow
 import {
   CHANGE_ORDER_DATA,
-  CLEAR_ORDER_DATA,
-  type PaymentActions
+  CLEAR_ORDER_DATA
 } from './Order.actions';
-
-export type OrderImage = {
-  name: string,
-  path: string,
-  url: string
-}
+import { type StudentInfo } from '../../types';
 
 export type OrderState = {
-  mark: string,
-  student: Object,
   date: string,
-  startDate: string,
   endDate: string,
-  subject: string,
-  lecturer: string,
-  image: OrderImage,
+  isLoading: boolean,
   key: string,
-  moneyAmount: string,
-  paymentType: string,
-  isLoading: boolean
+  lecturer: string,
+  mark: string,
+  startDate: string,
+  status: string,
+  student: StudentInfo,
+  subject: string
 }
 
 const initialState = {
-  mark: '',
-  student: {},
   date: '',
-  startDate: '',
   endDate: '',
-  subject: '',
-  lecturer: '',
-  image: {
-    name: '',
-    path: '',
-    url: ''
-  },
+  isLoading: false,
   key: '',
-  moneyAmount: '',
-  paymentType: '',
-  isLoading: false
+  lecturer: '',
+  mark: '',
+  startDate: '',
+  status: '',
+  student: {},
+  subject: ''
 };
 
-export default (state: OrderState = initialState,
-  action: PaymentActions): OrderState => {
+export default (state: OrderState = initialState, action: any): OrderState => {
   switch (action.type) {
   case CHANGE_ORDER_DATA:
     return {

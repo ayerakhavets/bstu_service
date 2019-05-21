@@ -1,11 +1,10 @@
 // @flow
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Dimensions, View, Text } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 
 // eslint-disable-next-line
-class XAxisExample extends React.PureComponent {
-
+class XAxisExample extends PureComponent<null> {
   render() {
     const style = {
       marginVertical: 8,

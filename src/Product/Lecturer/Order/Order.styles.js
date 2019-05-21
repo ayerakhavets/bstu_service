@@ -22,14 +22,6 @@ export default StyleSheet.create({
     padding: 10,
     width: '100%'
   },
-  dateView1: {
-    width: '100%',
-    flexDirection: 'row'
-  },
-  datePicker2: {
-    alignSelf: 'flex-start',
-    width: 150
-  },
   dateView: {
     flexDirection: 'row'
   },

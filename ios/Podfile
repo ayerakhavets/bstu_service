@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 
 target 'bstu_service' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
@@ -9,7 +9,7 @@ target 'bstu_service' do
 
   # Required by RNFirebase
   pod 'Firebase/Auth', '~> 5.20.1'
-  pod 'Firebase/Core'
+  pod 'Firebase/Core', '~> 5.20.1'
   pod 'Firebase/Database', '~> 5.20.1'
   pod 'Firebase/Storage', '~> 5.20.1'
 

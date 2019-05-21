@@ -16,6 +16,7 @@ type LabelPickerProps = {
   errorMessage?: ?string,
   pickerItems: string[],
   label: string,
+  enabled?: boolean,
   selectedValue?: string,
   style?: ViewStyleProp,
   onValueChange: (value: string) => void
@@ -74,6 +75,8 @@ class LabelPicker extends Component<LabelPickerProps, LabelPickerState> {
       </TouchableOpacity>
       { this.state.isPickerShown && <Picker
         selectedValue={ selectedValue }
+        enabled
+        // $FlowFixMe
         onValueChange={ this.onPickerValueChange }
         { ...rest }
       >

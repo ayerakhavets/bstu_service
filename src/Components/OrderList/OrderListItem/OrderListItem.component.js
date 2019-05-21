@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { ListItem } from 'react-native-elements';
 // import type { PaymentData } from '../../Product/types';
-import colors from '../colors';
+import colors from '../../colors';
 import styles from './OrderListItem.styles';
 
 type PaymentListItemProps = {

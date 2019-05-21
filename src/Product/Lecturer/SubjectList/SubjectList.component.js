@@ -3,15 +3,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { colors, HeaderRight } from '@my/components';
-import { logOut } from '../../Authentication';
+import { colors } from '@my/components';
 import { openStudentList, type NavigationParams } from './SubjectList.actions';
 import styles from './SubjectList.styles';
 
 type SubjectListProps = {
-  navigation: Object,
-  onOpenStudentList: (navigationParams: NavigationParams) => void,
-  onLogOut: () => void,
+  onOpenStudentList: (navigationParams: NavigationParams) => void
 }
 
 const list = [
@@ -20,17 +17,6 @@ const list = [
 ];
 
 class SubjectList extends React.Component<SubjectListProps> {
-  static navigationOptions = ({ navigation }) => {
-    const params = navigation.state.params || {};
-    return {
-      headerRight: <HeaderRight iconName="exit-to-app" onIconPress={ params.onLogOut } />
-    };
-  };
-
-  componentDidMount() {
-    this.props.navigation.setParams({ onLogOut: this.props.onLogOut });
-  }
-
   keyExtractor = (item, index) => item + index
 
   renderItem = ({ item }) => (
@@ -55,8 +41,7 @@ class SubjectList extends React.Component<SubjectListProps> {
 }
 
 const mapDispatchToProps = {
-  onOpenStudentList: openStudentList,
-  onLogOut: logOut
+  onOpenStudentList: openStudentList
 };
 
 export default connect(null, mapDispatchToProps)(SubjectList);

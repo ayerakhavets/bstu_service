@@ -15,7 +15,7 @@ import {
 } from './sagas';
 
 
-// FIXME: fix handling of admin/student roles.
+// TODO: fix handling of admin/student roles.
 export default function* authentication(): Saga<void> {
   yield takeEvery(LOG_IN, loginSaga);
   yield takeEvery(LOG_OUT, logoutSaga);

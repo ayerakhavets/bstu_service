@@ -50,64 +50,59 @@ class Payment extends PureComponent<PaymentProps> {
       <Screen>
         { this.props.isLoading
           ? <ActivityIndicator size="large" />
-          : <Fragment>
-            <View style={ styles.container }>
-              <Input
-                label="ФИО студента"
-                value={ studentName }
-                editable={ false }
-              />
-              <Input
-                label="Номер студенческого билета "
-                value={ this.props.currentUser.studentId }
-                editable={ false }
-              />
-              <Input
-                label="Преподаватель"
-                value={ this.props.lecturer }
-                editable={ false }
-              />
-              <View style={ styles.dateView1 }>
+          : (
+            <Fragment>
+              <View style={ styles.container }>
                 <Input
-                  label="Начало сдачи"
-                  value={ this.props.startDate }
+                  label="ФИО студента"
+                  value={ studentName }
                   editable={ false }
-                  containerViewStyle={ styles.datePicker2 }
                 />
                 <Input
-                  label="Конец сдачи"
-                  value={ this.props.endDate }
+                  label="Номер студенческого билета "
+                  value={ this.props.currentUser.studentId }
                   editable={ false }
-                  containerViewStyle={ styles.datePicker2 }
                 />
-              </View>
-              <Input
-                label="Название дисциплины"
-                value={ this.props.subject }
-                editable={ false }
-              />
-              {
-                this.props.status === 'planning'
-                  ? <DatePicker
-                    cancelBtnText="Закрыть"
-                    confirmBtnText="Ок"
-                    customStyles={{
-                      placeholderText: styles.datePlaceholderText
-                    }}
-                    date={ this.props.date }
-                    format="DD MM YYYY"
-                    placeholder="Дата"
-                    style={ styles.datePicker }
-                    onDateChange={ this.props.onChangeDate }
-                  />
-                  : <Input
-                    label="Дата сдачи"
-                    value={ this.props.date }
-                    editable={ false }
-                  />}
-              {
-                this.props.status === 'set'
-                  ? <Input
+                <Input
+                  label="Преподаватель"
+                  value={ this.props.lecturer }
+                  editable={ false }
+                />
+                { this.props.status === 'planning' && (
+                  <Fragment>
+                    <Input
+                      label="Начало сдачи"
+                      value={ this.props.startDate }
+                      editable={ false }
+                    />
+                    <Input
+                      label="Конец сдачи"
+                      value={ this.props.endDate }
+                      editable={ false }
+                    />
+                  </Fragment>
+                ) }
+                <Input
+                  label="Название дисциплины"
+                  value={ this.props.subject }
+                  editable={ false }
+                />
+                <DatePicker
+                  cancelBtnText="Закрыть"
+                  confirmBtnText="Ок"
+                  customStyles={{
+                    placeholderText: styles.datePlaceholderText
+                  }}
+                  disabled={ !(this.props.status === 'planning') }
+                  minDate={ this.props.startDate }
+                  maxDate={ this.props.endDate }
+                  date={ this.props.date }
+                  placeholder="Дата сдачи"
+                  style={ styles.datePicker }
+                  onDateChange={ this.props.onChangeDate }
+                />
+                { this.props.status === 'set' && ( // planning, set, closed
+                  <Input
                     isError={ !this.props.mark }
                     label="Оценка"
                     maxLength={ 2 }
@@ -115,26 +110,28 @@ class Payment extends PureComponent<PaymentProps> {
                     value={ this.props.mark }
                     onChangeText={ this.props.onChangeMark }
                   />
-                  : this.props.mark
-                    ? <Input
-                      label="Оценка"
-                      value={ this.props.mark }
-                      editable={ false }
-                    />
-                    : null
-              }
-              <MyButton
-                icon={{ name: 'done' }}
-                containerViewStyle={ styles.buttonAdd }
-                title={ this.props.status === 'planning'
-                  ? 'Назначить дату'
-                  : 'Оценить' }
-                onPress={ this.props.status === 'planning'
-                  ? this.props.onSetOrderRequest
-                  : this.props.onMarkOrder }
-              />
-            </View>
-          </Fragment> }
+                ) }
+                { !!this.props.mark && (
+                  <Input
+                    label="Оценка"
+                    value={ this.props.mark }
+                    editable={ false }
+                  />
+                ) }
+                { this.props.status !== 'closed' && (
+                  <MyButton
+                    containerViewStyle={ styles.buttonAdd }
+                    title={ this.props.status === 'planning'
+                      ? 'Назначить дату'
+                      : 'Оценить' }
+                    onPress={ this.props.status === 'planning'
+                      ? this.props.onSetOrderRequest
+                      : this.props.onMarkOrder }
+                  />
+                )}
+              </View>
+            </Fragment>
+          ) }
       </Screen>
     );
   }

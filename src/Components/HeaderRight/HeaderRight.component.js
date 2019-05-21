@@ -1,17 +1,21 @@
 // @flow
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { connect } from 'react-redux';
+
+import Icon, { type MaterialCommunityIconsGlyphs } from 'react-native-vector-icons/MaterialCommunityIcons';
+import { logOut } from '../../Product/Authentication/Authentication.actions';
 
 import styles from './HeaderRight.styles';
 import colors from '../colors';
 
 type HeaderRightProps = {
-  iconName: string,
-  onIconPress: () => void
+  iconName: MaterialCommunityIconsGlyphs,
+  onIconPress: () => void,
+  onLogOut: () => void
 }
 
 function HeaderRight(props: HeaderRightProps) {
-  const { iconName, onIconPress } = props;
+  const { iconName = 'exit-to-app', onIconPress, onLogOut } = props;
 
   return (
     <Icon
@@ -19,9 +23,13 @@ function HeaderRight(props: HeaderRightProps) {
       color={ colors.white }
       name={ iconName }
       size={ 24 }
-      onPress={ onIconPress }
+      onPress={ onIconPress || onLogOut }
     />
   );
 }
 
-export default HeaderRight;
+const mapDispatchToProps = {
+  onLogOut: logOut
+};
+
+export default connect(null, mapDispatchToProps)(HeaderRight);

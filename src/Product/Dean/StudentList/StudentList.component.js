@@ -61,7 +61,7 @@ class StudentList extends Component<StudentListProps, any> {
   renderItem = ({ item }) => (
     <ListItem
       keyExtractor={ this.keyExtractor }
-      title={ `${item.surname} ${item.name}  ${item.middleName}` }
+      title={ `${item.surname} ${item.name} ${item.middleName}` }
       subtitle={ item.studentId }
       // eslint-disable-next-line react/jsx-no-bind
       onPress={ () => this.props.onOpenPaymentList(item) }
