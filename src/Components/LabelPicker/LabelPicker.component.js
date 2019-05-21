@@ -16,6 +16,7 @@ type LabelPickerProps = {
   errorMessage?: ?string,
   pickerItems: string[],
   label: string,
+  enabled?: boolean,
   selectedValue?: string,
   style?: ViewStyleProp,
   onValueChange: (value: string) => void
@@ -45,7 +46,9 @@ function LabelPicker(props: LabelPickerProps) {
       <Picker
         style={ styles.picker }
         selectedValue={ selectedValue }
+        // $FlowFixMe
         onValueChange={ onValueChange }
+        enabled
         { ...rest }
       >
         { pickerItemComponents }

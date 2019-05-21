@@ -36,7 +36,8 @@ import {
   selectImage,
   selectIsLoading,
   selectMoneyAmount,
-  selectPaymentType
+  selectPaymentType,
+  selectStatus
 } from './Payment.selectors';
 import styles, { colors } from './Payment.styles';
 
@@ -53,6 +54,7 @@ type PaymentProps = {
   navigation: Object,
   paymentType: string,
   paymentTypes: string[],
+  status: string,
   onChangeMoneyAmount: () => void,
   onChangePaymentType: () => void,
   onChangeSubject: (subject: string) => void,
@@ -94,7 +96,8 @@ class Payment extends Component<PaymentProps> {
   editPayment = () => this.props.uploadPaymentRequest('EDIT')
 
   render() {
-    const { date, image, moneyAmount, navigation, paymentType } = this.props;
+    const { date, isLoading, image, moneyAmount, navigation, status, paymentType } = this.props;
+
     console.log('TCL: render -> image', image);
     // FIXME: use constants for params.
     const screenType = navigation.getParam('intent', 'ADD');
@@ -111,22 +114,27 @@ class Payment extends Component<PaymentProps> {
       : I18n.translate('student.payment.done');
     const isDataEmpty = !paymentType || !moneyAmount || !date || !image.name;
 
+    const isEditable = status === 'declined';
+
     return (
       <Screen>
-        { this.props.isLoading
+        { isLoading
           ? <ActivityIndicator size="large" />
           : (
             <Fragment>
-              { !!imageSource && (<Image
-                source={{ uri: image.uri }}
-                style={ styles.image }
-                resizeMethod="resize"
-              />) }
+              { !!imageSource && (
+                <Image
+                  source={{ uri: image.uri }}
+                  style={ styles.image }
+                  resizeMethod="resize"
+                />
+              ) }
               <View style={ styles.container }>
                 <View style={ styles.rowContainer }>
                   <Input
                     label={ I18n.translate('student.payment.money') }
                     maxLength={ 8 }
+                    editable={ isEditable }
                     containerStyle={ styles.input }
                     keyboardType="numeric"
                     value={ this.props.moneyAmount }
@@ -145,6 +153,7 @@ class Payment extends Component<PaymentProps> {
                 <DatePicker
                   cancelBtnText={ I18n.translate('payment.cancel') }
                   confirmBtnText={ I18n.translate('payment.ok') }
+                  disabled={ !isEditable }
                   customStyles={{
                     placeholderText: styles.datePlaceholderText
                   }}
@@ -156,6 +165,7 @@ class Payment extends Component<PaymentProps> {
                 />
                 <LabelPicker
                   label={ I18n.translate('payment.paymentType') }
+                  enabled={ isEditable }
                   pickerItems={ this.props.paymentTypes }
                   selectedValue={ this.props.paymentType }
                   onValueChange={ this.props.onChangePaymentType }
@@ -163,12 +173,14 @@ class Payment extends Component<PaymentProps> {
                 <LabelPicker
                   label={ I18n.translate('payment.subject') }
                   pickerItems={ this.props.subjects }
+                  enabled={ isEditable }
                   selectedValue={ this.props.subject }
                   onValueChange={ this.props.onChangeSubject }
                 />
                 <LabelPicker
                   label={ I18n.translate('payment.lecturer') }
                   pickerItems={ this.props.lecturers }
+                  enabled={ isEditable }
                   selectedValue={ this.props.lecturer }
                   onValueChange={ this.props.onChangeLecturer }
                 />
@@ -177,13 +189,15 @@ class Payment extends Component<PaymentProps> {
                     { I18n.translate('student.payment.requiredFieldsText').toUpperCase() }
                   </Text>
                 ) }
-                <MyButton
-                  containerViewStyle={ styles.buttonAdd }
-                  title={ submitButtonText }
-                  onPress={ screenType === 'EDIT'
-                    ? this.editPayment
-                    : this.addPayment }
-                />
+                { isEditable && (
+                  <MyButton
+                    containerViewStyle={ styles.buttonAdd }
+                    title={ submitButtonText }
+                    onPress={ screenType === 'EDIT'
+                      ? this.editPayment
+                      : this.addPayment }
+                  />
+                ) }
               </View>
             </Fragment>
           )}
@@ -208,6 +222,7 @@ const mapStateToProps = (state) => {
     paymentType: selectPaymentType(state),
     paymentTypes,
     subject: selectSubject(state),
+    status: selectStatus(state),
     subjects
   };
 };

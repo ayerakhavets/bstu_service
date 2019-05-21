@@ -6,9 +6,8 @@ import { createUser } from '../api';
 import { changeUid, loadingEnd, loadingStart } from '../Authentication.actions';
 import { selectEmail, selectIsRemember, selectPassword } from '../Authentication.selectors';
 import saveCredentialsSaga from './saveCredentials.saga';
+import { ERROR_SHORT_PASSWORD } from '../Authentication.constants';
 
-
-const ERROR_SHORT_PASSWORD = 'The given password is invalid. [ Password should be at least 6 characters ]';
 
 export default function* signUp(): Saga<void> {
   const email = yield select(selectEmail);
@@ -18,7 +17,7 @@ export default function* signUp(): Saga<void> {
   const requestParams = [email, password];
 
   if (!email || !password) {
-    Toast.show('Введите данные');
+    yield call(Toast.show, 'Введите данные');
     return;
   }
 
@@ -28,18 +27,20 @@ export default function* signUp(): Saga<void> {
     const { user } = yield call(createUser, ...requestParams);
     yield put(changeUid(user.uid));
 
-    yield call(user.sendEmailVerification); // TODO: check
+    yield call(user.sendEmailVerification); // TODO: check if it even works.
 
-    if (isRemember) yield call(saveCredentialsSaga);
+    if (isRemember) {
+      yield call(saveCredentialsSaga);
+    }
     yield put(loadingEnd());
 
-    NavigatorActions.navigate('Student');
+    yield call(NavigatorActions.navigate, 'Student');
   } catch (error) {
     yield put(loadingEnd());
     if (error.message === ERROR_SHORT_PASSWORD) {
-      Toast.show('Пароль меньше 6 символов');
+      yield call(Toast.show, 'Пароль меньше 6 символов');
     } else {
-      Toast.show('Ошибка');
+      yield call(Toast.show, 'Ошибка');
     }
   }
 }

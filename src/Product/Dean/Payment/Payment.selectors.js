@@ -1,33 +1,25 @@
 // @flow
-import type { ApplicationState } from '../../types';
+import type { ApplicationState as S } from '../../types';
 import type { PaymentImage } from './Payment.reducer';
 
-export const selectDate = ({ dean }: ApplicationState): string =>
-  dean.payment.date;
+export const selectDate = ({ dean }: S): string => dean.payment.date;
 
-export const selectStartDate = ({ dean }: ApplicationState): string =>
-  dean.payment.startDate;
+export const selectStartDate = ({ dean }: S): string => dean.payment.startDate;
 
-export const selectEndDate = ({ dean }: ApplicationState): string =>
-  dean.payment.endDate;
+export const selectEndDate = ({ dean }: S): string => dean.payment.endDate;
 
-export const selectLecturer = ({ dean }: ApplicationState): string =>
-  dean.payment.lecturer;
+export const selectLecturer = ({ dean }: S): string => dean.payment.lecturer;
 
-export const selectSubject = ({ dean }: ApplicationState): string =>
-  dean.payment.subject;
+export const selectSubject = ({ dean }: S): string => dean.payment.subject;
 
-export const selectImage = ({ dean }: ApplicationState): PaymentImage =>
-  dean.payment.image;
+export const selectImage = ({ dean }: S): PaymentImage => dean.payment.image;
 
-export const selectKey = ({ dean }: ApplicationState): string =>
-  dean.payment.key;
+export const selectKey = ({ dean }: S): string => dean.payment.key;
 
-export const selectIsLoading = ({ dean }: ApplicationState): boolean =>
-  dean.payment.isLoading;
+export const selectIsLoading = ({ dean }: S): boolean => dean.payment.isLoading;
 
-export const selectMoneyAmount = ({ dean }: ApplicationState): string =>
-  dean.payment.moneyAmount;
+export const selectMoneyAmount = ({ dean }: S): string => dean.payment.moneyAmount;
 
-export const selectPaymentType = ({ dean }: ApplicationState): string =>
-  dean.payment.paymentType;
+export const selectPaymentType = ({ dean }: S): string => dean.payment.paymentType;
+
+export const selectStatus = ({ dean }: S): string => dean.payment.status;

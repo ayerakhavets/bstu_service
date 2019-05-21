@@ -8,6 +8,7 @@ export default StyleSheet.create({
     width: 80
   },
   container: {
+    marginBottom: 10,
     width: '100%',
     backgroundColor: colors.greyLight
   },

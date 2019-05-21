@@ -106,6 +106,7 @@ export function* handlePayment({ type }: any): Saga<void> {
     yield put(loadPaymentListRequest());
     Toast.show(resultPhrase);
   } catch (error) {
+    // TODO: add error info to action.
     yield put(failureAction());
     Toast.show('Ошибка');
   }

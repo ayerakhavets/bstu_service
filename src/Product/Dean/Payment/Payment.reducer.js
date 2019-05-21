@@ -1,4 +1,5 @@
 // @flow
+import moment from 'moment';
 import {
   CHANGE_PAYMENT_DATA,
   CHANGE_START_DATE,
@@ -15,6 +16,7 @@ import {
   REMOVE_PAYMENT_SUCCESS,
   type PaymentActions
 } from './Payment.actions';
+import { DEFAULT_DATE_FORMAT } from '../../Product.constants';
 
 export type PaymentImage = {
   name: string,
@@ -72,7 +74,8 @@ export default (
   case CHANGE_START_DATE:
     return {
       ...state,
-      startDate: action.payload
+      startDate: action.payload,
+      endDate: moment(action.payload).add('3', 'days').format(DEFAULT_DATE_FORMAT)
     };
   case CHANGE_END_DATE:
     return {

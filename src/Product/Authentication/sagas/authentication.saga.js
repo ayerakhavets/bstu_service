@@ -19,6 +19,7 @@ import {
   adminUid,
   lecturerUid
 } from '../Authentication.constants';
+import { DEAN_ROUTE, LECTURER_ROUTE, STUDENT_ROUTE } from '../../Product.constants';
 
 
 export default function* authentication(): Saga<void> {
@@ -40,23 +41,23 @@ export default function* authentication(): Saga<void> {
 
     if (uid === adminUid) {
       yield put(loadingEnd());
-      NavigatorActions.navigate('Dean');
+      yield call(NavigatorActions.navigate, DEAN_ROUTE);
       return;
     } else if (uid === lecturerUid) {
       yield put(loadingEnd());
-      NavigatorActions.navigate('Lecturer');
+      yield call(NavigatorActions.navigate, LECTURER_ROUTE);
       return;
     }
 
-    // FIXME: move api call and result handling to the StudentInfo component.
+    // TODO: move api call and result handling to the StudentInfo component.
     const userInfo = yield call(getUserData, uid);
     yield put(changeUserInfo(userInfo));
 
     yield put(loadingEnd());
 
-    NavigatorActions.navigate('Student');
+    yield call(NavigatorActions.navigate, STUDENT_ROUTE);
   } catch (error) {
     yield put(loadingEnd());
-    Toast.show('Ошибка');
+    yield call(Toast.show, 'Ошибка');
   }
 }

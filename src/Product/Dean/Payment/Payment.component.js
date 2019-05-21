@@ -33,6 +33,7 @@ import {
   selectSubject,
   selectIsLoading,
   selectMoneyAmount,
+  selectStatus,
   selectPaymentType
 } from './Payment.selectors';
 import styles, { colors } from './Payment.styles';
@@ -42,6 +43,7 @@ type PaymentProps = {
   currentUser: StudentInfo,
   date: string,
   lecturer: string,
+  status: string,
   subject: string,
   startDate: string,
   endDate: string,
@@ -81,6 +83,7 @@ class Payment extends Component<PaymentProps> {
 
   render() {
     const name = `${this.props.currentUser.surname}${this.props.currentUser.name}${this.props.currentUser.middleName}`;
+
     return (
       <Screen>
         { this.props.isLoading
@@ -128,45 +131,48 @@ class Payment extends Component<PaymentProps> {
                   value={ this.props.lecturer }
                   editable={ false }
                 />
-                <View style={ styles.dateView }>
-                  <DatePicker
-                    cancelBtnText={ I18n.translate('payment.cancel') }
-                    confirmBtnText={ I18n.translate('payment.ok') }
-                    customStyles={{
-                      placeholderText: styles.datePlaceholderText
-                    }}
-                    date={ this.props.startDate }
-                    format="DD MM YYYY"
-                    placeholder={ I18n.translate('payment.dateFrom') }
-                    style={ styles.datePicker }
-                    onDateChange={ this.props.onChangeStartDate }
-                  />
-                  <DatePicker
-                    cancelBtnText={ I18n.translate('payment.cancel') }
-                    confirmBtnText={ I18n.translate('payment.ok') }
-                    customStyles={{
-                      placeholderText: styles.datePlaceholderText
-                    }}
-                    date={ this.props.endDate }
-                    format="DD MM YYYY"
-                    placeholder={ I18n.translate('payment.dateTo') }
-                    style={ styles.datePicker }
-                    onDateChange={ this.props.onChangeEndDate }
-                  />
-                </View>
-                <MyButton
-                  icon={{ name: 'done' }}
-                  containerViewStyle={ styles.buttonAdd }
-                  title={ I18n.translate('payment.accept') }
-                  onPress={ this.props.onApprovePaymentRequest }
-                />
-                <MyButton
-                  backgroundColor={ colors.red }
-                  icon={{ name: 'clear' }}
-                  containerViewStyle={ styles.buttonAdd }
-                  title={ I18n.translate('payment.decline') }
-                  onPress={ this.props.onDeclinePaymentRequest }
-                />
+                { this.props.status === 'declined' && (
+                  <Fragment>
+                    <View style={ styles.dateView }>
+                      <DatePicker
+                        cancelBtnText={ I18n.translate('payment.cancel') }
+                        confirmBtnText={ I18n.translate('payment.ok') }
+                        customStyles={{
+                          placeholderText: styles.datePlaceholderText
+                        }}
+                        date={ this.props.startDate }
+                        placeholder={ I18n.translate('payment.dateFrom') }
+                        style={ styles.datePicker }
+                        onDateChange={ this.props.onChangeStartDate }
+                      />
+                      <DatePicker
+                        cancelBtnText={ I18n.translate('payment.cancel') }
+                        confirmBtnText={ I18n.translate('payment.ok') }
+                        customStyles={{
+                          placeholderText: styles.datePlaceholderText
+                        }}
+                        date={ this.props.endDate }
+                        placeholder={ I18n.translate('payment.dateTo') }
+                        style={ styles.datePicker }
+                        onDateChange={ this.props.onChangeEndDate }
+                      />
+                    </View>
+
+                    <MyButton
+                      icon={{ name: 'done' }}
+                      containerViewStyle={ styles.buttonAdd }
+                      title={ I18n.translate('payment.accept') }
+                      onPress={ this.props.onApprovePaymentRequest }
+                    />
+                    <MyButton
+                      backgroundColor={ colors.red }
+                      icon={{ name: 'clear' }}
+                      containerViewStyle={ styles.buttonAdd }
+                      title={ I18n.translate('payment.decline') }
+                      onPress={ this.props.onDeclinePaymentRequest }
+                    />
+                  </Fragment>
+                ) }
               </View>
             </Fragment>
           ) }
@@ -183,6 +189,7 @@ const mapStateToProps = state => ({
   startDate: selectStartDate(state),
   endDate: selectEndDate(state),
   image: selectImage(state),
+  status: selectStatus(state),
   isLoading: selectIsLoading(state),
   moneyAmount: selectMoneyAmount(state),
   paymentType: selectPaymentType(state)

@@ -1,6 +1,6 @@
 // @flow
 import { StyleSheet } from 'react-native';
-import colors from '../colors';
+import colors from '../../colors';
 
 export default StyleSheet.create({
   avatar: {
@@ -8,6 +8,7 @@ export default StyleSheet.create({
     width: 80
   },
   container: {
+    marginBottom: 10,
     width: '100%',
     backgroundColor: colors.greyLight
   },

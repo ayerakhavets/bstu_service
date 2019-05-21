@@ -1,29 +1,22 @@
 // @flow
-import type { ApplicationState } from '../../types';
+import type { ApplicationState as S, StudentInfo } from '../../types';
 
-export const selectDate = ({ student }: ApplicationState): string =>
-  student.order.date;
+export const selectDate = ({ dean }: S): string => dean.order.date;
 
-export const selectStudent = ({ student }: ApplicationState): string =>
-  student.order.student;
+export const selectEndDate = ({ dean }: S): string => dean.order.endDate;
 
-export const selectStartDate = ({ student }: ApplicationState): string =>
-  student.order.startDate;
+export const selectIsLoading = ({ dean }: S): boolean => dean.order.isLoading;
 
-export const selectEndDate = ({ student }: ApplicationState): string =>
-  student.order.endDate;
+export const selectKey = ({ dean }: S): string => dean.order.key;
 
-export const selectLecturer = ({ student }: ApplicationState): string =>
-  student.order.lecturer;
+export const selectLecturer = ({ dean }: S): string => dean.order.lecturer;
 
-export const selectMark = ({ student }: ApplicationState): string =>
-  student.order.mark;
+export const selectMark = ({ dean }: S): string => dean.order.mark;
 
-export const selectSubject = ({ student }: ApplicationState): string =>
-  student.order.subject;
+export const selectStartDate = ({ dean }: S): string => dean.order.startDate;
 
-export const selectKey = ({ student }: ApplicationState): string =>
-  student.order.key;
+export const selectStatus = ({ dean }: S): string => dean.order.status;
 
-export const selectIsLoading = ({ student }: ApplicationState): boolean =>
-  student.order.isLoading;
+export const selectStudent = ({ dean }: S): StudentInfo => dean.order.student;
+
+export const selectSubject = ({ dean }: S): string => dean.order.subject;

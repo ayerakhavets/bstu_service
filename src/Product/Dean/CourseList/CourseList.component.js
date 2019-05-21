@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { ListItem } from 'react-native-elements';
 import { I18n } from '@my/framework';
 import { colors, HeaderRight } from '@my/components';
-import { logOut } from '../../Authentication';
 import { openStudentList, type NavigationParams } from './CourseList.actions';
 import styles from './CourseList.styles';
 
@@ -26,23 +25,13 @@ const sections = [
 ];
 
 type CourseListProps = {
-  navigation: Object,
   onOpenStudentList: (navigationParams: NavigationParams) => void,
-  onLogOut: () => void,
 }
 
 class CourseList extends React.Component<CourseListProps> {
-  static navigationOptions = ({ navigation }) => {
-    const params = navigation.state.params || {};
-    return {
-      headerRight: <HeaderRight iconName="exit-to-app" onIconPress={ params.onLogOut } />
-    };
-  };
-
-
-  componentWillMount() {
-    this.props.navigation.setParams({ onLogOut: this.props.onLogOut });
-  }
+  static navigationOptions = () => ({
+    headerRight: <HeaderRight />
+  });
 
   keyExtractor = (item, index) => item + index
 
@@ -78,8 +67,7 @@ class CourseList extends React.Component<CourseListProps> {
 }
 
 const mapDispatchToProps = {
-  onOpenStudentList: openStudentList,
-  onLogOut: logOut
+  onOpenStudentList: openStudentList
 };
 
 export default connect(null, mapDispatchToProps)(CourseList);

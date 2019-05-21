@@ -5,7 +5,8 @@ import LabelInput from './LabelInput';
 import LabelPicker, { type PickerItem } from './LabelPicker';
 import MyButton from './MyButton';
 import PaymentListItem from './PaymentListItem';
-import OrderListItem from './OrderListItem';
+import Order from './Order';
+import OrderList from './OrderList';
 import Screen from './Screen';
 import styles from './styles';
 
@@ -16,7 +17,8 @@ export {
   LabelPicker,
   MyButton,
   PaymentListItem,
-  OrderListItem,
+  Order,
+  OrderList,
   Screen,
   styles
 };

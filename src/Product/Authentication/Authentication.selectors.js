@@ -1,16 +1,12 @@
 // @flow
-import type { ApplicationState } from '../types';
+import type { ApplicationState as S } from '../types';
 
+export const selectEmail = ({ authentication }: S): string => authentication.email;
 
-export const selectEmail = ({ authentication }: ApplicationState): string => authentication.email;
+export const selectIsLoading = ({ authentication }: S): boolean => authentication.isLoading;
 
-export const selectIsLoading = ({ authentication }: ApplicationState): boolean =>
-  authentication.isLoading;
+export const selectIsRemember = ({ authentication }: S): boolean => authentication.isRemember;
 
-export const selectIsRemember = ({ authentication }: ApplicationState): boolean =>
-  authentication.isRemember;
+export const selectPassword = ({ authentication }: S): string => authentication.password;
 
-export const selectPassword = ({ authentication }: ApplicationState): string =>
-  authentication.password;
-
-export const selectUid = ({ authentication }: ApplicationState): string => authentication.uid;
+export const selectUid = ({ authentication }: S): string => authentication.uid;

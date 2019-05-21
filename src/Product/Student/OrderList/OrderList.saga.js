@@ -13,9 +13,7 @@ import {
   type OpenOrderInfoAction
 } from './OrderList.actions';
 import type { OrderData } from '../../types';
-
-
-export const ORDER = 'Направление';
+import { ORDER_ROUTE } from '../Student.constants';
 
 export default function* orderListSaga(): Saga<void> {
   yield takeEvery(LOAD_ORDER_LIST_REQUEST, handleLoadOrderList);
@@ -24,7 +22,7 @@ export default function* orderListSaga(): Saga<void> {
 
 export function* handleOpenShowPaymentScreen({ payload }: OpenOrderInfoAction): Saga<void> {
   yield put(changeOrderData(payload));
-  NavigatorActions.navigate(ORDER);
+  yield call(NavigatorActions.navigate, ORDER_ROUTE);
 }
 
 export function* handleLoadOrderList(): Saga<void> {

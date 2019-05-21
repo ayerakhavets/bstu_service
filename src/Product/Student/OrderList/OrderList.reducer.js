@@ -5,7 +5,7 @@ import {
   LOAD_ORDER_LIST_SUCCESS,
   type OrderListActions
 } from './OrderList.actions';
-import type { OrderData } from '../../types';
+import { type OrderData } from '../../types';
 
 export type OrderListState = {
   isLoading: boolean,

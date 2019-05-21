@@ -21,7 +21,6 @@ import {
   STUDENT_ROUTE
 } from './Student.constants';
 
-const ORDER_LIST_INDEX = 0;
 
 const StudentTabs = createBottomTabNavigator({
   [ORDER_LIST_ROUTE]: OrderList,
@@ -77,12 +76,9 @@ const StudentTabs = createBottomTabNavigator({
 export default createStackNavigator({
   [STUDENT_ROUTE]: {
     screen: StudentTabs,
-    navigationOptions: ({ navigation: { state } }) => {
-      const params = state.routes[ORDER_LIST_INDEX].params || {};
-      return {
-        headerRight: <HeaderRight iconName="exit-to-app" onIconPress={ params.onLogOut } />
-      };
-    }
+    navigationOptions: () => ({
+      headerRight: <HeaderRight />
+    })
   },
   [PAYMENT_ROUTE]: {
     screen: Payment,
