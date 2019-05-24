@@ -98,15 +98,14 @@ class Payment extends Component<PaymentProps> {
   render() {
     const { date, isLoading, image, moneyAmount, navigation, status, paymentType } = this.props;
 
-    console.log('TCL: render -> image', image);
     // FIXME: use constants for params.
     const screenType = navigation.getParam('intent', 'ADD');
 
     let imageSource = '';
     if (image.url) {
       imageSource = image.url;
-    } else if (image.path) {
-      imageSource = `file://${image.path}`;
+    } else if (image.uri) {
+      imageSource = image.uri;
     }
 
     const submitButtonText = screenType === 'EDIT'
@@ -124,9 +123,10 @@ class Payment extends Component<PaymentProps> {
             <Fragment>
               { !!imageSource && (
                 <Image
-                  source={{ uri: image.uri }}
+                  source={{ uri: imageSource }}
                   style={ styles.image }
-                  resizeMethod="resize"
+                  resizeMode="stretch"
+                  resizeMethod="auto"
                 />
               ) }
               <View style={ styles.container }>

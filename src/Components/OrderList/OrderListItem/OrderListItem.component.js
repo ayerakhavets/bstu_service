@@ -35,14 +35,14 @@ function PaymentListItem(props: PaymentListItemProps) {
     </View>);
   };
 
-  let icon = require('../assets/receipt.png'); // eslint-disable-line global-require
+  let icon = require('../../assets/receipt.png'); // eslint-disable-line global-require
 
   if (item.status === 'set') {
-    icon = require('../assets/receipt_yel.png'); // eslint-disable-line global-require
+    icon = require('../../assets/receipt_yel.png'); // eslint-disable-line global-require
   }
 
   if (item.status === 'closed') {
-    icon = require('../assets/receipt_gr.png'); // eslint-disable-line global-require
+    icon = require('../../assets/receipt_gr.png'); // eslint-disable-line global-require
   }
 
   return (

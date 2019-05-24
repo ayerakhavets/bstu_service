@@ -25,23 +25,27 @@ export default function* paymentListSaga(): Saga<void> {
 export function* handleOpenAddPaymentScreen(): Saga<void> {
   yield put(clearPaymentData());
   // FIXME: use constants for params.
-  NavigatorActions.navigate(PAYMENT_ROUTE, { intent: 'ADD' });
+  yield call(NavigatorActions.navigate, PAYMENT_ROUTE, { intent: 'ADD' });
 }
 
 export function* handleOpenShowPaymentScreen({ payload }: OpenShowPaymentScreen): Saga<void> {
   const storageImagePath = `${payload.key}/${payload.image.name}`;
-  const imageUrl = yield call(getPaymentImageUrl, storageImagePath);
-  const paymentData = {
-    ...payload,
-    image: {
-      ...payload.image,
-      url: imageUrl
-    }
-  };
+  try {
+    const imageUrl = yield call(getPaymentImageUrl, storageImagePath);
+    const paymentData = {
+      ...payload,
+      image: {
+        ...payload.image,
+        url: imageUrl
+      }
+    };
 
-  yield put(changePaymentData(paymentData));
-  // FIXME: use constants for params.
-  NavigatorActions.navigate(PAYMENT_ROUTE, { intent: 'EDIT' });
+    yield put(changePaymentData(paymentData));
+    // FIXME: use constants for params.
+    yield call(NavigatorActions.navigate, PAYMENT_ROUTE, { intent: 'EDIT' });
+  } catch (error) {
+    console.log('TCL: error', error);
+  }
 }
 
 export function* handleLoadPaymentList(): Saga<void> {
@@ -56,6 +60,6 @@ export function* handleLoadPaymentList(): Saga<void> {
     }
   } catch (error) {
     yield put(loadPaymentListFailure());
-    Toast.show(I18n.translate('student.errors.dataLoading'));
+    yield call(Toast.show, I18n.translate('student.errors.dataLoading'));
   }
 }

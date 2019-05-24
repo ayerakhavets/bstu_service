@@ -13,19 +13,18 @@ class PieChartWithCenteredLabels extends PureComponent<null> {
     };
     const screenWidth = Dimensions.get('window').width;
     const data = [
-      { name: 'Seoul',
-        population: 21500000,
+      { name: '4*',
+        population: 215,
         color: 'rgba(131, 167, 234, 1)',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15 },
-      { name: 'Общежитие', population: 2800000, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-      { name: 'Академическая задолженность',
-        population: 527612,
+      { name: '3*', population: 280, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+      { name: '2*',
+        population: 527,
         color: 'red',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15 },
-      { name: 'Пеня', population: 8538000, color: '#ffffff', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-      { name: 'Счастье', population: 11920000, color: 'rgb(0, 0, 255)', legendFontColor: '#7F7F7F', legendFontSize: 15 }
+      { name: '1*', population: 1190, color: 'rgb(0, 0, 255)', legendFontColor: '#7F7F7F', legendFontSize: 15 }
     ];
 
     return (

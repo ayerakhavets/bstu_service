@@ -19,7 +19,6 @@ import {
 
 export type PaymentImage = {
   name: string,
-  path: ?string,
   uri: string,
   url: string
 }
@@ -62,7 +61,6 @@ export default (
       ...state,
       image: {
         name: action.payload.name,
-        path: action.payload.path,
         uri: action.payload.uri,
         url: action.payload.url
       }
@@ -98,35 +96,19 @@ export default (
     };
   case CLEAR_PAYMENT_DATA:
     return initialState;
-  case REMOVE_PAYMENT_FAILURE:
-    return {
-      ...state,
-      isLoading: false
-    };
   case REMOVE_PAYMENT_REQUEST:
-    return {
-      ...state,
-      isLoading: true
-    };
-  case REMOVE_PAYMENT_SUCCESS:
-    return {
-      ...state,
-      isLoading: false
-    };
-  case UPLOAD_PAYMENT_FAILURE:
-    return {
-      ...state,
-      isLoading: false
-    };
-  case UPLOAD_PAYMENT_SUCCESS:
-    return {
-      ...state,
-      isLoading: false
-    };
   case UPLOAD_PAYMENT_REQUEST:
     return {
       ...state,
       isLoading: true
+    };
+  case REMOVE_PAYMENT_FAILURE:
+  case REMOVE_PAYMENT_SUCCESS:
+  case UPLOAD_PAYMENT_FAILURE:
+  case UPLOAD_PAYMENT_SUCCESS:
+    return {
+      ...state,
+      isLoading: false
     };
   default:
     return state;

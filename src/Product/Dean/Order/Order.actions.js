@@ -9,4 +9,3 @@ export type ChangeOrderData = ActionType<typeof changeOrderData>;
 
 export const CLEAR_ORDER_DATA = `CLEAR_ORDER_DATA@${DEAN}`;
 export const clearPaymentData = createAction(CLEAR_ORDER_DATA, () => undefined);
-export type ClearPaymentData = ActionType<typeof clearPaymentData>;
