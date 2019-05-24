@@ -51,9 +51,9 @@ export function* saveStudentInfoSaga(): Saga<void> {
   try {
     yield call(updateStudentInfo, studentInfo);
     yield put(saveStudentInfoSuccess());
-    Toast.show(I18n.translate('student.dataUpdateToast'));
+    yield call(Toast.show, I18n.translate('student.dataUpdateToast'));
   } catch (error) {
     yield put(saveStudentInfoFailure());
-    Toast.show(I18n.translate('student.errors.dataAdding'));
+    yield call(Toast.show, I18n.translate('student.errors.dataAdding'));
   }
 }

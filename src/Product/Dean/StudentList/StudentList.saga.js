@@ -26,7 +26,8 @@ export function* handleOpenPaymentList({ payload }: OpenPaymentListAction): Saga
 }
 
 const mapper = {
-  Mobile: 'ПОиБМС'
+  Mobile: 'ПОиБМС',
+  ПОиБМС: 'ПОиБМС'
 };
 export function* handleLoadStudentList(): Saga<void> {
   const course = yield select(selectCourse);

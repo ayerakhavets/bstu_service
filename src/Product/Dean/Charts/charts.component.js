@@ -14,7 +14,7 @@ class XAxisExample extends PureComponent<null> {
     return (
       <View>
         <Text>
-          Bezier Line Chart
+          Active payment period chart
         </Text>
         <LineChart
           data={{
@@ -30,14 +30,13 @@ class XAxisExample extends PureComponent<null> {
               ]
             }]
           }}
-          width={ Dimensions.get('window').width } // from react-native
+          width={ Dimensions.get('window').width }
           height={ 220 }
-          yAxisLabel="$"
+          // yAxisLabel="$"
           chartConfig={{
             backgroundColor: '#e26a00',
             backgroundGradientFrom: '#fb8c00',
             backgroundGradientTo: '#ffa726',
-            decimalPlaces: 2, // optional, defaults to 2dp
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             style: {
               borderRadius: 16

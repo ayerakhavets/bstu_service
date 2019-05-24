@@ -1,6 +1,7 @@
 // @flow
+import { handleActions } from 'redux-actions';
 import {
-  CHANGE_ORDER_DATA,
+  CHANGE_ORDER_DATA, type ChangeOrderData,
   CLEAR_ORDER_DATA
 } from './Order.actions';
 import { type StudentInfo } from '../../types';
@@ -17,8 +18,9 @@ export type OrderState = {
   student: StudentInfo,
   subject: string
 }
+type S = OrderState;
 
-const initialState = {
+const initialState: S = {
   date: '',
   endDate: '',
   isLoading: false,
@@ -31,16 +33,10 @@ const initialState = {
   subject: ''
 };
 
-export default (state: OrderState = initialState, action: any): OrderState => {
-  switch (action.type) {
-  case CHANGE_ORDER_DATA:
-    return {
-      ...state,
-      ...action.payload
-    };
-  case CLEAR_ORDER_DATA:
-    return initialState;
-  default:
-    return state;
-  }
-};
+export default handleActions({
+  [CHANGE_ORDER_DATA]: (state: S, { payload }: ChangeOrderData) => ({
+    ...state,
+    ...payload
+  }),
+  [CLEAR_ORDER_DATA]: () => initialState
+}, initialState);

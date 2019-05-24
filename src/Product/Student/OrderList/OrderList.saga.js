@@ -12,7 +12,7 @@ import {
   loadOrderListSuccess,
   type OpenOrderInfoAction
 } from './OrderList.actions';
-import type { OrderData } from '../../types';
+import { type OrderData } from '../../types';
 import { ORDER_ROUTE } from '../Student.constants';
 
 export default function* orderListSaga(): Saga<void> {
@@ -39,7 +39,7 @@ export function* handleLoadOrderList(): Saga<void> {
     }
   } catch (error) {
     yield put(loadOrderListFailure());
-    Toast.show('Ошибка загрузки данных');
+    yield call(Toast.show, 'Ошибка загрузки данных');
   }
 }
 

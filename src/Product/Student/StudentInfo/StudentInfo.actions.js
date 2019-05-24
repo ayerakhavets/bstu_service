@@ -38,16 +38,12 @@ export type ChangeUserInfo = ActionType<typeof changeUserInfo>;
 
 export const CLEAR_STUDENT_INFO = `CLEAR_STUDENT_INFO@${STUDENT}`;
 export const clearStudentInfo = createAction(CLEAR_STUDENT_INFO, () => undefined);
-export type ClearStudentInfo = ActionType<typeof clearStudentInfo>;
 
 export const SAVE_STUDENT_INFO_FAILURE = `SAVE_STUDENT_INFO_FAILURE@${STUDENT}`;
 export const saveStudentInfoFailure = createAction(SAVE_STUDENT_INFO_FAILURE, () => undefined);
-export type SaveStudentInfoFailure = ActionType<typeof saveStudentInfoFailure>;
 
 export const SAVE_STUDENT_INFO_REQUEST = `SAVE_STUDENT_INFO_REQUEST@${STUDENT}`;
 export const saveStudentInfoRequest = createAction(SAVE_STUDENT_INFO_REQUEST, () => undefined);
-export type SaveStudentInfoRequest = ActionType<typeof saveStudentInfoRequest>;
 
 export const SAVE_STUDENT_INFO_SUCCESS = `SAVE_STUDENT_INFO_SUCCESS@${STUDENT}`;
 export const saveStudentInfoSuccess = createAction(SAVE_STUDENT_INFO_SUCCESS, () => undefined);
-export type SaveStudentInfoSuccess = ActionType<typeof saveStudentInfoSuccess>;

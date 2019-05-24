@@ -1,7 +1,6 @@
 // @flow
 import { type Saga } from 'redux-saga';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-// $FlowFixMe no default export.
 import ImagePicker, { type Response, type Options } from 'react-native-image-picker';
 import { NavigatorActions, Toast } from '@my/framework';
 import { selectUid } from '../../Authentication';
@@ -36,7 +35,7 @@ import {
 const imagePickerOptions: Options = {
   cancelButtonTitle: 'Закрыть',
   chooseFromLibraryButtonTitle: 'Выбрать из библиотеки',
-  noData: true,
+  noData: true, // Improves performance on large photos.
   title: 'Выберите изображение',
   takePhotoButtonTitle: 'Сделать фото'
 };
@@ -54,18 +53,16 @@ const showImagePicker = (): Promise<Response> => new Promise((resolve) => {
 
 export function* handleSetImage(): Saga<void> {
   const response = yield call(showImagePicker);
-  console.log('TCL: response', response);
 
   if (response.didCancel) {
     return;
   } else if (response.error) {
-    Toast.show('Ошибка медиа');
+    yield call(Toast.show, 'Ошибка медиа');
     return;
   }
 
   yield put(changeImage({
     name: response.fileName,
-    path: response.path,
     uri: response.uri,
     url: ''
   }));
@@ -81,13 +78,13 @@ export function* handleRemovePayment(): Saga<void> {
 
   try {
     yield call(removePayment, databasePath, storagePath);
-    NavigatorActions.back();
+    yield call(NavigatorActions.back);
     yield put(removePaymentSuccess());
     yield put(loadPaymentListRequest());
-    Toast.show('Платёж удалён');
+    yield call(Toast.show, 'Платёж удалён');
   } catch (error) {
     yield put(removePaymentFailure());
-    Toast.show('Ошибка при удалении данных');
+    yield call(Toast.show, 'Ошибка при удалении данных');
   }
 }
 
@@ -104,8 +101,8 @@ export function* handleUploadPayment({ payload }: UploadPaymentRequestAction): S
   const isDataEmpty = !date || !paymentType || !moneyAmount || !image.name;
 
   if (isDataEmpty) {
-    Toast.show('Введите все данные');
-    yield put(uploadPaymentFailure());
+    yield call(Toast.show, 'Введите все данные');
+    yield put(uploadPaymentFailure(''));
   }
 
   try {
@@ -115,8 +112,7 @@ export function* handleUploadPayment({ payload }: UploadPaymentRequestAction): S
     const paymentInfo = {
       date,
       image: {
-        name: image.name,
-        url: ''
+        name: image.name
       },
       lecturer,
       subject,
@@ -128,16 +124,17 @@ export function* handleUploadPayment({ payload }: UploadPaymentRequestAction): S
     const storageImagePath = `${key}/${image.name}`;
 
     if (payload === 'EDIT') {
-      yield call(updatePayment, uid, paymentInfo, storageImagePath, image.path);
+      yield call(updatePayment, uid, paymentInfo, storageImagePath, image.uri);
     } else {
-      yield call(addPayment, uid, paymentInfo, storageImagePath, image.path);
+      yield call(addPayment, uid, paymentInfo, storageImagePath, image.uri);
     }
-    NavigatorActions.back();
+
+    yield call(NavigatorActions.back);
     yield put(uploadPaymentSuccess());
     yield put(loadPaymentListRequest());
-    Toast.show('Платёж добавлен');
+    yield call(Toast.show, 'Платёж добавлен');
   } catch (error) {
-    yield put(uploadPaymentFailure());
-    Toast.show('Ошибка при добавлении данных');
+    yield put(uploadPaymentFailure(error.message));
+    yield call(Toast.show, 'Ошибка при добавлении данных');
   }
 }

@@ -32,7 +32,7 @@ export type OpenImagePickerAction = { type: typeof OPEN_IMAGE_PICKER };
 export type RemovePaymentFailureAction = { type: typeof REMOVE_PAYMENT_FAILURE };
 export type RemovePaymentRequestAction = { type: typeof REMOVE_PAYMENT_REQUEST };
 export type RemovePaymentSuccessAction = { type: typeof REMOVE_PAYMENT_SUCCESS };
-export type UploadPaymentFailureAction = { type: typeof UPLOAD_PAYMENT_FAILURE };
+export type UploadPaymentFailureAction = { type: typeof UPLOAD_PAYMENT_FAILURE, payload: string };
 export type UploadPaymentRequestAction = {
   type: typeof UPLOAD_PAYMENT_REQUEST,
   payload: UploadPaymentType
@@ -87,8 +87,10 @@ export const removePaymentRequest = (): RemovePaymentRequestAction =>
 export const removePaymentSuccess = (): RemovePaymentSuccessAction =>
   ({ type: REMOVE_PAYMENT_SUCCESS });
 
-export const uploadPaymentFailure = (): UploadPaymentFailureAction =>
-  ({ type: UPLOAD_PAYMENT_FAILURE });
+export const uploadPaymentFailure = (message: string): UploadPaymentFailureAction => ({
+  type: UPLOAD_PAYMENT_FAILURE,
+  payload: message
+});
 
 export const uploadPaymentRequest = (type: UploadPaymentType): UploadPaymentRequestAction => ({
   type: UPLOAD_PAYMENT_REQUEST,
