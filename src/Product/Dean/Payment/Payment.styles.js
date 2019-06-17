@@ -23,14 +23,13 @@ export default StyleSheet.create({
     width: '100%'
   },
   dateView: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 10,
+    paddingHorizontal: 10
   },
   datePicker: {
-    alignSelf: 'flex-start',
-    marginTop: 10,
-    marginLeft: 18,
-    marginBottom: 18,
-    width: 150
+    marginBottom: 18
   },
   datePlaceholderText: {
     color: colors.black

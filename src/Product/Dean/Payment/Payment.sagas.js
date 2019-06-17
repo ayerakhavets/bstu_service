@@ -56,8 +56,6 @@ export function* handleRemovePayment(): Saga<void> {
 }
 
 export function* handlePayment({ type }: any): Saga<void> {
-  // APPROVE_PAYMENT_REQUEST
-  // DECLINE_PAYMENT_REQUEST
   let status;
   let successAction;
   let failureAction;

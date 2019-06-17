@@ -111,7 +111,7 @@ class Payment extends PureComponent<PaymentProps> {
                     onChangeText={ this.props.onChangeMark }
                   />
                 ) }
-                { !!this.props.mark && (
+                { !!this.props.mark && this.props.status === 'closed' && (
                   <Input
                     label="Оценка"
                     value={ this.props.mark }

@@ -16,6 +16,9 @@ export default StyleSheet.create({
     marginTop: 10,
     width: '100%'
   },
+  listItem: {
+    marginBottom: 10
+  },
   searchBarContainer: {
     backgroundColor: colors.greenLight,
     width: '100%'

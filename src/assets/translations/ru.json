@@ -10,6 +10,10 @@
     "signUp": "Зарегистрироваться",
     "title": "Вход в приложение"
   },
+  "dean": {
+    "courses": "Курсы",
+    "students": "Студенты"
+  },
   "courseList": {
     "course": "Курс {{title}}",
     "design": "ДЭиВИ",
@@ -63,7 +67,7 @@
     "routes": {
       "paymentList": "Платежи",
       "orderList": "Направления",
-      "studentInfo": "Личная информация",
+      "studentInfo": "Пользователь",
       "order": "Направление",
       "payment": "Платёж"
     },
@@ -72,7 +76,7 @@
       "confirmRemove": "Подтвердите удаление платежа",
       "cancelDialog": "Отменить",
       "remove": "Удалить",
-      "done": "Готово",
+      "done": "Cоздать",
       "saveChanges": "Сохранить изменения",
       "requiredFieldsText": "Заполните все поля",
       "date": "Дата платежа",

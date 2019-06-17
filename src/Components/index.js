@@ -7,7 +7,7 @@ import MyButton from './MyButton';
 import PaymentListItem from './PaymentListItem';
 import Order from './Order';
 import OrderList from './OrderList';
-import Screen from './Screen';
+import { Screen } from './Screen';
 import styles from './styles';
 
 export {

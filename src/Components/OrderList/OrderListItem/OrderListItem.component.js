@@ -2,7 +2,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { ListItem } from 'react-native-elements';
-// import type { PaymentData } from '../../Product/types';
 import colors from '../../colors';
 import styles from './OrderListItem.styles';
 
@@ -17,22 +16,19 @@ function PaymentListItem(props: PaymentListItemProps) {
   const handleOnPress = () => onPress(item);
 
   const subtitle = () => {
+    let paymentTypeText = `дата: ${item.date} оценка: ${item.mark}`;
     if (item.status === 'planning') {
-      return (<View style={ styles.subtitle }>
-        <Text>{item.student.surname}</Text>
-        <Text style={ styles.paymentTypeText }>{`c ${item.startDate} по ${item.endDate}`}</Text>
-      </View>);
+      paymentTypeText = `c ${item.startDate} по ${item.endDate}`;
     } else if (item.status === 'set') {
-      return (<View style={ styles.subtitle }>
-        <Text>{item.student.surname}</Text>
-        <Text style={ styles.paymentTypeText }>{`дата: ${item.date}`}</Text>
-      </View>);
+      paymentTypeText = `дата: ${item.date}`;
     }
 
-    return (<View style={ styles.subtitle }>
-      <Text>{item.student.surname}</Text>
-      <Text style={ styles.paymentTypeText }>{`дата: ${item.date} оценка: ${item.mark}`}</Text>
-    </View>);
+    return (
+      <View style={ styles.subtitle }>
+        <Text>{item.student && item.student.surname}</Text>
+        <Text style={ styles.paymentTypeText }>{ paymentTypeText }</Text>
+      </View>
+    );
   };
 
   let icon = require('../../assets/receipt.png'); // eslint-disable-line global-require

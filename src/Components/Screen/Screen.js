@@ -1,7 +1,7 @@
 // @flow
 import React, { type Node } from 'react';
 import { ScrollView } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { type ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import styles from './Screen.styles';
 
 

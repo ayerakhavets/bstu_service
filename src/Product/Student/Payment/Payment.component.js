@@ -110,7 +110,7 @@ class Payment extends Component<PaymentProps> {
 
     const submitButtonText = screenType === 'EDIT'
       ? I18n.translate('student.payment.saveChanges')
-      : I18n.translate('student.payment.done');
+      : I18n.translate('student.payment.done'); // TODO: rename to 'create'.
     const isDataEmpty = !paymentType || !moneyAmount || !date || !image.name;
 
     const isEditable = status === 'declined';
@@ -210,7 +210,7 @@ const mapStateToProps = (state) => {
   // TODO: translate.
   const subjects = ['', 'БД', 'СУБД'];
   const paymentTypes = ['', 'Академическая задолженность', 'Обучение', 'Общежитие', 'Пеня'];
-  const lecturers = ['', 'Иванов И. И'];
+  const lecturers = ['', 'Иванов И. И.', 'Чехов А. П.'];
 
   return {
     date: selectDate(state),

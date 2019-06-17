@@ -52,13 +52,16 @@ class StudentList extends Component<StudentListProps, StudentListState> {
     <Text>Список студентов пуст. Потяните для обновления</Text>
   </View>)
 
-  renderItem = ({ item }) => (<ListItem
-    keyExtractor={ this.keyExtractor }
-    title={ `${item.surname} ${item.name}  ${item.middleName}` }
-    subtitle={ item.studentId }
-    // eslint-disable-next-line react/jsx-no-bind
-    onPress={ () => this.props.onOpenOrderList(item) }
-  />)
+  renderItem = ({ item }) => (
+    <ListItem
+      containerStyle={ styles.listItem }
+      keyExtractor={ this.keyExtractor }
+      title={ `${item.surname} ${item.name} ${item.middleName}` }
+      subtitle={ item.studentId }
+      // eslint-disable-next-line react/jsx-no-bind
+      onPress={ () => this.props.onOpenOrderList(item) }
+    />
+  )
 
   render() {
     return (
@@ -69,7 +72,7 @@ class StudentList extends Component<StudentListProps, StudentListState> {
           borderColor={ colors.greenLight }
           containerStyle={ styles.searchBarContainer }
           onChangeText={ this.onSearchInputChange }
-          placeholder="Search by surname..."
+          placeholder="Искать имя..." // TODO: add translation.
         />
         <FlatList
           data={ this.filterItems() }

@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Picker, View, Text, TouchableOpacity } from 'react-native';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { type ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import styles from './LabelPicker.styles';
 
 export type PickerItem = {

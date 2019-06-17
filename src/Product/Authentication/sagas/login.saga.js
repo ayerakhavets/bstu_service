@@ -11,6 +11,8 @@ import { selectEmail, selectIsRemember, selectPassword } from '../Authentication
 import { adminUid, lecturerUid } from '../Authentication.constants';
 import saveCredentialsSaga from './saveCredentials.saga';
 
+import { DEAN_ROUTE, LECTURER_ROUTE, STUDENT_ROUTE } from '../../Product.constants';
+
 
 export default function* loginSaga(): Saga<void> {
   const email = yield select(selectEmail);
@@ -33,11 +35,11 @@ export default function* loginSaga(): Saga<void> {
 
     if (user.uid === adminUid) {
       yield put(loadingEnd());
-      yield call(NavigatorActions.navigate, 'Dean');
+      yield call(NavigatorActions.navigate, DEAN_ROUTE);
       return;
     } else if (user.uid === lecturerUid) {
       yield put(loadingEnd());
-      yield call(NavigatorActions.navigate, 'Lecturer');
+      yield call(NavigatorActions.navigate, LECTURER_ROUTE);
       return;
     }
 
@@ -46,7 +48,7 @@ export default function* loginSaga(): Saga<void> {
     yield put(changeUserInfo(userInfo));
     yield put(loadingEnd());
 
-    yield call(NavigatorActions.navigate, 'Student');
+    yield call(NavigatorActions.navigate, STUDENT_ROUTE);
   } catch (error) {
     yield put(loadingEnd());
     yield call(Toast.show, 'Ошибка');

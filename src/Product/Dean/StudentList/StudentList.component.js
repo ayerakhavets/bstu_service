@@ -60,6 +60,7 @@ class StudentList extends Component<StudentListProps, any> {
 
   renderItem = ({ item }) => (
     <ListItem
+      containerStyle={ styles.listItem }
       keyExtractor={ this.keyExtractor }
       title={ `${item.surname} ${item.name} ${item.middleName}` }
       subtitle={ item.studentId }
@@ -72,10 +73,11 @@ class StudentList extends Component<StudentListProps, any> {
       <View style={ styles.container }>
         <SearchBar
           clearIcon
+          value={ this.state.searchValue }
           borderColor={ colors.greenLight }
           containerStyle={ styles.searchBarContainer }
           onChangeText={ this.onSearchInputChange }
-          placeholder="Type Here..."
+          placeholder="Искать имя..." // TODO: add translation.
         />
         <FlatList
           data={ this.filterItems() }

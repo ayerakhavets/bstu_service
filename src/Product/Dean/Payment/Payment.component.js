@@ -82,7 +82,8 @@ class Payment extends Component<PaymentProps> {
   }
 
   render() {
-    const name = `${this.props.currentUser.surname}${this.props.currentUser.name}${this.props.currentUser.middleName}`;
+    const { currentUser, image } = this.props;
+    const name = `${currentUser.surname} ${currentUser.name} ${currentUser.middleName}`;
 
     return (
       <Screen>
@@ -91,7 +92,7 @@ class Payment extends Component<PaymentProps> {
           : (
             <Fragment>
               <Image
-                source={{ uri: this.props.image.url }}
+                source={{ uri: image.url }}
                 style={ styles.image }
                 resizeMethod="resize"
               />
@@ -103,7 +104,7 @@ class Payment extends Component<PaymentProps> {
                 />
                 <Input
                   label={ I18n.translate('payment.id') }
-                  value={ this.props.currentUser.studentId }
+                  value={ currentUser.studentId }
                   editable={ false }
                 />
                 <Input

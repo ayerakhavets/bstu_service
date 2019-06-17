@@ -67,7 +67,7 @@
     "routes": {
       "paymentList": "Payments",
       "orderList": "Orders",
-      "studentInfo": "Personal Info",
+      "studentInfo": "User",
       "order": "Order",
       "payment": "Payment"
     },

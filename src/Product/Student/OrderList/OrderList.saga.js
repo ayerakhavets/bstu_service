@@ -14,10 +14,18 @@ import {
 } from './OrderList.actions';
 import { type OrderData } from '../../types';
 import { ORDER_ROUTE } from '../Student.constants';
+import { subscribeToOrdersUpdate } from '../api';
 
 export default function* orderListSaga(): Saga<void> {
+  // yield call(subscribeForUpdatesSaga);
   yield takeEvery(LOAD_ORDER_LIST_REQUEST, handleLoadOrderList);
   yield takeEvery(OPEN_ORDER_INFO, handleOpenShowPaymentScreen);
+}
+
+// FIXME: saga is not used.
+export function* subscribeForUpdatesSaga(): Saga<void> {
+  const uid = yield select(selectUid);
+  yield call(subscribeToOrdersUpdate, uid);
 }
 
 export function* handleOpenShowPaymentScreen({ payload }: OpenOrderInfoAction): Saga<void> {

@@ -4,11 +4,11 @@ import { I18n } from '@my/framework';
 
 import { ActivityIndicator, View } from 'react-native';
 import { Input } from 'react-native-elements';
-import { Screen } from '@my/components';
+import { Screen } from '../Screen';
 
 import styles from './Order.styles';
 
-import type { StudentInfo } from '../../Product/types';
+import { type StudentInfo } from '../../Product/types';
 
 
 type OrderProps = {

@@ -1,5 +1,4 @@
 // @flow
-
 import { NavigationActions } from 'react-navigation';
 import type { NavigationParams, NavigationRoute } from 'react-navigation';
 

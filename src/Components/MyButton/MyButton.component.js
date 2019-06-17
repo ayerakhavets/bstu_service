@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { type ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { Button } from 'react-native-elements';
 
 import styles from './MyButton.styles';
